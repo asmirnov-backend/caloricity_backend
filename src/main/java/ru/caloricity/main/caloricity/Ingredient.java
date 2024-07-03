@@ -22,35 +22,41 @@ public class Ingredient {
     @Column(nullable = false)
     private UUID id;
 
+    @Comment("Наименование ингредиента")
     @Column(length = 127, nullable = false)
     private String name;
 
-    @Comment("Масса брутто")
+    @Comment("Масса брутто, г")
     @Column(nullable = false)
-    private float gross_g;
+    private float gross;
 
-    @Comment("Масса нетто")
+    @Comment("Масса нетто, г")
     @Column(nullable = false)
-    private float net_g;
+    private float net;
 
-    @Comment("Масса сухих веществ")
+    @Comment("Масса сухих веществ, г")
     @Column(nullable = false)
-    private float dry_substances_g;
+    private float drySubstances;
 
+    @Comment("Масса белков, г")
     @Column(nullable = false)
-    private float protein_g;
+    private float proteins;
 
+    @Comment("Масса жиров, г")
     @Column(nullable = false)
-    private float fats_g;
+    private float fats;
 
+    @Comment("Масса углеводов, г")
     @Column(nullable = false)
-    private float carbohydrates_g;
+    private float carbohydrates;
 
+    @Comment("Дата и время создания")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false, nullable = false)
     private Date createdAt;
 
+    @Comment("Дата и время редактирования")
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
