@@ -9,30 +9,31 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Comment("Ингредиенты")
-@Table(name = "ingredients")
-public class Ingredient {
+@Comment("Каталог ингредиентов")
+@Table(name = "ingredients_catalog")
+public class IngredientCatalog {
     @Id
     @Column(nullable = false)
     private UUID id;
 
-    @Comment("Масса брутто, г")
-    @Column(nullable = false)
-    private float gross;
+    @Comment("Наименование ингредиента")
+    @Column(length = 127, nullable = false)
+    private String name;
 
-    @Comment("Масса нетто, г")
+    @Comment("Масса съедобной части, г")
     @Column(nullable = false)
-    private float net;
+    private float ediblePart;
 
-    @Comment("Масса сухих веществ, г")
+    @Comment("Масса воды, г")
     @Column(nullable = false)
-    private float drySubstances;
+    private float water;
 
     @Comment("Масса белков, г")
     @Column(nullable = false)
@@ -58,10 +59,6 @@ public class Ingredient {
     @Column(nullable = false)
     private Date updatedAt;
 
-    @ManyToOne
-    private Probe probe;
-
-    @Comment("Ингредиент в справочнике")
-    @ManyToOne
-    private IngredientCatalog ingredientInCatalog;
+    @OneToMany
+    private Set<Ingredient> ingredients;
 }
