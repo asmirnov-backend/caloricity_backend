@@ -1,0 +1,54 @@
+package ru.caloricity.main.caloricity.ingredientCatalog;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+import ru.caloricity.main.caloricity.ingredientCatalog.dto.IngredientCatalogCreateDto;
+import ru.caloricity.main.caloricity.ingredientCatalog.dto.IngredientCatalogDto;
+import ru.caloricity.main.caloricity.ingredientCatalog.dto.IngredientCatalogInPageDto;
+import ru.caloricity.main.common.exception.EntityNotFoundException;
+
+import java.util.UUID;
+
+@RestController
+@RequestMapping("caloricity/ingredient-catalog")
+@RequiredArgsConstructor
+public class IngredientCatalogController {
+    private final IngredientCatalogService service;
+
+    @GetMapping
+    @PageableAsQueryParam
+    public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
+    @GetMapping("{id}")
+    public IngredientCatalogDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) throws EntityNotFoundException {
+        return service.findDtoByIdOrThrow(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Transactional
+    public void create(@Valid @RequestBody IngredientCatalogCreateDto ingredientCatalogCreateDto) {
+        service.create(ingredientCatalogCreateDto);
+    }
+
+    @PutMapping("{id}")
+    @Transactional
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto ingredientCatalogCreateDto) {
+        service.update(id, ingredientCatalogCreateDto);
+    }
+
+    @DeleteMapping("{id}")
+    @Transactional
+    public void delete(@PathVariable(name = "id") UUID id) {
+        service.deleteById(id);
+    }
+}

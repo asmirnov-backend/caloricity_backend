@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity;
+package ru.caloricity.main.caloricity.ingredientCatalog;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.caloricity.main.caloricity.Ingredient;
 
 import java.util.Date;
 import java.util.Set;
@@ -59,6 +60,6 @@ public class IngredientCatalog {
     @Column(nullable = false)
     private Date updatedAt;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Ingredient> ingredients;
 }
