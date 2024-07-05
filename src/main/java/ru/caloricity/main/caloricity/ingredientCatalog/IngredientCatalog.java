@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import ru.caloricity.main.caloricity.Ingredient;
+import ru.caloricity.main.caloricity.ingredient.Ingredient;
 
 import java.util.Date;
 import java.util.Set;

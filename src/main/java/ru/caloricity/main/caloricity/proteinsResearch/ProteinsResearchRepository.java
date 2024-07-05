@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity;
+package ru.caloricity.main.caloricity.proteinsResearch;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -6,5 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.UUID;
 
 @RepositoryRestResource(exported = false)
-public interface FatsResearchRepository extends JpaRepository<FatsResearch, UUID> {
+public interface ProteinsResearchRepository extends JpaRepository<ProteinsResearch, UUID> {
 }

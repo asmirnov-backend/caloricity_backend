@@ -1,10 +1,11 @@
-package ru.caloricity.main.caloricity;
+package ru.caloricity.main.caloricity.fatsResearch;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Comment;
+import ru.caloricity.main.caloricity.probe.Probe;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity;
+package ru.caloricity.main.caloricity.probe;
 
 public enum ProbeType {
     FIRST,

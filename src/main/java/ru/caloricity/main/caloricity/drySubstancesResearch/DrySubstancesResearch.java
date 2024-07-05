@@ -1,10 +1,11 @@
-package ru.caloricity.main.caloricity;
+package ru.caloricity.main.caloricity.drySubstancesResearch;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Comment;
+import ru.caloricity.main.caloricity.probe.Probe;
 
 import java.util.UUID;
 
@@ -12,9 +13,9 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Comment("Исследования на углеводы")
-@Table(name = "carbohydrates_researches")
-public class CarbohydratesResearch {
+@Comment("Исследования на сухие остатки")
+@Table(name = "dry_substances_researches")
+public class DrySubstancesResearch {
     @Id
     @Column(nullable = false)
     private UUID id;
@@ -31,14 +32,10 @@ public class CarbohydratesResearch {
     @Column(nullable = false)
     private float bankaEmptyMass;
 
-    @Comment("Масса банки с пробой, г")
-    @Column(nullable = false)
-    private float bankaWithProbeMass;
-
     @Comment("Масса навески, г")
     @Column(nullable = false)
     private float mass;
 
-    @OneToOne(mappedBy = "carbohydratesResearch")
+    @OneToOne(mappedBy = "drySubstancesResearch")
     private Probe probe;
 }

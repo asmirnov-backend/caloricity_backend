@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity;
+package ru.caloricity.main.caloricity.probe;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.caloricity.main.caloricity.proteinsResearch.ProteinsResearch;
+import ru.caloricity.main.caloricity.drySubstancesResearch.DrySubstancesResearch;
+import ru.caloricity.main.caloricity.fatsResearch.FatsResearch;
+import ru.caloricity.main.caloricity.сarbohydratesResearch.CarbohydratesResearch;
 
 import java.util.Date;
 import java.util.UUID;
