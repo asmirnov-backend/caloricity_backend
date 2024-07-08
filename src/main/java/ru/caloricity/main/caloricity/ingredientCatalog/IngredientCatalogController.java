@@ -9,9 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import ru.caloricity.main.caloricity.ingredientCatalog.dto.IngredientCatalogCreateDto;
-import ru.caloricity.main.caloricity.ingredientCatalog.dto.IngredientCatalogDto;
-import ru.caloricity.main.caloricity.ingredientCatalog.dto.IngredientCatalogInPageDto;
 import ru.caloricity.main.common.exception.EntityNotFoundException;
 
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity.ingredientCatalog.dto;
+package ru.caloricity.main.caloricity.ingredientCatalog;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

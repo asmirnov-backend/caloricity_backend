@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity.drySubstancesResearch.dto;
+package ru.caloricity.main.caloricity.drySubstancesResearch;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
