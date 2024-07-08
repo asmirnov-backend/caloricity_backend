@@ -36,14 +36,14 @@ public class IngredientCatalogController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public void create(@Valid @RequestBody IngredientCatalogCreateDto ingredientCatalogCreateDto) {
-        service.create(ingredientCatalogCreateDto);
+    public void create(@Valid @RequestBody IngredientCatalogCreateDto createDto) {
+        service.create(createDto);
     }
 
     @PutMapping("{id}")
     @Transactional
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto ingredientCatalogCreateDto) {
-        service.update(id, ingredientCatalogCreateDto);
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) {
+        service.update(id, createDto);
     }
 
     @DeleteMapping("{id}")

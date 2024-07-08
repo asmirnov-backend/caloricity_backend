@@ -32,17 +32,17 @@ public class IngredientCatalogService {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void create(IngredientCatalogCreateDto ingredientCatalogCreateDto) {
-        IngredientCatalog ingredientCatalog = modelMapper.map(ingredientCatalogCreateDto, IngredientCatalog.class);
-        ingredientCatalog.setId(UUID.randomUUID());
-        repository.save(ingredientCatalog);
+    public void create(IngredientCatalogCreateDto createDto) {
+        IngredientCatalog entity = modelMapper.map(createDto, IngredientCatalog.class);
+        entity.setId(UUID.randomUUID());
+        repository.save(entity);
     }
 
-    public void update(UUID id, IngredientCatalogCreateDto ingredientCatalogCreateDto){
-        Optional<IngredientCatalog> currentIngredientCatalog = findById(id);
-        if (currentIngredientCatalog.isPresent()) {
-            BeanUtils.copyProperties(ingredientCatalogCreateDto, currentIngredientCatalog, "id");
-            repository.save(currentIngredientCatalog.get());
+    public void update(UUID id, IngredientCatalogCreateDto createDto){
+        Optional<IngredientCatalog> currentEntity = findById(id);
+        if (currentEntity.isPresent()) {
+            BeanUtils.copyProperties(createDto, currentEntity, "id");
+            repository.save(currentEntity.get());
         }
     }
 
