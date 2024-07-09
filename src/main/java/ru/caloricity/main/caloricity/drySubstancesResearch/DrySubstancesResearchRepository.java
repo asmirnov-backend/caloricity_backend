@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RepositoryRestResource(exported = false)
-public interface DrySubstancesResearchRepository extends JpaRepository<DrySubstancesResearch, UUID> {
+interface DrySubstancesResearchRepository extends JpaRepository<DrySubstancesResearch, UUID> {
     Page<DrySubstancesResearchInPageDto> findAllProjectedBy(Pageable pageable);
 
     Optional<DrySubstancesResearchDto> findDtoById(UUID id);

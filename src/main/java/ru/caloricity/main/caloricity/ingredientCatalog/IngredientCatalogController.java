@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("caloricity/ingredient-catalog")
 @RequiredArgsConstructor
-public class IngredientCatalogController {
+class IngredientCatalogController {
     private final IngredientCatalogService service;
 
     @GetMapping
