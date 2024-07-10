@@ -6,5 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.UUID;
 
 @RepositoryRestResource(exported = false)
-public interface ProbeRepository extends JpaRepository<Probe, UUID> {
+interface ProbeRepository extends JpaRepository<Probe, UUID> {
 }
