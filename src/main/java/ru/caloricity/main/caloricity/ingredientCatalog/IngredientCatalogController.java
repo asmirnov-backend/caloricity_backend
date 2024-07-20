@@ -21,6 +21,7 @@ class IngredientCatalogController {
 
     @GetMapping
     @PageableAsQueryParam
+    // TODO add search by name
     public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable) {
         return service.findAll(pageable);
     }
@@ -38,12 +39,14 @@ class IngredientCatalogController {
     }
 
     @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) {
         service.update(id, createDto);
     }
 
     @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     public void delete(@PathVariable(name = "id") UUID id) {
         service.deleteById(id);
