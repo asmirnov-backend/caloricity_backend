@@ -1,17 +1,17 @@
 package ru.caloricity.main.caloricity.ingredient;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.main.caloricity.ingredientCatalog.IngredientCatalog;
 import ru.caloricity.main.caloricity.probe.Probe;
+import ru.caloricity.main.common.BaseEntity;
 
-import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,11 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Comment("Ингредиенты")
 @Table(name = "ingredients")
-public class Ingredient {
-    @Id
-    @Column(nullable = false)
-    private UUID id;
-
+public class Ingredient extends BaseEntity {
     @Comment("Масса брутто, г")
     @Column(nullable = false)
     private float gross;
@@ -49,18 +45,6 @@ public class Ingredient {
     @Comment("Масса углеводов, г")
     @Column(nullable = false)
     private float carbohydrates;
-
-    @Comment("Дата и время создания")
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false, nullable = false)
-    private Date createdAt;
-
-    @Comment("Дата и время редактирования")
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date updatedAt;
 
     @ManyToOne
     private Probe probe;

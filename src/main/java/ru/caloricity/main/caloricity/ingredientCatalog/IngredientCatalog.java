@@ -3,15 +3,12 @@ package ru.caloricity.main.caloricity.ingredientCatalog;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.main.caloricity.ingredient.Ingredient;
+import ru.caloricity.main.common.BaseEntity;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,11 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Comment("Каталог ингредиентов")
 @Table(name = "ingredients_catalog")
-public class IngredientCatalog {
-    @Id
-    @Column(nullable = false)
-    private UUID id;
-
+public class IngredientCatalog extends BaseEntity {
     @Comment("Наименование ингредиента")
     @Column(length = 127, nullable = false)
     private String name;
@@ -49,18 +42,6 @@ public class IngredientCatalog {
     @Comment("Масса углеводов, г")
     @Column(nullable = false)
     private float carbohydrates;
-
-    @Comment("Дата и время создания")
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false, nullable = false)
-    private Date createdAt;
-
-    @Comment("Дата и время редактирования")
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date updatedAt;
 
     @OneToMany(fetch = FetchType.LAZY)
     @ToString.Exclude
