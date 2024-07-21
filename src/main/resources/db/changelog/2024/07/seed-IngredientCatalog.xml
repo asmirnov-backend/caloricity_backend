@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+<changeSet id="23123" author="a2s">
+    <insert tableName="ingredients_catalog">
+        <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345000000"/>
+        <column name="name" value="Огурец тестовый"/>
+        <column name="edible_part" value="100"/>
+        <column name="water" value="70"/>
+        <column name="proteins" value="21.2"/>
+        <column name="fats" value="23.23"/>
+        <column name="carbohydrates" value="23.22"/>
+        <column name="carbohydrates" value="53.24"/>
+        <column name="created_at" value="2024-01-01"/>
+        <column name="updated_at" value="2024-01-01"/>
+    </insert>
+    <insert tableName="ingredients_catalog">
+        <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345050001"/>
+        <column name="name" value="Арбуз тестовый"/>
+        <column name="edible_part" value="10"/>
+        <column name="water" value="7"/>
+        <column name="proteins" value="1.2"/>
+        <column name="fats" value="2.2"/>
+        <column name="carbohydrates" value="3.2"/>
+        <column name="carbohydrates" value="3.2"/>
+        <column name="created_at" value="2024-01-01"/>
+        <column name="updated_at" value="2024-01-01"/>
+    </insert>
+    <insert tableName="ingredients_catalog">
+        <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345050002"/>
+        <column name="name" value="Дыня тестовая"/>
+        <column name="edible_part" value="103.31"/>
+        <column name="water" value="7.312"/>
+        <column name="proteins" value="132.2"/>
+        <column name="fats" value="23.2"/>
+        <column name="carbohydrates" value="37.2"/>
+        <column name="carbohydrates" value="36"/>
+        <column name="created_at" value="2024-01-01"/>
+        <column name="updated_at" value="2024-01-01"/>
+    </insert>
+</changeSet>
+</databaseChangeLog>
