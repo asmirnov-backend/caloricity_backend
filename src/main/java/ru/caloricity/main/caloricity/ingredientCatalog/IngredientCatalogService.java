@@ -1,5 +1,6 @@
 package ru.caloricity.main.caloricity.ingredientCatalog;
 
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -21,7 +22,10 @@ public class IngredientCatalogService {
         return repository.findById(id);
     }
 
-    public Page<IngredientCatalogInPageDto> findAll(Pageable pageable) {
+    public Page<IngredientCatalogInPageDto> findAll(Pageable pageable, @Nullable String search) {
+        if (search != null) {
+            return repository.findAllByNameLikeIgnoreCase(pageable, "%" + search + "%");
+        }
         return repository.findAllProjectedBy(pageable);
     }
 
@@ -35,11 +39,13 @@ public class IngredientCatalogService {
         repository.save(entity);
     }
 
-    public void update(UUID id, IngredientCatalogCreateDto createDto){
+    public void update(UUID id, IngredientCatalogCreateDto dto) throws EntityNotFoundException {
         Optional<IngredientCatalog> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(createDto, currentEntity, "id");
+            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
+        } else {
+            throw new EntityNotFoundException();
         }
     }
 

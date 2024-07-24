@@ -12,5 +12,7 @@ import java.util.UUID;
 interface IngredientCatalogRepository extends JpaRepository<IngredientCatalog, UUID> {
     Page<IngredientCatalogInPageDto> findAllProjectedBy(Pageable pageable);
 
+    Page<IngredientCatalogInPageDto> findAllByNameLikeIgnoreCase(Pageable pageable, String like);
+
     Optional<IngredientCatalogDto> findDtoById(UUID id);
 }

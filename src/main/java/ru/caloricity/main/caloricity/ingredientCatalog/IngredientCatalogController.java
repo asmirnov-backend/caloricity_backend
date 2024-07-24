@@ -1,5 +1,6 @@
 package ru.caloricity.main.caloricity.ingredientCatalog;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
@@ -16,14 +17,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("caloricity/ingredient-catalog")
 @RequiredArgsConstructor
+@CrossOrigin
 class IngredientCatalogController {
     private final IngredientCatalogService service;
 
     @GetMapping
     @PageableAsQueryParam
-    // TODO add search by name
-    public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
+        return service.findAll(pageable, search);
     }
 
     @GetMapping("{id}")
@@ -40,8 +41,7 @@ class IngredientCatalogController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Transactional
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) {
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) throws EntityNotFoundException {
         service.update(id, createDto);
     }
 
