@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.caloricity.main.common.dto.IdDto;
 import ru.caloricity.main.common.exception.EntityNotFoundException;
 
 import java.util.Optional;
@@ -33,10 +34,11 @@ public class IngredientCatalogService {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void create(IngredientCatalogCreateDto createDto) {
+    public IdDto create(IngredientCatalogCreateDto createDto) {
         IngredientCatalog entity = modelMapper.map(createDto, IngredientCatalog.class);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
+        return new IdDto(entity.getId());
     }
 
     public void update(UUID id, IngredientCatalogCreateDto dto) throws EntityNotFoundException {
