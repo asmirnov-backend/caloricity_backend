@@ -13,7 +13,6 @@
         <column name="proteins" value="21.2"/>
         <column name="fats" value="23.23"/>
         <column name="carbohydrates" value="23.22"/>
-        <column name="carbohydrates" value="53.24"/>
         <column name="created_at" value="2024-01-01"/>
         <column name="updated_at" value="2024-01-01"/>
     </insert>
@@ -24,7 +23,6 @@
         <column name="water" value="7"/>
         <column name="proteins" value="1.2"/>
         <column name="fats" value="2.2"/>
-        <column name="carbohydrates" value="3.2"/>
         <column name="carbohydrates" value="3.2"/>
         <column name="created_at" value="2024-01-01"/>
         <column name="updated_at" value="2024-01-01"/>
@@ -37,7 +35,6 @@
         <column name="proteins" value="132.2"/>
         <column name="fats" value="23.2"/>
         <column name="carbohydrates" value="37.2"/>
-        <column name="carbohydrates" value="36"/>
         <column name="created_at" value="2024-01-01"/>
         <column name="updated_at" value="2024-01-01"/>
     </insert>
