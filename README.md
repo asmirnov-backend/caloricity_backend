@@ -8,3 +8,9 @@
 ```bash
 docker compose -f ./docker-compose.dev.yml -p caloricity up -d
 ```
+
+## Test database
+
+```sql
+CREATE DATABASE caloricity_test WITH OWNER caloricity ENCODING 'UTF-8' TEMPLATE template0;
+```
