@@ -3,17 +3,16 @@ package ru.caloricity.main.caloricity.probe;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.main.caloricity.drySubstancesResearch.DrySubstancesResearch;
 import ru.caloricity.main.caloricity.fatsResearch.FatsResearch;
 import ru.caloricity.main.caloricity.proteinsResearch.ProteinsResearch;
 import ru.caloricity.main.caloricity.сarbohydratesResearch.CarbohydratesResearch;
+import ru.caloricity.main.common.BaseEntity;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -23,11 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Comment("Пробы блюд")
 @Table(name = "probes")
-public class Probe {
-    @Id
-    @Column(nullable = false)
-    private UUID id;
-
+public class Probe extends BaseEntity {
     @Comment("Наименование пробы")
     @Column(length = 127, nullable = false)
     private String name;
@@ -48,17 +43,6 @@ public class Probe {
     @Comment("Масса фактическая, г")
     @Column()
     private float massFact;
-
-    @Comment("Дата отбора пробы")
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
-    private Date selectedAt;
-
-    @Comment("Дата и время создания")
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false, nullable = false)
-    private Date createdAt;
 
     @Comment("Дата и время редактирования")
     @UpdateTimestamp

@@ -39,12 +39,14 @@ class DrySubstancesResearchController {
 
     @PutMapping("{id}")
     @Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody DrySubstancesResearchCreateDto createDto) {
         service.update(id, createDto);
     }
 
     @DeleteMapping("{id}")
     @Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(name = "id") UUID id) {
         service.deleteById(id);
     }

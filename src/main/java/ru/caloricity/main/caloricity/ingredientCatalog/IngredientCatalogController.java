@@ -1,5 +1,6 @@
 package ru.caloricity.main.caloricity.ingredientCatalog;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import ru.caloricity.main.common.dto.IdDto;
 import ru.caloricity.main.common.exception.EntityNotFoundException;
 
 import java.util.UUID;
@@ -16,13 +18,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("caloricity/ingredient-catalog")
 @RequiredArgsConstructor
+@CrossOrigin
 class IngredientCatalogController {
     private final IngredientCatalogService service;
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
+        return service.findAll(pageable, search);
     }
 
     @GetMapping("{id}")
@@ -33,13 +36,12 @@ class IngredientCatalogController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public void create(@Valid @RequestBody IngredientCatalogCreateDto createDto) {
-        service.create(createDto);
+    public IdDto create(@Valid @RequestBody IngredientCatalogCreateDto createDto) {
+        return service.create(createDto);
     }
 
     @PutMapping("{id}")
-    @Transactional
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) {
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) throws EntityNotFoundException {
         service.update(id, createDto);
     }
 

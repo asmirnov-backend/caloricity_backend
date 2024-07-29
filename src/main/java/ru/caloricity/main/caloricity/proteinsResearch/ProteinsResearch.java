@@ -1,13 +1,16 @@
 package ru.caloricity.main.caloricity.proteinsResearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.main.caloricity.probe.Probe;
+import ru.caloricity.main.common.BaseEntity;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,11 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Comment("Исследования на белок")
 @Table(name = "proteins_researches")
-public class ProteinsResearch {
-    @Id
-    @Column(nullable = false)
-    private UUID id;
-
+public class ProteinsResearch extends BaseEntity {
     @Comment("Объём титранта, г/см^3")
     @Column(nullable = false)
     private float titrantVolume;

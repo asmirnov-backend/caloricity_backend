@@ -1,11 +1,13 @@
 package ru.caloricity.main.caloricity.ingredientCatalog;
 
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.caloricity.main.common.dto.IdDto;
 import ru.caloricity.main.common.exception.EntityNotFoundException;
 
 import java.util.Optional;
@@ -21,7 +23,10 @@ public class IngredientCatalogService {
         return repository.findById(id);
     }
 
-    public Page<IngredientCatalogInPageDto> findAll(Pageable pageable) {
+    public Page<IngredientCatalogInPageDto> findAll(Pageable pageable, @Nullable String search) {
+        if (search != null) {
+            return repository.findAllByNameLikeIgnoreCase(pageable, "%" + search + "%");
+        }
         return repository.findAllProjectedBy(pageable);
     }
 
@@ -29,17 +34,20 @@ public class IngredientCatalogService {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void create(IngredientCatalogCreateDto createDto) {
+    public IdDto create(IngredientCatalogCreateDto createDto) {
         IngredientCatalog entity = modelMapper.map(createDto, IngredientCatalog.class);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
+        return new IdDto(entity.getId());
     }
 
-    public void update(UUID id, IngredientCatalogCreateDto createDto){
+    public void update(UUID id, IngredientCatalogCreateDto dto) throws EntityNotFoundException {
         Optional<IngredientCatalog> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(createDto, currentEntity, "id");
+            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
+        } else {
+            throw new EntityNotFoundException();
         }
     }
 
