@@ -12,10 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.caloricity.common.dto.IdDto;
 import ru.caloricity.common.exception.EntityNotFoundException;
-import ru.caloricity.ingredientCatalog.IngredientCatalogCreateDto;
-import ru.caloricity.ingredientCatalog.IngredientCatalogDto;
-import ru.caloricity.ingredientCatalog.IngredientCatalogInPageDto;
-import ru.caloricity.ingredientCatalog.IngredientCatalogService;
 
 import java.util.UUID;
 

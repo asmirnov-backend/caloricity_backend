@@ -1,7 +1,5 @@
 package ru.caloricity.ingredientCatalog;
 
-import ru.caloricity.ingredientCatalog.IngredientCatalog;
-
 import java.util.UUID;
 
 public class IngredientCatalogFactory {
