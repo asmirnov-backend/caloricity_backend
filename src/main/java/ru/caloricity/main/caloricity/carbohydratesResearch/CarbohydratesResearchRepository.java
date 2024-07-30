@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity.сarbohydratesResearch;
+package ru.caloricity.main.caloricity.carbohydratesResearch;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity.сarbohydratesResearch;
+package ru.caloricity.main.caloricity.carbohydratesResearch;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

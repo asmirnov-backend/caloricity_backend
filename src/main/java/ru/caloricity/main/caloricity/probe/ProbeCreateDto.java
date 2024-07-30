@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity.ingredientCatalog;
+package ru.caloricity.main.caloricity.probe;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -9,29 +9,23 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class IngredientCatalogCreateDto {
+public class ProbeCreateDto {
     @NotNull
     @NotBlank
     @Size(min=2)
     private String name;
 
     @NotNull
-    @Min(value = 0)
-    private float ediblePart;
+    private ProbeType type;
+
+    @NotNull
+    private String code;
 
     @NotNull
     @Min(value = 0)
-    private float water;
+    private float massTheory;
 
     @NotNull
     @Min(value = 0)
-    private float proteins;
-
-    @NotNull
-    @Min(value = 0)
-    private float fats;
-
-    @NotNull
-    @Min(value = 0)
-    private float carbohydrates;
+    private float massFact;
 }

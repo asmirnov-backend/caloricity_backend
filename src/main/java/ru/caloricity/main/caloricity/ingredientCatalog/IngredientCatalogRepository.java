@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RepositoryRestResource(exported = false)
 public interface IngredientCatalogRepository extends JpaRepository<IngredientCatalog, UUID> {
-    Page<IngredientCatalogInPageDto> findAllProjectedBy(Pageable pageable);
+    Page<IngredientCatalogInPageDto> findAllDtoBy(Pageable pageable);
 
     Page<IngredientCatalogInPageDto> findAllByNameLikeIgnoreCase(Pageable pageable, String like);
 

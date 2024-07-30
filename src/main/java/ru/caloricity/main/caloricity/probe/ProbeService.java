@@ -1,4 +1,4 @@
-package ru.caloricity.main.caloricity.ingredientCatalog;
+package ru.caloricity.main.caloricity.probe;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
@@ -15,34 +15,34 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class IngredientCatalogService {
-    private final IngredientCatalogRepository repository;
+public class ProbeService {
+    private final ProbeRepository repository;
     private final ModelMapper modelMapper;
 
-    public Optional<IngredientCatalog> findById(UUID id) {
+    public Optional<Probe> findById(UUID id) {
         return repository.findById(id);
     }
 
-    public Page<IngredientCatalogInPageDto> findAll(Pageable pageable, @Nullable String search) {
+    public Page<ProbeInPageDto> findAll(Pageable pageable, @Nullable String search) {
         if (search != null) {
             return repository.findAllByNameLikeIgnoreCase(pageable, "%" + search + "%");
         }
         return repository.findAllDtoBy(pageable);
     }
 
-    public IngredientCatalogDto findDtoByIdOrThrow(UUID id) throws EntityNotFoundException {
+    public ProbeDto findDtoByIdOrThrow(UUID id) throws EntityNotFoundException {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public IdDto create(IngredientCatalogCreateDto createDto) {
-        IngredientCatalog entity = modelMapper.map(createDto, IngredientCatalog.class);
+    public IdDto create(ProbeCreateDto createDto) {
+        Probe entity = modelMapper.map(createDto, Probe.class);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    public void update(UUID id, IngredientCatalogCreateDto dto) throws EntityNotFoundException {
-        Optional<IngredientCatalog> currentEntity = findById(id);
+    public void update(UUID id, ProbeCreateDto dto) throws EntityNotFoundException {
+        Optional<Probe> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
