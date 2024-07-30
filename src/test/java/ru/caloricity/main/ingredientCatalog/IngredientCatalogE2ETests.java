@@ -11,10 +11,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
-import ru.caloricity.main.caloricity.ingredientCatalog.IngredientCatalog;
-import ru.caloricity.main.caloricity.ingredientCatalog.IngredientCatalogCreateDto;
-import ru.caloricity.main.caloricity.ingredientCatalog.IngredientCatalogFactory;
-import ru.caloricity.main.caloricity.ingredientCatalog.IngredientCatalogRepository;
 
 import java.util.Optional;
 import java.util.UUID;
