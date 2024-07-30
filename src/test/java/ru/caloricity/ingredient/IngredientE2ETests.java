@@ -11,13 +11,18 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.ingredientCatalog.IngredientCatalog;
+import ru.caloricity.ingredientCatalog.IngredientCatalogFactory;
+import ru.caloricity.ingredientCatalog.IngredientCatalogRepository;
+import ru.caloricity.probe.Probe;
+import ru.caloricity.probe.ProbeFactory;
+import ru.caloricity.probe.ProbeRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -35,6 +40,10 @@ class IngredientE2ETests {
     private ObjectMapper objectMapper;
     @Autowired
     private IngredientRepository repository;
+    @Autowired
+    private IngredientCatalogRepository ingredientCatalogRepository;
+    @Autowired
+    private ProbeRepository probeRepository;
 
     @Test
     void contextLoads() {
@@ -42,19 +51,25 @@ class IngredientE2ETests {
     
     @Test
     void getAll_ok() throws Exception {
-        repository.save(new IngredientFactory().createSimple());
-        repository.save(new IngredientFactory().createSimple());
-        repository.save(new IngredientFactory().createSimple());
+        IngredientCatalog ingredientCatalog = ingredientCatalogRepository.save(new IngredientCatalogFactory().createSimple());
+        Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
-        mvc.perform(get("/caloricity/ingredient").contentType(MediaType.APPLICATION_JSON))
+        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
+        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
+        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
+
+        mvc.perform(get("/caloricity/ingredient?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.length()").value(greaterThan(2)));
+                .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
+                .andExpect(jsonPath("$.content[0].ingredientInCatalogName").value(ingredientCatalog.getName()));
     }
 
     @Test
     void create_created() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto(1,2);
+        IngredientCatalog ingredientCatalog = ingredientCatalogRepository.save(new IngredientCatalogFactory().createSimple());
+        Probe probe = probeRepository.save(new ProbeFactory().createSimple());
+        IngredientCreateDto dto = new IngredientCreateDto(1,2, ingredientCatalog.getId(), probe.getId());
 
         MvcResult result = mvc.perform(post("/caloricity/ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -72,12 +87,16 @@ class IngredientE2ETests {
 
         Optional<Ingredient> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
+        assertNotNull(createdEntity.get().getIngredientInCatalog());
+        assertEquals(createdEntity.get().getIngredientInCatalog().getId(), ingredientCatalog.getId());
+        assertNotNull(createdEntity.get().getProbe());
+        assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+
     }
 
     @Test
     void create_badRequest() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto(2,2);
-        dto.setNet(-23);
+        IngredientCreateDto dto = new IngredientCreateDto(2,-2, UUID.randomUUID(), UUID.randomUUID());
 
         mvc.perform(post("/caloricity/ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -85,22 +104,6 @@ class IngredientE2ETests {
                 )
                 .andDo(print())
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void update_ok() throws Exception {
-        Ingredient entity = repository.save(new IngredientFactory().createSimple());
-        IngredientCreateDto dto = new IngredientCreateDto(100,222);
-
-        mvc.perform(put("/caloricity/ingredient/{id}", entity.getId().toString())
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isOk());
-
-        Optional<Ingredient> updated = repository.findById(entity.getId());
-        assertEquals(updated.get().getNet(), dto.getNet());
     }
 
     @Test

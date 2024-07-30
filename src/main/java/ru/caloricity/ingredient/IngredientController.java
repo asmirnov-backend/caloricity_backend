@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.caloricity.common.dto.IdDto;
-import ru.caloricity.common.exception.EntityNotFoundException;
 
 import java.util.UUID;
 
@@ -23,8 +22,8 @@ class IngredientController {
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<IngredientInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<IngredientInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam("probe-id") UUID probeId) {
+        return service.findAll(pageable, probeId);
     }
 
     @PostMapping
@@ -32,11 +31,6 @@ class IngredientController {
     @Transactional
     public IdDto create(@Valid @RequestBody IngredientCreateDto createDto) {
         return service.create(createDto);
-    }
-
-    @PutMapping("{id}")
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCreateDto createDto) throws EntityNotFoundException {
-        service.update(id, createDto);
     }
 
     @DeleteMapping("{id}")

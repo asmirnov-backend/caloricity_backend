@@ -24,7 +24,7 @@ class IngredientCatalogController {
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
+    public Page<IngredientCatalogInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
         return service.findAll(pageable, search);
     }
 

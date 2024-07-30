@@ -9,6 +9,5 @@ import java.util.UUID;
 
 @RepositoryRestResource(exported = false)
 interface IngredientRepository extends JpaRepository<Ingredient, UUID> {
-    Page<IngredientInPageDto> findAllDtoBy(Pageable pageable);
-
+    Page<Ingredient> findAllByProbeId(Pageable page, UUID probeId);
 }

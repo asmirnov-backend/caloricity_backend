@@ -24,7 +24,7 @@ class ProbeController {
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<ProbeInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
+    public Page<ProbeInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
         return service.findAll(pageable, search);
     }
 
