@@ -3,6 +3,10 @@
 Расчёт калорийности по "МЕТОДИЧЕСКИЕ УКАЗАНИЯ ПО ГИГИЕНИЧЕСКОМУ КОНТРОЛЮ ЗА ПИТАНИЕМ В ОРГАНИЗОВАННЫХ КОЛЛЕКТИВАХ (УТВ. МИНЗДРАВОМ СССР 29.12.1986 N 4237-86)
 Источник: (1С-Рарус): https://otr-soft.ru/org/zakony_pitanie/mu_4237-86/"
 
+## Components diagram
+
+![Components diagram](./components-CaloricityApplication.png)
+
 ## Docker compose
 
 ```bash
