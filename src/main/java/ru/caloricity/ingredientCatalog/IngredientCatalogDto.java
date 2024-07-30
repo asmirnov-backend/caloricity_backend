@@ -9,16 +9,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class IngredientCatalogDto {
     private UUID id;
-    
     private String name;
-
     private float ediblePart;
-
     private float water;
-
     private float proteins;
-
     private float fats;
-
     private float carbohydrates;
 }

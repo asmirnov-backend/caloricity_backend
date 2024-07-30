@@ -94,18 +94,6 @@
             <column name="net" remarks="Масса нетто, г" type="FLOAT">
                 <constraints nullable="false"/>
             </column>
-            <column name="dry_substances" remarks="Масса сухих веществ, г" type="FLOAT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="proteins" remarks="Масса белков, г" type="FLOAT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fats" remarks="Масса жиров, г" type="FLOAT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="carbohydrates" remarks="Масса углеводов, г" type="FLOAT">
-                <constraints nullable="false"/>
-            </column>
             <column name="probe_id" type="UUID"/>
             <column name="ingredient_in_catalog_id" remarks="Ингредиент в справочнике" type="UUID"/>
         </createTable>

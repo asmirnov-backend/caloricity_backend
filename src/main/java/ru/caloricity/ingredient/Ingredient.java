@@ -30,22 +30,6 @@ public class Ingredient extends BaseEntity {
     @Column(nullable = false)
     private float net;
 
-    @Comment("Масса сухих веществ, г")
-    @Column(nullable = false)
-    private float drySubstances;
-
-    @Comment("Масса белков, г")
-    @Column(nullable = false)
-    private float proteins;
-
-    @Comment("Масса жиров, г")
-    @Column(nullable = false)
-    private float fats;
-
-    @Comment("Масса углеводов, г")
-    @Column(nullable = false)
-    private float carbohydrates;
-
     @ManyToOne
     private Probe probe;
 
