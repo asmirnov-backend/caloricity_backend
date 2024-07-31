@@ -6,6 +6,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
 import ru.caloricity.ingredientCatalog.IngredientCatalog;
@@ -31,10 +33,12 @@ public class Ingredient extends BaseEntity {
     private float net;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
 
     @Comment("Ингредиент в справочнике")
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.RESTRICT)
     private IngredientCatalog ingredientInCatalog;
 
     @Override

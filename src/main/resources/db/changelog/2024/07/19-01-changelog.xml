@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1721415902251-1" author="user (generated)">
+    <changeSet id="1722425523627-1" author="user (generated)">
         <createTable remarks="Исследования на углеводы" tableName="carbohydrates_researches">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_carbohydrates_researches"/>
@@ -33,7 +33,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1721415902251-2" author="user (generated)">
+    <changeSet id="1722425523627-2" author="user (generated)">
         <createTable remarks="Исследования на сухие остатки" tableName="dry_substances_researches">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_dry_substances_researches"/>
@@ -58,7 +58,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1721415902251-3" author="user (generated)">
+    <changeSet id="1722425523627-3" author="user (generated)">
         <createTable remarks="Исследования на жиры" tableName="fats_research">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_fats_research"/>
@@ -77,7 +77,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1721415902251-4" author="user (generated)">
+    <changeSet id="1722425523627-4" author="user (generated)">
         <createTable remarks="Ингредиенты" tableName="ingredients">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredients"/>
@@ -98,7 +98,7 @@
             <column name="ingredient_in_catalog_id" remarks="Ингредиент в справочнике" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="1721415902251-5" author="user (generated)">
+    <changeSet id="1722425523627-5" author="user (generated)">
         <createTable remarks="Каталог ингредиентов" tableName="ingredients_catalog">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredients_catalog"/>
@@ -129,17 +129,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1721415902251-6" author="user (generated)">
-        <createTable tableName="ingredients_catalog_ingredients">
-            <column name="ingredient_catalog_id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredients_catalog_ingredients"/>
-            </column>
-            <column name="ingredients_id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredients_catalog_ingredients"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet id="1721415902251-7" author="user (generated)">
+    <changeSet id="1722425523627-6" author="user (generated)">
         <createTable remarks="Пробы блюд" tableName="probes">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_probes"/>
@@ -169,7 +159,7 @@
             <column name="carbohydrates_research_id" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="1721415902251-8" author="user (generated)">
+    <changeSet id="1722425523627-7" author="user (generated)">
         <createTable remarks="Исследования на белок" tableName="proteins_researches">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_proteins_researches"/>
@@ -194,50 +184,35 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1721415902251-9" author="user (generated)">
-        <addUniqueConstraint columnNames="ingredients_id"
-                             constraintName="uc_ingredients_catalog_ingredients_ingredients"
-                             tableName="ingredients_catalog_ingredients"/>
-    </changeSet>
-    <changeSet id="1721415902251-10" author="user (generated)">
+    <changeSet id="1722425523627-8" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="ingredient_in_catalog_id" baseTableName="ingredients"
                                  constraintName="FK_INGREDIENTS_ON_INGREDIENT_IN_CATALOG" referencedColumnNames="id"
                                  referencedTableName="ingredients_catalog"/>
     </changeSet>
-    <changeSet id="1721415902251-11" author="user (generated)">
+    <changeSet id="1722425523627-9" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="probe_id" baseTableName="ingredients"
-                                 constraintName="FK_INGREDIENTS_ON_PROBE" referencedColumnNames="id"
+                                 constraintName="FK_INGREDIENTS_ON_PROBE" onDelete="CASCADE" referencedColumnNames="id"
                                  referencedTableName="probes"/>
     </changeSet>
-    <changeSet id="1721415902251-12" author="user (generated)">
+    <changeSet id="1722425523627-10" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="carbohydrates_research_id" baseTableName="probes"
                                  constraintName="FK_PROBES_ON_CARBOHYDRATES_RESEARCH" referencedColumnNames="id"
                                  referencedTableName="carbohydrates_researches"/>
     </changeSet>
-    <changeSet id="1721415902251-13" author="user (generated)">
+    <changeSet id="1722425523627-11" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="dry_substances_research_id" baseTableName="probes"
                                  constraintName="FK_PROBES_ON_DRY_SUBSTANCES_RESEARCH" referencedColumnNames="id"
                                  referencedTableName="dry_substances_researches"/>
     </changeSet>
-    <changeSet id="1721415902251-14" author="user (generated)">
+    <changeSet id="1722425523627-12" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="fats_research_id" baseTableName="probes"
                                  constraintName="FK_PROBES_ON_FATS_RESEARCH" referencedColumnNames="id"
                                  referencedTableName="fats_research"/>
     </changeSet>
-    <changeSet id="1721415902251-15" author="user (generated)">
+    <changeSet id="1722425523627-13" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="proteins_research_id" baseTableName="probes"
                                  constraintName="FK_PROBES_ON_PROTEINS_RESEARCH" referencedColumnNames="id"
                                  referencedTableName="proteins_researches"/>
-    </changeSet>
-    <changeSet id="1721415902251-16" author="user (generated)">
-        <addForeignKeyConstraint baseColumnNames="ingredients_id" baseTableName="ingredients_catalog_ingredients"
-                                 constraintName="fk_ingcating_on_ingredient" referencedColumnNames="id"
-                                 referencedTableName="ingredients"/>
-    </changeSet>
-    <changeSet id="1721415902251-17" author="user (generated)">
-        <addForeignKeyConstraint baseColumnNames="ingredient_catalog_id" baseTableName="ingredients_catalog_ingredients"
-                                 constraintName="fk_ingcating_on_ingredient_catalog" referencedColumnNames="id"
-                                 referencedTableName="ingredients_catalog"/>
     </changeSet>
 
 </databaseChangeLog>
