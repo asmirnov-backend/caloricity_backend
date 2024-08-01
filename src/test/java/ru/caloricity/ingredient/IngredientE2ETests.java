@@ -62,7 +62,7 @@ class IngredientE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
-                .andExpect(jsonPath("$.content[0].ingredientInCatalogName").value(ingredientCatalog.getName()));
+                .andExpect(jsonPath("$.content[0].name").value(ingredientCatalog.getName()));
     }
 
     @Test

@@ -2,7 +2,6 @@ package ru.caloricity.ingredientCatalog;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class IngredientCatalogService {
     private final IngredientCatalogRepository repository;
-    private final ModelMapper modelMapper;
+    private final IngredientCatalogMapper mapper;
 
     public Optional<IngredientCatalog> findById(UUID id) {
         return repository.findById(id);
@@ -35,7 +34,7 @@ public class IngredientCatalogService {
     }
 
     public IdDto create(IngredientCatalogCreateDto createDto) {
-        IngredientCatalog entity = modelMapper.map(createDto, IngredientCatalog.class);
+        IngredientCatalog entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
         return new IdDto(entity.getId());

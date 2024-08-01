@@ -1,7 +1,6 @@
 package ru.caloricity.ingredient;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class IngredientService {
     private final IngredientRepository repository;
-    private final ModelMapper modelMapper;
+    private final IngredientMapper mapper;
 
     public Optional<Ingredient> findById(UUID id) {
         return repository.findById(id);
@@ -26,14 +25,14 @@ public class IngredientService {
     public Page<IngredientInPageDto> findAll(Pageable pageable, UUID probeId) {
         Page<Ingredient> ingredientEntities = repository.findAllByProbeId(pageable, probeId);
         List<IngredientInPageDto> dtoList = ingredientEntities.stream()
-                .map(e -> modelMapper.map(e, IngredientInPageDto.class))
+                .map(mapper::toPageDto)
                 .collect(Collectors.toList());
 
         return new PageImpl<>(dtoList, pageable, ingredientEntities.getTotalElements());
     }
 
     public IdDto create(IngredientCreateDto createDto) {
-        Ingredient entity = modelMapper.map(createDto, Ingredient.class);
+        Ingredient entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
         return new IdDto(entity.getId());

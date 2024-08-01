@@ -1,7 +1,6 @@
 package ru.caloricity.drySubstancesResearch;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DrySubstancesResearchService {
     private final DrySubstancesResearchRepository repository;
-    private final ModelMapper modelMapper;
+    private final DrySubstancesResearchMapper mapper;
 
     public Optional<DrySubstancesResearch> findById(UUID id) {
         return repository.findById(id);
@@ -30,7 +29,7 @@ public class DrySubstancesResearchService {
     }
 
     public void create(DrySubstancesResearchCreateDto createDto) {
-        DrySubstancesResearch entity = modelMapper.map(createDto, DrySubstancesResearch.class);
+        DrySubstancesResearch entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
     }

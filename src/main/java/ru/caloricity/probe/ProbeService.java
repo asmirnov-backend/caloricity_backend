@@ -2,7 +2,6 @@ package ru.caloricity.probe;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProbeService {
     private final ProbeRepository repository;
-    private final ModelMapper modelMapper;
+    private final ProbeMapper mapper;
+
+    public UUID gen() {
+        return UUID.randomUUID();
+    }
 
     public Optional<Probe> findById(UUID id) {
         return repository.findById(id);
@@ -35,12 +38,13 @@ public class ProbeService {
     }
 
     public IdDto create(ProbeCreateDto createDto) {
-        Probe entity = modelMapper.map(createDto, Probe.class);
+        Probe entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
+    // TODO throw new ResourceNotFoundException()
     public void update(UUID id, ProbeCreateDto dto) throws EntityNotFoundException {
         Optional<Probe> currentEntity = findById(id);
         if (currentEntity.isPresent()) {

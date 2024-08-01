@@ -13,5 +13,5 @@ public class IngredientInPageDto {
     private UUID id;
     private float gross;
     private float net;
-    private String ingredientInCatalogName;
+    private String name;
 }
