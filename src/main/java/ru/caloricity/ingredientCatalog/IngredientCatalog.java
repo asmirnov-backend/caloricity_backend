@@ -25,23 +25,23 @@ public class IngredientCatalog extends BaseEntity {
 
     @Comment("Масса съедобной части, г")
     @Column(nullable = false)
-    private float ediblePart;
+    private Float ediblePart;
 
     @Comment("Масса воды, г")
     @Column(nullable = false)
-    private float water;
+    private Float water;
 
     @Comment("Масса белков, г")
     @Column(nullable = false)
-    private float proteins;
+    private Float proteins;
 
     @Comment("Масса жиров, г")
     @Column(nullable = false)
-    private float fats;
+    private Float fats;
 
     @Comment("Масса углеводов, г")
     @Column(nullable = false)
-    private float carbohydrates;
+    private Float carbohydrates;
 
 //    @OneToMany(fetch = FetchType.LAZY)
 //    @ToString.Exclude

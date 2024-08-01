@@ -1,5 +1,6 @@
 package ru.caloricity.probe;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,12 +38,12 @@ public class Probe extends BaseEntity {
     private String code;
 
     @Comment("Масса теоретическая, г")
-    @Column(nullable = false)
-    private float massTheory;
+    @Column()
+    private Float massTheory;
 
     @Comment("Масса фактическая, г")
-    @Column()
-    private float massFact;
+    @Column(nullable = false)
+    private Float massFact;
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private ProteinsResearch proteinsResearch;

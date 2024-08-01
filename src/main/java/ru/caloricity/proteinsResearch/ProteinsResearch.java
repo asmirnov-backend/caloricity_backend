@@ -21,19 +21,19 @@ import java.util.Objects;
 public class ProteinsResearch extends BaseEntity {
     @Comment("Объём титранта, г/см^3")
     @Column(nullable = false)
-    private float titrantVolume;
+    private Float titrantVolume;
 
     @Comment("Масса навески, г")
     @Column(nullable = false)
-    private float mass;
+    private Float mass;
 
     @Comment("Объём контроля, г/см^3")
     @Column(nullable = false)
-    private float controlVolume;
+    private Float controlVolume;
 
     @Comment("Коэффициент")
     @Column(nullable = false)
-    private float coefficient;
+    private Float coefficient;
 
 //    @OneToOne(mappedBy = "proteinsResearch")
 //    private Probe probe;

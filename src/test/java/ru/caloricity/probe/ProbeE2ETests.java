@@ -81,7 +81,7 @@ class ProbeE2ETests {
 
     @Test
     void create_created() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST,"f213",1,1);
+        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST,"f213",1f,1f);
 
         MvcResult result = mvc.perform(post("/caloricity/probe")
                         .content(objectMapper.writeValueAsString(dto))
@@ -103,8 +103,7 @@ class ProbeE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST,"f213",1,1);
-        dto.setName("");
+        ProbeCreateDto dto = new ProbeCreateDto("", ProbeType.FIRST,"f213",1f,1f);
 
         mvc.perform(post("/caloricity/probe")
                         .content(objectMapper.writeValueAsString(dto))
@@ -117,7 +116,7 @@ class ProbeE2ETests {
     @Test
     void update_ok() throws Exception {
         Probe catalog = repository.save(new ProbeFactory().createSimple());
-        ProbeCreateDto dto = new ProbeCreateDto("name for test132", ProbeType.FIRST,"f213",1,1);
+        ProbeCreateDto dto = new ProbeCreateDto("name for test132", ProbeType.FIRST,"f213",1f,1f);
 
         mvc.perform(put("/caloricity/probe/{id}", catalog.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -127,7 +126,7 @@ class ProbeE2ETests {
                 .andExpect(status().isOk());
 
         Optional<Probe> updated = repository.findById(catalog.getId());
-        assertEquals(updated.get().getName(), dto.getName());
+        assertEquals(updated.get().getName(), dto.name());
     }
 
     @Test

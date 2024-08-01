@@ -26,11 +26,11 @@ import java.util.Objects;
 public class Ingredient extends BaseEntity {
     @Comment("Масса брутто, г")
     @Column(nullable = false)
-    private float gross;
+    private Float gross;
 
     @Comment("Масса нетто, г")
     @Column(nullable = false)
-    private float net;
+    private Float net;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

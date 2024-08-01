@@ -11,11 +11,11 @@ import java.util.UUID;
 @NoArgsConstructor
 public class IngredientInPageDto {
     private UUID id;
-    private float gross;
-    private float net;
+    private Float gross;
+    private Float net;
     private String name;
-    private float water;
-    private float proteins;
-    private float fats;
-    private float carbohydrates;
+    private Float water;
+    private Float proteins;
+    private Float fats;
+    private Float carbohydrates;
 }

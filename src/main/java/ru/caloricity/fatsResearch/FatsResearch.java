@@ -21,11 +21,11 @@ import java.util.Objects;
 public class FatsResearch extends BaseEntity {
     @Comment("Масса патрона до экстракции, г")
     @Column(nullable = false)
-    private float patronMassBeforeExtraction;
+    private Float patronMassBeforeExtraction;
 
     @Comment("Масса патрона после экстракции, г")
     @Column(nullable = false)
-    private float patronMassAfterExtraction;
+    private Float patronMassAfterExtraction;
 
 //    @OneToOne(mappedBy = "fatsResearch")
 //    private Probe probe;

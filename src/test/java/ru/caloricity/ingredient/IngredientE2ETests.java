@@ -73,7 +73,7 @@ class IngredientE2ETests {
     void create_created() throws Exception {
         IngredientCatalog ingredientCatalog = ingredientCatalogRepository.save(new IngredientCatalogFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        IngredientCreateDto dto = new IngredientCreateDto(1,2, ingredientCatalog.getId(), probe.getId());
+        IngredientCreateDto dto = new IngredientCreateDto(1f,2f, ingredientCatalog.getId(), probe.getId());
 
         MvcResult result = mvc.perform(post("/caloricity/ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -100,7 +100,7 @@ class IngredientE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto(2,-2, UUID.randomUUID(), UUID.randomUUID());
+        IngredientCreateDto dto = new IngredientCreateDto(2f,-2f, UUID.randomUUID(), UUID.randomUUID());
 
         mvc.perform(post("/caloricity/ingredient")
                         .content(objectMapper.writeValueAsString(dto))

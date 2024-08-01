@@ -21,19 +21,19 @@ import java.util.Objects;
 public class DrySubstancesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
     @Column(nullable = false)
-    private float byuksaParallelFirst;
+    private Float byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
     @Column(nullable = false)
-    private float byuksaParallelSecond;
+    private Float byuksaParallelSecond;
 
     @Comment("Масса пустой банки, г")
     @Column(nullable = false)
-    private float bankaEmptyMass;
+    private Float bankaEmptyMass;
 
     @Comment("Масса навески, г")
     @Column(nullable = false)
-    private float mass;
+    private Float mass;
 
 //    @OneToOne(mappedBy = "drySubstancesResearch")
 //    private Probe probe;

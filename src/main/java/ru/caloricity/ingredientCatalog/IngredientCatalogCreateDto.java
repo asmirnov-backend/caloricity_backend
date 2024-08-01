@@ -17,21 +17,21 @@ public class IngredientCatalogCreateDto {
 
     @NotNull
     @Min(value = 0)
-    private float ediblePart;
+    private Float ediblePart;
 
     @NotNull
     @Min(value = 0)
-    private float water;
+    private Float water;
 
     @NotNull
     @Min(value = 0)
-    private float proteins;
+    private Float proteins;
 
     @NotNull
     @Min(value = 0)
-    private float fats;
+    private Float fats;
 
     @NotNull
     @Min(value = 0)
-    private float carbohydrates;
+    private Float carbohydrates;
 }

@@ -13,17 +13,17 @@ public class DrySubstancesResearchCreateDto {
     private String name;
 
     @NotNull
-    private float ediblePart;
+    private Float ediblePart;
 
     @NotNull
-    private float water;
+    private Float water;
 
     @NotNull
-    private float proteins;
+    private Float proteins;
 
     @NotNull
-    private float fats;
+    private Float fats;
 
     @NotNull
-    private float carbohydrates;
+    private Float carbohydrates;
 }

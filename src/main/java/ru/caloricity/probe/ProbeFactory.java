@@ -9,8 +9,8 @@ public class ProbeFactory {
         probe.setName("Test name");
         probe.setCode("f123213");
         probe.setType(ProbeType.FIRST);
-        probe.setMassFact(1);
-        probe.setMassTheory(1);
+        probe.setMassFact(1f);
+        probe.setMassTheory(1f);
         return probe;
     }
 }

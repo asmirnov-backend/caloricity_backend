@@ -29,22 +29,22 @@ public class IngredientMapperUtils {
     }
 
     @Named("calcWater")
-    float calcWater(Ingredient ingredient) {
+    Float calcWater(Ingredient ingredient) {
         return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getWater();
     }
 
     @Named("calcProteins")
-    float calcProteins(Ingredient ingredient) {
+    Float calcProteins(Ingredient ingredient) {
         return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getProteins();
     }
 
     @Named("calcFats")
-    float calcFats(Ingredient ingredient) {
+    Float calcFats(Ingredient ingredient) {
         return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getFats();
     }
 
     @Named("calcCarbohydrates")
-    float calcCarbohydrates(Ingredient ingredient) {
+    Float calcCarbohydrates(Ingredient ingredient) {
         return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getCarbohydrates();
     }
 }
