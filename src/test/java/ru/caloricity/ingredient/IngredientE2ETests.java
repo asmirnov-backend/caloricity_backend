@@ -62,7 +62,11 @@ class IngredientE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
-                .andExpect(jsonPath("$.content[0].name").value(ingredientCatalog.getName()));
+                .andExpect(jsonPath("$.content[0].name").value(ingredientCatalog.getName()))
+                .andExpect(jsonPath("$.content[0].water").value(1))
+                .andExpect(jsonPath("$.content[0].proteins").value(1))
+                .andExpect(jsonPath("$.content[0].fats").value(1))
+                .andExpect(jsonPath("$.content[0].carbohydrates").value(1));
     }
 
     @Test

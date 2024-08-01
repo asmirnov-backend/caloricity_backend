@@ -14,5 +14,9 @@ public interface IngredientMapper {
     Ingredient toEntity(IngredientCreateDto dto);
 
     @Mapping(source = "ingredientInCatalog.name", target = "name")
+    @Mapping(source = ".", target = "water", qualifiedByName = {"IngredientMapperUtils", "calcWater"})
+    @Mapping(source = ".", target = "proteins", qualifiedByName = {"IngredientMapperUtils", "calcProteins"})
+    @Mapping(source = ".", target = "fats", qualifiedByName = {"IngredientMapperUtils", "calcFats"})
+    @Mapping(source = ".", target = "carbohydrates", qualifiedByName = {"IngredientMapperUtils", "calcCarbohydrates"})
     IngredientInPageDto toPageDto(Ingredient entity);
 }

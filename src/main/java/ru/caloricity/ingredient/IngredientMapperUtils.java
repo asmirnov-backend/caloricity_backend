@@ -27,4 +27,24 @@ public class IngredientMapperUtils {
     IngredientCatalog mapIngredientInCatalogIdToEntity(UUID ingredientInCatalogId) {
         return ingredientCatalogService.findById(ingredientInCatalogId).orElseThrow(EntityNotFoundException::new);
     }
+
+    @Named("calcWater")
+    float calcWater(Ingredient ingredient) {
+        return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getWater();
+    }
+
+    @Named("calcProteins")
+    float calcProteins(Ingredient ingredient) {
+        return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getProteins();
+    }
+
+    @Named("calcFats")
+    float calcFats(Ingredient ingredient) {
+        return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getFats();
+    }
+
+    @Named("calcCarbohydrates")
+    float calcCarbohydrates(Ingredient ingredient) {
+        return (ingredient.getNet() /  ingredient.getIngredientInCatalog().getEdiblePart()) * ingredient.getIngredientInCatalog().getCarbohydrates();
+    }
 }

@@ -14,4 +14,8 @@ public class IngredientInPageDto {
     private float gross;
     private float net;
     private String name;
+    private float water;
+    private float proteins;
+    private float fats;
+    private float carbohydrates;
 }
