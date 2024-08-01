@@ -28,7 +28,7 @@ public class ProbeService {
 
     public Page<ProbeInPageDto> findAll(Pageable pageable, @Nullable String search) {
         if (search != null) {
-            return repository.findAllByNameLikeIgnoreCase(pageable, "%" + search + "%");
+            return repository.findAllByCodeLikeIgnoreCase(pageable, "%" + search + "%");
         }
         return repository.findAllDtoBy(pageable);
     }
@@ -46,7 +46,7 @@ public class ProbeService {
     }
 
     // TODO throw new ResourceNotFoundException()
-    public void update(UUID id, ProbeCreateDto dto) throws EntityNotFoundException {
+    public void update(UUID id, ProbeUpdateDto dto) throws EntityNotFoundException {
         Optional<Probe> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");

@@ -116,7 +116,7 @@ class ProbeE2ETests {
     @Test
     void update_ok() throws Exception {
         Probe catalog = repository.save(new ProbeFactory().createSimple());
-        ProbeCreateDto dto = new ProbeCreateDto("name for test132", ProbeType.FIRST,"f213",1f,1f);
+        ProbeUpdateDto dto = new ProbeUpdateDto("name for test132","f213",1f,1f);
 
         mvc.perform(put("/caloricity/probe/{id}", catalog.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

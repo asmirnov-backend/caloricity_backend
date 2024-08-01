@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface ProbeRepository extends JpaRepository<Probe, UUID> {
     Page<ProbeInPageDto> findAllDtoBy(Pageable pageable);
 
-    Page<ProbeInPageDto> findAllByNameLikeIgnoreCase(Pageable pageable, String like);
+    Page<ProbeInPageDto> findAllByCodeLikeIgnoreCase(Pageable pageable, String like);
 
     Optional<ProbeDto> findDtoById(UUID id);
 }
