@@ -10,7 +10,6 @@ import org.springframework.modulith.docs.Documenter;
 class CaloricityApplicationTests {
 	ApplicationModules modules = ApplicationModules.of(CaloricityApplication.class);
 
-
 	@Test
 	void shouldBeCompliant() {
 		modules.verify();

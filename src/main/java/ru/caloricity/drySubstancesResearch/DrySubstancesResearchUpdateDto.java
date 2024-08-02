@@ -4,11 +4,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
-public class DrySubstancesResearchCreateDto {
+public class DrySubstancesResearchUpdateDto {
     @NotNull
     private Float byuksaParallelFirst;
 
@@ -20,7 +18,4 @@ public class DrySubstancesResearchCreateDto {
 
     @NotNull
     private Float mass;
-
-    @NotNull
-    private UUID probeId;
 }

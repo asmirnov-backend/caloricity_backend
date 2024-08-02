@@ -5,6 +5,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.caloricity.common.dto.IdDto;
 import ru.caloricity.common.exception.EntityNotFoundException;
 
 import java.util.Optional;
@@ -20,23 +21,24 @@ public class DrySubstancesResearchService {
         return repository.findById(id);
     }
 
-    public Page<DrySubstancesResearchInPageDto> findAll(Pageable pageable) {
-        return repository.findAllProjectedBy(pageable);
+    public Page<DrySubstancesResearchInPageDto> findAll(Pageable pageable, UUID probeId) {
+        return repository.findAllProjectedByProbeId(pageable, probeId);
     }
 
     public DrySubstancesResearchDto findDtoByIdOrThrow(UUID id) throws EntityNotFoundException {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void create(DrySubstancesResearchCreateDto createDto) {
+    public IdDto create(DrySubstancesResearchCreateDto createDto) {
         DrySubstancesResearch entity = mapper.toEntity(createDto);
         repository.save(entity);
+        return new IdDto(entity.getId());
     }
 
-    public void update(UUID id, DrySubstancesResearchCreateDto createDto){
+    public void update(UUID id, DrySubstancesResearchUpdateDto dto){
         Optional<DrySubstancesResearch> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(createDto, currentEntity, "id");
+            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
         }
     }

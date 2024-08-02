@@ -1,6 +1,5 @@
 package ru.caloricity.probe;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
-import ru.caloricity.carbohydratesResearch.CarbohydratesResearch;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.drySubstancesResearch.DrySubstancesResearch;
-import ru.caloricity.fatsResearch.FatsResearch;
-import ru.caloricity.proteinsResearch.ProteinsResearch;
 
 import java.util.Objects;
 

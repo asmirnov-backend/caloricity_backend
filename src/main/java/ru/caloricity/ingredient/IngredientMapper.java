@@ -1,16 +1,16 @@
 package ru.caloricity.ingredient;
 
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import ru.caloricity.probe.ProbeMapperUtils;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {
-        IngredientMapperUtils.class
-})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {IngredientMapperUtils.class, ProbeMapperUtils.class}, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface IngredientMapper {
     @Mapping(target="id", expression="java(java.util.UUID.randomUUID())")
     @Mapping(source = "ingredientInCatalogId", target = "ingredientInCatalog", qualifiedByName = {"IngredientMapperUtils", "mapIngredientInCatalogIdToEntity"})
-    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"IngredientMapperUtils", "mapProbeIdToEntity"})
+    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "mapProbeIdToEntity"})
     Ingredient toEntity(IngredientCreateDto dto);
 
     @Mapping(source = "ingredientInCatalog.name", target = "name")
