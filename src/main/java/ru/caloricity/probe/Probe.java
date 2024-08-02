@@ -45,17 +45,17 @@ public class Probe extends BaseEntity {
     @Column(nullable = false)
     private Float massFact;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private ProteinsResearch proteinsResearch;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private FatsResearch fatsResearch;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private DrySubstancesResearch drySubstancesResearch;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private CarbohydratesResearch carbohydratesResearch;
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private ProteinsResearch proteinsResearch;
+//
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private FatsResearch fatsResearch;
+//
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private DrySubstancesResearch drySubstancesResearch;
+//
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private CarbohydratesResearch carbohydratesResearch;
 
     @Override
     public final boolean equals(Object o) {

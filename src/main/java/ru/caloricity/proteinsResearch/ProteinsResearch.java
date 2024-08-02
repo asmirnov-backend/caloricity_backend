@@ -2,11 +2,13 @@ package ru.caloricity.proteinsResearch;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
 
@@ -35,8 +37,8 @@ public class ProteinsResearch extends BaseEntity {
     @Column(nullable = false)
     private Float coefficient;
 
-//    @OneToOne(mappedBy = "proteinsResearch")
-//    private Probe probe;
+    @OneToOne()
+    private Probe probe;
 
     @Override
     public final boolean equals(Object o) {
