@@ -38,9 +38,7 @@ public class ProbeService {
     }
 
     public IdDto create(ProbeCreateDto createDto) {
-        System.out.println(createDto.massTheory());
         Probe entity = mapper.toEntity(createDto);
-        System.out.println(entity.getMassTheory());
         repository.save(entity);
         return new IdDto(entity.getId());
     }

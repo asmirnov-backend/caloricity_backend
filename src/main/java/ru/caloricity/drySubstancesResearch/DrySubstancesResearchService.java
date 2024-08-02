@@ -30,7 +30,6 @@ public class DrySubstancesResearchService {
 
     public void create(DrySubstancesResearchCreateDto createDto) {
         DrySubstancesResearch entity = mapper.toEntity(createDto);
-        entity.setId(UUID.randomUUID());
         repository.save(entity);
     }
 
