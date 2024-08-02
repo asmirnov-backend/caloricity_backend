@@ -17,7 +17,7 @@ import ru.caloricity.common.exception.EntityNotFoundException;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("caloricity/probe")
+@RequestMapping("probe")
 @RequiredArgsConstructor
 @CrossOrigin
 class ProbeController {

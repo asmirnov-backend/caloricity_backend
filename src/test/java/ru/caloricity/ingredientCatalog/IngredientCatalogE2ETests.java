@@ -44,7 +44,7 @@ class IngredientCatalogE2ETests {
     void getById_ok() throws Exception {
         IngredientCatalog catalog = repository.save(new IngredientCatalogFactory().createSimple());
 
-        mvc.perform(get("/caloricity/ingredient-catalog/{id}", catalog.getId()))
+        mvc.perform(get("/ingredient-catalog/{id}", catalog.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(catalog.getId().toString()))
@@ -58,7 +58,7 @@ class IngredientCatalogE2ETests {
         repository.save(new IngredientCatalogFactory().createSimple());
         repository.save(new IngredientCatalogFactory().createSimple());
 
-        mvc.perform(get("/caloricity/ingredient-catalog").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/ingredient-catalog").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)));
@@ -72,7 +72,7 @@ class IngredientCatalogE2ETests {
         repository.save(new IngredientCatalogFactory().createSimple());
         repository.save(new IngredientCatalogFactory().createSimple());
 
-        mvc.perform(get("/caloricity/ingredient-catalog?search={name}", searchedCatalog.getName().toLowerCase()))
+        mvc.perform(get("/ingredient-catalog?search={name}", searchedCatalog.getName().toLowerCase()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(1))
@@ -83,7 +83,7 @@ class IngredientCatalogE2ETests {
     void create_created() throws Exception {
         IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f,1f,1f,1f,1f);
 
-        MvcResult result = mvc.perform(post("/caloricity/ingredient-catalog")
+        MvcResult result = mvc.perform(post("/ingredient-catalog")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -106,7 +106,7 @@ class IngredientCatalogE2ETests {
         IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f,1f,1f,1f,1f);
         dto.setName("");
 
-        mvc.perform(post("/caloricity/ingredient-catalog")
+        mvc.perform(post("/ingredient-catalog")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -119,7 +119,7 @@ class IngredientCatalogE2ETests {
         IngredientCatalog catalog = repository.save(new IngredientCatalogFactory().createSimple());
         IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f,1f,1f,1f,1f);
 
-        mvc.perform(put("/caloricity/ingredient-catalog/{id}", catalog.getId().toString())
+        mvc.perform(put("/ingredient-catalog/{id}", catalog.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -134,7 +134,7 @@ class IngredientCatalogE2ETests {
     void delete_ok() throws Exception {
         IngredientCatalog catalog = repository.save(new IngredientCatalogFactory().createSimple());
 
-        mvc.perform(delete("/caloricity/ingredient-catalog/{id}", catalog.getId().toString()))
+        mvc.perform(delete("/ingredient-catalog/{id}", catalog.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 

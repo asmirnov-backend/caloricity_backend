@@ -14,7 +14,7 @@ import ru.caloricity.common.dto.IdDto;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("caloricity/ingredient")
+@RequestMapping("ingredient")
 @RequiredArgsConstructor
 @CrossOrigin
 class IngredientController {

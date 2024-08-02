@@ -14,7 +14,7 @@ import ru.caloricity.common.exception.EntityNotFoundException;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("caloricity/dry-substances-research")
+@RequestMapping("dry-substances-research")
 @RequiredArgsConstructor
 class DrySubstancesResearchController {
     private final DrySubstancesResearchService service;

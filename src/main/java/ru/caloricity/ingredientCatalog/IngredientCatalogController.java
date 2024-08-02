@@ -16,7 +16,7 @@ import ru.caloricity.common.exception.EntityNotFoundException;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("caloricity/ingredient-catalog")
+@RequestMapping("ingredient-catalog")
 @RequiredArgsConstructor
 @CrossOrigin
 class IngredientCatalogController {
