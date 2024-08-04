@@ -32,12 +32,12 @@ public class Ingredient extends BaseEntity {
     @Column(nullable = false)
     private Float net;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
 
     @Comment("Ингредиент в справочнике")
-    @ManyToOne
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     private IngredientCatalog ingredientInCatalog;
 

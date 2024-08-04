@@ -1,11 +1,10 @@
 package ru.caloricity.drySubstancesResearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
 import ru.caloricity.probe.Probe;
@@ -37,7 +36,9 @@ public class DrySubstancesResearch extends BaseEntity {
     @Column(nullable = false)
     private Float mass;
 
-    @OneToOne()
+    @OneToOne(optional = false)
+    @JoinColumn(name="probe_id", unique=true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
 
     @Override

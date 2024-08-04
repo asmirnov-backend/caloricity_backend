@@ -1,9 +1,6 @@
 package ru.caloricity.fatsResearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
@@ -29,7 +26,8 @@ public class FatsResearch extends BaseEntity {
     @Column(nullable = false)
     private Float patronMassAfterExtraction;
 
-    @OneToOne()
+    @OneToOne(optional = false)
+    @JoinColumn(name="probe_id", unique=true)
     private Probe probe;
 
     @Override

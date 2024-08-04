@@ -6,4 +6,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
         <include file="db/changelog/2024/07/19-01-changelog.xml"/>
         <include file="db/changelog/2024/07/seed-IngredientCatalog.xml"/>
+        <include file="db/changelog/2024/08/03-01-changelog.xml"/>
+        <include file="db/changelog/2024/08/03-02-changelog.xml"/>
 </databaseChangeLog>

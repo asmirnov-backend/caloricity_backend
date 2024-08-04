@@ -1,9 +1,6 @@
 package ru.caloricity.proteinsResearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
@@ -37,7 +34,8 @@ public class ProteinsResearch extends BaseEntity {
     @Column(nullable = false)
     private Float coefficient;
 
-    @OneToOne()
+    @OneToOne(optional = false)
+    @JoinColumn(name="probe_id", unique=true)
     private Probe probe;
 
     @Override

@@ -1,9 +1,6 @@
 package ru.caloricity.carbohydratesResearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,7 +40,8 @@ public class CarbohydratesResearch extends BaseEntity {
     @Column(nullable = false)
     private Float mass;
 
-    @OneToOne()
+    @OneToOne(optional = false)
+    @JoinColumn(name="probe_id", unique=true)
     private Probe probe;
 
     @Override
