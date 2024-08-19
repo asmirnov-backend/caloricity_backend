@@ -25,7 +25,7 @@ public class DrySubstancesResearchService {
         return repository.findAllProjectedByProbeId(pageable, probeId);
     }
 
-    public DrySubstancesResearchDto findDtoByIdOrThrow(UUID id) throws EntityNotFoundException {
+    public DrySubstancesResearchDto findDtoByIdOrThrow(UUID id) {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 

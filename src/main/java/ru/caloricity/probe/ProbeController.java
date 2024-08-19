@@ -29,7 +29,7 @@ class ProbeController {
     }
 
     @GetMapping("{id}")
-    public ProbeDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) throws EntityNotFoundException {
+    public ProbeDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
         return service.findDtoByIdOrThrow(id);
     }
 
@@ -41,7 +41,7 @@ class ProbeController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody ProbeUpdateDto createDto) throws EntityNotFoundException {
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody ProbeUpdateDto createDto) {
         service.update(id, createDto);
     }
 

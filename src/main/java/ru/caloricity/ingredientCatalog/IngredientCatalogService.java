@@ -29,7 +29,7 @@ public class IngredientCatalogService {
         return repository.findAllDtoBy(pageable);
     }
 
-    public IngredientCatalogDto findDtoByIdOrThrow(UUID id) throws EntityNotFoundException {
+    public IngredientCatalogDto findDtoByIdOrThrow(UUID id) {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
@@ -40,7 +40,7 @@ public class IngredientCatalogService {
         return new IdDto(entity.getId());
     }
 
-    public void update(UUID id, IngredientCatalogCreateDto dto) throws EntityNotFoundException {
+    public void update(UUID id, IngredientCatalogCreateDto dto) {
         Optional<IngredientCatalog> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");

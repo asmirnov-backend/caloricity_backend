@@ -28,7 +28,7 @@ class DrySubstancesResearchController {
     }
 
     @GetMapping("{id}")
-    public DrySubstancesResearchDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) throws EntityNotFoundException {
+    public DrySubstancesResearchDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
         return service.findDtoByIdOrThrow(id);
     }
 

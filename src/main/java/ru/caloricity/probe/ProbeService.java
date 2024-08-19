@@ -33,7 +33,7 @@ public class ProbeService {
         return repository.findAllDtoBy(pageable);
     }
 
-    public ProbeDto findDtoByIdOrThrow(UUID id) throws EntityNotFoundException {
+    public ProbeDto findDtoByIdOrThrow(UUID id) {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
@@ -44,7 +44,7 @@ public class ProbeService {
     }
 
     // TODO throw new ResourceNotFoundException()
-    public void update(UUID id, ProbeUpdateDto dto) throws EntityNotFoundException {
+    public void update(UUID id, ProbeUpdateDto dto) {
         Optional<Probe> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");

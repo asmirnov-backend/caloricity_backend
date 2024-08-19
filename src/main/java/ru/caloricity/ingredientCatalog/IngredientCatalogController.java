@@ -29,7 +29,7 @@ class IngredientCatalogController {
     }
 
     @GetMapping("{id}")
-    public IngredientCatalogDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) throws EntityNotFoundException {
+    public IngredientCatalogDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
         return service.findDtoByIdOrThrow(id);
     }
 
@@ -41,7 +41,7 @@ class IngredientCatalogController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) throws EntityNotFoundException {
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) {
         service.update(id, createDto);
     }
 
