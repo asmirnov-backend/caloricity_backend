@@ -7,7 +7,6 @@ import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.caloricity.common.dto.IdDto;
 
@@ -28,13 +27,11 @@ class IngredientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Transactional
     public IdDto create(@Valid @RequestBody IngredientCreateDto createDto) {
         return service.create(createDto);
     }
 
     @DeleteMapping("{id}")
-    @Transactional
     public void delete(@PathVariable(name = "id") UUID id) {
         service.deleteById(id);
     }

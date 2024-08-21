@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.caloricity.common.dto.IdDto;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class IngredientService {
         return new PageImpl<>(dtoList, pageable, ingredientEntities.getTotalElements());
     }
 
+    @Transactional
     public IdDto create(IngredientCreateDto createDto) {
         Ingredient entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
@@ -38,6 +40,7 @@ public class IngredientService {
         return new IdDto(entity.getId());
     }
 
+    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }
