@@ -126,6 +126,7 @@ class ProbeE2ETests {
                 .andExpect(status().isOk());
 
         Optional<Probe> updated = repository.findById(catalog.getId());
+        //noinspection OptionalGetWithoutIsPresent
         assertEquals(updated.get().getName(), dto.name());
     }
 

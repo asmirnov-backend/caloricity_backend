@@ -112,6 +112,7 @@ class DrySubstancesResearchE2ETests {
                 .andExpect(status().isOk());
 
         Optional<DrySubstancesResearch> updated = repository.findById(entity.getId());
+        //noinspection OptionalGetWithoutIsPresent
         assertEquals(updated.get().getMass(), dto.getMass());
     }
 

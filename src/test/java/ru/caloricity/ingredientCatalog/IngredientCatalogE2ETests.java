@@ -127,6 +127,7 @@ class IngredientCatalogE2ETests {
                 .andExpect(status().isOk());
 
         Optional<IngredientCatalog> updated = repository.findById(catalog.getId());
+        //noinspection OptionalGetWithoutIsPresent
         assertEquals(updated.get().getName(), dto.getName());
     }
 
