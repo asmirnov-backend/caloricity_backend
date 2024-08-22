@@ -8,18 +8,18 @@ import org.springframework.modulith.docs.Documenter;
 
 @SpringBootTest
 class CaloricityApplicationTests {
-	ApplicationModules modules = ApplicationModules.of(CaloricityApplication.class);
+    ApplicationModules modules = ApplicationModules.of(CaloricityApplication.class);
 
-	@Test
-	void shouldBeCompliant() {
-		modules.verify();
-	}
+    @Test
+    void shouldBeCompliant() {
+        modules.verify();
+    }
 
-	@Test
-	void writeDocumentationSnippets() {
-		new Documenter(modules)
-				.writeModulesAsPlantUml()
-				.writeIndividualModulesAsPlantUml();
-	}
+    @Test
+    void writeDocumentationSnippets() {
+        new Documenter(modules)
+                .writeModulesAsPlantUml()
+                .writeIndividualModulesAsPlantUml();
+    }
 
 }

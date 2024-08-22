@@ -6,6 +6,6 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProbeMapper {
-    @Mapping(target="id", expression="java(java.util.UUID.randomUUID())")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     Probe toEntity(ProbeCreateDto dto);
 }

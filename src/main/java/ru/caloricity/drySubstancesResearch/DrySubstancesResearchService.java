@@ -38,7 +38,7 @@ public class DrySubstancesResearchService {
     }
 
     @Transactional
-    public void update(UUID id, DrySubstancesResearchUpdateDto dto){
+    public void update(UUID id, DrySubstancesResearchUpdateDto dto) {
         Optional<DrySubstancesResearch> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");

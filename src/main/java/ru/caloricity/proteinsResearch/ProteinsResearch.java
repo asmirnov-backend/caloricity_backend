@@ -35,7 +35,7 @@ public class ProteinsResearch extends BaseEntity {
     private Float coefficient;
 
     @OneToOne(optional = false)
-    @JoinColumn(name="probe_id", unique=true)
+    @JoinColumn(name = "probe_id", unique = true)
     private Probe probe;
 
     @Override

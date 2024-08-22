@@ -10,4 +10,5 @@ public record IngredientCreateDto(
         @NotNull @Min(0) Float net,
         @NotNull UUID ingredientInCatalogId,
         @NotNull UUID probeId
-) {}
+) {
+}

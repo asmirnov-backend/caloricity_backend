@@ -12,7 +12,7 @@ import lombok.Data;
 public class IngredientCatalogCreateDto {
     @NotNull
     @NotBlank
-    @Size(min=2)
+    @Size(min = 2)
     private String name;
 
     @NotNull

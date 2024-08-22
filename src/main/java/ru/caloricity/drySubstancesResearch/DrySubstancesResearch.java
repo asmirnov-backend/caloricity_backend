@@ -37,7 +37,7 @@ public class DrySubstancesResearch extends BaseEntity {
     private Float mass;
 
     @OneToOne(optional = false)
-    @JoinColumn(name="probe_id", unique=true)
+    @JoinColumn(name = "probe_id", unique = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
 

@@ -81,7 +81,7 @@ class IngredientCatalogE2ETests {
 
     @Test
     void create_created() throws Exception {
-        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f,1f,1f,1f,1f);
+        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
 
         MvcResult result = mvc.perform(post("/ingredient-catalog")
                         .content(objectMapper.writeValueAsString(dto))
@@ -103,7 +103,7 @@ class IngredientCatalogE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f,1f,1f,1f,1f);
+        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
         dto.setName("");
 
         mvc.perform(post("/ingredient-catalog")
@@ -117,7 +117,7 @@ class IngredientCatalogE2ETests {
     @Test
     void update_ok() throws Exception {
         IngredientCatalog catalog = repository.save(new IngredientCatalogFactory().createSimple());
-        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f,1f,1f,1f,1f);
+        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
 
         mvc.perform(put("/ingredient-catalog/{id}", catalog.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

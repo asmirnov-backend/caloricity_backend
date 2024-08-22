@@ -19,10 +19,6 @@ public class ProbeService {
     private final ProbeRepository repository;
     private final ProbeMapper mapper;
 
-    public UUID gen() {
-        return UUID.randomUUID();
-    }
-
     public Optional<Probe> findById(UUID id) {
         return repository.findById(id);
     }

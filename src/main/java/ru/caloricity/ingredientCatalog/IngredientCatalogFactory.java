@@ -12,6 +12,6 @@ public class IngredientCatalogFactory {
         ingredientCatalog.setWater(1f);
         ingredientCatalog.setEdiblePart(1f);
         ingredientCatalog.setProteins(1f);
-        return  ingredientCatalog;
+        return ingredientCatalog;
     }
 }

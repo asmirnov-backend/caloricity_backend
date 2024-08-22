@@ -8,7 +8,7 @@ import ru.caloricity.probe.ProbeMapperUtils;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ProbeMapperUtils.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface DrySubstancesResearchMapper {
-    @Mapping(target="id", expression="java(java.util.UUID.randomUUID())")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "mapProbeIdToEntity"})
     DrySubstancesResearch toEntity(DrySubstancesResearchCreateDto dto);
 }
