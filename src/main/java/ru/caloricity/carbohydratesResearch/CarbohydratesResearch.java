@@ -41,7 +41,7 @@ public class CarbohydratesResearch extends BaseEntity {
     private Float mass;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "probe_id", unique = true)
+    @JoinColumn(unique = true)
     private Probe probe;
 
     @Override
