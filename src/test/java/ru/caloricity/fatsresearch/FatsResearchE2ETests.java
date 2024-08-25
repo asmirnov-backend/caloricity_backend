@@ -1,4 +1,4 @@
-package ru.caloricity.ingredient;
+package ru.caloricity.fatsresearch;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,9 +11,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
-import ru.caloricity.ingredientcatalog.IngredientCatalog;
-import ru.caloricity.ingredientcatalog.IngredientCatalogFactory;
-import ru.caloricity.ingredientcatalog.IngredientCatalogRepository;
 import ru.caloricity.probe.Probe;
 import ru.caloricity.probe.ProbeFactory;
 import ru.caloricity.probe.ProbeRepository;
@@ -32,16 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class IngredientE2ETests {
+class FatsResearchE2ETests {
 
     @Autowired
     private MockMvc mvc;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private IngredientRepository repository;
-    @Autowired
-    private IngredientCatalogRepository ingredientCatalogRepository;
+    private FatsResearchRepository repository;
     @Autowired
     private ProbeRepository probeRepository;
 
@@ -51,31 +46,24 @@ class IngredientE2ETests {
 
     @Test
     void getAll_ok() throws Exception {
-        IngredientCatalog ingredientCatalog = ingredientCatalogRepository.save(new IngredientCatalogFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
+        repository.save(new FatsResearchFactory().createSimple(probe));
 
-        mvc.perform(get("/ingredient?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/fats-research?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
-                .andExpect(jsonPath("$.content[0].name").value(ingredientCatalog.getName()))
-                .andExpect(jsonPath("$.content[0].water").value(1))
-                .andExpect(jsonPath("$.content[0].proteins").value(1))
-                .andExpect(jsonPath("$.content[0].fats").value(1))
-                .andExpect(jsonPath("$.content[0].carbohydrates").value(1));
+                .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
+                .andExpect(jsonPath("$.content[0].patronMassBeforeExtraction").value(11))
+                .andExpect(jsonPath("$.content[0].patronMassAfterExtraction").value(8));
     }
 
     @Test
     void create_created() throws Exception {
-        IngredientCatalog ingredientCatalog = ingredientCatalogRepository.save(new IngredientCatalogFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        IngredientCreateDto dto = new IngredientCreateDto(1f, 2f, ingredientCatalog.getId(), probe.getId());
+        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, 2f,  probe.getId());
 
-        MvcResult result = mvc.perform(post("/ingredient")
+        MvcResult result = mvc.perform(post("/fats-research")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -89,20 +77,17 @@ class IngredientE2ETests {
         JsonNode jsonNode = objectMapper.readTree(responseBody);
         UUID id = UUID.fromString(jsonNode.get("id").asText());
 
-        Optional<Ingredient> createdEntity = repository.findById(id);
+        Optional<FatsResearch> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
-        assertNotNull(createdEntity.get().getIngredientInCatalog());
-        assertEquals(createdEntity.get().getIngredientInCatalog().getId(), ingredientCatalog.getId());
         assertNotNull(createdEntity.get().getProbe());
         assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
-
     }
 
     @Test
     void create_badRequest() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto(2f, -2f, UUID.randomUUID(), UUID.randomUUID());
+        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, null,  UUID.randomUUID());
 
-        mvc.perform(post("/ingredient")
+        mvc.perform(post("/fats-research")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -111,15 +96,34 @@ class IngredientE2ETests {
     }
 
     @Test
-    void delete_ok() throws Exception {
-        Ingredient entity = repository.save(new IngredientFactory().createSimple());
+    void update_ok() throws Exception {
+        FatsResearch entity = repository.save(new FatsResearchFactory().createSimple());
+        FatsResearchUpdateDto dto = new FatsResearchUpdateDto(2f, 2f);
 
-        mvc.perform(delete("/ingredient/{id}", entity.getId().toString()))
+        mvc.perform(put("/fats-research/{id}", entity.getId().toString())
+                        .content(objectMapper.writeValueAsString(dto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Optional<Ingredient> deleted = repository.findById(entity.getId());
+        Optional<FatsResearch> updated = repository.findById(entity.getId());
+        //noinspection OptionalGetWithoutIsPresent
+        assertEquals(updated.get().getPatronMassAfterExtraction(), dto.getPatronMassAfterExtraction());
+    }
+
+    @Test
+    void delete_ok() throws Exception {
+        Probe probe = probeRepository.save(new ProbeFactory().createSimple());
+        FatsResearch entity = repository.save(new FatsResearchFactory().createSimple(probe));
+
+        mvc.perform(delete("/fats-research/{id}", entity.getId().toString()))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Optional<FatsResearch> deleted = repository.findById(entity.getId());
         assertTrue(deleted.isEmpty());
+        assertTrue(probeRepository.findById(probe.getId()).isPresent());
     }
 
 }

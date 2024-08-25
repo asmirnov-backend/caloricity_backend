@@ -1,16 +1,13 @@
-package ru.caloricity.ingredient;
+package ru.caloricity.carbohydratesresearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.ingredientcatalog.IngredientCatalog;
 import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
@@ -19,27 +16,33 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
-@AllArgsConstructor
-@RequiredArgsConstructor
-@Comment("Ингредиенты")
-@Table(name = "ingredients")
-public class Ingredient extends BaseEntity {
-    @Comment("Масса брутто, г")
+@NoArgsConstructor
+@Comment("Исследования на углеводы")
+@Table(name = "carbohydrates_researches")
+public class CarbohydratesResearch extends BaseEntity {
+    @Comment("Масса бюксы первая параллель, г")
     @Column(nullable = false)
-    private Float gross;
+    private Float byuksaParallelFirst;
 
-    @Comment("Масса нетто, г")
+    @Comment("Масса бюксы вторая параллель, г")
     @Column(nullable = false)
-    private Float net;
+    private Float byuksaParallelSecond;
 
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Comment("Масса пустой банки, г")
+    @Column(nullable = false)
+    private Float bankaEmptyMass;
+
+    @Comment("Масса банки с пробой, г")
+    @Column(nullable = false)
+    private Float bankaWithProbeMass;
+
+    @Comment("Масса навески, г")
+    @Column(nullable = false)
+    private Float mass;
+
+    @OneToOne(optional = false)
+    @JoinColumn(unique = true)
     private Probe probe;
-
-    @Comment("Ингредиент в справочнике")
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    private IngredientCatalog ingredientInCatalog;
 
     @Override
     public final boolean equals(Object o) {
@@ -48,7 +51,7 @@ public class Ingredient extends BaseEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Ingredient that = (Ingredient) o;
+        CarbohydratesResearch that = (CarbohydratesResearch) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 

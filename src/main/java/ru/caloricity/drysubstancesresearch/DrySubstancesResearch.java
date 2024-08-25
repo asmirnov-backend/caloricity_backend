@@ -1,16 +1,12 @@
-package ru.caloricity.ingredient;
+package ru.caloricity.drysubstancesresearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.ingredientcatalog.IngredientCatalog;
 import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
@@ -21,25 +17,33 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Comment("Ингредиенты")
-@Table(name = "ingredients")
-public class Ingredient extends BaseEntity {
-    @Comment("Масса брутто, г")
+@Comment("Исследования на сухие остатки")
+@Table(name = "dry_substances_researches")
+public class DrySubstancesResearch extends BaseEntity {
+    @Comment("Масса бюксы первая параллель, г")
     @Column(nullable = false)
-    private Float gross;
+    private Float byuksaParallelFirst;
 
-    @Comment("Масса нетто, г")
+    @Comment("Масса бюксы вторая параллель, г")
     @Column(nullable = false)
-    private Float net;
+    private Float byuksaParallelSecond;
 
-    @ManyToOne(optional = false)
+    @Comment("Масса пустой банки, г")
+    @Column(nullable = false)
+    private Float bankaEmptyMass;
+
+    @Comment("Масса банки с пробой, г")
+    @Column(nullable = false)
+    private Float bankaWithProbeMass;
+
+    @Comment("Масса навески, г")
+    @Column(nullable = false)
+    private Float mass;
+
+    @OneToOne(optional = false)
+    @JoinColumn(unique = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
-
-    @Comment("Ингредиент в справочнике")
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    private IngredientCatalog ingredientInCatalog;
 
     @Override
     public final boolean equals(Object o) {
@@ -48,7 +52,7 @@ public class Ingredient extends BaseEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Ingredient that = (Ingredient) o;
+        DrySubstancesResearch that = (DrySubstancesResearch) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 

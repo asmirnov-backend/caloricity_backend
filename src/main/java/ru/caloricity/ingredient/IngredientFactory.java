@@ -1,6 +1,6 @@
 package ru.caloricity.ingredient;
 
-import ru.caloricity.ingredientCatalog.IngredientCatalog;
+import ru.caloricity.ingredientcatalog.IngredientCatalog;
 import ru.caloricity.probe.Probe;
 
 import java.util.UUID;

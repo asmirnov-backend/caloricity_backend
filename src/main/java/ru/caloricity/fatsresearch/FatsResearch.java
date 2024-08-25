@@ -1,16 +1,10 @@
-package ru.caloricity.ingredient;
+package ru.caloricity.fatsresearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.ingredientcatalog.IngredientCatalog;
 import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
@@ -21,25 +15,20 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Comment("Ингредиенты")
-@Table(name = "ingredients")
-public class Ingredient extends BaseEntity {
-    @Comment("Масса брутто, г")
+@Comment("Исследования на жиры")
+@Table(name = "fats_research")
+public class FatsResearch extends BaseEntity {
+    @Comment("Масса патрона до экстракции, г")
     @Column(nullable = false)
-    private Float gross;
+    private Float patronMassBeforeExtraction;
 
-    @Comment("Масса нетто, г")
+    @Comment("Масса патрона после экстракции, г")
     @Column(nullable = false)
-    private Float net;
+    private Float patronMassAfterExtraction;
 
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(optional = false)
+    @JoinColumn(unique = true)
     private Probe probe;
-
-    @Comment("Ингредиент в справочнике")
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    private IngredientCatalog ingredientInCatalog;
 
     @Override
     public final boolean equals(Object o) {
@@ -48,7 +37,7 @@ public class Ingredient extends BaseEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Ingredient that = (Ingredient) o;
+        FatsResearch that = (FatsResearch) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 

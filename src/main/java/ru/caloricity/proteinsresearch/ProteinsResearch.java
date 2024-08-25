@@ -1,16 +1,10 @@
-package ru.caloricity.ingredient;
+package ru.caloricity.proteinsresearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.ingredientcatalog.IngredientCatalog;
 import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
@@ -21,25 +15,28 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Comment("Ингредиенты")
-@Table(name = "ingredients")
-public class Ingredient extends BaseEntity {
-    @Comment("Масса брутто, г")
+@Comment("Исследования на белок")
+@Table(name = "proteins_researches")
+public class ProteinsResearch extends BaseEntity {
+    @Comment("Объём титранта, г/см^3")
     @Column(nullable = false)
-    private Float gross;
+    private Float titrantVolume;
 
-    @Comment("Масса нетто, г")
+    @Comment("Масса навески, г")
     @Column(nullable = false)
-    private Float net;
+    private Float mass;
 
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Comment("Объём контроля, г/см^3")
+    @Column(nullable = false)
+    private Float controlVolume;
+
+    @Comment("Коэффициент")
+    @Column(nullable = false)
+    private Float coefficient;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "probe_id", unique = true)
     private Probe probe;
-
-    @Comment("Ингредиент в справочнике")
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    private IngredientCatalog ingredientInCatalog;
 
     @Override
     public final boolean equals(Object o) {
@@ -48,7 +45,7 @@ public class Ingredient extends BaseEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Ingredient that = (Ingredient) o;
+        ProteinsResearch that = (ProteinsResearch) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 
