@@ -32,12 +32,16 @@ public class DrySubstancesResearch extends BaseEntity {
     @Column(nullable = false)
     private Float bankaEmptyMass;
 
+    @Comment("Масса банки с пробой, г")
+    @Column(nullable = false)
+    private Float bankaWithProbeMass;
+
     @Comment("Масса навески, г")
     @Column(nullable = false)
     private Float mass;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "probe_id", unique = true)
+    @JoinColumn(unique = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
 

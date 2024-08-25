@@ -11,6 +11,7 @@ public class DrySubstancesResearchFactory {
         drySubstancesResearch.setMass(100f);
         drySubstancesResearch.setBankaEmptyMass(50f);
         drySubstancesResearch.setByuksaParallelFirst(11f);
+        drySubstancesResearch.setBankaWithProbeMass(10f);
         drySubstancesResearch.setByuksaParallelSecond(12f);
         return drySubstancesResearch;
     }

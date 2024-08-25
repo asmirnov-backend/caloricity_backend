@@ -16,5 +16,7 @@ public class DrySubstancesResearchInPageDto {
 
     private Float bankaEmptyMass;
 
+    private Float bankaWithProbeMass;
+
     private Float mass;
 }
