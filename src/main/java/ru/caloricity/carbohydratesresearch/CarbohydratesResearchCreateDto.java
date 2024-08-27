@@ -1,29 +1,15 @@
 package ru.caloricity.carbohydratesresearch;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-public class CarbohydratesResearchCreateDto {
-    @NotNull
-    private Float byuksaParallelFirst;
-
-    @NotNull
-    private Float byuksaParallelSecond;
-
-    @NotNull
-    private Float bankaEmptyMass;
-
-    @NotNull
-    private Float bankaWithProbeMass;
-
-    @NotNull
-    private Float mass;
-
-    @NotNull
-    private UUID probeId;
+public record CarbohydratesResearchCreateDto(
+    @NotNull Float byuksaParallelFirst,
+    @NotNull Float byuksaParallelSecond,
+    @NotNull Float bankaEmptyMass,
+    @NotNull Float bankaWithProbeMass,
+    @NotNull Float mass,
+    @NotNull UUID probeId
+) {
 }
