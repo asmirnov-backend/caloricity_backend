@@ -7,11 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
-import ru.caloricity.carbohydratesResearch.CarbohydratesResearch;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.drySubstancesResearch.DrySubstancesResearch;
-import ru.caloricity.fatsResearch.FatsResearch;
-import ru.caloricity.proteinsResearch.ProteinsResearch;
 
 import java.util.Objects;
 
@@ -37,24 +33,24 @@ public class Probe extends BaseEntity {
     private String code;
 
     @Comment("Масса теоретическая, г")
-    @Column(nullable = false)
-    private float massTheory;
+    @Column()
+    private Float massTheory;
 
     @Comment("Масса фактическая, г")
-    @Column()
-    private float massFact;
+    @Column(nullable = false)
+    private Float massFact;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private ProteinsResearch proteinsResearch;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private FatsResearch fatsResearch;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private DrySubstancesResearch drySubstancesResearch;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private CarbohydratesResearch carbohydratesResearch;
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private ProteinsResearch proteinsResearch;
+//
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private FatsResearch fatsResearch;
+//
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private DrySubstancesResearch drySubstancesResearch;
+//
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    private CarbohydratesResearch carbohydratesResearch;
 
     @Override
     public final boolean equals(Object o) {

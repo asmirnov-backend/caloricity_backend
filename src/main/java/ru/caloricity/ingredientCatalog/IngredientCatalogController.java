@@ -8,15 +8,13 @@ import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.caloricity.common.dto.IdDto;
-import ru.caloricity.common.exception.EntityNotFoundException;
 
 import java.util.UUID;
 
 @RestController
-@RequestMapping("caloricity/ingredient-catalog")
+@RequestMapping("ingredient-catalog")
 @RequiredArgsConstructor
 @CrossOrigin
 class IngredientCatalogController {
@@ -24,29 +22,27 @@ class IngredientCatalogController {
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<IngredientCatalogInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
+    public Page<IngredientCatalogInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
         return service.findAll(pageable, search);
     }
 
     @GetMapping("{id}")
-    public IngredientCatalogDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) throws EntityNotFoundException {
+    public IngredientCatalogDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
         return service.findDtoByIdOrThrow(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Transactional
     public IdDto create(@Valid @RequestBody IngredientCatalogCreateDto createDto) {
         return service.create(createDto);
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) throws EntityNotFoundException {
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) {
         service.update(id, createDto);
     }
 
     @DeleteMapping("{id}")
-    @Transactional
     public void delete(@PathVariable(name = "id") UUID id) {
         service.deleteById(id);
     }

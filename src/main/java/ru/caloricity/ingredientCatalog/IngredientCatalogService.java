@@ -2,11 +2,11 @@ package ru.caloricity.ingredientCatalog;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.caloricity.common.dto.IdDto;
 import ru.caloricity.common.exception.EntityNotFoundException;
 
@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class IngredientCatalogService {
     private final IngredientCatalogRepository repository;
-    private final ModelMapper modelMapper;
+    private final IngredientCatalogMapper mapper;
 
     public Optional<IngredientCatalog> findById(UUID id) {
         return repository.findById(id);
@@ -30,18 +30,20 @@ public class IngredientCatalogService {
         return repository.findAllDtoBy(pageable);
     }
 
-    public IngredientCatalogDto findDtoByIdOrThrow(UUID id) throws EntityNotFoundException {
+    public IngredientCatalogDto findDtoByIdOrThrow(UUID id) {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    @Transactional
     public IdDto create(IngredientCatalogCreateDto createDto) {
-        IngredientCatalog entity = modelMapper.map(createDto, IngredientCatalog.class);
+        IngredientCatalog entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    public void update(UUID id, IngredientCatalogCreateDto dto) throws EntityNotFoundException {
+    @Transactional
+    public void update(UUID id, IngredientCatalogCreateDto dto) {
         Optional<IngredientCatalog> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");
@@ -51,6 +53,7 @@ public class IngredientCatalogService {
         }
     }
 
+    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

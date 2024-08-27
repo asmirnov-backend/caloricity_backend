@@ -6,6 +6,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
 import ru.caloricity.ingredientCatalog.IngredientCatalog;
@@ -24,33 +26,19 @@ import java.util.Objects;
 public class Ingredient extends BaseEntity {
     @Comment("Масса брутто, г")
     @Column(nullable = false)
-    private float gross;
+    private Float gross;
 
     @Comment("Масса нетто, г")
     @Column(nullable = false)
-    private float net;
+    private Float net;
 
-    @Comment("Масса сухих веществ, г")
-    @Column(nullable = false)
-    private float drySubstances;
-
-    @Comment("Масса белков, г")
-    @Column(nullable = false)
-    private float proteins;
-
-    @Comment("Масса жиров, г")
-    @Column(nullable = false)
-    private float fats;
-
-    @Comment("Масса углеводов, г")
-    @Column(nullable = false)
-    private float carbohydrates;
-
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
 
     @Comment("Ингредиент в справочнике")
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
     private IngredientCatalog ingredientInCatalog;
 
     @Override

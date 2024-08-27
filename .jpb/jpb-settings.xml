@@ -10,9 +10,9 @@
   </component>
   <component name="PersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit name="Default">
+      <persistence-unit name="Default" defaultIncludeChangeLogFile="src/main/resources/db/changelog/db.changelog-master.xml">
         <packages>
-          <package value="ru.caloricity.main" />
+          <package value="ru.caloricity" />
         </packages>
       </persistence-unit>
     </persistence-units>

@@ -12,26 +12,26 @@ import lombok.Data;
 public class IngredientCatalogCreateDto {
     @NotNull
     @NotBlank
-    @Size(min=2)
+    @Size(min = 2)
     private String name;
 
     @NotNull
     @Min(value = 0)
-    private float ediblePart;
+    private Float ediblePart;
 
     @NotNull
     @Min(value = 0)
-    private float water;
+    private Float water;
 
     @NotNull
     @Min(value = 0)
-    private float proteins;
+    private Float proteins;
 
     @NotNull
     @Min(value = 0)
-    private float fats;
+    private Float fats;
 
     @NotNull
     @Min(value = 0)
-    private float carbohydrates;
+    private Float carbohydrates;
 }

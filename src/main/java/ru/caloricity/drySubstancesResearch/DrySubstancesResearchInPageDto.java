@@ -10,11 +10,11 @@ import java.util.UUID;
 public class DrySubstancesResearchInPageDto {
     private UUID id;
 
-    private float byuksaParallelFirst;
+    private Float byuksaParallelFirst;
 
-    private float byuksaParallelSecond;
+    private Float byuksaParallelSecond;
 
-    private float bankaEmptyMass;
+    private Float bankaEmptyMass;
 
-    private float mass;
+    private Float mass;
 }

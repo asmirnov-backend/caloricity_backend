@@ -1,8 +1,6 @@
 package ru.caloricity.carbohydratesResearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
 
@@ -23,26 +22,27 @@ import java.util.Objects;
 public class CarbohydratesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
     @Column(nullable = false)
-    private float byuksaParallelFirst;
+    private Float byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
     @Column(nullable = false)
-    private float byuksaParallelSecond;
+    private Float byuksaParallelSecond;
 
     @Comment("Масса пустой банки, г")
     @Column(nullable = false)
-    private float bankaEmptyMass;
+    private Float bankaEmptyMass;
 
     @Comment("Масса банки с пробой, г")
     @Column(nullable = false)
-    private float bankaWithProbeMass;
+    private Float bankaWithProbeMass;
 
     @Comment("Масса навески, г")
     @Column(nullable = false)
-    private float mass;
+    private Float mass;
 
-//    @OneToOne(mappedBy = "carbohydratesResearch")
-//    private Probe probe;
+    @OneToOne(optional = false)
+    @JoinColumn(unique = true)
+    private Probe probe;
 
     @Override
     public final boolean equals(Object o) {

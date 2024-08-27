@@ -1,12 +1,13 @@
 package ru.caloricity.drySubstancesResearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
 
@@ -21,22 +22,24 @@ import java.util.Objects;
 public class DrySubstancesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
     @Column(nullable = false)
-    private float byuksaParallelFirst;
+    private Float byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
     @Column(nullable = false)
-    private float byuksaParallelSecond;
+    private Float byuksaParallelSecond;
 
     @Comment("Масса пустой банки, г")
     @Column(nullable = false)
-    private float bankaEmptyMass;
+    private Float bankaEmptyMass;
 
     @Comment("Масса навески, г")
     @Column(nullable = false)
-    private float mass;
+    private Float mass;
 
-//    @OneToOne(mappedBy = "drySubstancesResearch")
-//    private Probe probe;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "probe_id", unique = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Probe probe;
 
     @Override
     public final boolean equals(Object o) {

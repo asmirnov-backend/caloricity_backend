@@ -7,11 +7,11 @@ public class IngredientCatalogFactory {
         IngredientCatalog ingredientCatalog = new IngredientCatalog();
         ingredientCatalog.setId(UUID.randomUUID());
         ingredientCatalog.setName("Test name");
-        ingredientCatalog.setFats(1);
-        ingredientCatalog.setCarbohydrates(1);
-        ingredientCatalog.setWater(1);
-        ingredientCatalog.setEdiblePart(1);
-        ingredientCatalog.setProteins(1);
-        return  ingredientCatalog;
+        ingredientCatalog.setFats(1f);
+        ingredientCatalog.setCarbohydrates(1f);
+        ingredientCatalog.setWater(1f);
+        ingredientCatalog.setEdiblePart(1f);
+        ingredientCatalog.setProteins(1f);
+        return ingredientCatalog;
     }
 }

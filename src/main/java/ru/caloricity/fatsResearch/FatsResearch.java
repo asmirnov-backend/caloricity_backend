@@ -1,12 +1,11 @@
 package ru.caloricity.fatsResearch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
 
@@ -21,14 +20,15 @@ import java.util.Objects;
 public class FatsResearch extends BaseEntity {
     @Comment("Масса патрона до экстракции, г")
     @Column(nullable = false)
-    private float patronMassBeforeExtraction;
+    private Float patronMassBeforeExtraction;
 
     @Comment("Масса патрона после экстракции, г")
     @Column(nullable = false)
-    private float patronMassAfterExtraction;
+    private Float patronMassAfterExtraction;
 
-//    @OneToOne(mappedBy = "fatsResearch")
-//    private Probe probe;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "probe_id", unique = true)
+    private Probe probe;
 
     @Override
     public final boolean equals(Object o) {

@@ -1,29 +1,26 @@
 package ru.caloricity.drySubstancesResearch;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 public class DrySubstancesResearchCreateDto {
-    @NotBlank
     @NotNull
-    private String name;
+    private Float byuksaParallelFirst;
 
     @NotNull
-    private float ediblePart;
+    private Float byuksaParallelSecond;
 
     @NotNull
-    private float water;
+    private Float bankaEmptyMass;
 
     @NotNull
-    private float proteins;
+    private Float mass;
 
     @NotNull
-    private float fats;
-
-    @NotNull
-    private float carbohydrates;
+    private UUID probeId;
 }

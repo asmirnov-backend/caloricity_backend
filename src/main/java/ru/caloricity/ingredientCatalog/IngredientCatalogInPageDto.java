@@ -12,13 +12,13 @@ public class IngredientCatalogInPageDto {
 
     private String name;
 
-    private float ediblePart;
+    private Float ediblePart;
 
-    private float water;
+    private Float water;
 
-    private float proteins;
+    private Float proteins;
 
-    private float fats;
+    private Float fats;
 
-    private float carbohydrates;
+    private Float carbohydrates;
 }
