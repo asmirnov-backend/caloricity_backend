@@ -10,9 +10,9 @@ import java.util.UUID;
 public class ProteinsResearchDto {
     private UUID id;
 
-    private Float titrantVolume;
+    private Float titrantVolumeParallelFirst;
 
-    private Float mass;
+    private Float titrantVolumeParallelSecond;
 
     private Float controlVolume;
 

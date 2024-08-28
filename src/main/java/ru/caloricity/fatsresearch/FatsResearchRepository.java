@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RepositoryRestResource(exported = false)
 interface FatsResearchRepository extends JpaRepository<FatsResearch, UUID> {
-    Page<FatsResearchInPageDto> findAllProjectedByProbeId(Pageable pageable, UUID probeId);
+    Page<FatsResearchDto> findAllProjectedByProbeId(Pageable pageable, UUID probeId);
 
     Optional<FatsResearchDto> findDtoById(UUID id);
 }

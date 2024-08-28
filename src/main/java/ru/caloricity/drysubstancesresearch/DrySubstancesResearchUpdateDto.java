@@ -14,11 +14,8 @@ public class DrySubstancesResearchUpdateDto {
     private Float byuksaParallelSecond;
 
     @NotNull
-    private Float bankaEmptyMass;
+    private Float byuksaAfterDryingParallelFirst;
 
     @NotNull
-    private Float bankaWithProbeMass;
-
-    @NotNull
-    private Float mass;
+    private Float byuksaAfterDryingParallelSecond;
 }

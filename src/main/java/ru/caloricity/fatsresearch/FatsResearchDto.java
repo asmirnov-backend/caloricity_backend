@@ -10,8 +10,12 @@ import java.util.UUID;
 public class FatsResearchDto {
     private UUID id;
 
-    private Float patronMassBeforeExtraction;
+    private Float patronMassBeforeExtractionParallelFirst;
 
-    private Float patronMassAfterExtraction;
+    private Float patronMassBeforeExtractionParallelSecond;
+
+    private Float patronMassAfterExtractionParallelFirst;
+
+    private Float patronMassAfterExtractionParallelSecond;
 
 }

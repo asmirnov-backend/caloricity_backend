@@ -8,10 +8,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class ProteinsResearchUpdateDto {
     @NotNull
-    private Float titrantVolume;
+    private Float titrantVolumeParallelFirst;
 
     @NotNull
-    private Float mass;
+    private Float titrantVolumeParallelSecond;
 
     @NotNull
     private Float controlVolume;

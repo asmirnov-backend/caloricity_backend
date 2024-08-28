@@ -10,6 +10,7 @@ public record ProbeUpdateDto(
         @NotNull @NotBlank @Size(min = 2) String name,
         @NotNull String code,
         @Nullable @Min(value = 0) Float massTheory,
-        @NotNull @Min(value = 0) Float massFact
+        @Nullable @Min(value = 0) Float bankaEmptyMass,
+        @Nullable @Min(value = 0) Float bankaWithProbeMass
 ) {
 }

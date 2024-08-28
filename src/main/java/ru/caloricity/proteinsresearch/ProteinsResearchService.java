@@ -22,7 +22,7 @@ public class ProteinsResearchService {
         return repository.findById(id);
     }
 
-    public Page<ProteinsResearchInPageDto> findAll(Pageable pageable, UUID probeId) {
+    public Page<ProteinsResearchDto> findAll(Pageable pageable, UUID probeId) {
         return repository.findAllProjectedByProbeId(pageable, probeId);
     }
 

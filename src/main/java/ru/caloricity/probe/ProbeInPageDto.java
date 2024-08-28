@@ -16,5 +16,6 @@ public class ProbeInPageDto {
     private ProbeType type;
     private String code;
     private Float massTheory;
-    private Float massFact;
+    private Float bankaEmptyMass;
+    private Float bankaWithProbeMass;
 }

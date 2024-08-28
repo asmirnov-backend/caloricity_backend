@@ -54,14 +54,14 @@ class FatsResearchE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
-                .andExpect(jsonPath("$.content[0].patronMassBeforeExtraction").value(11))
-                .andExpect(jsonPath("$.content[0].patronMassAfterExtraction").value(8));
+                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelFirst").value(8))
+                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelSecond").value(9));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, 2f,  probe.getId());
+        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, 2f, 1f, 2f, probe.getId());
 
         MvcResult result = mvc.perform(post("/fats-research")
                         .content(objectMapper.writeValueAsString(dto))
@@ -85,7 +85,7 @@ class FatsResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, null,  UUID.randomUUID());
+        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, null, 1f, 2f, UUID.randomUUID());
 
         mvc.perform(post("/fats-research")
                         .content(objectMapper.writeValueAsString(dto))
@@ -98,7 +98,7 @@ class FatsResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         FatsResearch entity = repository.save(new FatsResearchFactory().createSimple());
-        FatsResearchUpdateDto dto = new FatsResearchUpdateDto(2f, 2f);
+        FatsResearchUpdateDto dto = new FatsResearchUpdateDto(2f, 2f, 1f, 2f);
 
         mvc.perform(put("/fats-research/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -109,7 +109,7 @@ class FatsResearchE2ETests {
 
         Optional<FatsResearch> updated = repository.findById(entity.getId());
         //noinspection OptionalGetWithoutIsPresent
-        assertEquals(updated.get().getPatronMassAfterExtraction(), dto.getPatronMassAfterExtraction());
+        assertEquals(updated.get().getPatronMassBeforeExtractionParallelFirst(), dto.getPatronMassBeforeExtractionParallelFirst());
     }
 
     @Test

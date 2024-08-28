@@ -22,7 +22,7 @@ public class CarbohydratesResearchService {
         return repository.findById(id);
     }
 
-    public Page<CarbohydratesResearchInPageDto> findAll(Pageable pageable, UUID probeId) {
+    public Page<CarbohydratesResearchDto> findAll(Pageable pageable, UUID probeId) {
         return repository.findAllProjectedByProbeId(pageable, probeId);
     }
 

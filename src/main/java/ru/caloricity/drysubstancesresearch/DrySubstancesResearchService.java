@@ -22,7 +22,7 @@ public class DrySubstancesResearchService {
         return repository.findById(id);
     }
 
-    public Page<DrySubstancesResearchInPageDto> findAll(Pageable pageable, UUID probeId) {
+    public Page<DrySubstancesResearchDto> findAll(Pageable pageable, UUID probeId) {
         return repository.findAllProjectedByProbeId(pageable, probeId);
     }
 

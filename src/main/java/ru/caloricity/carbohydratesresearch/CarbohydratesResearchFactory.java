@@ -8,9 +8,8 @@ public class CarbohydratesResearchFactory {
     public CarbohydratesResearch createSimple() {
         var research = new CarbohydratesResearch();
         research.setId(UUID.randomUUID());
-        research.setMass(100f);
-        research.setBankaEmptyMass(50f);
-        research.setBankaWithProbeMass(10f);
+        research.setByuksaAfterDryingParallelFirst(50f);
+        research.setByuksaAfterDryingParallelSecond(52f);
         research.setByuksaParallelFirst(11f);
         research.setByuksaParallelSecond(12f);
         return research;

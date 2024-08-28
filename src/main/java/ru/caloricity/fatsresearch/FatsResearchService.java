@@ -22,7 +22,7 @@ public class FatsResearchService {
         return repository.findById(id);
     }
 
-    public Page<FatsResearchInPageDto> findAll(Pageable pageable, UUID probeId) {
+    public Page<FatsResearchDto> findAll(Pageable pageable, UUID probeId) {
         return repository.findAllProjectedByProbeId(pageable, probeId);
     }
 

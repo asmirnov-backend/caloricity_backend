@@ -6,19 +6,18 @@ import java.util.UUID;
 
 public class DrySubstancesResearchFactory {
     public DrySubstancesResearch createSimple() {
-        var drySubstancesResearch = new DrySubstancesResearch();
-        drySubstancesResearch.setId(UUID.randomUUID());
-        drySubstancesResearch.setMass(100f);
-        drySubstancesResearch.setBankaEmptyMass(50f);
-        drySubstancesResearch.setByuksaParallelFirst(11f);
-        drySubstancesResearch.setBankaWithProbeMass(10f);
-        drySubstancesResearch.setByuksaParallelSecond(12f);
-        return drySubstancesResearch;
+        var research = new DrySubstancesResearch();
+        research.setId(UUID.randomUUID());
+        research.setByuksaAfterDryingParallelFirst(50f);
+        research.setByuksaAfterDryingParallelSecond(52f);
+        research.setByuksaParallelFirst(11f);
+        research.setByuksaParallelSecond(12f);
+        return research;
     }
 
     public DrySubstancesResearch createSimple(Probe probe) {
-        var drySubstancesResearch = createSimple();
-        drySubstancesResearch.setProbe(probe);
-        return drySubstancesResearch;
+        var research = createSimple();
+        research.setProbe(probe);
+        return research;
     }
 }

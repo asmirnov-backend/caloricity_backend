@@ -54,17 +54,14 @@ class DrySubstancesResearchE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
-                .andExpect(jsonPath("$.content[0].bankaEmptyMass").value(50))
                 .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
-                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12))
-                .andExpect(jsonPath("$.content[0].bankaWithProbeMass").value(10))
-                .andExpect(jsonPath("$.content[0].mass").value(100));
+                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, 2f, 10f,10f, 40f, probe.getId());
+        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, 2f, 10f, 10f, 40f, probe.getId());
 
         MvcResult result = mvc.perform(post("/dry-substances-research")
                         .content(objectMapper.writeValueAsString(dto))
@@ -88,7 +85,7 @@ class DrySubstancesResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, null, 10f,10f, 40f, UUID.randomUUID());
+        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, null, 10f, 10f, 40f, UUID.randomUUID());
 
         mvc.perform(post("/dry-substances-research")
                         .content(objectMapper.writeValueAsString(dto))
@@ -101,7 +98,7 @@ class DrySubstancesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         DrySubstancesResearch entity = repository.save(new DrySubstancesResearchFactory().createSimple());
-        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2f, 1f, 1f,10f, 1f);
+        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2f, 1f, 1f, 10f);
 
         mvc.perform(put("/dry-substances-research/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -112,7 +109,7 @@ class DrySubstancesResearchE2ETests {
 
         Optional<DrySubstancesResearch> updated = repository.findById(entity.getId());
         //noinspection OptionalGetWithoutIsPresent
-        assertEquals(updated.get().getMass(), dto.getMass());
+        assertEquals(updated.get().getByuksaParallelSecond(), dto.getByuksaParallelSecond());
     }
 
     @Test

@@ -18,13 +18,13 @@ import java.util.Objects;
 @Comment("Исследования на белок")
 @Table(name = "proteins_researches")
 public class ProteinsResearch extends BaseEntity {
-    @Comment("Объём титранта, г/см^3")
+    @Comment("Объём титранта первая параллель, г/см^3")
     @Column(nullable = false)
-    private Float titrantVolume;
+    private Float titrantVolumeParallelFirst;
 
-    @Comment("Масса навески, г")
+    @Comment("Объём титранта вторая параллель, г/см^3")
     @Column(nullable = false)
-    private Float mass;
+    private Float titrantVolumeParallelSecond;
 
     @Comment("Объём контроля, г/см^3")
     @Column(nullable = false)

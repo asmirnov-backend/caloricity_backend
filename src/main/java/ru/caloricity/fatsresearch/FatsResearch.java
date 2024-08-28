@@ -18,13 +18,21 @@ import java.util.Objects;
 @Comment("Исследования на жиры")
 @Table(name = "fats_research")
 public class FatsResearch extends BaseEntity {
-    @Comment("Масса патрона до экстракции, г")
+    @Comment("Масса патрона до экстракции первая параллель, г")
     @Column(nullable = false)
-    private Float patronMassBeforeExtraction;
+    private Float patronMassBeforeExtractionParallelFirst;
 
-    @Comment("Масса патрона после экстракции, г")
+    @Comment("Масса патрона до экстракции вторая параллель, г")
     @Column(nullable = false)
-    private Float patronMassAfterExtraction;
+    private Float patronMassBeforeExtractionParallelSecond;
+
+    @Comment("Масса патрона после экстракции первая параллель, г")
+    @Column(nullable = false)
+    private Float patronMassAfterExtractionParallelFirst;
+
+    @Comment("Масса патрона после экстракции вторая параллель, г")
+    @Column(nullable = false)
+    private Float patronMassAfterExtractionParallelSecond;
 
     @OneToOne(optional = false)
     @JoinColumn(unique = true)

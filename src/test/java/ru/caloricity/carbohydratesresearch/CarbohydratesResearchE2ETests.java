@@ -54,17 +54,14 @@ class CarbohydratesResearchE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
-                .andExpect(jsonPath("$.content[0].bankaEmptyMass").value(50))
                 .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
-                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12))
-                .andExpect(jsonPath("$.content[0].bankaWithProbeMass").value(10))
-                .andExpect(jsonPath("$.content[0].mass").value(100));
+                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, 2f, 10f,10f, 40f, probe.getId());
+        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
 
         MvcResult result = mvc.perform(post("/carbohydrates-research")
                         .content(objectMapper.writeValueAsString(dto))
@@ -88,7 +85,7 @@ class CarbohydratesResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, null, 10f, 10f, 40f, UUID.randomUUID());
+        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
 
         mvc.perform(post("/carbohydrates-research")
                         .content(objectMapper.writeValueAsString(dto))
@@ -101,7 +98,7 @@ class CarbohydratesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         CarbohydratesResearch entity = repository.save(new CarbohydratesResearchFactory().createSimple());
-        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2f, 1f, 1f,1f, 1f);
+        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2f, 1f, 1f, 1f);
 
         mvc.perform(put("/carbohydrates-research/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -112,7 +109,7 @@ class CarbohydratesResearchE2ETests {
 
         Optional<CarbohydratesResearch> updated = repository.findById(entity.getId());
         //noinspection OptionalGetWithoutIsPresent
-        assertEquals(updated.get().getMass(), dto.getMass());
+        assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test

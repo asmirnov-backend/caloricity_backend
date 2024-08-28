@@ -49,7 +49,8 @@ class ProbeE2ETests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()))
                 .andExpect(jsonPath("$.name").value(entity.getName()))
-                .andExpect(jsonPath("$.massFact").value(entity.getMassFact()));
+                .andExpect(jsonPath("$.bankaEmptyMass").value(entity.getBankaEmptyMass()))
+                .andExpect(jsonPath("$.bankaWithProbeMass").value(entity.getBankaWithProbeMass()));
     }
 
     @Test
@@ -81,7 +82,7 @@ class ProbeE2ETests {
 
     @Test
     void create_created() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST, "f213", 1f, 1f);
+        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST, "f213", 1f, 1f, 2f);
 
         MvcResult result = mvc.perform(post("/probe")
                         .content(objectMapper.writeValueAsString(dto))
@@ -103,7 +104,7 @@ class ProbeE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("", ProbeType.FIRST, "f213", 1f, 1f);
+        ProbeCreateDto dto = new ProbeCreateDto("", ProbeType.FIRST, "f213", 1f, 1f, 2f);
 
         mvc.perform(post("/probe")
                         .content(objectMapper.writeValueAsString(dto))
@@ -116,7 +117,7 @@ class ProbeE2ETests {
     @Test
     void update_ok() throws Exception {
         Probe catalog = repository.save(new ProbeFactory().createSimple());
-        ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1f, 1f);
+        ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1f, 1f, 2f);
 
         mvc.perform(put("/probe/{id}", catalog.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

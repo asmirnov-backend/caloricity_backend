@@ -8,8 +8,8 @@ public class ProteinsResearchFactory {
     public ProteinsResearch createSimple() {
         var research = new ProteinsResearch();
         research.setId(UUID.randomUUID());
-        research.setMass(100f);
-        research.setTitrantVolume(8f);
+        research.setTitrantVolumeParallelFirst(10f);
+        research.setTitrantVolumeParallelSecond(20f);
         research.setCoefficient(0.95f);
         research.setControlVolume(5f);
         return research;

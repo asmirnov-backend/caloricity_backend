@@ -8,8 +8,10 @@ public class FatsResearchFactory {
     public FatsResearch createSimple() {
         var research = new FatsResearch();
         research.setId(UUID.randomUUID());
-        research.setPatronMassBeforeExtraction(11f);
-        research.setPatronMassAfterExtraction(8f);
+        research.setPatronMassAfterExtractionParallelFirst(11f);
+        research.setPatronMassBeforeExtractionParallelFirst(8f);
+        research.setPatronMassAfterExtractionParallelSecond(12f);
+        research.setPatronMassBeforeExtractionParallelSecond(9f);
         return research;
     }
 

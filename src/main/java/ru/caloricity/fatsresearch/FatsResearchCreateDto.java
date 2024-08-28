@@ -10,10 +10,16 @@ import java.util.UUID;
 @AllArgsConstructor
 public class FatsResearchCreateDto {
     @NotNull
-    private Float patronMassBeforeExtraction;
+    private Float patronMassBeforeExtractionParallelFirst;
 
     @NotNull
-    private Float patronMassAfterExtraction;
+    private Float patronMassBeforeExtractionParallelSecond;
+
+    @NotNull
+    private Float patronMassAfterExtractionParallelFirst;
+
+    @NotNull
+    private Float patronMassAfterExtractionParallelSecond;
 
     @NotNull
     private UUID probeId;

@@ -21,7 +21,7 @@ class CarbohydratesResearchController {
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<CarbohydratesResearchInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam("probe-id") UUID probeId) {
+    public Page<CarbohydratesResearchDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam("probe-id") UUID probeId) {
         return service.findAll(pageable, probeId);
     }
 

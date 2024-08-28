@@ -21,7 +21,7 @@ class DrySubstancesResearchController {
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<DrySubstancesResearchInPageDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam("probe-id") UUID probeId) {
+    public Page<DrySubstancesResearchDto> findDtoByIdOrThrow(@ParameterObject Pageable pageable, @RequestParam("probe-id") UUID probeId) {
         return service.findAll(pageable, probeId);
     }
 

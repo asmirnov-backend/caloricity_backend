@@ -28,17 +28,13 @@ public class CarbohydratesResearch extends BaseEntity {
     @Column(nullable = false)
     private Float byuksaParallelSecond;
 
-    @Comment("Масса пустой банки, г")
+    @Comment("Масса бюксы с пробой после высушивания первая параллель, г")
     @Column(nullable = false)
-    private Float bankaEmptyMass;
+    private Float byuksaAfterDryingParallelFirst;
 
-    @Comment("Масса банки с пробой, г")
+    @Comment("Масса бюксы с пробой после высушивания вторая параллель, г")
     @Column(nullable = false)
-    private Float bankaWithProbeMass;
-
-    @Comment("Масса навески, г")
-    @Column(nullable = false)
-    private Float mass;
+    private Float byuksaAfterDryingParallelSecond;
 
     @OneToOne(optional = false)
     @JoinColumn(unique = true)

@@ -14,9 +14,7 @@ public class CarbohydratesResearchDto {
 
     private Float byuksaParallelSecond;
 
-    private Float bankaEmptyMass;
+    private Float byuksaAfterDryingParallelFirst;
 
-    private Float bankaWithProbeMass;
-
-    private Float mass;
+    private Float byuksaAfterDryingParallelSecond;
 }
