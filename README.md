@@ -17,3 +17,9 @@ docker compose -f ./docker-compose.dev.yml -p caloricity up -d
 ```sql
 CREATE DATABASE caloricity_test WITH OWNER caloricity ENCODING 'UTF-8';
 ```
+
+## TODO
+
+- Add protocols module
+- Add users module
+- Add AuditEvents https://docs.spring.io/spring-boot/api/java/org/springframework/boot/actuate/audit/AuditEvent.html
