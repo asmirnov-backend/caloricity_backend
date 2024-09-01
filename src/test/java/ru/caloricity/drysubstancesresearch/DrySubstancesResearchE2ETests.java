@@ -61,7 +61,7 @@ class DrySubstancesResearchE2ETests {
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, 2f, 10f, 10f, 40f, probe.getId());
+        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
 
         MvcResult result = mvc.perform(post("/dry-substances-research")
                         .content(objectMapper.writeValueAsString(dto))
@@ -85,7 +85,7 @@ class DrySubstancesResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, null, 10f, 10f, 40f, UUID.randomUUID());
+        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
 
         mvc.perform(post("/dry-substances-research")
                         .content(objectMapper.writeValueAsString(dto))
