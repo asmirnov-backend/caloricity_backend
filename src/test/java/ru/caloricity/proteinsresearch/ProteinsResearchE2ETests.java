@@ -110,7 +110,7 @@ class ProteinsResearchE2ETests {
 
         Optional<ProteinsResearch> updated = repository.findById(entity.getId());
         //noinspection OptionalGetWithoutIsPresent
-        assertEquals(updated.get().getTitrantVolumeParallelSecond(), dto.getTitrantVolumeParallelSecond());
+        assertEquals(updated.get().getTitrantVolumeParallelSecond(), dto.titrantVolumeParallelSecond());
     }
 
     @Test

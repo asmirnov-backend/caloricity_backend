@@ -109,7 +109,7 @@ class FatsResearchE2ETests {
 
         Optional<FatsResearch> updated = repository.findById(entity.getId());
         //noinspection OptionalGetWithoutIsPresent
-        assertEquals(updated.get().getPatronMassBeforeExtractionParallelFirst(), dto.getPatronMassBeforeExtractionParallelFirst());
+        assertEquals(updated.get().getPatronMassBeforeExtractionParallelFirst(), dto.patronMassBeforeExtractionParallelFirst());
     }
 
     @Test

@@ -1,20 +1,9 @@
 package ru.caloricity.proteinsresearch;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-public class ProteinsResearchDto {
-    private UUID id;
-
-    private Float titrantVolumeParallelFirst;
-
-    private Float titrantVolumeParallelSecond;
-
-    private Float controlVolume;
-
-    private Float coefficient;
-}
+public record ProteinsResearchDto(UUID id,
+                                  Float titrantVolumeParallelFirst,
+                                  Float titrantVolumeParallelSecond,
+                                  Float controlVolume,
+                                  Float coefficient) {}

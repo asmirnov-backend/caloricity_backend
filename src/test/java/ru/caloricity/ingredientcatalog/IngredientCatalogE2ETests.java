@@ -103,8 +103,7 @@ class IngredientCatalogE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
-        dto.setName("");
+        IngredientCatalogCreateDto dto = new IngredientCatalogCreateDto("", 1f, 1f, 1f, 1f, 1f);
 
         mvc.perform(post("/ingredient-catalog")
                         .content(objectMapper.writeValueAsString(dto))
@@ -128,7 +127,7 @@ class IngredientCatalogE2ETests {
 
         Optional<IngredientCatalog> updated = repository.findById(catalog.getId());
         //noinspection OptionalGetWithoutIsPresent
-        assertEquals(updated.get().getName(), dto.getName());
+        assertEquals(updated.get().getName(), dto.name());
     }
 
     @Test
