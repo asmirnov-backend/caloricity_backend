@@ -1,13 +1,17 @@
 package ru.caloricity.proteinsresearch;
 
+import ru.caloricity.common.DefinedUuidIterator;
 import ru.caloricity.probe.Probe;
 
+import java.util.Iterator;
 import java.util.UUID;
 
 public class ProteinsResearchFactory {
+    Iterator<UUID> uuidIterator = new DefinedUuidIterator();
+
     public ProteinsResearch createSimple() {
         var research = new ProteinsResearch();
-        research.setId(UUID.randomUUID());
+        research.setId(uuidIterator.next());
         research.setTitrantVolumeParallelFirst(10f);
         research.setTitrantVolumeParallelSecond(20f);
         research.setCoefficient(0.95f);

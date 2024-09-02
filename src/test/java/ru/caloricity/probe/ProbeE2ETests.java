@@ -55,9 +55,10 @@ class ProbeE2ETests {
 
     @Test
     void getAll_ok() throws Exception {
-        repository.save(new ProbeFactory().createSimple());
-        repository.save(new ProbeFactory().createSimple());
-        repository.save(new ProbeFactory().createSimple());
+        var probeFactory = new ProbeFactory();
+        repository.save(probeFactory.createSimple());
+        repository.save(probeFactory.createSimple());
+        repository.save(probeFactory.createSimple());
 
         mvc.perform(get("/probe").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -67,11 +68,12 @@ class ProbeE2ETests {
 
     @Test
     void getAllWithSearch_ok() throws Exception {
-        Probe searchedEntity = new ProbeFactory().createSimple();
+        var probeFactory = new ProbeFactory();
+        Probe searchedEntity = probeFactory.createSimple();
         searchedEntity.setCode("F123-563");
         repository.save(searchedEntity);
-        repository.save(new ProbeFactory().createSimple());
-        repository.save(new ProbeFactory().createSimple());
+        repository.save(probeFactory.createSimple());
+        repository.save(probeFactory.createSimple());
 
         mvc.perform(get("/probe?search={code}", searchedEntity.getCode().toLowerCase()))
                 .andDo(print())

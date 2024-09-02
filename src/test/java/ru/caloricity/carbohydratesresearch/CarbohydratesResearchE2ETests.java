@@ -18,7 +18,6 @@ import ru.caloricity.probe.ProbeRepository;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -53,7 +52,6 @@ class CarbohydratesResearchE2ETests {
         mvc.perform(get("/carbohydrates-research?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
                 .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
                 .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12));
     }

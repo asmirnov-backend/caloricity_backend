@@ -1,13 +1,17 @@
 package ru.caloricity.fatsresearch;
 
+import ru.caloricity.common.DefinedUuidIterator;
 import ru.caloricity.probe.Probe;
 
+import java.util.Iterator;
 import java.util.UUID;
 
 public class FatsResearchFactory {
+    Iterator<UUID> uuidIterator = new DefinedUuidIterator();
+
     public FatsResearch createSimple() {
         var research = new FatsResearch();
-        research.setId(UUID.randomUUID());
+        research.setId(uuidIterator.next());
         research.setPatronMassAfterExtractionParallelFirst(11f);
         research.setPatronMassBeforeExtractionParallelFirst(8f);
         research.setPatronMassAfterExtractionParallelSecond(12f);

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -39,6 +41,11 @@ class ProteinsResearchE2ETests {
     private ProteinsResearchRepository repository;
     @Autowired
     private ProbeRepository probeRepository;
+
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+    @LocalServerPort
+    private int localServerPort;
 
     @Test
     void contextLoads() {
@@ -126,5 +133,4 @@ class ProteinsResearchE2ETests {
         assertTrue(deleted.isEmpty());
         assertTrue(probeRepository.findById(probe.getId()).isPresent());
     }
-
 }

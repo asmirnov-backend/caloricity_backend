@@ -54,9 +54,10 @@ class IngredientE2ETests {
         IngredientCatalog ingredientCatalog = ingredientCatalogRepository.save(new IngredientCatalogFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
+        var ingredientFactory = new IngredientFactory();
+        repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
+        repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
+        repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
 
         mvc.perform(get("/ingredient?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

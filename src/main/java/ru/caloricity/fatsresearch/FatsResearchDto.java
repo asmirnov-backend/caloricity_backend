@@ -6,4 +6,5 @@ public record FatsResearchDto(UUID id,
                               Float patronMassBeforeExtractionParallelFirst,
                               Float patronMassBeforeExtractionParallelSecond,
                               Float patronMassAfterExtractionParallelFirst,
-                              Float patronMassAfterExtractionParallelSecond) {}
+                              Float patronMassAfterExtractionParallelSecond) {
+}

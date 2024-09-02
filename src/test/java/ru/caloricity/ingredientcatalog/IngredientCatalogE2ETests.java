@@ -54,9 +54,10 @@ class IngredientCatalogE2ETests {
 
     @Test
     void getAll_ok() throws Exception {
-        repository.save(new IngredientCatalogFactory().createSimple());
-        repository.save(new IngredientCatalogFactory().createSimple());
-        repository.save(new IngredientCatalogFactory().createSimple());
+        var ingredientCatalogFactory = new IngredientCatalogFactory();
+        repository.save(ingredientCatalogFactory.createSimple());
+        repository.save(ingredientCatalogFactory.createSimple());
+        repository.save(ingredientCatalogFactory.createSimple());
 
         mvc.perform(get("/ingredient-catalog").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -66,11 +67,12 @@ class IngredientCatalogE2ETests {
 
     @Test
     void getAllWithSearch_ok() throws Exception {
-        IngredientCatalog searchedCatalog = new IngredientCatalogFactory().createSimple();
+        var ingredientCatalogFactory = new IngredientCatalogFactory();
+        IngredientCatalog searchedCatalog = ingredientCatalogFactory.createSimple();
         searchedCatalog.setName("Searched name");
         repository.save(searchedCatalog);
-        repository.save(new IngredientCatalogFactory().createSimple());
-        repository.save(new IngredientCatalogFactory().createSimple());
+        repository.save(ingredientCatalogFactory.createSimple());
+        repository.save(ingredientCatalogFactory.createSimple());
 
         mvc.perform(get("/ingredient-catalog?search={name}", searchedCatalog.getName().toLowerCase()))
                 .andDo(print())

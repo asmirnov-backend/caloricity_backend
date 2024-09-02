@@ -1,3 +1,4 @@
 package ru.caloricity.common.dto;
 
-public record ErrorResponseDto(String message) {}
+public record ErrorResponseDto(String message) {
+}
