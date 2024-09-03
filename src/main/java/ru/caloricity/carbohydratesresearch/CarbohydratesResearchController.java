@@ -13,7 +13,7 @@ import ru.caloricity.common.dto.IdDto;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("carbohydrates-research")
+@RequestMapping("carbohydrates-researches")
 @RequiredArgsConstructor
 @CrossOrigin
 class CarbohydratesResearchController {

@@ -49,7 +49,7 @@ class CarbohydratesResearchE2ETests {
 
         repository.save(new CarbohydratesResearchFactory().createSimple(probe));
 
-        mvc.perform(get("/carbohydrates-research?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/carbohydrates-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
@@ -61,7 +61,7 @@ class CarbohydratesResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
 
-        MvcResult result = mvc.perform(post("/carbohydrates-research")
+        MvcResult result = mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -85,7 +85,7 @@ class CarbohydratesResearchE2ETests {
     void create_badRequest() throws Exception {
         CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
 
-        mvc.perform(post("/carbohydrates-research")
+        mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -98,7 +98,7 @@ class CarbohydratesResearchE2ETests {
         CarbohydratesResearch entity = repository.save(new CarbohydratesResearchFactory().createSimple());
         CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2f, 1f, 1f, 1f);
 
-        mvc.perform(put("/carbohydrates-research/{id}", entity.getId().toString())
+        mvc.perform(put("/carbohydrates-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -115,7 +115,7 @@ class CarbohydratesResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         CarbohydratesResearch entity = repository.save(new CarbohydratesResearchFactory().createSimple(probe));
 
-        mvc.perform(delete("/carbohydrates-research/{id}", entity.getId().toString()))
+        mvc.perform(delete("/carbohydrates-researches/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 

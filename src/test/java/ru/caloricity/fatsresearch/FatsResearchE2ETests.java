@@ -50,7 +50,7 @@ class FatsResearchE2ETests {
 
         repository.save(new FatsResearchFactory().createSimple(probe));
 
-        mvc.perform(get("/fats-research?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/fats-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
@@ -63,7 +63,7 @@ class FatsResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, 2f, 1f, 2f, probe.getId());
 
-        MvcResult result = mvc.perform(post("/fats-research")
+        MvcResult result = mvc.perform(post("/fats-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -87,7 +87,7 @@ class FatsResearchE2ETests {
     void create_badRequest() throws Exception {
         FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, null, 1f, 2f, UUID.randomUUID());
 
-        mvc.perform(post("/fats-research")
+        mvc.perform(post("/fats-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -100,7 +100,7 @@ class FatsResearchE2ETests {
         FatsResearch entity = repository.save(new FatsResearchFactory().createSimple());
         FatsResearchUpdateDto dto = new FatsResearchUpdateDto(2f, 2f, 1f, 2f);
 
-        mvc.perform(put("/fats-research/{id}", entity.getId().toString())
+        mvc.perform(put("/fats-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -117,7 +117,7 @@ class FatsResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         FatsResearch entity = repository.save(new FatsResearchFactory().createSimple(probe));
 
-        mvc.perform(delete("/fats-research/{id}", entity.getId().toString()))
+        mvc.perform(delete("/fats-researches/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 

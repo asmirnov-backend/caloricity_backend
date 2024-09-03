@@ -50,7 +50,7 @@ class DrySubstancesResearchE2ETests {
 
         repository.save(new DrySubstancesResearchFactory().createSimple(probe));
 
-        mvc.perform(get("/dry-substances-research?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/dry-substances-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
@@ -63,7 +63,7 @@ class DrySubstancesResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
 
-        MvcResult result = mvc.perform(post("/dry-substances-research")
+        MvcResult result = mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -87,7 +87,7 @@ class DrySubstancesResearchE2ETests {
     void create_badRequest() throws Exception {
         DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
 
-        mvc.perform(post("/dry-substances-research")
+        mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -100,7 +100,7 @@ class DrySubstancesResearchE2ETests {
         DrySubstancesResearch entity = repository.save(new DrySubstancesResearchFactory().createSimple());
         DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2f, 1f, 1f, 10f);
 
-        mvc.perform(put("/dry-substances-research/{id}", entity.getId().toString())
+        mvc.perform(put("/dry-substances-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -117,7 +117,7 @@ class DrySubstancesResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         DrySubstancesResearch entity = repository.save(new DrySubstancesResearchFactory().createSimple(probe));
 
-        mvc.perform(delete("/dry-substances-research/{id}", entity.getId().toString()))
+        mvc.perform(delete("/dry-substances-researches/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 

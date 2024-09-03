@@ -44,7 +44,7 @@ class ProbeE2ETests {
     void getById_ok() throws Exception {
         Probe entity = repository.save(new ProbeFactory().createSimple());
 
-        mvc.perform(get("/probe/{id}", entity.getId()))
+        mvc.perform(get("/probes/{id}", entity.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()))
@@ -60,7 +60,7 @@ class ProbeE2ETests {
         repository.save(probeFactory.createSimple());
         repository.save(probeFactory.createSimple());
 
-        mvc.perform(get("/probe").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/probes").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)));
@@ -75,7 +75,7 @@ class ProbeE2ETests {
         repository.save(probeFactory.createSimple());
         repository.save(probeFactory.createSimple());
 
-        mvc.perform(get("/probe?search={code}", searchedEntity.getCode().toLowerCase()))
+        mvc.perform(get("/probes?search={code}", searchedEntity.getCode().toLowerCase()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(1))
@@ -86,7 +86,7 @@ class ProbeE2ETests {
     void create_created() throws Exception {
         ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST, "f213", 1f, 1f, 2f);
 
-        MvcResult result = mvc.perform(post("/probe")
+        MvcResult result = mvc.perform(post("/probes")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -108,7 +108,7 @@ class ProbeE2ETests {
     void create_badRequest() throws Exception {
         ProbeCreateDto dto = new ProbeCreateDto("", ProbeType.FIRST, "f213", 1f, 1f, 2f);
 
-        mvc.perform(post("/probe")
+        mvc.perform(post("/probes")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -121,7 +121,7 @@ class ProbeE2ETests {
         Probe catalog = repository.save(new ProbeFactory().createSimple());
         ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1f, 1f, 2f);
 
-        mvc.perform(put("/probe/{id}", catalog.getId().toString())
+        mvc.perform(put("/probes/{id}", catalog.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -137,7 +137,7 @@ class ProbeE2ETests {
     void delete_ok() throws Exception {
         Probe catalog = repository.save(new ProbeFactory().createSimple());
 
-        mvc.perform(delete("/probe/{id}", catalog.getId().toString()))
+        mvc.perform(delete("/probes/{id}", catalog.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 

@@ -59,7 +59,7 @@ class IngredientE2ETests {
         repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
         repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
 
-        mvc.perform(get("/ingredient?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/ingredients?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
@@ -76,7 +76,7 @@ class IngredientE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         IngredientCreateDto dto = new IngredientCreateDto(1f, 2f, ingredientCatalog.getId(), probe.getId());
 
-        MvcResult result = mvc.perform(post("/ingredient")
+        MvcResult result = mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -103,7 +103,7 @@ class IngredientE2ETests {
     void create_badRequest() throws Exception {
         IngredientCreateDto dto = new IngredientCreateDto(2f, -2f, UUID.randomUUID(), UUID.randomUUID());
 
-        mvc.perform(post("/ingredient")
+        mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -115,7 +115,7 @@ class IngredientE2ETests {
     void delete_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
 
-        mvc.perform(delete("/ingredient/{id}", entity.getId().toString()))
+        mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 

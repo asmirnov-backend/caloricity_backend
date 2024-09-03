@@ -57,7 +57,7 @@ class ProteinsResearchE2ETests {
 
         repository.save(new ProteinsResearchFactory().createSimple(probe));
 
-        mvc.perform(get("/proteins-research?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/proteins-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
@@ -71,7 +71,7 @@ class ProteinsResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
 
-        MvcResult result = mvc.perform(post("/proteins-research")
+        MvcResult result = mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -95,7 +95,7 @@ class ProteinsResearchE2ETests {
     void create_badRequest() throws Exception {
         ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
 
-        mvc.perform(post("/proteins-research")
+        mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -108,7 +108,7 @@ class ProteinsResearchE2ETests {
         ProteinsResearch entity = repository.save(new ProteinsResearchFactory().createSimple());
         ProteinsResearchUpdateDto dto = new ProteinsResearchUpdateDto(2f, 1f, 1f, 1f);
 
-        mvc.perform(put("/proteins-research/{id}", entity.getId().toString())
+        mvc.perform(put("/proteins-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -125,7 +125,7 @@ class ProteinsResearchE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         ProteinsResearch entity = repository.save(new ProteinsResearchFactory().createSimple(probe));
 
-        mvc.perform(delete("/proteins-research/{id}", entity.getId().toString()))
+        mvc.perform(delete("/proteins-researches/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 
