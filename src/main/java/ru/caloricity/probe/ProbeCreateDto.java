@@ -10,7 +10,8 @@ public record ProbeCreateDto(
         @NotNull @NotBlank @Size(min = 2) String name,
         @NotNull ProbeType type,
         @NotNull String code,
-        @Nullable @Min(value = 0) Float massTheory,
-        @NotNull @Min(value = 0) Float massFact
+        @Nullable @Min(0) Float massTheory,
+        @Nullable @Min(0) Float bankaEmptyMass,
+        @Nullable @Min(0) Float bankaWithProbeMass
 ) {
 }

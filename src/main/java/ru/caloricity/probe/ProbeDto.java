@@ -1,20 +1,9 @@
 package ru.caloricity.probe;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.Date;
 import java.util.UUID;
 
-@AllArgsConstructor
-@Data
-public class ProbeDto {
-    private UUID id;
-    private Date createdAt;
-    private Date updatedAt;
-    private String name;
-    private ProbeType type;
-    private String code;
-    private Float massTheory;
-    private Float massFact;
+public record ProbeDto(UUID id, Date createdAt, Date updatedAt, String name,
+                       ProbeType type, String code, Float massTheory,
+                       Float bankaEmptyMass, Float bankaWithProbeMass) {
 }

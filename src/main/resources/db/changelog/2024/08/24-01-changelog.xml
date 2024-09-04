@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1724500207592-1" author="user (generated)">
+        <addColumn tableName="dry_substances_researches">
+            <column name="banka_with_probe_mass" remarks="Масса банки с пробой, г" type="FLOAT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1724500207592-2" author="user (generated)">
+        <addNotNullConstraint columnName="banka_with_probe_mass" tableName="dry_substances_researches"/>
+    </changeSet>
+
+</databaseChangeLog>

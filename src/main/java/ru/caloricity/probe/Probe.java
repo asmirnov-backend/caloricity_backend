@@ -33,12 +33,16 @@ public class Probe extends BaseEntity {
     private String code;
 
     @Comment("Масса теоретическая, г")
-    @Column()
+    @Column(nullable = false)
     private Float massTheory;
 
-    @Comment("Масса фактическая, г")
+    @Comment("Масса пустой банки, г")
     @Column(nullable = false)
-    private Float massFact;
+    private Float bankaEmptyMass;
+
+    @Comment("Масса банки с пробой, г")
+    @Column(nullable = false)
+    private Float bankaWithProbeMass;
 
 //    @OneToOne(cascade = CascadeType.REMOVE)
 //    private ProteinsResearch proteinsResearch;

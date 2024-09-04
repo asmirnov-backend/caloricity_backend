@@ -11,9 +11,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
-import ru.caloricity.ingredientCatalog.IngredientCatalog;
-import ru.caloricity.ingredientCatalog.IngredientCatalogFactory;
-import ru.caloricity.ingredientCatalog.IngredientCatalogRepository;
+import ru.caloricity.ingredientcatalog.IngredientCatalog;
+import ru.caloricity.ingredientcatalog.IngredientCatalogFactory;
+import ru.caloricity.ingredientcatalog.IngredientCatalogRepository;
 import ru.caloricity.probe.Probe;
 import ru.caloricity.probe.ProbeFactory;
 import ru.caloricity.probe.ProbeRepository;
@@ -54,11 +54,12 @@ class IngredientE2ETests {
         IngredientCatalog ingredientCatalog = ingredientCatalogRepository.save(new IngredientCatalogFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
-        repository.save(new IngredientFactory().createSimple(ingredientCatalog, probe));
+        var ingredientFactory = new IngredientFactory();
+        repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
+        repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
+        repository.save(ingredientFactory.createSimple(ingredientCatalog, probe));
 
-        mvc.perform(get("/ingredient?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/ingredients?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
@@ -75,7 +76,7 @@ class IngredientE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         IngredientCreateDto dto = new IngredientCreateDto(1f, 2f, ingredientCatalog.getId(), probe.getId());
 
-        MvcResult result = mvc.perform(post("/ingredient")
+        MvcResult result = mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -102,7 +103,7 @@ class IngredientE2ETests {
     void create_badRequest() throws Exception {
         IngredientCreateDto dto = new IngredientCreateDto(2f, -2f, UUID.randomUUID(), UUID.randomUUID());
 
-        mvc.perform(post("/ingredient")
+        mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -114,7 +115,7 @@ class IngredientE2ETests {
     void delete_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
 
-        mvc.perform(delete("/ingredient/{id}", entity.getId().toString()))
+        mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 

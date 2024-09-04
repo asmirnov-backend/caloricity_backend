@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 import ru.caloricity.common.exception.EntityNotFoundException;
-import ru.caloricity.ingredientCatalog.IngredientCatalog;
-import ru.caloricity.ingredientCatalog.IngredientCatalogService;
+import ru.caloricity.ingredientcatalog.IngredientCatalog;
+import ru.caloricity.ingredientcatalog.IngredientCatalogService;
 
 import java.util.UUID;
 

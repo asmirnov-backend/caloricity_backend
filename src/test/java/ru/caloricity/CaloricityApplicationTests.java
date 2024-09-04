@@ -24,7 +24,7 @@ class CaloricityApplicationTests {
 
     @Test
     void test() {
-        System.out.print( characterReplacement("AABABBA", 1));
+        System.out.print(characterReplacement("AABABBA", 1));
     }
 
     public int characterReplacement(String s, int k) {
@@ -37,7 +37,7 @@ class CaloricityApplicationTests {
         while (left < chars.length - 1) {
             if (right == chars.length) {
                 int leftK = localK > 0 ? (localK < left + 1 ? localK : left + 1 - 1) : 0;
-                var ii =  Math.max(right - left + leftK, longest);
+                var ii = Math.max(right - left + leftK, longest);
                 return ii;
             }
 
