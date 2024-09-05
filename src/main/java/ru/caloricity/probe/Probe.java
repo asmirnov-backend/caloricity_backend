@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @NoArgsConstructor
 @Comment("Пробы блюд")
@@ -45,6 +47,7 @@ public class Probe extends BaseEntity {
     private Float bankaWithProbeMass;
 
     @OneToMany(mappedBy = "probe")
+    @ToString.Exclude
     Set<ProbeIngredient> probeIngredient;
 
 //    @OneToOne(cascade = CascadeType.REMOVE)
