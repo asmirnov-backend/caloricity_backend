@@ -118,30 +118,30 @@ class ProbeE2ETests {
 
     @Test
     void update_ok() throws Exception {
-        Probe catalog = repository.save(new ProbeFactory().createSimple());
+        Probe entity = repository.save(new ProbeFactory().createSimple());
         ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1f, 1f, 2f);
 
-        mvc.perform(put("/probes/{id}", catalog.getId().toString())
+        mvc.perform(put("/probes/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Optional<Probe> updated = repository.findById(catalog.getId());
+        Optional<Probe> updated = repository.findById(entity.getId());
         //noinspection OptionalGetWithoutIsPresent
         assertEquals(updated.get().getName(), dto.name());
     }
 
     @Test
     void delete_ok() throws Exception {
-        Probe catalog = repository.save(new ProbeFactory().createSimple());
+        Probe entity = repository.save(new ProbeFactory().createSimple());
 
-        mvc.perform(delete("/probes/{id}", catalog.getId().toString()))
+        mvc.perform(delete("/probes/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Optional<Probe> deletedEntity = repository.findById(catalog.getId());
+        Optional<Probe> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
     }
 

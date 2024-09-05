@@ -2,16 +2,11 @@ package ru.caloricity.ingredient;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.ingredientcatalog.IngredientCatalog;
-import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
 
@@ -21,25 +16,36 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Comment("Ингредиенты")
+@Comment("Каталог ингредиентов")
 @Table(name = "ingredients")
 public class Ingredient extends BaseEntity {
-    @Comment("Масса брутто, г")
+    @Comment("Наименование ингредиента")
+    @Column(length = 127, nullable = false)
+    private String name;
+
+    @Comment("Масса съедобной части, г")
     @Column(nullable = false)
-    private Float gross;
+    private Float ediblePart;
 
-    @Comment("Масса нетто, г")
+    @Comment("Масса воды, г")
     @Column(nullable = false)
-    private Float net;
+    private Float water;
 
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Probe probe;
+    @Comment("Масса белков, г")
+    @Column(nullable = false)
+    private Float proteins;
 
-    @Comment("Ингредиент в справочнике")
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    private IngredientCatalog ingredientInCatalog;
+    @Comment("Масса жиров, г")
+    @Column(nullable = false)
+    private Float fats;
+
+    @Comment("Масса углеводов, г")
+    @Column(nullable = false)
+    private Float carbohydrates;
+
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    private Set<Ingredient> ingredients;
 
     @Override
     public final boolean equals(Object o) {

@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probe.probeingredient.ProbeIngredient;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @NoArgsConstructor
 @Comment("Пробы блюд")
@@ -43,6 +43,9 @@ public class Probe extends BaseEntity {
     @Comment("Масса банки с пробой, г")
     @Column(nullable = false)
     private Float bankaWithProbeMass;
+
+    @OneToMany(mappedBy = "probe")
+    Set<ProbeIngredient> probeIngredient;
 
 //    @OneToOne(cascade = CascadeType.REMOVE)
 //    private ProteinsResearch proteinsResearch;

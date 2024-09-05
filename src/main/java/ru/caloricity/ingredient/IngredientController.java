@@ -1,5 +1,6 @@
 package ru.caloricity.ingredient;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
@@ -13,7 +14,7 @@ import ru.caloricity.common.dto.IdDto;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("ingredients")
+@RequestMapping("ingredient")
 @RequiredArgsConstructor
 @CrossOrigin
 class IngredientController {
@@ -21,14 +22,24 @@ class IngredientController {
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<IngredientInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam("probe-id") UUID probeId) {
-        return service.findAll(pageable, probeId);
+    public Page<IngredientInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
+        return service.findAll(pageable, search);
+    }
+
+    @GetMapping("{id}")
+    public IngredientDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
+        return service.findDtoByIdOrThrow(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public IdDto create(@Valid @RequestBody IngredientCreateDto createDto) {
         return service.create(createDto);
+    }
+
+    @PutMapping("{id}")
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCreateDto createDto) {
+        service.update(id, createDto);
     }
 
     @DeleteMapping("{id}")
