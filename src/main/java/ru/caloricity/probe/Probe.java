@@ -8,10 +8,8 @@ import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.probe.probeingredient.ProbeIngredient;
 
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -45,22 +43,6 @@ public class Probe extends BaseEntity {
     @Comment("Масса банки с пробой, г")
     @Column(nullable = false)
     private Float bankaWithProbeMass;
-
-    @OneToMany(mappedBy = "probe")
-    @ToString.Exclude
-    Set<ProbeIngredient> probeIngredient;
-
-//    @OneToOne(cascade = CascadeType.REMOVE)
-//    private ProteinsResearch proteinsResearch;
-//
-//    @OneToOne(cascade = CascadeType.REMOVE)
-//    private FatsResearch fatsResearch;
-//
-//    @OneToOne(cascade = CascadeType.REMOVE)
-//    private DrySubstancesResearch drySubstancesResearch;
-//
-//    @OneToOne(cascade = CascadeType.REMOVE)
-//    private CarbohydratesResearch carbohydratesResearch;
 
     @Override
     public final boolean equals(Object o) {

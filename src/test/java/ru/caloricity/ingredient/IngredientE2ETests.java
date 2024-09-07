@@ -128,7 +128,7 @@ class IngredientE2ETests {
                 .andExpect(status().isOk());
 
         Optional<Ingredient> updated = repository.findById(entity.getId());
-        //noinspection OptionalGetWithoutIsPresent
+        assertTrue(updated.isPresent());
         assertEquals(updated.get().getName(), dto.name());
     }
 

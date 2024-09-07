@@ -108,7 +108,7 @@ class FatsResearchE2ETests {
                 .andExpect(status().isOk());
 
         Optional<FatsResearch> updated = repository.findById(entity.getId());
-        //noinspection OptionalGetWithoutIsPresent
+        assertTrue(updated.isPresent());
         assertEquals(updated.get().getPatronMassBeforeExtractionParallelFirst(), dto.patronMassBeforeExtractionParallelFirst());
     }
 

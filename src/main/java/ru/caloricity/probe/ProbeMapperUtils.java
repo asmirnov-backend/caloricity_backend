@@ -3,7 +3,6 @@ package ru.caloricity.probe;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
-import ru.caloricity.common.exception.EntityNotFoundException;
 
 import java.util.UUID;
 
@@ -13,8 +12,8 @@ import java.util.UUID;
 public class ProbeMapperUtils {
     private final ProbeService probeService;
 
-    @Named("mapProbeIdToEntity")
-    public Probe mapProbeIdToEntity(UUID probeId) {
-        return probeService.findById(probeId).orElseThrow(EntityNotFoundException::new);
+    @Named("getReferenceById")
+    public Probe getReferenceById(UUID probeId) {
+        return probeService.getReferenceById(probeId);
     }
 }

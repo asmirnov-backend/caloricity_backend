@@ -106,7 +106,7 @@ class CarbohydratesResearchE2ETests {
                 .andExpect(status().isOk());
 
         Optional<CarbohydratesResearch> updated = repository.findById(entity.getId());
-        //noinspection OptionalGetWithoutIsPresent
+        assertTrue(updated.isPresent());
         assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 

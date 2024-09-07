@@ -13,10 +13,10 @@ public class IngredientFactory {
         ingredient.setId(uuidIterator.next());
         ingredient.setName("Test name");
         ingredient.setFats(1f);
-        ingredient.setCarbohydrates(1f);
-        ingredient.setWater(1f);
-        ingredient.setEdiblePart(1f);
-        ingredient.setProteins(1f);
+        ingredient.setCarbohydrates(2f);
+        ingredient.setWater(3f);
+        ingredient.setEdiblePart(4f);
+        ingredient.setProteins(5f);
         return ingredient;
     }
 }

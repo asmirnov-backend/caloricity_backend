@@ -34,6 +34,10 @@ public class ProbeService {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    public Probe getReferenceById(UUID id) {
+        return repository.getReferenceById(id);
+    }
+
     @Transactional
     public IdDto create(ProbeCreateDto createDto) {
         Probe entity = mapper.toEntity(createDto);

@@ -34,6 +34,10 @@ public class IngredientService {
         return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    public Ingredient getReferenceById(UUID id) {
+        return repository.getReferenceById(id);
+    }
+
     @Transactional
     public IdDto create(IngredientCreateDto createDto) {
         Ingredient entity = mapper.toEntity(createDto);

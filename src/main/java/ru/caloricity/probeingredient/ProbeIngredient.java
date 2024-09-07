@@ -1,28 +1,23 @@
-package ru.caloricity.probe.probeingredient;
+package ru.caloricity.probeingredient;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.proxy.HibernateProxy;
+import ru.caloricity.common.BaseEntity;
 import ru.caloricity.ingredient.Ingredient;
 import ru.caloricity.probe.Probe;
 
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@NoArgsConstructor
-@Table(name = "probe_ingredient")
-@AllArgsConstructor
+@Table(name = "probe_ingredient", indexes = @Index(columnList = "probeId, ingredientId", unique = true))
 @Getter
 @Setter
 @ToString
-public class ProbeIngredient {
-    @EmbeddedId
-    ProbeIngredientKey id;
-
+public class ProbeIngredient extends BaseEntity {
     @Comment("Масса брутто, г")
     @Column(nullable = false)
     private Float gross;
@@ -31,24 +26,10 @@ public class ProbeIngredient {
     @Column(nullable = false)
     private Float net;
 
-    @Comment("Дата и время создания")
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false, nullable = false)
-    private Date createdAt;
-
-    @Comment("Дата и время редактирования")
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date updatedAt;
-
-    @ManyToOne
-    @MapsId("probeId")
+    @ManyToOne(optional = false)
     Probe probe;
 
-    @ManyToOne
-    @MapsId("ingredientId")
+    @ManyToOne(optional = false)
     Ingredient ingredient;
 
     @Override
@@ -64,6 +45,6 @@ public class ProbeIngredient {
 
     @Override
     public final int hashCode() {
-        return Objects.hash(id);
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

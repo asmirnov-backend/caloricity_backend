@@ -116,7 +116,7 @@ class ProteinsResearchE2ETests {
                 .andExpect(status().isOk());
 
         Optional<ProteinsResearch> updated = repository.findById(entity.getId());
-        //noinspection OptionalGetWithoutIsPresent
+        assertTrue(updated.isPresent());
         assertEquals(updated.get().getTitrantVolumeParallelSecond(), dto.titrantVolumeParallelSecond());
     }
 
