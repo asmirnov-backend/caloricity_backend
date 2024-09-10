@@ -1,9 +1,9 @@
 package ru.caloricity.probe;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record ProbeInPageDto(UUID id, Date createdAt, Date updatedAt,
+public record ProbeInPageDto(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt,
                              String name, ProbeType type,
                              String code) {
 }

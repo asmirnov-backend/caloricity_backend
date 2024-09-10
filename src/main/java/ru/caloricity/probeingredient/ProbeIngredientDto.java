@@ -1,11 +1,11 @@
 package ru.caloricity.probeingredient;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record ProbeIngredientDto(UUID id,
-                                 Date createdAt,
-                                 Date updatedAt,
+                                 LocalDateTime createdAt,
+                                 LocalDateTime updatedAt,
                                  UUID probeId,
                                  UUID ingredientId,
                                  Float gross,
