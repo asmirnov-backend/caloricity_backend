@@ -44,7 +44,7 @@ class IngredientE2ETests {
     void getById_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
 
-        mvc.perform(get("/ingredient/{id}", entity.getId()))
+        mvc.perform(get("/ingredients/{id}", entity.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()))
@@ -59,7 +59,7 @@ class IngredientE2ETests {
         repository.save(factory.createSimple());
         repository.save(factory.createSimple());
 
-        mvc.perform(get("/ingredient").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/ingredients").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)));
@@ -74,7 +74,7 @@ class IngredientE2ETests {
         repository.save(factory.createSimple());
         repository.save(factory.createSimple());
 
-        mvc.perform(get("/ingredient?search={name}", searched.getName().toLowerCase()))
+        mvc.perform(get("/ingredients?search={name}", searched.getName().toLowerCase()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(1))
@@ -85,7 +85,7 @@ class IngredientE2ETests {
     void create_created() throws Exception {
         IngredientCreateDto dto = new IngredientCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
 
-        MvcResult result = mvc.perform(post("/ingredient")
+        MvcResult result = mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -107,7 +107,7 @@ class IngredientE2ETests {
     void create_badRequest() throws Exception {
         IngredientCreateDto dto = new IngredientCreateDto("", 1f, 1f, 1f, 1f, 1f);
 
-        mvc.perform(post("/ingredient")
+        mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -120,7 +120,7 @@ class IngredientE2ETests {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
         IngredientCreateDto dto = new IngredientCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
 
-        mvc.perform(put("/ingredient/{id}", entity.getId().toString())
+        mvc.perform(put("/ingredients/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -136,7 +136,7 @@ class IngredientE2ETests {
     void delete_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
 
-        mvc.perform(delete("/ingredient/{id}", entity.getId().toString()))
+        mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 
