@@ -109,7 +109,7 @@ class DrySubstancesResearchE2ETests {
 
         Optional<DrySubstancesResearch> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
-        assertEquals(updated.get().getByuksaParallelSecond(), dto.getByuksaParallelSecond());
+        assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
     }
 
     @Test

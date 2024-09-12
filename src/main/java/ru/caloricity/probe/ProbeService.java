@@ -45,7 +45,6 @@ public class ProbeService {
         return new IdDto(entity.getId());
     }
 
-    // TODO throw new ResourceNotFoundException()
     @Transactional
     public void update(UUID id, ProbeUpdateDto dto) {
         Optional<Probe> currentEntity = findById(id);
