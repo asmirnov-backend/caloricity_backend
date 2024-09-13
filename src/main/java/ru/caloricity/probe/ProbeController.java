@@ -27,7 +27,7 @@ class ProbeController {
     }
 
     @GetMapping("{id}")
-    public ProbeDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
+    public ProbeDto findOne(@PathVariable(name = "id") UUID id) {
         return service.findDtoByIdOrThrow(id);
     }
 

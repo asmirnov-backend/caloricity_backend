@@ -31,7 +31,7 @@ public class ProbeService {
     }
 
     public ProbeDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
     }
 
     public Probe getReferenceById(UUID id) {
@@ -52,7 +52,7 @@ public class ProbeService {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
         } else {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException(id, Probe.class);
         }
     }
 

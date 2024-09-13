@@ -11,13 +11,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.common.exception.EntityNotFoundException;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -51,6 +51,14 @@ class ProbeE2ETests {
                 .andExpect(jsonPath("$.name").value(entity.getName()))
                 .andExpect(jsonPath("$.bankaEmptyMass").value(entity.getBankaEmptyMass()))
                 .andExpect(jsonPath("$.bankaWithProbeMass").value(entity.getBankaWithProbeMass()));
+    }
+
+    @Test
+    void getById_notFound() throws Exception {
+        mvc.perform(get("/probes/{id}", UUID.randomUUID()))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
     }
 
     @Test

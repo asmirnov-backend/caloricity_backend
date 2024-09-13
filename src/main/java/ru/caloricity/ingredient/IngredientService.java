@@ -31,7 +31,7 @@ public class IngredientService {
     }
 
     public IngredientDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, Ingredient.class));
     }
 
     public Ingredient getReferenceById(UUID id) {
@@ -53,7 +53,7 @@ public class IngredientService {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
         } else {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException(id, Ingredient.class);
         }
     }
 

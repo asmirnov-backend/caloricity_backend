@@ -12,6 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.common.exception.EntityNotFoundException;
 import ru.caloricity.ingredient.Ingredient;
 import ru.caloricity.ingredient.IngredientFactory;
 import ru.caloricity.ingredient.IngredientRepository;
@@ -23,8 +24,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -35,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class ProbeIngredientE2ETests {
+
 
     @Autowired
     private MockMvc mvc;
@@ -63,6 +64,14 @@ class ProbeIngredientE2ETests {
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()))
                 .andExpect(jsonPath("$.gross").value(entity.getGross()))
                 .andExpect(jsonPath("$.net").value(entity.getNet()));
+    }
+
+    @Test
+    void getById_notFound() throws Exception {
+        mvc.perform(get("/probe-ingredient/{id}", UUID.randomUUID()))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
     }
 
     @Test

@@ -34,7 +34,7 @@ public class ProbeIngredientService {
     }
 
     public ProbeIngredientDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, ProbeIngredient.class));
     }
 
     @Transactional
@@ -52,7 +52,7 @@ public class ProbeIngredientService {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
         } else {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException(id, ProbeIngredient.class);
         }
     }
 

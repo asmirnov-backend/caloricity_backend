@@ -27,7 +27,7 @@ public class DrySubstancesResearchService {
     }
 
     public DrySubstancesResearchDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, DrySubstancesResearch.class));
     }
 
     @Transactional

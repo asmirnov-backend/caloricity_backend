@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.common.exception.EntityNotFoundException;
 import ru.caloricity.probe.Probe;
 import ru.caloricity.probe.ProbeFactory;
 import ru.caloricity.probe.ProbeRepository;
@@ -31,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class DrySubstancesResearchE2ETests {
 
+
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -42,6 +44,14 @@ class DrySubstancesResearchE2ETests {
 
     @Test
     void contextLoads() {
+    }
+
+    @Test
+    void getById_notFound() throws Exception {
+        mvc.perform(get("/dry-substances-researches/{id}", UUID.randomUUID()))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
     }
 
     @Test
