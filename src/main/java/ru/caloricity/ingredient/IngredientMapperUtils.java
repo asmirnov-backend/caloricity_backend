@@ -12,8 +12,8 @@ import java.util.UUID;
 public class IngredientMapperUtils {
     private final IngredientService ingredientService;
 
-    @Named("getReferenceById")
-    public Ingredient getReferenceById(UUID probeId) {
-        return ingredientService.getReferenceById(probeId);
+    @Named("getExistingReferenceByIdOrThrow")
+    public Ingredient getExistingReferenceByIdOrThrow(UUID probeId) {
+        return ingredientService.getExistingReferenceByIdOrThrow(probeId);
     }
 }

@@ -34,7 +34,11 @@ public class IngredientService {
         return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, Ingredient.class));
     }
 
-    public Ingredient getReferenceById(UUID id) {
+    public Ingredient getExistingReferenceByIdOrThrow(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException(id, Ingredient.class);
+        }
+
         return repository.getReferenceById(id);
     }
 

@@ -9,6 +9,6 @@ import ru.caloricity.probe.ProbeMapperUtils;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ProbeMapperUtils.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface CarbohydratesResearchMapper {
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
-    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getReferenceById"})
+    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getExistingReferenceByIdOrThrow"})
     CarbohydratesResearch toEntity(CarbohydratesResearchCreateDto dto);
 }

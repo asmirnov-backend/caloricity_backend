@@ -39,7 +39,6 @@ public class ProbeIngredientService {
 
     @Transactional
     public IdDto create(ProbeIngredientCreateDto createDto) {
-        // TODO add error handling when referenced ingredient or probe does not exist
         ProbeIngredient entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());

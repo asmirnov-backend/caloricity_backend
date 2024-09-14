@@ -12,8 +12,8 @@ import java.util.UUID;
 public class ProbeMapperUtils {
     private final ProbeService probeService;
 
-    @Named("getReferenceById")
-    public Probe getReferenceById(UUID probeId) {
-        return probeService.getReferenceById(probeId);
+    @Named("getExistingReferenceByIdOrThrow")
+    public Probe getExistingReferenceByIdOrThrow(UUID probeId) {
+        return probeService.getExistingReferenceByIdOrThrow(probeId);
     }
 }

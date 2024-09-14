@@ -34,7 +34,11 @@ public class ProbeService {
         return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
     }
 
-    public Probe getReferenceById(UUID id) {
+    public Probe getExistingReferenceByIdOrThrow(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException(id, Probe.class);
+        }
+
         return repository.getReferenceById(id);
     }
 

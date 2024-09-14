@@ -2,7 +2,6 @@ package ru.caloricity.probeingredient;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -137,7 +136,6 @@ class ProbeIngredientE2ETests {
     }
 
     @Test
-    @Disabled
     void create_badRequest_referencedProbeNotExist() throws Exception {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(UUID.randomUUID(), ingredient.getId(), 40f, 3f);
@@ -147,11 +145,11 @@ class ProbeIngredientE2ETests {
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
     }
 
     @Test
-    @Disabled
     void create_badRequest_referencedIngredientNotExist() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(probe.getId(), UUID.randomUUID(), 40f, 3f);
@@ -161,7 +159,8 @@ class ProbeIngredientE2ETests {
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
     }
 
     @Test
