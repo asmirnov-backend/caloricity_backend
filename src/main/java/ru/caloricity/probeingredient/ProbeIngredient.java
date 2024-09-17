@@ -1,48 +1,36 @@
-package ru.caloricity.probe;
+package ru.caloricity.probeingredient;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.ingredient.Ingredient;
+import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
 
+@Entity
+@Table(name = "probe_ingredient", indexes = @Index(columnList = "probeId, ingredientId", unique = true))
 @Getter
 @Setter
 @ToString
-@Entity
-@NoArgsConstructor
-@Comment("Пробы блюд")
-@Table(name = "probes")
-public class Probe extends BaseEntity {
-    @Comment("Наименование пробы")
-    @Column(length = 127, nullable = false)
-    private String name;
-
-    @Comment("Тип пробы")
-    @Column(length = 127, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ProbeType type;
-
-    @Comment("Код пробы")
-    @Column(length = 127, nullable = false)
-    private String code;
-
-    @Comment("Масса теоретическая, г")
+public class ProbeIngredient extends BaseEntity {
+    @Comment("Масса брутто, г")
     @Column(nullable = false)
-    private Float massTheory;
+    private Float gross;
 
-    @Comment("Масса пустой банки, г")
+    @Comment("Масса нетто, г")
     @Column(nullable = false)
-    private Float bankaEmptyMass;
+    private Float net;
 
-    @Comment("Масса банки с пробой, г")
-    @Column(nullable = false)
-    private Float bankaWithProbeMass;
+    @ManyToOne(optional = false)
+    Probe probe;
+
+    @ManyToOne(optional = false)
+    Ingredient ingredient;
 
     @Override
     public final boolean equals(Object o) {
@@ -51,8 +39,8 @@ public class Probe extends BaseEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Probe probe = (Probe) o;
-        return getId() != null && Objects.equals(getId(), probe.getId());
+        ProbeIngredient that = (ProbeIngredient) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
     }
 
     @Override

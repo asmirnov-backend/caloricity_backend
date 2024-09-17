@@ -1,6 +1,5 @@
-package ru.caloricity.ingredientcatalog;
+package ru.caloricity.probeingredient;
 
-import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
@@ -14,31 +13,31 @@ import ru.caloricity.common.dto.IdDto;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("ingredient-catalog")
+@RequestMapping("probe-ingredient")
 @RequiredArgsConstructor
 @CrossOrigin
-class IngredientCatalogController {
-    private final IngredientCatalogService service;
+class ProbeIngredientController {
+    private final ProbeIngredientService service;
 
     @GetMapping
     @PageableAsQueryParam
-    public Page<IngredientCatalogInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
-        return service.findAll(pageable, search);
+    public Page<ProbeIngredientInPageDto> findAll(@ParameterObject Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     @GetMapping("{id}")
-    public IngredientCatalogDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
+    public ProbeIngredientDto findDtoByIdOrThrow(@PathVariable(name = "id") UUID id) {
         return service.findDtoByIdOrThrow(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public IdDto create(@Valid @RequestBody IngredientCatalogCreateDto createDto) {
+    public IdDto create(@Valid @RequestBody ProbeIngredientCreateDto createDto) {
         return service.create(createDto);
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCatalogCreateDto createDto) {
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody ProbeIngredientUpdateDto createDto) {
         service.update(id, createDto);
     }
 

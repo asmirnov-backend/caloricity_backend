@@ -1,21 +1,17 @@
 package ru.caloricity.drysubstancesresearch;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class DrySubstancesResearchUpdateDto {
-    @NotNull
-    private Float byuksaParallelFirst;
+public record DrySubstancesResearchUpdateDto(@NotNull
+                                             Float byuksaParallelFirst,
 
-    @NotNull
-    private Float byuksaParallelSecond;
+                                             @NotNull
+                                             Float byuksaParallelSecond,
 
-    @NotNull
-    private Float byuksaAfterDryingParallelFirst;
+                                             @NotNull
+                                             Float byuksaAfterDryingParallelFirst,
 
-    @NotNull
-    private Float byuksaAfterDryingParallelSecond;
+                                             @NotNull
+                                             Float byuksaAfterDryingParallelSecond) {
+
 }

@@ -27,7 +27,7 @@ public class FatsResearchService {
     }
 
     public FatsResearchDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, FatsResearch.class));
     }
 
     @Transactional

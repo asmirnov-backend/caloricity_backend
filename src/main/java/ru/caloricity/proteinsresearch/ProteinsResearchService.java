@@ -27,7 +27,7 @@ public class ProteinsResearchService {
     }
 
     public ProteinsResearchDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, ProteinsResearch.class));
     }
 
     @Transactional

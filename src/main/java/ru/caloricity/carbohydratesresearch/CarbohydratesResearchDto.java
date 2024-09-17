@@ -1,20 +1,15 @@
 package ru.caloricity.carbohydratesresearch;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-public class CarbohydratesResearchDto {
-    private UUID id;
+public record CarbohydratesResearchDto(UUID id,
 
-    private Float byuksaParallelFirst;
+                                       Float byuksaParallelFirst,
 
-    private Float byuksaParallelSecond;
+                                       Float byuksaParallelSecond,
 
-    private Float byuksaAfterDryingParallelFirst;
+                                       Float byuksaAfterDryingParallelFirst,
 
-    private Float byuksaAfterDryingParallelSecond;
+                                       Float byuksaAfterDryingParallelSecond) {
+
 }

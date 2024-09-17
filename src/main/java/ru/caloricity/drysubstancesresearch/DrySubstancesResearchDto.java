@@ -1,20 +1,16 @@
 package ru.caloricity.drysubstancesresearch;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-public class DrySubstancesResearchDto {
-    private UUID id;
 
-    private Float byuksaParallelFirst;
+public record DrySubstancesResearchDto(UUID id,
 
-    private Float byuksaParallelSecond;
+                                       Float byuksaParallelFirst,
 
-    private Float byuksaAfterDryingParallelFirst;
+                                       Float byuksaParallelSecond,
 
-    private Float byuksaAfterDryingParallelSecond;
+                                       Float byuksaAfterDryingParallelFirst,
+
+                                       Float byuksaAfterDryingParallelSecond) {
+
 }

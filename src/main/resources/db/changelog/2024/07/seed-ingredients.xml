@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
     <changeSet id="23123" author="a2s">
-        <insert tableName="ingredients_catalog">
+        <insert tableName="ingredients">
             <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345000000"/>
             <column name="name" value="Огурец тестовый"/>
             <column name="edible_part" value="100"/>
@@ -16,7 +16,7 @@
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
         </insert>
-        <insert tableName="ingredients_catalog">
+        <insert tableName="ingredients">
             <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345050001"/>
             <column name="name" value="Арбуз тестовый"/>
             <column name="edible_part" value="10"/>
@@ -27,7 +27,7 @@
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
         </insert>
-        <insert tableName="ingredients_catalog">
+        <insert tableName="ingredients">
             <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345050002"/>
             <column name="name" value="Дыня тестовая"/>
             <column name="edible_part" value="103.31"/>

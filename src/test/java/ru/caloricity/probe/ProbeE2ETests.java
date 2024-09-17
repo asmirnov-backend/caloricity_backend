@@ -11,13 +11,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.common.exception.EntityNotFoundException;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -51,6 +51,14 @@ class ProbeE2ETests {
                 .andExpect(jsonPath("$.name").value(entity.getName()))
                 .andExpect(jsonPath("$.bankaEmptyMass").value(entity.getBankaEmptyMass()))
                 .andExpect(jsonPath("$.bankaWithProbeMass").value(entity.getBankaWithProbeMass()));
+    }
+
+    @Test
+    void getById_notFound() throws Exception {
+        mvc.perform(get("/probes/{id}", UUID.randomUUID()))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
     }
 
     @Test
@@ -118,30 +126,30 @@ class ProbeE2ETests {
 
     @Test
     void update_ok() throws Exception {
-        Probe catalog = repository.save(new ProbeFactory().createSimple());
+        Probe entity = repository.save(new ProbeFactory().createSimple());
         ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1f, 1f, 2f);
 
-        mvc.perform(put("/probes/{id}", catalog.getId().toString())
+        mvc.perform(put("/probes/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Optional<Probe> updated = repository.findById(catalog.getId());
-        //noinspection OptionalGetWithoutIsPresent
+        Optional<Probe> updated = repository.findById(entity.getId());
+        assertTrue(updated.isPresent());
         assertEquals(updated.get().getName(), dto.name());
     }
 
     @Test
     void delete_ok() throws Exception {
-        Probe catalog = repository.save(new ProbeFactory().createSimple());
+        Probe entity = repository.save(new ProbeFactory().createSimple());
 
-        mvc.perform(delete("/probes/{id}", catalog.getId().toString()))
+        mvc.perform(delete("/probes/{id}", entity.getId().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Optional<Probe> deletedEntity = repository.findById(catalog.getId());
+        Optional<Probe> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
     }
 

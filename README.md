@@ -20,6 +20,7 @@ CREATE DATABASE caloricity_test WITH OWNER caloricity ENCODING 'UTF-8';
 
 ## TODO
 
+- Add error descriptions to swagger https://habr.com/ru/articles/814061/
 - Add protocols module
 - Add users module
 - Add AuditEvents https://docs.spring.io/spring-boot/api/java/org/springframework/boot/actuate/audit/AuditEvent.html

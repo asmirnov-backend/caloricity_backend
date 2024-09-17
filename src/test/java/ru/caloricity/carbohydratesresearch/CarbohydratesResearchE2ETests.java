@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.common.exception.EntityNotFoundException;
 import ru.caloricity.probe.Probe;
 import ru.caloricity.probe.ProbeFactory;
 import ru.caloricity.probe.ProbeRepository;
@@ -41,6 +42,14 @@ class CarbohydratesResearchE2ETests {
 
     @Test
     void contextLoads() {
+    }
+
+    @Test
+    void getById_notFound() throws Exception {
+        mvc.perform(get("/carbohydrates-researches/{id}", UUID.randomUUID()))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
     }
 
     @Test
@@ -106,7 +115,7 @@ class CarbohydratesResearchE2ETests {
                 .andExpect(status().isOk());
 
         Optional<CarbohydratesResearch> updated = repository.findById(entity.getId());
-        //noinspection OptionalGetWithoutIsPresent
+        assertTrue(updated.isPresent());
         assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 

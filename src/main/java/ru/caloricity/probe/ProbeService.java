@@ -31,7 +31,15 @@ public class ProbeService {
     }
 
     public ProbeDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
+    }
+
+    public Probe getExistingReferenceByIdOrThrow(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException(id, Probe.class);
+        }
+
+        return repository.getReferenceById(id);
     }
 
     @Transactional
@@ -41,7 +49,6 @@ public class ProbeService {
         return new IdDto(entity.getId());
     }
 
-    // TODO throw new ResourceNotFoundException()
     @Transactional
     public void update(UUID id, ProbeUpdateDto dto) {
         Optional<Probe> currentEntity = findById(id);
@@ -49,7 +56,7 @@ public class ProbeService {
             BeanUtils.copyProperties(dto, currentEntity.get(), "id");
             repository.save(currentEntity.get());
         } else {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException(id, Probe.class);
         }
     }
 
