@@ -2,13 +2,16 @@ package ru.caloricity.ingredient;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probeingredient.ProbeIngredient;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -43,9 +46,9 @@ public class Ingredient extends BaseEntity {
     @Column(nullable = false)
     private Float carbohydrates;
 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    private Set<Ingredient> ingredients;
+    @OneToMany(mappedBy = "ingredient")
+    @ToString.Exclude
+    private Set<ProbeIngredient> probeIngredients;
 
     @Override
     public final boolean equals(Object o) {

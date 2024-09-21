@@ -7,9 +7,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
+import ru.caloricity.carbohydratesresearch.CarbohydratesResearch;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.drysubstancesresearch.DrySubstancesResearch;
+import ru.caloricity.fatsresearch.FatsResearch;
+import ru.caloricity.probeingredient.ProbeIngredient;
+import ru.caloricity.proteinsresearch.ProteinsResearch;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -43,6 +49,21 @@ public class Probe extends BaseEntity {
     @Comment("Масса банки с пробой, г")
     @Column(nullable = false)
     private Float bankaWithProbeMass;
+
+    @OneToMany(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProbeIngredient> probeIngredient;
+
+    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private CarbohydratesResearch carbohydratesResearch;
+
+    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private DrySubstancesResearch drySubstancesResearch;
+
+    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private FatsResearch fatsResearch;
+
+    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ProteinsResearch proteinsResearch;
 
     @Override
     public final boolean equals(Object o) {
