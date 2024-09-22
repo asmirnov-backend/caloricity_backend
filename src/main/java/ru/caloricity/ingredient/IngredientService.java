@@ -8,7 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.caloricity.common.dto.IdDto;
+import ru.caloricity.common.exception.CascadeDeleteRestrictException;
 import ru.caloricity.common.exception.EntityNotFoundException;
+import ru.caloricity.probeingredient.ProbeIngredient;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -63,6 +65,10 @@ public class IngredientService {
 
     @Transactional
     public void deleteById(UUID id) {
+        if (repository.existsByIdAndProbeIngredientsIsNotEmpty(id)) {
+            throw new CascadeDeleteRestrictException(id, Ingredient.class, ProbeIngredient.class);
+        }
+
         repository.deleteById(id);
     }
 }

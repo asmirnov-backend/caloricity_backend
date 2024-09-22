@@ -11,7 +11,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.common.exception.CascadeDeleteRestrictException;
 import ru.caloricity.common.exception.EntityNotFoundException;
+import ru.caloricity.probe.Probe;
+import ru.caloricity.probe.ProbeFactory;
+import ru.caloricity.probe.ProbeRepository;
+import ru.caloricity.probeingredient.ProbeIngredient;
+import ru.caloricity.probeingredient.ProbeIngredientFactory;
+import ru.caloricity.probeingredient.ProbeIngredientRepository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -36,6 +43,10 @@ class IngredientE2ETests {
     private ObjectMapper objectMapper;
     @Autowired
     private IngredientRepository repository;
+    @Autowired
+    private ProbeIngredientRepository probeIngredientRepository;
+    @Autowired
+    private ProbeRepository probeRepository;
 
     @Test
     void contextLoads() {
@@ -151,6 +162,18 @@ class IngredientE2ETests {
 
         Optional<Ingredient> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
+    }
+
+    @Test
+    void delete_throwCascadeDeleteRestrictException() throws Exception {
+        Ingredient entity = repository.save(new IngredientFactory().createSimple());
+        Probe probe = probeRepository.save(new ProbeFactory().createSimple());
+        ProbeIngredient probeIngredient = probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(probe, entity));
+
+        mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertInstanceOf(CascadeDeleteRestrictException.class, result.getResolvedException()));
     }
 
 }

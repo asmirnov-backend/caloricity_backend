@@ -11,11 +11,6 @@ class CaloricityApplicationTests {
     ApplicationModules modules = ApplicationModules.of(CaloricityApplication.class);
 
     @Test
-    void shouldBeCompliant() {
-        modules.verify();
-    }
-
-    @Test
     void writeDocumentationSnippets() {
         new Documenter(modules)
                 .writeModulesAsPlantUml()

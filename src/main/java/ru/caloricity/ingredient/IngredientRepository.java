@@ -15,4 +15,6 @@ public interface IngredientRepository extends JpaRepository<Ingredient, UUID> {
     Page<IngredientInPageDto> findAllByNameLikeIgnoreCase(Pageable pageable, String like);
 
     Optional<IngredientDto> findDtoById(UUID id);
+
+    boolean existsByIdAndProbeIngredientsIsNotEmpty(UUID id);
 }
