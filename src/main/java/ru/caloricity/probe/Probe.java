@@ -51,6 +51,7 @@ public class Probe extends BaseEntity {
     private Float bankaWithProbeMass;
 
     @OneToMany(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private Set<ProbeIngredient> probeIngredient;
 
     @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)

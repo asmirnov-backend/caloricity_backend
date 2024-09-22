@@ -138,7 +138,7 @@ class ProbeE2ETests {
 
         Optional<Probe> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
-        assertEquals(updated.get().getName(), dto.name());
+        assertEquals(updated.get().getName(), dto.getName());
     }
 
     @Test

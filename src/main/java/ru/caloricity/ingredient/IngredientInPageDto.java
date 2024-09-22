@@ -1,8 +1,11 @@
 package ru.caloricity.ingredient;
 
+import lombok.Getter;
+
 import java.util.UUID;
 
 
+@Getter
 public record IngredientInPageDto(UUID id,
 
                                   String name,
