@@ -15,7 +15,7 @@ public interface ProbeIngredientMapper {
     ProbeIngredient toEntity(ProbeIngredientCreateDto dto);
 
     @Mapping(source = "ingredient.name", target = "ingredientName")
-    @Mapping(source = ".", target = "water", qualifiedByName = {"ProbeIngredientMapperUtils", "calcWater"})
+    @Mapping(source = ".", target = "drySubstances", qualifiedByName = {"ProbeIngredientMapperUtils", "calcDrySubstances"})
     @Mapping(source = ".", target = "proteins", qualifiedByName = {"ProbeIngredientMapperUtils", "calcProteins"})
     @Mapping(source = ".", target = "fats", qualifiedByName = {"ProbeIngredientMapperUtils", "calcFats"})
     @Mapping(source = ".", target = "carbohydrates", qualifiedByName = {"ProbeIngredientMapperUtils", "calcCarbohydrates"})

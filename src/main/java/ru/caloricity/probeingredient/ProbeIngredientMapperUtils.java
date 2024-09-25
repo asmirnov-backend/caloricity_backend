@@ -9,23 +9,21 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProbeIngredientMapperUtils {
 
-    @Named("calcWater")
-    Float calcWater(ProbeIngredient probeIngredient) {
-        return (probeIngredient.getNet() / probeIngredient.ingredient.getEdiblePart()) * probeIngredient.ingredient.getWater();
+    @Named("calcDrySubstances")
+    Float calcDrySubstances(ProbeIngredient probeIngredient) {
+        return probeIngredient.getNet() - (probeIngredient.getNet() * probeIngredient.ingredient.getWater() / 100);
     }
 
     @Named("calcProteins")
     Float calcProteins(ProbeIngredient probeIngredient) {
-        return (probeIngredient.getNet() / probeIngredient.ingredient.getEdiblePart()) * probeIngredient.ingredient.getProteins();
+        return probeIngredient.getNet() * probeIngredient.ingredient.getProteins() / 100;
     }
 
     @Named("calcFats")
     Float calcFats(ProbeIngredient probeIngredient) {
-        return (probeIngredient.getNet() / probeIngredient.ingredient.getEdiblePart()) * probeIngredient.ingredient.getFats();
-    }
+        return probeIngredient.getNet() * probeIngredient.ingredient.getFats() / 100;    }
 
     @Named("calcCarbohydrates")
     Float calcCarbohydrates(ProbeIngredient probeIngredient) {
-        return (probeIngredient.getNet() / probeIngredient.ingredient.getEdiblePart()) * probeIngredient.ingredient.getCarbohydrates();
-    }
+        return probeIngredient.getNet() * probeIngredient.ingredient.getCarbohydrates() / 100;    }
 }

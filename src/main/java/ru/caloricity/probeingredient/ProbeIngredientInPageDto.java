@@ -7,7 +7,7 @@ public record ProbeIngredientInPageDto(UUID id,
                                        Float net,
 
                                        String ingredientName,
-                                       Float water,
+                                       Float drySubstances,
                                        Float proteins,
                                        Float fats,
                                        Float carbohydrates) {

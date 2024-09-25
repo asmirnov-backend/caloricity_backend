@@ -26,7 +26,7 @@ public class Ingredient extends BaseEntity {
     @Column(length = 127, nullable = false)
     private String name;
 
-    @Comment("Масса съедобной части, г")
+    @Comment("Съедобная часть, доля (От 0 до 1)")
     @Column(nullable = false)
     private Float ediblePart;
 
