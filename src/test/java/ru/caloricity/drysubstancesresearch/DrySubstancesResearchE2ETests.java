@@ -64,8 +64,13 @@ class DrySubstancesResearchE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
-                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
-                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12));
+                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(61))
+                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(62))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelFirst").value(50))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelSecond").value(52))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(11))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(10))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(10.5));
     }
 
     @Test

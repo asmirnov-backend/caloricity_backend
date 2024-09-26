@@ -14,8 +14,8 @@ public class DrySubstancesResearchFactory {
         research.setId(uuidIterator.next());
         research.setByuksaAfterDryingParallelFirst(50f);
         research.setByuksaAfterDryingParallelSecond(52f);
-        research.setByuksaParallelFirst(11f);
-        research.setByuksaParallelSecond(12f);
+        research.setByuksaParallelFirst(61f);
+        research.setByuksaParallelSecond(62f);
         return research;
     }
 
