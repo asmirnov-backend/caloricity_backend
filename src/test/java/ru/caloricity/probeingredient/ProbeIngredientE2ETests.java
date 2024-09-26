@@ -91,10 +91,10 @@ class ProbeIngredientE2ETests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
                 .andExpect(jsonPath("$.content[0].ingredientName").value(ingredient1.getName()))
-                .andExpect(jsonPath("$.content[0].water").value(37))
-                .andExpect(jsonPath("$.content[0].proteins").value(62))
-                .andExpect(jsonPath("$.content[0].fats").value(12))
-                .andExpect(jsonPath("$.content[0].carbohydrates").value(25));
+                .andExpect(jsonPath("$.content[0].drySubstances").value(48))
+                .andExpect(jsonPath("$.content[0].proteins").value(2))
+                .andExpect(jsonPath("$.content[0].fats").value(0.5))
+                .andExpect(jsonPath("$.content[0].carbohydrates").value(1));
     }
 
 

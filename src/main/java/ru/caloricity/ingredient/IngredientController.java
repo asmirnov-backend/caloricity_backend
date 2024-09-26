@@ -23,7 +23,7 @@ class IngredientController {
     @GetMapping
     @PageableAsQueryParam
     public Page<IngredientInPageDto> findAll(@ParameterObject Pageable pageable, @RequestParam(value = "search", required = false) @Nullable String search) {
-        // TODO: 25.09.2024 Add alfabetic sort 
+        // TODO: 25.09.2024 Add alfabetic sort
         return service.findAll(pageable, search);
     }
 

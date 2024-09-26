@@ -21,9 +21,11 @@ public class ProbeIngredientMapperUtils {
 
     @Named("calcFats")
     Float calcFats(ProbeIngredient probeIngredient) {
-        return probeIngredient.getNet() * probeIngredient.ingredient.getFats() / 100;    }
+        return probeIngredient.getNet() * probeIngredient.ingredient.getFats() / 100;
+    }
 
     @Named("calcCarbohydrates")
     Float calcCarbohydrates(ProbeIngredient probeIngredient) {
-        return probeIngredient.getNet() * probeIngredient.ingredient.getCarbohydrates() / 100;    }
+        return probeIngredient.getNet() * probeIngredient.ingredient.getCarbohydrates() / 100;
+    }
 }
