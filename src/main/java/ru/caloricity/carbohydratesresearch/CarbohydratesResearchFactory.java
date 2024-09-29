@@ -14,8 +14,8 @@ public class CarbohydratesResearchFactory {
         research.setId(uuidIterator.next());
         research.setByuksaAfterDryingParallelFirst(50f);
         research.setByuksaAfterDryingParallelSecond(52f);
-        research.setByuksaParallelFirst(11f);
-        research.setByuksaParallelSecond(12f);
+        research.setByuksaParallelFirst(60f);
+        research.setByuksaParallelSecond(61f);
         return research;
     }
 

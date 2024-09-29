@@ -6,6 +6,10 @@
 
 ![Modules diagram](./components-CaloricityApplication.png)
 
+# Rules
+
+- use https://www.conventionalcommits.org/en/v1.0.0/ for commits messages
+
 ## Docker compose
 
 ```bash

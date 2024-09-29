@@ -61,8 +61,13 @@ class CarbohydratesResearchE2ETests {
         mvc.perform(get("/carbohydrates-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
-                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12));
+                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(60))
+                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(61))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelFirst").value(50))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelSecond").value(52))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(9))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(9.5));
     }
 
     @Test

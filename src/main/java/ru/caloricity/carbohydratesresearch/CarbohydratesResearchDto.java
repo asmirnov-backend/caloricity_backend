@@ -10,6 +10,12 @@ public record CarbohydratesResearchDto(UUID id,
 
                                        Float byuksaAfterDryingParallelFirst,
 
-                                       Float byuksaAfterDryingParallelSecond) {
+                                       Float byuksaAfterDryingParallelSecond,
+
+                                       Float dryResidueWeightParallelFirst,
+
+                                       Float dryResidueWeightParallelSecond,
+
+                                       Float dryResidueWeightAverage) {
 
 }
