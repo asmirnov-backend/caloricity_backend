@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class FatsResearchE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -64,8 +63,13 @@ class FatsResearchE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
-                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelFirst").value(8))
-                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelSecond").value(9));
+                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelFirst").value(80))
+                .andExpect(jsonPath("$.content[0].patronMassAfterExtractionParallelFirst").value(11))
+                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelSecond").value(90))
+                .andExpect(jsonPath("$.content[0].patronMassAfterExtractionParallelSecond").value(12))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(69))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(78))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(73.5));
     }
 
     @Test

@@ -12,10 +12,10 @@ public class FatsResearchFactory {
     public FatsResearch createSimple() {
         var research = new FatsResearch();
         research.setId(uuidIterator.next());
+        research.setPatronMassBeforeExtractionParallelFirst(80f);
         research.setPatronMassAfterExtractionParallelFirst(11f);
-        research.setPatronMassBeforeExtractionParallelFirst(8f);
+        research.setPatronMassBeforeExtractionParallelSecond(90f);
         research.setPatronMassAfterExtractionParallelSecond(12f);
-        research.setPatronMassBeforeExtractionParallelSecond(9f);
         return research;
     }
 
