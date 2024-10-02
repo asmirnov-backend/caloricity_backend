@@ -9,5 +9,6 @@ public record ProbeIngredientDto(UUID id,
                                  UUID probeId,
                                  UUID ingredientId,
                                  Float gross,
-                                 Float net) {
+                                 Float net
+) {
 }

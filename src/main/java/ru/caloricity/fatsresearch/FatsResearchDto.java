@@ -9,5 +9,6 @@ public record FatsResearchDto(UUID id,
                               Float patronMassAfterExtractionParallelSecond,
                               Float dryResidueWeightParallelFirst,
                               Float dryResidueWeightParallelSecond,
-                              Float dryResidueWeightAverage) {
+                              Float dryResidueWeightAverage
+) {
 }

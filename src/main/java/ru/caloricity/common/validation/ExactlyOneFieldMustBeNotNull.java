@@ -21,7 +21,10 @@ public @interface ExactlyOneFieldMustBeNotNull {
      * The names of the fields to be validated.
      */
     String[] value();
+
     String message() default "Only one of the specified fields must be not null";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
