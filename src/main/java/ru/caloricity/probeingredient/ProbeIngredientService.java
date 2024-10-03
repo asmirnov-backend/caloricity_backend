@@ -48,7 +48,8 @@ public class ProbeIngredientService {
     public void update(UUID id, ProbeIngredientUpdateDto dto) {
         Optional<ProbeIngredient> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
+            currentEntity.get().setGross(dto.gross());
+            currentEntity.get().setNet(dto.net());
             repository.save(currentEntity.get());
         } else {
             throw new EntityNotFoundException(id, ProbeIngredient.class);
