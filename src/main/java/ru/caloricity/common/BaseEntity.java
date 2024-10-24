@@ -22,13 +22,12 @@ public class BaseEntity {
     @Comment("Дата и время создания")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @Comment("Дата и время редактирования")
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 }
