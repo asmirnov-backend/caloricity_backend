@@ -1,6 +1,10 @@
 package ru.caloricity.fatsresearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
@@ -19,19 +23,19 @@ import java.util.Objects;
 @Table(name = "fats_research")
 public class FatsResearch extends BaseEntity {
     @Comment("Масса патрона до экстракции первая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float patronMassBeforeExtractionParallelFirst;
 
     @Comment("Масса патрона до экстракции вторая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float patronMassBeforeExtractionParallelSecond;
 
     @Comment("Масса патрона после экстракции первая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float patronMassAfterExtractionParallelFirst;
 
     @Comment("Масса патрона после экстракции вторая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float patronMassAfterExtractionParallelSecond;
 
     @OneToOne(optional = false)

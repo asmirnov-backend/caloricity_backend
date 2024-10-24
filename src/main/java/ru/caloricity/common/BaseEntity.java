@@ -1,6 +1,7 @@
 package ru.caloricity.common;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
@@ -15,18 +16,19 @@ import java.util.UUID;
 @Setter
 public class BaseEntity {
     @Id
-    @Column(nullable = false)
+    @NotNull
     private UUID id;
 
     @Comment("Дата и время создания")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false, nullable = false)
+    @NotNull
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @Comment("Дата и время редактирования")
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
+    @NotNull
     private LocalDateTime updatedAt;
 }

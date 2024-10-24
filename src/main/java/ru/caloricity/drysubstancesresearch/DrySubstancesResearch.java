@@ -1,6 +1,10 @@
 package ru.caloricity.drysubstancesresearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.OnDelete;
@@ -21,19 +25,19 @@ import java.util.Objects;
 @Table(name = "dry_substances_researches")
 public class DrySubstancesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaParallelSecond;
 
     @Comment("Масса бюксы с пробой после высушивания первая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaAfterDryingParallelFirst;
 
     @Comment("Масса бюксы с пробой после высушивания вторая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaAfterDryingParallelSecond;
 
     @OneToOne(optional = false)

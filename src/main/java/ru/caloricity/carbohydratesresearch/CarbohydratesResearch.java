@@ -1,6 +1,10 @@
 package ru.caloricity.carbohydratesresearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,19 +25,19 @@ import java.util.Objects;
 @Table(name = "carbohydrates_researches")
 public class CarbohydratesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaParallelSecond;
 
     @Comment("Масса бюксы с пробой после высушивания первая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaAfterDryingParallelFirst;
 
     @Comment("Масса бюксы с пробой после высушивания вторая параллель, г")
-    @Column(nullable = false)
+    @NotNull
     private Float byuksaAfterDryingParallelSecond;
 
     @OneToOne(optional = false)

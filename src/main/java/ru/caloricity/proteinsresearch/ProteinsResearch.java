@@ -1,6 +1,10 @@
 package ru.caloricity.proteinsresearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
@@ -19,19 +23,19 @@ import java.util.Objects;
 @Table(name = "proteins_researches")
 public class ProteinsResearch extends BaseEntity {
     @Comment("Объём титранта первая параллель, г/см^3")
-    @Column(nullable = false)
+    @NotNull
     private Float titrantVolumeParallelFirst;
 
     @Comment("Объём титранта вторая параллель, г/см^3")
-    @Column(nullable = false)
+    @NotNull
     private Float titrantVolumeParallelSecond;
 
     @Comment("Объём контроля, г/см^3")
-    @Column(nullable = false)
+    @NotNull
     private Float controlVolume;
 
     @Comment("Коэффициент")
-    @Column(nullable = false)
+    @NotNull
     private Float coefficient;
 
     @OneToOne(optional = false)

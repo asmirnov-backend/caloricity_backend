@@ -1,9 +1,9 @@
 package ru.caloricity.ingredient;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
@@ -23,27 +23,27 @@ import java.util.Set;
 @Table(name = "ingredients")
 public class Ingredient extends BaseEntity {
     @Comment("Наименование ингредиента")
-    @Column(length = 127, nullable = false)
+    @NotNull
     private String name;
 
     @Comment("Съедобная часть, доля (От 0 до 1)")
-    @Column(nullable = false)
+    @NotNull
     private Float ediblePart;
 
     @Comment("Масса воды, г")
-    @Column(nullable = false)
+    @NotNull
     private Float water;
 
     @Comment("Масса белков, г")
-    @Column(nullable = false)
+    @NotNull
     private Float proteins;
 
     @Comment("Масса жиров, г")
-    @Column(nullable = false)
+    @NotNull
     private Float fats;
 
     @Comment("Масса углеводов, г")
-    @Column(nullable = false)
+    @NotNull
     private Float carbohydrates;
 
     @OneToMany(mappedBy = "ingredient")

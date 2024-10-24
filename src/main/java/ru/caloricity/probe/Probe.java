@@ -1,6 +1,7 @@
 package ru.caloricity.probe;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,28 +27,28 @@ import java.util.Set;
 @Table(name = "probes")
 public class Probe extends BaseEntity {
     @Comment("Наименование пробы")
-    @Column(length = 127, nullable = false)
+    @NotNull
     private String name;
 
     @Comment("Тип пробы")
-    @Column(length = 127, nullable = false)
+    @NotNull
     @Enumerated(EnumType.STRING)
     private ProbeType type;
 
     @Comment("Код пробы")
-    @Column(length = 127, nullable = false)
+    @NotNull
     private String code;
 
     @Comment("Масса теоретическая, г")
-    @Column(nullable = false)
+    @NotNull
     private Float massTheory;
 
     @Comment("Масса пустой банки, г")
-    @Column(nullable = false)
+    @NotNull
     private Float bankaEmptyMass;
 
     @Comment("Масса банки с пробой, г")
-    @Column(nullable = false)
+    @NotNull
     private Float bankaWithProbeMass;
 
     @OneToMany(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)

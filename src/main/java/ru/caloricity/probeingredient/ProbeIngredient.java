@@ -1,6 +1,10 @@
 package ru.caloricity.probeingredient;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,11 +25,11 @@ import java.util.Objects;
 @ToString
 public class ProbeIngredient extends BaseEntity {
     @Comment("Масса брутто, г")
-    @Column(nullable = false)
+    @NotNull
     private Float gross;
 
     @Comment("Масса нетто, г")
-    @Column(nullable = false)
+    @NotNull
     private Float net;
 
     @ManyToOne(optional = false)
