@@ -17,7 +17,7 @@ import java.util.UUID;
 public class BaseEntity {
     @Id
     @NotNull
-    protected UUID id;
+    protected UUID id = UUID.randomUUID();
 
     @Comment("Дата и время создания")
     @CreationTimestamp
@@ -30,14 +30,4 @@ public class BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     protected LocalDateTime updatedAt;
-
-    /**
-     * Easier approach then {@code @GeneratorValue}
-     */
-    @PrePersist
-    protected void generateIdIfItIsNull() {
-        if (this.id == null) {
-            this.id = UUID.randomUUID();
-        }
-    }
 }
