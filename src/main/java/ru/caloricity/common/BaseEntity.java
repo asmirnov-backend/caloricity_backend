@@ -17,17 +17,27 @@ import java.util.UUID;
 public class BaseEntity {
     @Id
     @NotNull
-    private UUID id;
+    protected UUID id;
 
     @Comment("Дата и время создания")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false, nullable = false)
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
     @Comment("Дата и время редактирования")
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    protected LocalDateTime updatedAt;
+
+    /**
+     * Easier approach then {@code @GeneratorValue}
+     */
+    @PrePersist
+    protected void generateIdIfItIsNull() {
+        if (this.id == null) {
+            this.id = UUID.randomUUID();
+        }
+    }
 }

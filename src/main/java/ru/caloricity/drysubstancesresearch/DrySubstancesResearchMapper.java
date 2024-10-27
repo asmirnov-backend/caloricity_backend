@@ -5,7 +5,6 @@ import ru.caloricity.probe.ProbeMapperUtils;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ProbeMapperUtils.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface DrySubstancesResearchMapper {
-    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getExistingReferenceByIdOrThrow"})
     DrySubstancesResearch toEntity(DrySubstancesResearchCreateDto dto);
 
@@ -16,18 +15,18 @@ public interface DrySubstancesResearchMapper {
 
     @Named("calcDryResidueWeightParallelFirst")
     default Float calcDryResidueWeightParallelFirst(DrySubstancesResearch research) {
-        return research.getByuksaParallelFirst() - research.getByuksaAfterDryingParallelFirst();
+        return research.calcDryResidueWeightParallelFirst();
     }
 
     @Named("calcDryResidueWeightParallelSecond")
     default Float calcDryResidueWeightParallelSecond(DrySubstancesResearch research) {
-        return research.getByuksaParallelSecond() - research.getByuksaAfterDryingParallelSecond();
+        return research.calcDryResidueWeightParallelSecond();
     }
 
 
     @Named("calcDryResidueWeightAverage")
     default Float calcDryResidueWeightAverage(DrySubstancesResearch research) {
-        return (calcDryResidueWeightParallelFirst(research) + calcDryResidueWeightParallelSecond(research)) / 2.0f;
+        return research.calcDryResidueWeightAverage();
     }
 
 }
