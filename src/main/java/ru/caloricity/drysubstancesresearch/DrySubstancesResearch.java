@@ -45,6 +45,18 @@ public class DrySubstancesResearch extends BaseEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
 
+    public Float calcDryResidueWeightParallelFirst() {
+        return byuksaParallelFirst - byuksaAfterDryingParallelFirst;
+    }
+
+    public Float calcDryResidueWeightParallelSecond() {
+        return byuksaParallelSecond - byuksaAfterDryingParallelSecond;
+    }
+
+    public Float calcDryResidueWeightAverage() {
+        return (calcDryResidueWeightParallelFirst() + calcDryResidueWeightParallelSecond()) / 2.0f;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

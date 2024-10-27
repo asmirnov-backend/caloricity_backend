@@ -57,4 +57,17 @@ public class FatsResearch extends BaseEntity {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
+    public Float calcDryResidueWeightParallelFirst() {
+        return patronMassBeforeExtractionParallelFirst - patronMassAfterExtractionParallelFirst;
+    }
+
+    public Float calcDryResidueWeightParallelSecond() {
+        return patronMassBeforeExtractionParallelSecond - patronMassAfterExtractionParallelSecond;
+    }
+
+    public Float calcDryResidueWeightAverage() {
+        return (calcDryResidueWeightParallelFirst() + calcDryResidueWeightParallelSecond()) / 2.0f;
+    }
+
 }
