@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1725649348600-1" author="user (generated)">
+    <changeSet id="1730051948363-1" author="user (generated)">
         <createTable remarks="Исследования на углеводы" tableName="carbohydrates_researches">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_carbohydrates_researches"/>
@@ -16,6 +16,9 @@
             <column name="updated_at" remarks="Дата и время редактирования" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
+            <column name="version" remarks="Номер версии сущности" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
             <column name="byuksa_parallel_first" remarks="Масса бюксы первая параллель, г" type="FLOAT">
                 <constraints nullable="false"/>
             </column>
@@ -35,7 +38,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1725649348600-2" author="user (generated)">
+    <changeSet id="1730051948363-2" author="user (generated)">
         <createTable remarks="Исследования на сухие остатки" tableName="dry_substances_researches">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_dry_substances_researches"/>
@@ -46,6 +49,9 @@
             <column name="updated_at" remarks="Дата и время редактирования" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
+            <column name="version" remarks="Номер версии сущности" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
             <column name="byuksa_parallel_first" remarks="Масса бюксы первая параллель, г" type="FLOAT">
                 <constraints nullable="false"/>
             </column>
@@ -65,7 +71,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1725649348600-3" author="user (generated)">
+    <changeSet id="1730051948363-3" author="user (generated)">
         <createTable remarks="Исследования на жиры" tableName="fats_research">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_fats_research"/>
@@ -74,6 +80,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="updated_at" remarks="Дата и время редактирования" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" remarks="Номер версии сущности" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="patron_mass_before_extraction_parallel_first"
@@ -97,7 +106,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1725649348600-4" author="user (generated)">
+    <changeSet id="1730051948363-4" author="user (generated)">
         <createTable remarks="Каталог ингредиентов" tableName="ingredients">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredients"/>
@@ -108,10 +117,13 @@
             <column name="updated_at" remarks="Дата и время редактирования" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" remarks="Наименование ингредиента" type="VARCHAR(127)">
+            <column name="version" remarks="Номер версии сущности" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="edible_part" remarks="Масса съедобной части, г" type="FLOAT">
+            <column name="name" remarks="Наименование ингредиента" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="edible_part" remarks="Съедобная часть, доля (От 0 до 1)" type="FLOAT">
                 <constraints nullable="false"/>
             </column>
             <column name="water" remarks="Масса воды, г" type="FLOAT">
@@ -128,7 +140,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1725649348600-5" author="user (generated)">
+    <changeSet id="1730051948363-5" author="user (generated)">
         <createTable tableName="probe_ingredient">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_probe_ingredient"/>
@@ -137,6 +149,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="updated_at" remarks="Дата и время редактирования" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" remarks="Номер версии сущности" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="gross" remarks="Масса брутто, г" type="FLOAT">
@@ -153,7 +168,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1725649348600-6" author="user (generated)">
+    <changeSet id="1730051948363-6" author="user (generated)">
         <createTable remarks="Пробы блюд" tableName="probes">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_probes"/>
@@ -164,13 +179,16 @@
             <column name="updated_at" remarks="Дата и время редактирования" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" remarks="Наименование пробы" type="VARCHAR(127)">
+            <column name="version" remarks="Номер версии сущности" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="type" remarks="Тип пробы" type="VARCHAR(127)">
+            <column name="name" remarks="Наименование пробы" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="code" remarks="Код пробы" type="VARCHAR(127)">
+            <column name="type" remarks="Тип пробы" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="Код пробы" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="mass_theory" remarks="Масса теоретическая, г" type="FLOAT">
@@ -184,7 +202,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1725649348600-7" author="user (generated)">
+    <changeSet id="1730051948363-7" author="user (generated)">
         <createTable remarks="Исследования на белок" tableName="proteins_researches">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_proteins_researches"/>
@@ -193,6 +211,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="updated_at" remarks="Дата и время редактирования" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" remarks="Номер версии сущности" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="titrant_volume_parallel_first" remarks="Объём титранта первая параллель, г/см^3" type="FLOAT">
@@ -213,53 +234,53 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1725649348600-8" author="user (generated)">
+    <changeSet id="1730051948363-8" author="user (generated)">
         <addUniqueConstraint columnNames="probe_id" constraintName="uc_carbohydrates_researches_probe"
                              tableName="carbohydrates_researches"/>
     </changeSet>
-    <changeSet id="1725649348600-9" author="user (generated)">
+    <changeSet id="1730051948363-9" author="user (generated)">
         <addUniqueConstraint columnNames="probe_id" constraintName="uc_dry_substances_researches_probe"
                              tableName="dry_substances_researches"/>
     </changeSet>
-    <changeSet id="1725649348600-10" author="user (generated)">
+    <changeSet id="1730051948363-10" author="user (generated)">
         <addUniqueConstraint columnNames="probe_id" constraintName="uc_fats_research_probe" tableName="fats_research"/>
     </changeSet>
-    <changeSet id="1725649348600-11" author="user (generated)">
+    <changeSet id="1730051948363-11" author="user (generated)">
         <addUniqueConstraint columnNames="probe_id" constraintName="uc_proteins_researches_probe"
                              tableName="proteins_researches"/>
     </changeSet>
-    <changeSet id="1725649348600-12" author="user (generated)">
+    <changeSet id="1730051948363-12" author="user (generated)">
         <createIndex indexName="idx_d9374939c399a966802a3a563" tableName="probe_ingredient" unique="true">
             <column name="probe_id"/>
             <column name="ingredient_id"/>
         </createIndex>
     </changeSet>
-    <changeSet id="1725649348600-13" author="user (generated)">
+    <changeSet id="1730051948363-13" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="probe_id" baseTableName="carbohydrates_researches"
                                  constraintName="FK_CARBOHYDRATES_RESEARCHES_ON_PROBE" referencedColumnNames="id"
                                  referencedTableName="probes"/>
     </changeSet>
-    <changeSet id="1725649348600-14" author="user (generated)">
+    <changeSet id="1730051948363-14" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="probe_id" baseTableName="dry_substances_researches"
                                  constraintName="FK_DRY_SUBSTANCES_RESEARCHES_ON_PROBE" onDelete="CASCADE"
                                  referencedColumnNames="id" referencedTableName="probes"/>
     </changeSet>
-    <changeSet id="1725649348600-15" author="user (generated)">
+    <changeSet id="1730051948363-15" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="probe_id" baseTableName="fats_research"
                                  constraintName="FK_FATS_RESEARCH_ON_PROBE" referencedColumnNames="id"
                                  referencedTableName="probes"/>
     </changeSet>
-    <changeSet id="1725649348600-16" author="user (generated)">
+    <changeSet id="1730051948363-16" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="ingredient_id" baseTableName="probe_ingredient"
-                                 constraintName="FK_PROBE_INGREDIENT_ON_INGREDIENT" referencedColumnNames="id"
-                                 referencedTableName="ingredients"/>
+                                 constraintName="FK_PROBE_INGREDIENT_ON_INGREDIENT" onDelete="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="ingredients"/>
     </changeSet>
-    <changeSet id="1725649348600-17" author="user (generated)">
+    <changeSet id="1730051948363-17" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="probe_id" baseTableName="probe_ingredient"
                                  constraintName="FK_PROBE_INGREDIENT_ON_PROBE" referencedColumnNames="id"
                                  referencedTableName="probes"/>
     </changeSet>
-    <changeSet id="1725649348600-18" author="user (generated)">
+    <changeSet id="1730051948363-18" author="user (generated)">
         <addForeignKeyConstraint baseColumnNames="probe_id" baseTableName="proteins_researches"
                                  constraintName="FK_PROTEINS_RESEARCHES_ON_PROBE" referencedColumnNames="id"
                                  referencedTableName="probes"/>

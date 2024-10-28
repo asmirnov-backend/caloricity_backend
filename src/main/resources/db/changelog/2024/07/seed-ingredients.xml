@@ -15,6 +15,7 @@
             <column name="carbohydrates" value="8.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="3d723c67-21e0-434e-a6dd-9208e6cfe748"/>
@@ -26,6 +27,7 @@
             <column name="carbohydrates" value="48.9"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="5596347b-e62e-4a45-94ea-11810e40c920"/>
@@ -37,6 +39,7 @@
             <column name="carbohydrates" value="9.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="117bb4d0-59f0-4e03-a3fa-f12d0aeda933"/>
@@ -48,6 +51,7 @@
             <column name="carbohydrates" value="50.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="a1ed575e-6fae-4847-9b0f-5375b4b29430"/>
@@ -59,6 +63,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="5acdae16-453e-45a4-b8ef-4e9513d30d11"/>
@@ -70,6 +75,7 @@
             <column name="carbohydrates" value="0.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b94df1a3-77d8-4956-ae2c-3fdb9545712b"/>
@@ -81,6 +87,7 @@
             <column name="carbohydrates" value="0.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="07e0f758-835e-4c76-820c-2a0906063ed1"/>
@@ -92,6 +99,7 @@
             <column name="carbohydrates" value="2.36"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="62616efb-5abc-49a6-a609-eb53d56336ff"/>
@@ -103,6 +111,7 @@
             <column name="carbohydrates" value="61.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="75beae86-364d-4520-afb4-d240d385e9ed"/>
@@ -114,6 +123,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="93fbfd61-9a6b-44a1-a3ff-942748ae010b"/>
@@ -125,6 +135,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="02ffd70f-c718-49cc-aecf-50c0481ad1f2"/>
@@ -136,6 +147,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="bef1c8bc-c162-44e8-9cf9-f1a09f23fd97"/>
@@ -147,6 +159,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="33557af8-0879-4e1f-9c65-5ad3195bdddc"/>
@@ -158,6 +171,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="5e740d9b-9cc0-4565-938f-53e19f4efc20"/>
@@ -169,6 +183,7 @@
             <column name="carbohydrates" value="0.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="ab2a6513-f442-40b3-93d0-9cfa2f06ea22"/>
@@ -180,6 +195,7 @@
             <column name="carbohydrates" value="48.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="e00543f2-6cf0-4b0f-aff9-65f581e35832"/>
@@ -191,6 +207,7 @@
             <column name="carbohydrates" value="6.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="8319461c-090b-45b4-97de-1352e7c3701f"/>
@@ -202,6 +219,7 @@
             <column name="carbohydrates" value="32.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="d78e688b-e908-4978-8e45-2782b0312ad6"/>
@@ -213,6 +231,7 @@
             <column name="carbohydrates" value="62.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="1301ff26-c526-459c-9f1b-3294271e58d9"/>
@@ -224,6 +243,7 @@
             <column name="carbohydrates" value="1.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="8e463bf6-1e60-4390-8ad6-e78d21b95089"/>
@@ -235,6 +255,7 @@
             <column name="carbohydrates" value="9"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="cc6ba2f6-c868-42f4-a91c-debe564ee8b2"/>
@@ -246,6 +267,7 @@
             <column name="carbohydrates" value="1.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="f49bcf7c-b71d-4b19-9d4f-17b3d7baf0b9"/>
@@ -257,6 +279,7 @@
             <column name="carbohydrates" value="14.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b94a1480-a4fe-47a7-855a-ed343131c2c4"/>
@@ -268,6 +291,7 @@
             <column name="carbohydrates" value="0.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="ff4567c0-49d9-4cda-99c1-05cfa1e4e865"/>
@@ -279,6 +303,7 @@
             <column name="carbohydrates" value="66"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="00919df5-b52c-49e7-aa08-9a32742e0da1"/>
@@ -290,6 +315,7 @@
             <column name="carbohydrates" value="7.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="c159dda7-27b9-48af-9112-947a886cebeb"/>
@@ -301,6 +327,7 @@
             <column name="carbohydrates" value="10.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="d4c83e55-19c2-4471-817e-9a0f30b4e0f9"/>
@@ -312,6 +339,7 @@
             <column name="carbohydrates" value="4.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="51780eed-9aae-4f92-aaf4-ed7d5d263241"/>
@@ -323,6 +351,7 @@
             <column name="carbohydrates" value="2.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b620be08-fad1-493c-ad7c-2b734990b70d"/>
@@ -334,6 +363,7 @@
             <column name="carbohydrates" value="16.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="2ba4f2cb-06b4-44b5-9ed7-7482af851509"/>
@@ -345,6 +375,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="96203c23-2250-42cf-918a-9765aca388f3"/>
@@ -356,6 +387,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="27b257bd-72a5-4319-baa1-43774ff5a870"/>
@@ -367,6 +399,7 @@
             <column name="carbohydrates" value="4.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="0d3a5184-17ab-40fb-a9d2-2c1e2baacd98"/>
@@ -378,6 +411,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="58df7bf0-f76d-435d-9317-d5fcd9fc8deb"/>
@@ -389,6 +423,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="38538c30-a317-4592-86c0-205b551098c9"/>
@@ -400,6 +435,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="3eef4eb7-89a6-45ff-a32a-81ea078bcf9b"/>
@@ -411,6 +447,7 @@
             <column name="carbohydrates" value="14.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="823380ad-71fc-427e-8733-9d329693276e"/>
@@ -422,6 +459,7 @@
             <column name="carbohydrates" value="0.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="c15aa3a7-0cee-4e5f-83c4-4f588233bab3"/>
@@ -433,6 +471,7 @@
             <column name="carbohydrates" value="1.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="54bec002-16d9-411e-8f1f-c7a53487e356"/>
@@ -444,6 +483,7 @@
             <column name="carbohydrates" value="55"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="be3a6ede-eedf-4a21-b7d9-60dbd92f53a9"/>
@@ -455,6 +495,7 @@
             <column name="carbohydrates" value="48.67"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="9cd976a1-3743-4622-a358-a568222be73d"/>
@@ -466,6 +507,7 @@
             <column name="carbohydrates" value="3.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b2e32468-7398-4de6-86d9-dbd0f43f0a60"/>
@@ -477,6 +519,7 @@
             <column name="carbohydrates" value="9.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="78991fd9-6516-48e1-9762-a6a8cbc48835"/>
@@ -488,6 +531,7 @@
             <column name="carbohydrates" value="69.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="10ec7ce8-fb99-43a4-9c5d-f2c806b0c83c"/>
@@ -499,6 +543,7 @@
             <column name="carbohydrates" value="68.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="3e86b25b-65ae-4ffc-9979-44430d276866"/>
@@ -510,6 +555,7 @@
             <column name="carbohydrates" value="67.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="5aea6b78-d3cc-4ec4-a4e1-b1ef5aaa8d22"/>
@@ -521,6 +567,7 @@
             <column name="carbohydrates" value="1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="16be725e-8dad-4a26-b349-415fa2378b56"/>
@@ -532,6 +579,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="fb039f99-a364-4b9a-b625-56ff9072f6d2"/>
@@ -543,6 +591,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="8cad4f02-f8b7-47b4-9674-49e5f8bd4b80"/>
@@ -554,6 +603,7 @@
             <column name="carbohydrates" value="1.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="50495eb2-5256-44fd-b796-adddf94bec1b"/>
@@ -565,6 +615,7 @@
             <column name="carbohydrates" value="0.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="ad209c14-443e-4d08-adf3-861f99843604"/>
@@ -576,6 +627,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="21798329-1938-4db2-81cf-ccdc8d3b7a2a"/>
@@ -587,6 +639,7 @@
             <column name="carbohydrates" value="4.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="12996c74-6ee0-4277-a9ef-63ccb29fe2b3"/>
@@ -598,6 +651,7 @@
             <column name="carbohydrates" value="4.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="d81d00c4-5e7e-4e74-8f95-ef6dc47bcbf9"/>
@@ -609,6 +663,7 @@
             <column name="carbohydrates" value="4.69"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="81b81aa3-6089-47a3-a3af-277f1888b61f"/>
@@ -620,6 +675,7 @@
             <column name="carbohydrates" value="4.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="fd0b1c21-3b24-401d-ae9d-569e00c4d221"/>
@@ -631,6 +687,7 @@
             <column name="carbohydrates" value="56"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="28973cbd-3872-4ec1-87ae-de5385492ae6"/>
@@ -642,6 +699,7 @@
             <column name="carbohydrates" value="9.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b4b01e12-64e7-4c8c-9e77-3fbee5b8474a"/>
@@ -653,6 +711,7 @@
             <column name="carbohydrates" value="4.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="5a8b07d0-3630-412e-aabe-d092c745bf74"/>
@@ -664,6 +723,7 @@
             <column name="carbohydrates" value="47"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="3a939832-c7f3-41be-95e7-4ad2379df860"/>
@@ -675,6 +735,7 @@
             <column name="carbohydrates" value="4.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="db151778-0f5f-4adc-881d-af0a831fcb9e"/>
@@ -686,6 +747,7 @@
             <column name="carbohydrates" value="7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b484bda9-cbfc-4653-9309-ae4dedb5099f"/>
@@ -697,6 +759,7 @@
             <column name="carbohydrates" value="56.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="aff09dc3-54e3-4a1d-8d17-0ae0d18436b4"/>
@@ -708,6 +771,7 @@
             <column name="carbohydrates" value="67.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="abd7f645-a47f-4c03-b023-46fcfcfb8bce"/>
@@ -719,6 +783,7 @@
             <column name="carbohydrates" value="68.9"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="57f03358-c87f-4033-b203-c147c0eb92ba"/>
@@ -730,6 +795,7 @@
             <column name="carbohydrates" value="2.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="33134296-1acc-4953-8d3a-f88be7a48588"/>
@@ -741,6 +807,7 @@
             <column name="carbohydrates" value="1.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="3e3b5dcc-33e7-4f76-b17b-2fa823d26907"/>
@@ -752,6 +819,7 @@
             <column name="carbohydrates" value="1.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="157ad4f4-6cec-4490-af37-5ec78bd0dcb6"/>
@@ -763,6 +831,7 @@
             <column name="carbohydrates" value="0.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="a01f92b6-f615-4ef1-95a4-26d80796f4be"/>
@@ -774,6 +843,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="887db1da-d485-46e0-8438-a150099984a9"/>
@@ -785,6 +855,7 @@
             <column name="carbohydrates" value="5.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="7882f796-183a-48a8-a740-ded355733955"/>
@@ -796,6 +867,7 @@
             <column name="carbohydrates" value="38.31"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="72540ae2-0987-4570-b577-8260e6b769f6"/>
@@ -807,6 +879,7 @@
             <column name="carbohydrates" value="66.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="d4c1d787-fd03-47af-ad1a-256bf3ecc5e5"/>
@@ -818,6 +891,7 @@
             <column name="carbohydrates" value="8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="3a9aa2bd-2cc9-4392-9c36-cdf6c6251ce5"/>
@@ -829,6 +903,7 @@
             <column name="carbohydrates" value="10.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="690976d4-8a13-4722-b143-f4e93f70064e"/>
@@ -840,6 +915,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="08b96e3b-0bce-4419-9064-3cd227174453"/>
@@ -851,6 +927,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="1999fd94-ec48-4cb8-9d54-06aae678df1a"/>
@@ -862,6 +939,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="68cc77db-2361-4acf-af17-802eb5e21a22"/>
@@ -873,6 +951,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="8033cab1-08c7-4c0d-9c3f-06915343a924"/>
@@ -884,6 +963,7 @@
             <column name="carbohydrates" value="63.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="1cdbfc8f-0ff9-4305-a8a4-4d85c3b9a11e"/>
@@ -895,6 +975,7 @@
             <column name="carbohydrates" value="66.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="6c5703dc-5d9c-4538-b2e4-333010ced386"/>
@@ -906,6 +987,7 @@
             <column name="carbohydrates" value="71.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="eb4a436f-b22b-44be-9168-0562b0cfac6e"/>
@@ -917,6 +999,7 @@
             <column name="carbohydrates" value="2.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="2d29a976-12be-4d47-a92b-926bd9a780af"/>
@@ -928,6 +1011,7 @@
             <column name="carbohydrates" value="1.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="7cf34b2e-0b14-4304-b923-f0bdd844bb6c"/>
@@ -939,6 +1023,7 @@
             <column name="carbohydrates" value="1.9"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b7928d49-9916-4bd0-a7bb-3ad5eccc1a69"/>
@@ -950,6 +1035,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="847c276b-32a6-4eb3-a432-4b2d77a9eb06"/>
@@ -961,6 +1047,7 @@
             <column name="carbohydrates" value="99.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b25f6e95-b9d1-4596-8db4-804f60952e2a"/>
@@ -972,6 +1059,7 @@
             <column name="carbohydrates" value="9.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="6cca68be-f432-4c2e-8d5f-7892fb9c4cba"/>
@@ -983,6 +1071,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="8fbfde5e-603b-481e-a6e8-fcb80fa97702"/>
@@ -994,6 +1083,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="bad0a8e7-1e4f-485f-bd83-400f92ba802d"/>
@@ -1005,6 +1095,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="b5c0ea5b-358f-407a-9cd5-14186dcb44c2"/>
@@ -1016,6 +1107,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="695c6c0c-9c1b-44ef-bffb-dfa9b7475f58"/>
@@ -1027,6 +1119,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="70ca8e9f-83a1-42eb-b5d5-7adcddd35951"/>
@@ -1038,6 +1131,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="559438da-8376-4d58-bfe0-4382f1cf53e8"/>
@@ -1049,6 +1143,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="82ab6ebd-34aa-4098-be42-a0b5d4ddf330"/>
@@ -1060,6 +1155,7 @@
             <column name="carbohydrates" value="2.9"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="f6698723-21e2-4186-aa02-69c69d05179d"/>
@@ -1071,6 +1167,7 @@
             <column name="carbohydrates" value="3.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="e2020eb3-ae80-43cd-ab10-4a6606a28446"/>
@@ -1082,6 +1179,7 @@
             <column name="carbohydrates" value="3.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="63227837-226e-48b5-bf8d-2bfbf07e0b13"/>
@@ -1093,6 +1191,7 @@
             <column name="carbohydrates" value="7.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="44e82c20-abca-4d71-9b96-5f2be1a4c529"/>
@@ -1104,6 +1203,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="e414d1a7-cc67-40a5-b291-d15772e71af2"/>
@@ -1115,6 +1215,7 @@
             <column name="carbohydrates" value="1.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="5f6eccc3-caac-49e9-9a2e-75f23c325e64"/>
@@ -1126,6 +1227,7 @@
             <column name="carbohydrates" value="22.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="8cf17a28-c144-46a3-b880-77513d48380c"/>
@@ -1137,6 +1239,7 @@
             <column name="carbohydrates" value="67.48"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="cbb651eb-9d58-461b-9111-c2362153134c"/>
@@ -1148,6 +1251,7 @@
             <column name="carbohydrates" value="59"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="fa639111-0fb0-4d2c-bb15-635cb3c104fb"/>
@@ -1159,6 +1263,7 @@
             <column name="carbohydrates" value="2.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="9d9af5b6-f83a-4803-bd61-b5db73caad3e"/>
@@ -1170,6 +1275,7 @@
             <column name="carbohydrates" value="2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="46c9fff9-799a-4dca-8990-0ef97f9f8d0e"/>
@@ -1181,6 +1287,7 @@
             <column name="carbohydrates" value="1.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="7b8dbe42-14b8-4d11-97c6-3aa25c28efbc"/>
@@ -1192,6 +1299,7 @@
             <column name="carbohydrates" value="19"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="ab2249d2-d7d1-434e-b390-1a5d91a554b3"/>
@@ -1203,6 +1311,7 @@
             <column name="carbohydrates" value="11.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="af93c3c0-e57d-479e-968e-531b465964a7"/>
@@ -1214,6 +1323,7 @@
             <column name="carbohydrates" value="3.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="6c170cae-f398-4341-babe-1f45f24fa345"/>
@@ -1225,6 +1335,7 @@
             <column name="carbohydrates" value="1.6"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="4bceb2ff-8ba2-4e43-9efd-cab38cf76b32"/>
@@ -1236,6 +1347,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="30505b9a-3616-40b3-b8e5-32d25a3622de"/>
@@ -1247,6 +1359,7 @@
             <column name="carbohydrates" value="4.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="1bf1fb20-650d-48de-b8af-22b07d7ad0ba"/>
@@ -1258,6 +1371,7 @@
             <column name="carbohydrates" value="3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="09f568f0-a2d4-49bc-b97d-a80016a63677"/>
@@ -1269,6 +1383,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="fb3fa072-b924-4877-9fe5-13945f470d06"/>
@@ -1280,6 +1395,7 @@
             <column name="carbohydrates" value="2.9"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="790af975-6b2c-4040-bb2a-c6b96be92cf2"/>
@@ -1291,6 +1407,7 @@
             <column name="carbohydrates" value="0"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="0a38444c-4635-4b35-ae0c-5795dda2aa90"/>
@@ -1302,6 +1419,7 @@
             <column name="carbohydrates" value="17.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="beb036fd-8338-4bcf-8dd4-3d766e1a8508"/>
@@ -1313,6 +1431,7 @@
             <column name="carbohydrates" value="41.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="8d0bd48a-61d1-4963-a0c5-2fcf22a53e66"/>
@@ -1324,6 +1443,7 @@
             <column name="carbohydrates" value="0.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="fe3edb87-2291-45be-869f-b4514996359a"/>
@@ -1335,6 +1455,7 @@
             <column name="carbohydrates" value="36.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="31558a60-7d3a-4e39-ab1a-4f32a77c364a"/>
@@ -1346,6 +1467,7 @@
             <column name="carbohydrates" value="0.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="63efe588-01bc-451c-afa4-234dda8be284"/>
@@ -1357,6 +1479,7 @@
             <column name="carbohydrates" value="0.5"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="f50fef36-6f4b-439d-8909-9a5a5409203f"/>
@@ -1368,6 +1491,7 @@
             <column name="carbohydrates" value="6.9"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="3d4922cf-7c37-4134-bbb5-a1cd872d43c1"/>
@@ -1379,6 +1503,7 @@
             <column name="carbohydrates" value="58.4"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="99b8b4e5-3349-4d88-9702-1891323bdad4"/>
@@ -1390,6 +1515,7 @@
             <column name="carbohydrates" value="5.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="562ebd0f-d186-4da5-83c6-f3472e0c4a5d"/>
@@ -1401,6 +1527,7 @@
             <column name="carbohydrates" value="48.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="6e46e84f-9569-4870-8f96-05b6eda52476"/>
@@ -1412,6 +1539,7 @@
             <column name="carbohydrates" value="2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="e2d8ac31-0229-4a77-a1ef-bd976e9ac7b9"/>
@@ -1423,6 +1551,7 @@
             <column name="carbohydrates" value="9.8"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="98e04c9e-5244-4023-abe5-812eb8828391"/>
@@ -1434,6 +1563,7 @@
             <column name="carbohydrates" value="48"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
             <column name="id" value="f93b3d77-0f3f-4ca8-91fb-e7cc1cbdd2ea"/>
@@ -1445,6 +1575,7 @@
             <column name="carbohydrates" value="0.7"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

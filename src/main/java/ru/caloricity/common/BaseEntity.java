@@ -2,6 +2,7 @@ package ru.caloricity.common;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
@@ -30,4 +31,9 @@ public class BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     protected LocalDateTime updatedAt;
+
+    @Version
+    @Setter(AccessLevel.NONE)
+    @Comment("Номер версии сущности")
+    protected long version = 0;
 }
