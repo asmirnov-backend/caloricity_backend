@@ -10,9 +10,9 @@ import java.util.UUID;
 
 @RepositoryRestResource(exported = false)
 public interface IngredientRepository extends JpaRepository<Ingredient, UUID> {
-    Page<IngredientInPageDto> findAllDtoBy(Pageable pageable);
+    Page<IngredientInPageDto> findAllDtoByOrderByName(Pageable pageable);
 
-    Page<IngredientInPageDto> findAllByNameLikeIgnoreCase(Pageable pageable, String like);
+    Page<IngredientInPageDto> findAllByNameLikeIgnoreCaseOrderByName(Pageable pageable, String like);
 
     Optional<IngredientDto> findDtoById(UUID id);
 

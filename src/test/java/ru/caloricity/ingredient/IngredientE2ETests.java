@@ -36,7 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class IngredientE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -61,7 +60,11 @@ class IngredientE2ETests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()))
                 .andExpect(jsonPath("$.name").value(entity.getName()))
-                .andExpect(jsonPath("$.fats").value(entity.getFats()));
+                .andExpect(jsonPath("$.fats").value(entity.getFats()))
+                .andExpect(jsonPath("$.carbohydrates").value(entity.getCarbohydrates()))
+                .andExpect(jsonPath("$.proteins").value(entity.getProteins()))
+                .andExpect(jsonPath("$.ediblePart").value(entity.getEdiblePart()))
+                .andExpect(jsonPath("$.water").value(entity.getWater()));
     }
 
     @Test

@@ -27,9 +27,9 @@ public class IngredientService {
 
     public Page<IngredientInPageDto> findAll(Pageable pageable, @Nullable String search) {
         if (search != null) {
-            return repository.findAllByNameLikeIgnoreCase(pageable, "%" + search + "%");
+            return repository.findAllByNameLikeIgnoreCaseOrderByName(pageable, "%" + search + "%");
         }
-        return repository.findAllDtoBy(pageable);
+        return repository.findAllDtoByOrderByName(pageable);
     }
 
     public IngredientDto findDtoByIdOrThrow(UUID id) {
