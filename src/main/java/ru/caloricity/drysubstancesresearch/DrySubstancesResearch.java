@@ -23,6 +23,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Comment("Исследования на сухие остатки")
 @Table(name = "dry_substances_researches")
+@Builder
 public class DrySubstancesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
     @NotNull

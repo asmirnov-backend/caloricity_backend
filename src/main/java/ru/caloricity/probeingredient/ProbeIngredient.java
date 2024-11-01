@@ -5,9 +5,7 @@ import jakarta.persistence.Index;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -23,6 +21,9 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProbeIngredient extends BaseEntity {
     @Comment("Масса брутто, г")
     @NotNull
@@ -38,6 +39,22 @@ public class ProbeIngredient extends BaseEntity {
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     Ingredient ingredient;
+
+    Float drySubstances() {
+        return net - (net * ingredient.getWater()) / 100;
+    }
+
+    Float proteins() {
+        return net * ingredient.getProteins() / 100;
+    }
+
+    Float fats() {
+        return net * ingredient.getFats() / 100;
+    }
+
+    Float carbohydrates() {
+        return net * ingredient.getCarbohydrates() / 100;
+    }
 
     @Override
     public final boolean equals(Object o) {

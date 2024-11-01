@@ -5,10 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
@@ -23,6 +20,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @Comment("Исследования на углеводы")
 @Table(name = "carbohydrates_researches")
+@AllArgsConstructor
+@Builder
 public class CarbohydratesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
     @NotNull

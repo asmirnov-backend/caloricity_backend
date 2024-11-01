@@ -1,12 +1,20 @@
 package ru.caloricity.probe;
 
 import jakarta.validation.constraints.NotNull;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
+import org.springframework.stereotype.Service;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public abstract class ProbeMapper {
-    abstract Probe toEntity(ProbeCreateDto dto);
+@Service
+public class ProbeMapper {
+    Probe toEntity(@NotNull ProbeCreateDto dto) {
+        return Probe.builder()
+                .name(dto.name())
+                .type(dto.type())
+                .code(dto.code())
+                .massTheory(dto.massTheory())
+                .bankaEmptyMass(dto.bankaEmptyMass())
+                .bankaWithProbeMass(dto.bankaWithProbeMass())
+                .build();
+    }
 
     ProbeDto toDto(@NotNull Probe entity) {
         return ProbeDto.builder()

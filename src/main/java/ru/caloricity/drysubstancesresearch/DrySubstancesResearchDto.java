@@ -1,8 +1,10 @@
 package ru.caloricity.drysubstancesresearch;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
-
+@Builder
 public record DrySubstancesResearchDto(UUID id,
                                        Float byuksaParallelFirst,
                                        Float byuksaParallelSecond,

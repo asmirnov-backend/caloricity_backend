@@ -1,22 +1,38 @@
 package ru.caloricity.probeingredient;
 
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import ru.caloricity.ingredient.IngredientMapperUtils;
-import ru.caloricity.probe.ProbeMapperUtils;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.caloricity.ingredient.Ingredient;
+import ru.caloricity.ingredient.IngredientService;
+import ru.caloricity.probe.ProbeService;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {ProbeIngredientMapperUtils.class, ProbeMapperUtils.class, IngredientMapperUtils.class}, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface ProbeIngredientMapper {
-    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getExistingReferenceByIdOrThrow"})
-    @Mapping(source = "ingredientId", target = "ingredient", qualifiedByName = {"IngredientMapperUtils", "getExistingReferenceByIdOrThrow"})
-    ProbeIngredient toEntity(ProbeIngredientCreateDto dto);
+@Service
+@RequiredArgsConstructor
+public class ProbeIngredientMapper {
+    private final ProbeService probeService;
+    private final IngredientService ingredientService;
 
-    @Mapping(source = "ingredient.name", target = "ingredientName")
-    @Mapping(source = ".", target = "drySubstances", qualifiedByName = {"ProbeIngredientMapperUtils", "calcDrySubstances"})
-    @Mapping(source = ".", target = "proteins", qualifiedByName = {"ProbeIngredientMapperUtils", "calcProteins"})
-    @Mapping(source = ".", target = "fats", qualifiedByName = {"ProbeIngredientMapperUtils", "calcFats"})
-    @Mapping(source = ".", target = "carbohydrates", qualifiedByName = {"ProbeIngredientMapperUtils", "calcCarbohydrates"})
-    ProbeIngredientInPageDto toPageDto(ProbeIngredient probeIngredient);
+    public ProbeIngredient toEntity(@NotNull ProbeIngredientCreateDto dto) {
+        return ProbeIngredient.builder()
+                .gross(dto.gross())
+                .net(dto.net())
+                .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
+                .ingredient(ingredientService.getExistingReferenceByIdOrThrow(dto.ingredientId()))
+                .build();
+    }
+
+    public ProbeIngredientInPageDto toPageDto(@NotNull ProbeIngredient probeIngredient) {
+        Ingredient ingredient = probeIngredient.getIngredient();
+        return ProbeIngredientInPageDto.builder()
+                .id(probeIngredient.getId())
+                .gross(probeIngredient.getGross())
+                .net(probeIngredient.getNet())
+                .ingredientName(ingredient.getName())
+                .drySubstances(probeIngredient.drySubstances())
+                .proteins(probeIngredient.proteins())
+                .fats(probeIngredient.fats())
+                .carbohydrates(probeIngredient.carbohydrates())
+                .build();
+    }
 }

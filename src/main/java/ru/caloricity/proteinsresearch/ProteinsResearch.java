@@ -18,9 +18,10 @@ import java.util.Objects;
 @ToString
 @Entity
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Comment("Исследования на белок")
 @Table(name = "proteins_researches")
+@Builder
 public class ProteinsResearch extends BaseEntity {
     @Comment("Объём титранта первая параллель, г/см^3")
     @NotNull

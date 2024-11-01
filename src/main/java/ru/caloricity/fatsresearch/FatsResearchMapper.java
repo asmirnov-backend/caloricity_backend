@@ -1,30 +1,35 @@
 package ru.caloricity.fatsresearch;
 
-import org.mapstruct.*;
-import ru.caloricity.probe.ProbeMapperUtils;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.caloricity.probe.ProbeService;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ProbeMapperUtils.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface FatsResearchMapper {
-    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getExistingReferenceByIdOrThrow"})
-    FatsResearch toEntity(FatsResearchCreateDto dto);
+@Service
+@RequiredArgsConstructor
+public class FatsResearchMapper {
+    private final ProbeService probeService;
 
-    @Mapping(source = ".", target = "dryResidueWeightParallelFirst", qualifiedByName = "calcDryResidueWeightParallelFirst")
-    @Mapping(source = ".", target = "dryResidueWeightParallelSecond", qualifiedByName = "calcDryResidueWeightParallelSecond")
-    @Mapping(source = ".", target = "dryResidueWeightAverage", qualifiedByName = "calcDryResidueWeightAverage")
-    FatsResearchDto toDto(FatsResearch entity);
-
-    @Named("calcDryResidueWeightParallelFirst")
-    default Float calcDryResidueWeightParallelFirst(FatsResearch research) {
-        return research.calcDryResidueWeightParallelFirst();
+    public FatsResearch toEntity(@NotNull FatsResearchCreateDto dto) {
+        return FatsResearch.builder()
+                .patronMassBeforeExtractionParallelFirst(dto.patronMassBeforeExtractionParallelFirst())
+                .patronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond())
+                .patronMassAfterExtractionParallelFirst(dto.patronMassAfterExtractionParallelFirst())
+                .patronMassAfterExtractionParallelSecond(dto.patronMassAfterExtractionParallelSecond())
+                .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
+                .build();
     }
 
-    @Named("calcDryResidueWeightParallelSecond")
-    default Float calcDryResidueWeightParallelSecond(FatsResearch research) {
-        return research.calcDryResidueWeightParallelSecond();
-    }
-
-    @Named("calcDryResidueWeightAverage")
-    default Float calcDryResidueWeightAverage(FatsResearch research) {
-        return research.calcDryResidueWeightAverage();
+    public FatsResearchDto toDto(@NotNull FatsResearch entity) {
+        return FatsResearchDto.builder()
+                .id(entity.getId())
+                .patronMassBeforeExtractionParallelFirst(entity.getPatronMassBeforeExtractionParallelFirst())
+                .patronMassBeforeExtractionParallelSecond(entity.getPatronMassBeforeExtractionParallelSecond())
+                .patronMassAfterExtractionParallelFirst(entity.getPatronMassAfterExtractionParallelFirst())
+                .patronMassAfterExtractionParallelSecond(entity.getPatronMassAfterExtractionParallelSecond())
+                .dryResidueWeightParallelFirst(entity.calcDryResidueWeightParallelFirst())
+                .dryResidueWeightParallelSecond(entity.calcDryResidueWeightParallelSecond())
+                .dryResidueWeightAverage(entity.calcDryResidueWeightAverage())
+                .build();
     }
 }

@@ -21,6 +21,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Comment("Исследования на жиры")
 @Table(name = "fats_research")
+@Builder
 public class FatsResearch extends BaseEntity {
     @Comment("Масса патрона до экстракции первая параллель, г")
     @NotNull

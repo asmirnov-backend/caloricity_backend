@@ -18,7 +18,8 @@ import java.util.Set;
 @ToString
 @Entity
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Builder
 @Comment("Каталог ингредиентов")
 @Table(name = "ingredients")
 public class Ingredient extends BaseEntity {

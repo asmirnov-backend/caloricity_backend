@@ -2,10 +2,7 @@ package ru.caloricity.probe;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.carbohydratesresearch.CarbohydratesResearch;
@@ -25,6 +22,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Comment("Пробы блюд")
 @Table(name = "probes")
+@Builder
+@AllArgsConstructor
 public class Probe extends BaseEntity {
     @Comment("Наименование пробы")
     @NotNull

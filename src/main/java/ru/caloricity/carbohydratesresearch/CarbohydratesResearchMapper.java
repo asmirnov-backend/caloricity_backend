@@ -1,31 +1,35 @@
 package ru.caloricity.carbohydratesresearch;
 
-import org.mapstruct.*;
-import ru.caloricity.probe.ProbeMapperUtils;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.caloricity.probe.ProbeService;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ProbeMapperUtils.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface CarbohydratesResearchMapper {
-    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getExistingReferenceByIdOrThrow"})
-    CarbohydratesResearch toEntity(CarbohydratesResearchCreateDto dto);
+@Service
+@RequiredArgsConstructor
+public class CarbohydratesResearchMapper {
+    private final ProbeService probeService;
 
-    @Mapping(source = ".", target = "dryResidueWeightParallelFirst", qualifiedByName = "calcDryResidueWeightParallelFirst")
-    @Mapping(source = ".", target = "dryResidueWeightParallelSecond", qualifiedByName = "calcDryResidueWeightParallelSecond")
-    @Mapping(source = ".", target = "dryResidueWeightAverage", qualifiedByName = "calcDryResidueWeightAverage")
-    CarbohydratesResearchDto toDto(CarbohydratesResearch entity);
-
-    @Named("calcDryResidueWeightParallelFirst")
-    default Float calcDryResidueWeightParallelFirst(CarbohydratesResearch research) {
-        return research.calcDryResidueWeightParallelFirst();
+    public CarbohydratesResearch toEntity(@NotNull CarbohydratesResearchCreateDto dto) {
+        return CarbohydratesResearch.builder()
+                .byuksaParallelFirst(dto.byuksaParallelFirst())
+                .byuksaParallelSecond(dto.byuksaParallelSecond())
+                .byuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst())
+                .byuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond())
+                .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
+                .build();
     }
 
-    @Named("calcDryResidueWeightParallelSecond")
-    default Float calcDryResidueWeightParallelSecond(CarbohydratesResearch research) {
-        return research.calcDryResidueWeightParallelSecond();
-    }
-
-
-    @Named("calcDryResidueWeightAverage")
-    default Float calcDryResidueWeightAverage(CarbohydratesResearch research) {
-        return research.calcDryResidueWeightAverage();
+    public CarbohydratesResearchDto toDto(@NotNull CarbohydratesResearch entity) {
+        return CarbohydratesResearchDto.builder()
+                .id(entity.getId())
+                .byuksaParallelFirst(entity.getByuksaParallelFirst())
+                .byuksaParallelSecond(entity.getByuksaParallelSecond())
+                .byuksaAfterDryingParallelFirst(entity.getByuksaAfterDryingParallelFirst())
+                .byuksaAfterDryingParallelSecond(entity.getByuksaAfterDryingParallelSecond())
+                .dryResidueWeightParallelFirst(entity.calcDryResidueWeightParallelFirst())
+                .dryResidueWeightParallelSecond(entity.calcDryResidueWeightParallelSecond())
+                .dryResidueWeightAverage(entity.calcDryResidueWeightAverage())
+                .build();
     }
 }

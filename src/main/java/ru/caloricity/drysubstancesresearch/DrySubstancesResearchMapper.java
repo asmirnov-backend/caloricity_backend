@@ -1,32 +1,35 @@
 package ru.caloricity.drysubstancesresearch;
 
-import org.mapstruct.*;
-import ru.caloricity.probe.ProbeMapperUtils;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.caloricity.probe.ProbeService;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ProbeMapperUtils.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface DrySubstancesResearchMapper {
-    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getExistingReferenceByIdOrThrow"})
-    DrySubstancesResearch toEntity(DrySubstancesResearchCreateDto dto);
 
-    @Mapping(source = ".", target = "dryResidueWeightParallelFirst", qualifiedByName = "calcDryResidueWeightParallelFirst")
-    @Mapping(source = ".", target = "dryResidueWeightParallelSecond", qualifiedByName = "calcDryResidueWeightParallelSecond")
-    @Mapping(source = ".", target = "dryResidueWeightAverage", qualifiedByName = "calcDryResidueWeightAverage")
-    DrySubstancesResearchDto toDto(DrySubstancesResearch entity);
+@Service
+@RequiredArgsConstructor
+public class DrySubstancesResearchMapper {
+    private final ProbeService probeService;
 
-    @Named("calcDryResidueWeightParallelFirst")
-    default Float calcDryResidueWeightParallelFirst(DrySubstancesResearch research) {
-        return research.calcDryResidueWeightParallelFirst();
+    public DrySubstancesResearch toEntity(DrySubstancesResearchCreateDto dto) {
+        return DrySubstancesResearch.builder()
+                .byuksaParallelFirst(dto.byuksaParallelFirst())
+                .byuksaParallelSecond(dto.byuksaParallelSecond())
+                .byuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst())
+                .byuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond())
+                .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
+                .build();
     }
 
-    @Named("calcDryResidueWeightParallelSecond")
-    default Float calcDryResidueWeightParallelSecond(DrySubstancesResearch research) {
-        return research.calcDryResidueWeightParallelSecond();
+    public DrySubstancesResearchDto toDto(DrySubstancesResearch entity) {
+        return DrySubstancesResearchDto.builder()
+                .id(entity.getId())
+                .byuksaParallelFirst(entity.getByuksaParallelFirst())
+                .byuksaParallelSecond(entity.getByuksaParallelSecond())
+                .byuksaAfterDryingParallelFirst(entity.getByuksaAfterDryingParallelFirst())
+                .byuksaAfterDryingParallelSecond(entity.getByuksaAfterDryingParallelSecond())
+                .dryResidueWeightParallelFirst(entity.calcDryResidueWeightParallelFirst())
+                .dryResidueWeightParallelSecond(entity.calcDryResidueWeightParallelSecond())
+                .dryResidueWeightAverage(entity.calcDryResidueWeightAverage())
+                .build();
     }
-
-
-    @Named("calcDryResidueWeightAverage")
-    default Float calcDryResidueWeightAverage(DrySubstancesResearch research) {
-        return research.calcDryResidueWeightAverage();
-    }
-
 }
