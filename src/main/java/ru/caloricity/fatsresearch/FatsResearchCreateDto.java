@@ -1,12 +1,13 @@
 package ru.caloricity.fatsresearch;
 
-@Builder
-import lombok.Builder;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
 import java.util.UUID;
 
+@Builder
 public record FatsResearchCreateDto(
         @NotNull @Min(0) Float patronMassBeforeExtractionParallelFirst,
         @NotNull @Min(0) Float patronMassBeforeExtractionParallelSecond,
