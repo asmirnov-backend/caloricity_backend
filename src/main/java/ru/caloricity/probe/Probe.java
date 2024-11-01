@@ -67,6 +67,21 @@ public class Probe extends BaseEntity {
     @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
     private ProteinsResearch proteinsResearch;
 
+    /**
+     * @return Масса фактическая, г
+     */
+    public Float massFact() {
+        return bankaWithProbeMass - bankaEmptyMass;
+    }
+
+    /**
+     * @return Минеральные вещества, г
+     */
+    public Double minerals() {
+        return massFact() * type.coefficientOfMinerals;
+    }
+
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

@@ -31,7 +31,7 @@ public class ProbeService {
     }
 
     public ProbeDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
+        return repository.findById(id).map(mapper::toDto).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
     }
 
     public Probe getExistingReferenceByIdOrThrow(UUID id) {

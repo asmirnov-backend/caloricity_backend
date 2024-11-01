@@ -50,7 +50,13 @@ class ProbeE2ETests {
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()))
                 .andExpect(jsonPath("$.name").value(entity.getName()))
                 .andExpect(jsonPath("$.bankaEmptyMass").value(entity.getBankaEmptyMass()))
-                .andExpect(jsonPath("$.bankaWithProbeMass").value(entity.getBankaWithProbeMass()));
+                .andExpect(jsonPath("$.bankaWithProbeMass").value(entity.getBankaWithProbeMass()))
+                .andExpect(jsonPath("$.code").value(entity.getCode()))
+                .andExpect(jsonPath("$.type").value(entity.getType().toString()))
+                .andExpect(jsonPath("$.massTheory").value(entity.getMassTheory()))
+                .andExpect(jsonPath("$.massFact").value(10))
+                .andExpect(jsonPath("$.minerals").value(0.12))
+        ;
     }
 
     @Test

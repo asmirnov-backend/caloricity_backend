@@ -26,9 +26,6 @@ CREATE DATABASE caloricity_test WITH OWNER caloricity ENCODING 'UTF-8';
 
 - Write more tests
 - Масса сухого остатка = масса до высушивания минус масса после высушивания (Для исследований). Затем расситать среднюю из двух параллелей
-- У пробы рассчитываемое поля: 
-"Масса фактическа" = масса банки с пробой минус масса пусой банки
-"Минирельные вещества" = масса фактическая * k, для первый блюд k=0,012, для вторых k=0,01, для третих k=0,001
 - Add error descriptions to swagger https://habr.com/ru/articles/814061/
 - Add protocols module
 - Add users module
