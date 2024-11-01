@@ -1,5 +1,7 @@
 package ru.caloricity.fatsresearch;
 
+@Builder
+import lombok.Builder;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 

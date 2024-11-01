@@ -1,8 +1,10 @@
 package ru.caloricity.ingredient;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
-
+@Builder
 public record IngredientInPageDto(UUID id,
                                   String name,
                                   Float ediblePart,
