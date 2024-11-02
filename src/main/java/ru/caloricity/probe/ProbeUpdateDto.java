@@ -11,8 +11,8 @@ import lombok.Builder;
 public record ProbeUpdateDto(
         @NotNull @NotBlank @Size(min = 2) String name,
         @NotNull String code,
-        @Nullable @Min(value = 0) Float massTheory,
-        @Nullable @Min(value = 0) Float bankaEmptyMass,
-        @Nullable @Min(value = 0) Float bankaWithProbeMass
+        @Nullable @Min(value = 0) Double massTheory,
+        @Nullable @Min(value = 0) Double bankaEmptyMass,
+        @Nullable @Min(value = 0) Double bankaWithProbeMass
 ) {
 }

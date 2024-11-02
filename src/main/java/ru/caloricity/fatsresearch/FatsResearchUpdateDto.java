@@ -5,9 +5,9 @@ import lombok.Builder;
 
 @Builder
 public record FatsResearchUpdateDto(
-        @NotNull Float patronMassBeforeExtractionParallelFirst,
-        @NotNull Float patronMassBeforeExtractionParallelSecond,
-        @NotNull Float patronMassAfterExtractionParallelFirst,
-        @NotNull Float patronMassAfterExtractionParallelSecond
+        @NotNull Double patronMassBeforeExtractionParallelFirst,
+        @NotNull Double patronMassBeforeExtractionParallelSecond,
+        @NotNull Double patronMassAfterExtractionParallelFirst,
+        @NotNull Double patronMassAfterExtractionParallelSecond
 ) {
 }

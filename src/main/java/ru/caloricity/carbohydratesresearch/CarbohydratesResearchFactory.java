@@ -12,10 +12,10 @@ public class CarbohydratesResearchFactory {
     public CarbohydratesResearch createSimple() {
         var research = new CarbohydratesResearch();
         research.setId(uuidIterator.next());
-        research.setByuksaAfterDryingParallelFirst(50f);
-        research.setByuksaAfterDryingParallelSecond(52f);
-        research.setByuksaParallelFirst(60f);
-        research.setByuksaParallelSecond(61f);
+        research.setByuksaAfterDryingParallelFirst(50.);
+        research.setByuksaAfterDryingParallelSecond(52.);
+        research.setByuksaParallelFirst(60.);
+        research.setByuksaParallelSecond(61.);
         return research;
     }
 

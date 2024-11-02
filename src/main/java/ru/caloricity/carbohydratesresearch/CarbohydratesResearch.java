@@ -25,34 +25,34 @@ import java.util.Objects;
 public class CarbohydratesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
     @NotNull
-    private Float byuksaParallelFirst;
+    private Double byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
     @NotNull
-    private Float byuksaParallelSecond;
+    private Double byuksaParallelSecond;
 
     @Comment("Масса бюксы с пробой после высушивания первая параллель, г")
     @NotNull
-    private Float byuksaAfterDryingParallelFirst;
+    private Double byuksaAfterDryingParallelFirst;
 
     @Comment("Масса бюксы с пробой после высушивания вторая параллель, г")
     @NotNull
-    private Float byuksaAfterDryingParallelSecond;
+    private Double byuksaAfterDryingParallelSecond;
 
     @OneToOne(optional = false)
     @JoinColumn(unique = true)
     private Probe probe;
 
-    public Float getDryResidueWeightParallelFirst() {
+    public Double getDryResidueWeightParallelFirst() {
         return byuksaParallelFirst - byuksaAfterDryingParallelFirst;
     }
 
-    public Float getDryResidueWeightParallelSecond() {
+    public Double getDryResidueWeightParallelSecond() {
         return byuksaParallelSecond - byuksaAfterDryingParallelSecond;
     }
 
-    public Float getDryResidueWeightAverage() {
-        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0f;
+    public Double getDryResidueWeightAverage() {
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0;
     }
 
     @Override

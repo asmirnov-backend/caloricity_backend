@@ -16,11 +16,11 @@ public class IngredientFactory {
         Ingredient ingredient = new Ingredient();
         ingredient.setId(uuidIterator.next());
         ingredient.setName(name);
-        ingredient.setFats(1f);
-        ingredient.setCarbohydrates(2f);
-        ingredient.setWater(3f);
-        ingredient.setEdiblePart(4f);
-        ingredient.setProteins(5f);
+        ingredient.setFats(1.);
+        ingredient.setCarbohydrates(2.);
+        ingredient.setWater(3.);
+        ingredient.setEdiblePart(4.);
+        ingredient.setProteins(5.);
         return ingredient;
     }
 }

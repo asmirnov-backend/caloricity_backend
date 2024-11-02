@@ -25,34 +25,34 @@ import java.util.Objects;
 public class FatsResearch extends BaseEntity {
     @Comment("Масса патрона до экстракции первая параллель, г")
     @NotNull
-    private Float patronMassBeforeExtractionParallelFirst;
+    private Double patronMassBeforeExtractionParallelFirst;
 
     @Comment("Масса патрона до экстракции вторая параллель, г")
     @NotNull
-    private Float patronMassBeforeExtractionParallelSecond;
+    private Double patronMassBeforeExtractionParallelSecond;
 
     @Comment("Масса патрона после экстракции первая параллель, г")
     @NotNull
-    private Float patronMassAfterExtractionParallelFirst;
+    private Double patronMassAfterExtractionParallelFirst;
 
     @Comment("Масса патрона после экстракции вторая параллель, г")
     @NotNull
-    private Float patronMassAfterExtractionParallelSecond;
+    private Double patronMassAfterExtractionParallelSecond;
 
     @OneToOne(optional = false)
     @JoinColumn(unique = true)
     private Probe probe;
 
-    public Float getDryResidueWeightParallelFirst() {
+    public Double getDryResidueWeightParallelFirst() {
         return patronMassBeforeExtractionParallelFirst - patronMassAfterExtractionParallelFirst;
     }
 
-    public Float getDryResidueWeightParallelSecond() {
+    public Double getDryResidueWeightParallelSecond() {
         return patronMassBeforeExtractionParallelSecond - patronMassAfterExtractionParallelSecond;
     }
 
-    public Float getDryResidueWeightAverage() {
-        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0f;
+    public Double getDryResidueWeightAverage() {
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0;
     }
 
     @Override

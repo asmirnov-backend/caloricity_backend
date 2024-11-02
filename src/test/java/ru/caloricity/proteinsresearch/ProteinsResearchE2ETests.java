@@ -65,14 +65,14 @@ class ProteinsResearchE2ETests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
                 .andExpect(jsonPath("$.content[0].titrantVolumeParallelSecond").value(20))
-                .andExpect(jsonPath("$.content[0].coefficient").value(0.95f))
+                .andExpect(jsonPath("$.content[0].coefficient").value(0.95))
                 .andExpect(jsonPath("$.content[0].controlVolume").value(5));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
+        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1., 2., 10., 10., probe.getId());
 
         MvcResult result = mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -96,7 +96,7 @@ class ProteinsResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
+        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1., null, 10., 10., UUID.randomUUID());
 
         mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -109,7 +109,7 @@ class ProteinsResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         ProteinsResearch entity = repository.save(new ProteinsResearchFactory().createSimple());
-        ProteinsResearchUpdateDto dto = new ProteinsResearchUpdateDto(2f, 1f, 1f, 1f);
+        ProteinsResearchUpdateDto dto = new ProteinsResearchUpdateDto(2., 1., 1., 1.);
 
         mvc.perform(put("/proteins-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

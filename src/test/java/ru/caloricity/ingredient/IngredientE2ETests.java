@@ -106,7 +106,7 @@ class IngredientE2ETests {
 
     @Test
     void create_created() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
+        IngredientCreateDto dto = new IngredientCreateDto("name for test", 1., 1., 1., 1., 1.);
 
         MvcResult result = mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
@@ -128,7 +128,7 @@ class IngredientE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto("", 1f, 1f, 1f, 1f, 1f);
+        IngredientCreateDto dto = new IngredientCreateDto("", 1., 1., 1., 1., 1.);
 
         mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
@@ -141,7 +141,7 @@ class IngredientE2ETests {
     @Test
     void update_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
-        IngredientCreateDto dto = new IngredientCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
+        IngredientCreateDto dto = new IngredientCreateDto("name for test", 1., 1., 1., 1., 1.);
 
         mvc.perform(put("/ingredients/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

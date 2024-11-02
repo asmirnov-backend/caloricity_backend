@@ -11,7 +11,7 @@ public record ProbeIngredientDto(UUID id,
                                  LocalDateTime updatedAt,
                                  UUID probeId,
                                  UUID ingredientId,
-                                 Float gross,
-                                 Float net
+                                 Double gross,
+                                 Double net
 ) {
 }

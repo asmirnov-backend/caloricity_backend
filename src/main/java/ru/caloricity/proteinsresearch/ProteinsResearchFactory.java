@@ -12,10 +12,10 @@ public class ProteinsResearchFactory {
     public ProteinsResearch createSimple() {
         var research = new ProteinsResearch();
         research.setId(uuidIterator.next());
-        research.setTitrantVolumeParallelFirst(10f);
-        research.setTitrantVolumeParallelSecond(20f);
-        research.setCoefficient(0.95f);
-        research.setControlVolume(5f);
+        research.setTitrantVolumeParallelFirst(10.);
+        research.setTitrantVolumeParallelSecond(20.);
+        research.setCoefficient(0.95);
+        research.setControlVolume(5.);
         return research;
     }
 

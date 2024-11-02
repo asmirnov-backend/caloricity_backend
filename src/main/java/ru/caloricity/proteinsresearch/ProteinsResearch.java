@@ -25,19 +25,19 @@ import java.util.Objects;
 public class ProteinsResearch extends BaseEntity {
     @Comment("Объём титранта первая параллель, г/см^3")
     @NotNull
-    private Float titrantVolumeParallelFirst;
+    private Double titrantVolumeParallelFirst;
 
     @Comment("Объём титранта вторая параллель, г/см^3")
     @NotNull
-    private Float titrantVolumeParallelSecond;
+    private Double titrantVolumeParallelSecond;
 
     @Comment("Объём контроля, г/см^3")
     @NotNull
-    private Float controlVolume;
+    private Double controlVolume;
 
     @Comment("Коэффициент")
     @NotNull
-    private Float coefficient;
+    private Double coefficient;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "probe_id", unique = true)

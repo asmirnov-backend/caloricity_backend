@@ -103,7 +103,7 @@ class ProbeIngredientE2ETests {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(probe.getId(), ingredient.getId(), 2f, 3f);
+        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(probe.getId(), ingredient.getId(), 2., 3.);
 
         MvcResult result = mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -125,7 +125,7 @@ class ProbeIngredientE2ETests {
 
     @Test
     void create_badRequest_massSmallerThenZero() throws Exception {
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(UUID.randomUUID(), UUID.randomUUID(), -40f, 3f);
+        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(UUID.randomUUID(), UUID.randomUUID(), -40., 3.);
 
         mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -138,7 +138,7 @@ class ProbeIngredientE2ETests {
     @Test
     void create_badRequest_referencedProbeNotExist() throws Exception {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(UUID.randomUUID(), ingredient.getId(), 40f, 3f);
+        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(UUID.randomUUID(), ingredient.getId(), 40., 3.);
 
         mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -152,7 +152,7 @@ class ProbeIngredientE2ETests {
     @Test
     void create_badRequest_referencedIngredientNotExist() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(probe.getId(), UUID.randomUUID(), 40f, 3f);
+        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(probe.getId(), UUID.randomUUID(), 40., 3.);
 
         mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -169,7 +169,7 @@ class ProbeIngredientE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
         ProbeIngredient entity = repository.save(new ProbeIngredientFactory().createSimple(probe, ingredient));
-        ProbeIngredientUpdateDto dto = new ProbeIngredientUpdateDto(1321f, 2412f);
+        ProbeIngredientUpdateDto dto = new ProbeIngredientUpdateDto(1321., 2412.);
 
         mvc.perform(put("/probe-ingredient/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

@@ -27,11 +27,11 @@ import java.util.Objects;
 public class ProbeIngredient extends BaseEntity {
     @Comment("Масса брутто, г")
     @NotNull
-    private Float gross;
+    private Double gross;
 
     @Comment("Масса нетто, г")
     @NotNull
-    private Float net;
+    private Double net;
 
     @ManyToOne(optional = false)
     Probe probe;
@@ -40,19 +40,19 @@ public class ProbeIngredient extends BaseEntity {
     @OnDelete(action = OnDeleteAction.RESTRICT)
     Ingredient ingredient;
 
-    Float drySubstances() {
+    Double drySubstances() {
         return net - (net * ingredient.getWater()) / 100;
     }
 
-    Float proteins() {
+    Double proteins() {
         return net * ingredient.getProteins() / 100;
     }
 
-    Float fats() {
+    Double fats() {
         return net * ingredient.getFats() / 100;
     }
 
-    Float carbohydrates() {
+    Double carbohydrates() {
         return net * ingredient.getCarbohydrates() / 100;
     }
 

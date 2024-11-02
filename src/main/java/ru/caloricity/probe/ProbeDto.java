@@ -13,10 +13,10 @@ public record ProbeDto(UUID id,
                        String name,
                        ProbeType type,
                        String code,
-                       Float massTheory,
-                       Float bankaEmptyMass,
-                       Float bankaWithProbeMass,
-                       Float massFact,
+                       Double massTheory,
+                       Double bankaEmptyMass,
+                       Double bankaWithProbeMass,
+                       Double massFact,
                        Double minerals
 ) {
 }

@@ -7,10 +7,10 @@ import java.util.UUID;
 
 @Builder
 public record ProteinsResearchCreateDto(
-        @NotNull Float titrantVolumeParallelFirst,
-        @NotNull Float titrantVolumeParallelSecond,
-        @NotNull Float controlVolume,
-        @NotNull Float coefficient,
+        @NotNull Double titrantVolumeParallelFirst,
+        @NotNull Double titrantVolumeParallelSecond,
+        @NotNull Double controlVolume,
+        @NotNull Double coefficient,
         @NotNull UUID probeId
 ) {
 }

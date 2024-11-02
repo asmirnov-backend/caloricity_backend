@@ -6,12 +6,12 @@ import java.util.UUID;
 
 @Builder
 public record FatsResearchDto(UUID id,
-                              Float patronMassBeforeExtractionParallelFirst,
-                              Float patronMassBeforeExtractionParallelSecond,
-                              Float patronMassAfterExtractionParallelFirst,
-                              Float patronMassAfterExtractionParallelSecond,
-                              Float dryResidueWeightParallelFirst,
-                              Float dryResidueWeightParallelSecond,
-                              Float dryResidueWeightAverage
+                              Double patronMassBeforeExtractionParallelFirst,
+                              Double patronMassBeforeExtractionParallelSecond,
+                              Double patronMassAfterExtractionParallelFirst,
+                              Double patronMassAfterExtractionParallelSecond,
+                              Double dryResidueWeightParallelFirst,
+                              Double dryResidueWeightParallelSecond,
+                              Double dryResidueWeightAverage
 ) {
 }

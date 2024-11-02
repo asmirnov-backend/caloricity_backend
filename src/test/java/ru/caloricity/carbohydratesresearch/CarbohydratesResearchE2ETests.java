@@ -72,7 +72,7 @@ class CarbohydratesResearchE2ETests {
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
+        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1., 2., 10., 10., probe.getId());
 
         MvcResult result = mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -96,7 +96,7 @@ class CarbohydratesResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
+        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1., null, 10., 10., UUID.randomUUID());
 
         mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -109,7 +109,7 @@ class CarbohydratesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         CarbohydratesResearch entity = repository.save(new CarbohydratesResearchFactory().createSimple());
-        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2f, 1f, 1f, 1f);
+        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2., 1., 1., 1.);
 
         mvc.perform(put("/carbohydrates-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

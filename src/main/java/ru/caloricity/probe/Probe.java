@@ -40,15 +40,15 @@ public class Probe extends BaseEntity {
 
     @Comment("Масса теоретическая, г")
     @NotNull
-    private Float massTheory;
+    private Double massTheory;
 
     @Comment("Масса пустой банки, г")
     @NotNull
-    private Float bankaEmptyMass;
+    private Double bankaEmptyMass;
 
     @Comment("Масса банки с пробой, г")
     @NotNull
-    private Float bankaWithProbeMass;
+    private Double bankaWithProbeMass;
 
     @OneToMany(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
@@ -69,7 +69,7 @@ public class Probe extends BaseEntity {
     /**
      * @return Масса фактическая, г
      */
-    public Float getMassFact() {
+    public Double getMassFact() {
         return bankaWithProbeMass - bankaEmptyMass;
     }
 

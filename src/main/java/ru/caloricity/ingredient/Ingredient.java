@@ -29,23 +29,23 @@ public class Ingredient extends BaseEntity {
 
     @Comment("Съедобная часть, доля (От 0 до 1)")
     @NotNull
-    private Float ediblePart;
+    private Double ediblePart;
 
     @Comment("Масса воды, г")
     @NotNull
-    private Float water;
+    private Double water;
 
     @Comment("Масса белков, г")
     @NotNull
-    private Float proteins;
+    private Double proteins;
 
     @Comment("Масса жиров, г")
     @NotNull
-    private Float fats;
+    private Double fats;
 
     @Comment("Масса углеводов, г")
     @NotNull
-    private Float carbohydrates;
+    private Double carbohydrates;
 
     @OneToMany(mappedBy = "ingredient")
     @ToString.Exclude

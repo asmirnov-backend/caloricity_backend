@@ -11,7 +11,7 @@ import java.util.UUID;
 public record ProbeIngredientCreateDto(
         @NotNull UUID probeId,
         @NotNull UUID ingredientId,
-        @Nullable @Min(0) Float gross,
-        @Nullable @Min(0) Float net
+        @Nullable @Min(0) Double gross,
+        @Nullable @Min(0) Double net
 ) {
 }

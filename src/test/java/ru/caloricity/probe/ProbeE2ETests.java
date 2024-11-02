@@ -98,7 +98,7 @@ class ProbeE2ETests {
 
     @Test
     void create_created() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST, "f213", 1f, 1f, 2f);
+        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST, "f213", 1., 1., 2.);
 
         MvcResult result = mvc.perform(post("/probes")
                         .content(objectMapper.writeValueAsString(dto))
@@ -120,7 +120,7 @@ class ProbeE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("", ProbeType.FIRST, "f213", 1f, 1f, 2f);
+        ProbeCreateDto dto = new ProbeCreateDto("", ProbeType.FIRST, "f213", 1., 1., 2.);
 
         mvc.perform(post("/probes")
                         .content(objectMapper.writeValueAsString(dto))
@@ -133,7 +133,7 @@ class ProbeE2ETests {
     @Test
     void update_ok() throws Exception {
         Probe entity = repository.save(new ProbeFactory().createSimple());
-        ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1f, 1f, 2f);
+        ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1., 1., 2.);
 
         mvc.perform(put("/probes/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

@@ -76,7 +76,7 @@ class DrySubstancesResearchE2ETests {
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
+        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1., 2., 10., 10., probe.getId());
 
         MvcResult result = mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -100,7 +100,7 @@ class DrySubstancesResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
+        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1., null, 10., 10., UUID.randomUUID());
 
         mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -113,7 +113,7 @@ class DrySubstancesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         DrySubstancesResearch entity = repository.save(new DrySubstancesResearchFactory().createSimple());
-        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2f, 1f, 1f, 10f);
+        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2., 1., 1., 10.);
 
         mvc.perform(put("/dry-substances-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

@@ -6,12 +6,12 @@ import java.util.UUID;
 
 @Builder
 public record DrySubstancesResearchDto(UUID id,
-                                       Float byuksaParallelFirst,
-                                       Float byuksaParallelSecond,
-                                       Float byuksaAfterDryingParallelFirst,
-                                       Float byuksaAfterDryingParallelSecond,
-                                       Float dryResidueWeightParallelFirst,
-                                       Float dryResidueWeightParallelSecond,
-                                       Float dryResidueWeightAverage
+                                       Double byuksaParallelFirst,
+                                       Double byuksaParallelSecond,
+                                       Double byuksaAfterDryingParallelFirst,
+                                       Double byuksaAfterDryingParallelSecond,
+                                       Double dryResidueWeightParallelFirst,
+                                       Double dryResidueWeightParallelSecond,
+                                       Double dryResidueWeightAverage
 ) {
 }

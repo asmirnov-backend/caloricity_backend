@@ -6,10 +6,10 @@ import lombok.Builder;
 @Builder
 public record IngredientCreateDto(
         @NotNull @NotBlank @Size(min = 2) String name,
-        @NotNull @Min(value = 0) @Max(value = 1) Float ediblePart,
-        @NotNull @Min(value = 0) Float water,
-        @NotNull @Min(value = 0) Float proteins,
-        @NotNull @Min(value = 0) Float fats,
-        @NotNull @Min(value = 0) Float carbohydrates
+        @NotNull @Min(value = 0) @Max(value = 1) Double ediblePart,
+        @NotNull @Min(value = 0) Double water,
+        @NotNull @Min(value = 0) Double proteins,
+        @NotNull @Min(value = 0) Double fats,
+        @NotNull @Min(value = 0) Double carbohydrates
 ) {
 }

@@ -9,10 +9,10 @@ import java.util.UUID;
 
 @Builder
 public record FatsResearchCreateDto(
-        @NotNull @Min(0) Float patronMassBeforeExtractionParallelFirst,
-        @NotNull @Min(0) Float patronMassBeforeExtractionParallelSecond,
-        @NotNull @Min(0) Float patronMassAfterExtractionParallelFirst,
-        @NotNull @Min(0) Float patronMassAfterExtractionParallelSecond,
+        @NotNull @Min(0) Double patronMassBeforeExtractionParallelFirst,
+        @NotNull @Min(0) Double patronMassBeforeExtractionParallelSecond,
+        @NotNull @Min(0) Double patronMassAfterExtractionParallelFirst,
+        @NotNull @Min(0) Double patronMassAfterExtractionParallelSecond,
         @NotNull UUID probeId
 ) {
 }
