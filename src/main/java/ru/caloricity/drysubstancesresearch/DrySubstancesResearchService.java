@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class DrySubstancesResearchService {
     private final DrySubstancesResearchRepository repository;
     private final DrySubstancesResearchMapper mapper;
@@ -38,14 +39,12 @@ public class DrySubstancesResearchService {
         return repository.findById(id).map(mapper::toDto).orElseThrow(() -> new EntityNotFoundException(id, DrySubstancesResearch.class));
     }
 
-    @Transactional
     public IdDto create(DrySubstancesResearchCreateDto createDto) {
         DrySubstancesResearch entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, DrySubstancesResearchUpdateDto dto) {
         Optional<DrySubstancesResearch> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
@@ -54,7 +53,6 @@ public class DrySubstancesResearchService {
         }
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

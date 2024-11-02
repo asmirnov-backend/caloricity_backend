@@ -15,6 +15,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProbeService {
     private final ProbeRepository repository;
     private final ProbeMapper mapper;
@@ -42,14 +43,12 @@ public class ProbeService {
         return repository.getReferenceById(id);
     }
 
-    @Transactional
     public IdDto create(ProbeCreateDto createDto) {
         Probe entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, ProbeUpdateDto dto) {
         Optional<Probe> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
@@ -60,7 +59,6 @@ public class ProbeService {
         }
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

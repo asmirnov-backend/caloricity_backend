@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProbeIngredientService {
     private final ProbeIngredientRepository repository;
     private final ProbeIngredientMapper mapper;
@@ -36,14 +37,12 @@ public class ProbeIngredientService {
         return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, ProbeIngredient.class));
     }
 
-    @Transactional
     public IdDto create(ProbeIngredientCreateDto createDto) {
         ProbeIngredient entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, ProbeIngredientUpdateDto dto) {
         Optional<ProbeIngredient> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
@@ -55,7 +54,6 @@ public class ProbeIngredientService {
         }
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class IngredientService {
     private final IngredientRepository repository;
     private final IngredientMapper mapper;
@@ -44,7 +45,6 @@ public class IngredientService {
         return repository.getReferenceById(id);
     }
 
-    @Transactional
     public IdDto create(IngredientCreateDto createDto) {
         Ingredient entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
@@ -52,7 +52,6 @@ public class IngredientService {
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, IngredientCreateDto dto) {
         Optional<Ingredient> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
@@ -63,7 +62,6 @@ public class IngredientService {
         }
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         if (repository.existsByIdAndProbeIngredientsIsNotEmpty(id)) {
             throw new CascadeDeleteRestrictException(id, Ingredient.class, ProbeIngredient.class);

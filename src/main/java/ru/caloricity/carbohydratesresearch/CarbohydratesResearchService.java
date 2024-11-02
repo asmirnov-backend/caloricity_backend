@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CarbohydratesResearchService {
     private final CarbohydratesResearchRepository repository;
     private final CarbohydratesResearchMapper mapper;
@@ -37,14 +38,12 @@ public class CarbohydratesResearchService {
         return repository.findById(id).map(mapper::toDto).orElseThrow(() -> new EntityNotFoundException(id, CarbohydratesResearch.class));
     }
 
-    @Transactional
     public IdDto create(CarbohydratesResearchCreateDto createDto) {
         CarbohydratesResearch entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, CarbohydratesResearchUpdateDto dto) {
         Optional<CarbohydratesResearch> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
@@ -53,7 +52,6 @@ public class CarbohydratesResearchService {
         }
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

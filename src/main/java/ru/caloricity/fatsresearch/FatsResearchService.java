@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class FatsResearchService {
     private final FatsResearchRepository repository;
     private final FatsResearchMapper mapper;
@@ -37,14 +38,12 @@ public class FatsResearchService {
         return repository.findById(id).map(mapper::toDto).orElseThrow(() -> new EntityNotFoundException(id, FatsResearch.class));
     }
 
-    @Transactional
     public IdDto create(FatsResearchCreateDto createDto) {
         FatsResearch entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, FatsResearchUpdateDto dto) {
         Optional<FatsResearch> currentEntity = findById(id);
         if (currentEntity.isPresent()) {
@@ -53,7 +52,6 @@ public class FatsResearchService {
         }
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }
