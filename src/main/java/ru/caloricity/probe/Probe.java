@@ -69,15 +69,15 @@ public class Probe extends BaseEntity {
     /**
      * @return Масса фактическая, г
      */
-    public Float massFact() {
+    public Float getMassFact() {
         return bankaWithProbeMass - bankaEmptyMass;
     }
 
     /**
      * @return Минеральные вещества, г
      */
-    public Double minerals() {
-        return massFact() * type.coefficientOfMinerals;
+    public Double getMinerals() {
+        return getMassFact() * type.coefficientOfMinerals;
     }
 
 

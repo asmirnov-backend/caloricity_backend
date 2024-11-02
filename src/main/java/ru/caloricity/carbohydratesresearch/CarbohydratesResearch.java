@@ -43,16 +43,16 @@ public class CarbohydratesResearch extends BaseEntity {
     @JoinColumn(unique = true)
     private Probe probe;
 
-    public Float calcDryResidueWeightParallelFirst() {
+    public Float getDryResidueWeightParallelFirst() {
         return byuksaParallelFirst - byuksaAfterDryingParallelFirst;
     }
 
-    public Float calcDryResidueWeightParallelSecond() {
+    public Float getDryResidueWeightParallelSecond() {
         return byuksaParallelSecond - byuksaAfterDryingParallelSecond;
     }
 
-    public Float calcDryResidueWeightAverage() {
-        return (calcDryResidueWeightParallelFirst() + calcDryResidueWeightParallelSecond()) / 2.0f;
+    public Float getDryResidueWeightAverage() {
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0f;
     }
 
     @Override

@@ -27,8 +27,8 @@ public class ProbeMapper {
                 .massTheory(entity.getMassTheory())
                 .bankaEmptyMass(entity.getBankaEmptyMass())
                 .bankaWithProbeMass(entity.getBankaWithProbeMass())
-                .massFact(entity.massFact())
-                .minerals(entity.minerals())
+                .massFact(entity.getMassFact())
+                .minerals(entity.getMinerals())
                 .build();
     }
 }

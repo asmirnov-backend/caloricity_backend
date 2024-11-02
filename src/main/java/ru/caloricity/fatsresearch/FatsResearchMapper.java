@@ -27,9 +27,9 @@ public class FatsResearchMapper {
                 .patronMassBeforeExtractionParallelSecond(entity.getPatronMassBeforeExtractionParallelSecond())
                 .patronMassAfterExtractionParallelFirst(entity.getPatronMassAfterExtractionParallelFirst())
                 .patronMassAfterExtractionParallelSecond(entity.getPatronMassAfterExtractionParallelSecond())
-                .dryResidueWeightParallelFirst(entity.calcDryResidueWeightParallelFirst())
-                .dryResidueWeightParallelSecond(entity.calcDryResidueWeightParallelSecond())
-                .dryResidueWeightAverage(entity.calcDryResidueWeightAverage())
+                .dryResidueWeightParallelFirst(entity.getDryResidueWeightParallelFirst())
+                .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
+                .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
                 .build();
     }
 }

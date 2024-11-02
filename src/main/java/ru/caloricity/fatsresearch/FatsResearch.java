@@ -43,6 +43,18 @@ public class FatsResearch extends BaseEntity {
     @JoinColumn(unique = true)
     private Probe probe;
 
+    public Float getDryResidueWeightParallelFirst() {
+        return patronMassBeforeExtractionParallelFirst - patronMassAfterExtractionParallelFirst;
+    }
+
+    public Float getDryResidueWeightParallelSecond() {
+        return patronMassBeforeExtractionParallelSecond - patronMassAfterExtractionParallelSecond;
+    }
+
+    public Float getDryResidueWeightAverage() {
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0f;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
@@ -57,18 +69,6 @@ public class FatsResearch extends BaseEntity {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
-    }
-
-    public Float calcDryResidueWeightParallelFirst() {
-        return patronMassBeforeExtractionParallelFirst - patronMassAfterExtractionParallelFirst;
-    }
-
-    public Float calcDryResidueWeightParallelSecond() {
-        return patronMassBeforeExtractionParallelSecond - patronMassAfterExtractionParallelSecond;
-    }
-
-    public Float calcDryResidueWeightAverage() {
-        return (calcDryResidueWeightParallelFirst() + calcDryResidueWeightParallelSecond()) / 2.0f;
     }
 
 }

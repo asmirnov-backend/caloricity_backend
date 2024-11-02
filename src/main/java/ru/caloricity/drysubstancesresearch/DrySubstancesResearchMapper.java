@@ -27,9 +27,9 @@ public class DrySubstancesResearchMapper {
                 .byuksaParallelSecond(entity.getByuksaParallelSecond())
                 .byuksaAfterDryingParallelFirst(entity.getByuksaAfterDryingParallelFirst())
                 .byuksaAfterDryingParallelSecond(entity.getByuksaAfterDryingParallelSecond())
-                .dryResidueWeightParallelFirst(entity.calcDryResidueWeightParallelFirst())
-                .dryResidueWeightParallelSecond(entity.calcDryResidueWeightParallelSecond())
-                .dryResidueWeightAverage(entity.calcDryResidueWeightAverage())
+                .dryResidueWeightParallelFirst(entity.getDryResidueWeightParallelFirst())
+                .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
+                .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
                 .build();
     }
 }
