@@ -75,7 +75,13 @@ class FatsResearchE2ETests {
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        FatsResearchCreateDto dto = new FatsResearchCreateDto(1., 2., 1., 2., probe.getId());
+        FatsResearchCreateDto dto = FatsResearchCreateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(1.)
+                .patronMassBeforeExtractionParallelSecond(2.)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/fats-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -99,7 +105,13 @@ class FatsResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        FatsResearchCreateDto dto = new FatsResearchCreateDto(1., null, 1., 2., UUID.randomUUID());
+        FatsResearchCreateDto dto = FatsResearchCreateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(1.)
+                .patronMassBeforeExtractionParallelSecond(null)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/fats-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -112,7 +124,12 @@ class FatsResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         FatsResearch entity = repository.save(new FatsResearchFactory().createSimple());
-        FatsResearchUpdateDto dto = new FatsResearchUpdateDto(2., 2., 1., 2.);
+        FatsResearchUpdateDto dto = FatsResearchUpdateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(2.)
+                .patronMassBeforeExtractionParallelSecond(2.)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .build();
 
         mvc.perform(put("/fats-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

@@ -72,7 +72,13 @@ class ProteinsResearchE2ETests {
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1., 2., 10., 10., probe.getId());
+        ProteinsResearchCreateDto dto = ProteinsResearchCreateDto.builder()
+                .titrantVolumeParallelFirst(1.)
+                .titrantVolumeParallelSecond(2.)
+                .controlVolume(10.)
+                .coefficient(10.)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -96,7 +102,13 @@ class ProteinsResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1., null, 10., 10., UUID.randomUUID());
+        ProteinsResearchCreateDto dto = ProteinsResearchCreateDto.builder()
+                .titrantVolumeParallelFirst(1.)
+                .titrantVolumeParallelSecond(null)
+                .controlVolume(10.)
+                .coefficient(10.)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))

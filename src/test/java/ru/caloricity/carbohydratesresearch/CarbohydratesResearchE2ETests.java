@@ -72,7 +72,13 @@ class CarbohydratesResearchE2ETests {
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1., 2., 10., 10., probe.getId());
+        CarbohydratesResearchCreateDto dto = CarbohydratesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(2.)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -96,7 +102,13 @@ class CarbohydratesResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1., null, 10., 10., UUID.randomUUID());
+        CarbohydratesResearchCreateDto dto = CarbohydratesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(null)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))

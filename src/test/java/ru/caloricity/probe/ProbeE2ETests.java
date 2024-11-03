@@ -98,7 +98,14 @@ class ProbeE2ETests {
 
     @Test
     void create_created() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("name for test", ProbeType.FIRST, "f213", 1., 1., 2.);
+        ProbeCreateDto dto = ProbeCreateDto.builder()
+                .name("name for test")
+                .type(ProbeType.FIRST)
+                .code("f213")
+                .massTheory(1.)
+                .bankaEmptyMass(1.)
+                .bankaWithProbeMass(2.)
+                .build();
 
         MvcResult result = mvc.perform(post("/probes")
                         .content(objectMapper.writeValueAsString(dto))
@@ -133,7 +140,13 @@ class ProbeE2ETests {
     @Test
     void update_ok() throws Exception {
         Probe entity = repository.save(new ProbeFactory().createSimple());
-        ProbeUpdateDto dto = new ProbeUpdateDto("name for test132", "f213", 1., 1., 2.);
+        ProbeUpdateDto dto = ProbeUpdateDto.builder()
+                .name("name for test132")
+                .code("f213")
+                .massTheory(1.)
+                .bankaEmptyMass(1.)
+                .bankaWithProbeMass(2.)
+                .build();
 
         mvc.perform(put("/probes/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

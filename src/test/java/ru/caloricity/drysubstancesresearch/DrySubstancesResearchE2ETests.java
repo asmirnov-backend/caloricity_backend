@@ -76,7 +76,13 @@ class DrySubstancesResearchE2ETests {
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1., 2., 10., 10., probe.getId());
+        DrySubstancesResearchCreateDto dto = DrySubstancesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(2.)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -100,7 +106,13 @@ class DrySubstancesResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1., null, 10., 10., UUID.randomUUID());
+        DrySubstancesResearchCreateDto dto = DrySubstancesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(null)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
