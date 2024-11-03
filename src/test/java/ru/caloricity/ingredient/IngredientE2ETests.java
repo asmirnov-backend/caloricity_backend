@@ -16,7 +16,6 @@ import ru.caloricity.common.exception.EntityNotFoundException;
 import ru.caloricity.probe.Probe;
 import ru.caloricity.probe.ProbeFactory;
 import ru.caloricity.probe.ProbeRepository;
-import ru.caloricity.probeingredient.ProbeIngredient;
 import ru.caloricity.probeingredient.ProbeIngredientFactory;
 import ru.caloricity.probeingredient.ProbeIngredientRepository;
 
@@ -192,7 +191,7 @@ class IngredientE2ETests {
     void delete_throwCascadeDeleteRestrictException() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        ProbeIngredient probeIngredient = probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(probe, entity));
+        probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(probe, entity));
 
         mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
                 .andDo(print())
