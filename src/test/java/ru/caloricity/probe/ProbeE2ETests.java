@@ -127,7 +127,15 @@ class ProbeE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        ProbeCreateDto dto = new ProbeCreateDto("", ProbeType.FIRST, "f213", 1., 1., 2.);
+        ProbeCreateDto dto = ProbeCreateDto.builder()
+                .name("name for test")
+                .type(ProbeType.FIRST)
+                .code("f213")
+                .massTheory(-1.)
+                .bankaEmptyMass(1.)
+                .build();
+
+        System.out.println(dto);
 
         mvc.perform(post("/probes")
                         .content(objectMapper.writeValueAsString(dto))
