@@ -19,4 +19,11 @@ public class ProteinsResearchMapper {
                 .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
                 .build();
     }
+
+    void updateEntity(@NotNull ProteinsResearch entity, @NotNull ProteinsResearchUpdateDto dto) {
+        entity.setTitrantVolumeParallelFirst(dto.titrantVolumeParallelFirst());
+        entity.setTitrantVolumeParallelSecond(dto.titrantVolumeParallelSecond());
+        entity.setControlVolume(dto.controlVolume());
+        entity.setCoefficient(dto.coefficient());
+    }
 }

@@ -2,7 +2,6 @@ package ru.caloricity.probe;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -50,13 +49,9 @@ public class ProbeService {
     }
 
     public void update(UUID id, ProbeUpdateDto dto) {
-        Optional<Probe> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        } else {
-            throw new EntityNotFoundException(id, Probe.class);
-        }
+        Probe probe = findById(id).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
+        mapper.updateEntity(probe, dto);
+        repository.save(probe);
     }
 
     public void deleteById(UUID id) {

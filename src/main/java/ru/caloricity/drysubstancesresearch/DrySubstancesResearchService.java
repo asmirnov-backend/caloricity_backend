@@ -1,7 +1,6 @@
 package ru.caloricity.drysubstancesresearch;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -46,11 +45,9 @@ public class DrySubstancesResearchService {
     }
 
     public void update(UUID id, DrySubstancesResearchUpdateDto dto) {
-        Optional<DrySubstancesResearch> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        }
+        DrySubstancesResearch research = findById(id).orElseThrow(() -> new EntityNotFoundException(id, DrySubstancesResearch.class));
+        mapper.updateEntity(research, dto);
+        repository.save(research);
     }
 
     public void deleteById(UUID id) {

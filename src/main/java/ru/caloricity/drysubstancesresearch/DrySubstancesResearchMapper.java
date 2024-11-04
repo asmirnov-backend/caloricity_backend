@@ -1,5 +1,6 @@
 package ru.caloricity.drysubstancesresearch;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.caloricity.probe.ProbeService;
@@ -10,7 +11,7 @@ import ru.caloricity.probe.ProbeService;
 public class DrySubstancesResearchMapper {
     private final ProbeService probeService;
 
-    public DrySubstancesResearch toEntity(DrySubstancesResearchCreateDto dto) {
+    public DrySubstancesResearch toEntity(@NotNull DrySubstancesResearchCreateDto dto) {
         return DrySubstancesResearch.builder()
                 .byuksaParallelFirst(dto.byuksaParallelFirst())
                 .byuksaParallelSecond(dto.byuksaParallelSecond())
@@ -20,7 +21,7 @@ public class DrySubstancesResearchMapper {
                 .build();
     }
 
-    public DrySubstancesResearchDto toDto(DrySubstancesResearch entity) {
+    public DrySubstancesResearchDto toDto(@NotNull DrySubstancesResearch entity) {
         return DrySubstancesResearchDto.builder()
                 .id(entity.getId())
                 .byuksaParallelFirst(entity.getByuksaParallelFirst())
@@ -31,5 +32,12 @@ public class DrySubstancesResearchMapper {
                 .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
                 .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
                 .build();
+    }
+
+    void updateEntity(@NotNull DrySubstancesResearch entity, @NotNull DrySubstancesResearchUpdateDto dto) {
+        entity.setByuksaParallelFirst(dto.byuksaParallelFirst());
+        entity.setByuksaParallelSecond(dto.byuksaParallelSecond());
+        entity.setByuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst());
+        entity.setByuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond());
     }
 }

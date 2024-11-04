@@ -32,4 +32,11 @@ public class FatsResearchMapper {
                 .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
                 .build();
     }
+
+    void updateEntity(@NotNull FatsResearch entity, @NotNull FatsResearchUpdateDto dto) {
+        entity.setPatronMassBeforeExtractionParallelFirst(dto.patronMassBeforeExtractionParallelFirst());
+        entity.setPatronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond());
+        entity.setPatronMassAfterExtractionParallelFirst(dto.patronMassAfterExtractionParallelFirst());
+        entity.setPatronMassAfterExtractionParallelSecond(dto.patronMassAfterExtractionParallelSecond());
+    }
 }

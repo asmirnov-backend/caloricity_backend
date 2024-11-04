@@ -17,4 +17,13 @@ public class IngredientMapper {
                 .carbohydrates(dto.carbohydrates())
                 .build();
     }
+
+    void updateEntity(@NotNull Ingredient entity, @NotNull IngredientUpdateDto dto) {
+        entity.setName(dto.name());
+        entity.setEdiblePart(dto.ediblePart());
+        entity.setWater(dto.water());
+        entity.setProteins(dto.proteins());
+        entity.setFats(dto.fats());
+        entity.setCarbohydrates(dto.carbohydrates());
+    }
 }

@@ -1,7 +1,6 @@
 package ru.caloricity.carbohydratesresearch;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -45,11 +44,9 @@ public class CarbohydratesResearchService {
     }
 
     public void update(UUID id, CarbohydratesResearchUpdateDto dto) {
-        Optional<CarbohydratesResearch> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        }
+        CarbohydratesResearch research = findById(id).orElseThrow(() -> new EntityNotFoundException(id, CarbohydratesResearch.class));
+        mapper.updateEntity(research, dto);
+        repository.save(research);
     }
 
     public void deleteById(UUID id) {

@@ -32,4 +32,11 @@ public class CarbohydratesResearchMapper {
                 .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
                 .build();
     }
+
+    void updateEntity(@NotNull CarbohydratesResearch entity, @NotNull CarbohydratesResearchUpdateDto dto) {
+        entity.setByuksaParallelFirst(dto.byuksaParallelFirst());
+        entity.setByuksaParallelSecond(dto.byuksaParallelSecond());
+        entity.setByuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst());
+        entity.setByuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond());
+    }
 }

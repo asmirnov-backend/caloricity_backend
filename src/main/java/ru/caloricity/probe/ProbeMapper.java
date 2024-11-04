@@ -31,4 +31,12 @@ public class ProbeMapper {
                 .minerals(entity.getMinerals())
                 .build();
     }
+
+    void updateEntity(@NotNull Probe entity, @NotNull ProbeUpdateDto dto) {
+        entity.setName(dto.name());
+        entity.setCode(dto.code());
+        entity.setMassTheory(dto.massTheory());
+        entity.setBankaEmptyMass(dto.bankaEmptyMass());
+        entity.setBankaWithProbeMass(dto.bankaWithProbeMass());
+    }
 }

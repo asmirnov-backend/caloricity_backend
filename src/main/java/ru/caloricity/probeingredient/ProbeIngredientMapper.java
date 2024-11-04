@@ -35,4 +35,9 @@ public class ProbeIngredientMapper {
                 .carbohydrates(probeIngredient.carbohydrates())
                 .build();
     }
+
+    void updateEntity(@NotNull ProbeIngredient entity, @NotNull ProbeIngredientUpdateDto dto) {
+        entity.setGross(dto.gross());
+        entity.setNet(dto.net());
+    }
 }

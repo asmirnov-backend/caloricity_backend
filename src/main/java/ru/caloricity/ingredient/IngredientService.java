@@ -2,7 +2,6 @@ package ru.caloricity.ingredient;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -52,14 +51,10 @@ public class IngredientService {
         return new IdDto(entity.getId());
     }
 
-    public void update(UUID id, IngredientCreateDto dto) {
-        Optional<Ingredient> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        } else {
-            throw new EntityNotFoundException(id, Ingredient.class);
-        }
+    public void update(UUID id, IngredientUpdateDto dto) {
+        Ingredient ingredient = findById(id).orElseThrow(() -> new EntityNotFoundException(id, Ingredient.class));
+        mapper.updateEntity(ingredient, dto);
+        repository.save(ingredient);
     }
 
     public void deleteById(UUID id) {

@@ -44,14 +44,9 @@ public class ProbeIngredientService {
     }
 
     public void update(UUID id, ProbeIngredientUpdateDto dto) {
-        Optional<ProbeIngredient> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            currentEntity.get().setGross(dto.gross());
-            currentEntity.get().setNet(dto.net());
-            repository.save(currentEntity.get());
-        } else {
-            throw new EntityNotFoundException(id, ProbeIngredient.class);
-        }
+        ProbeIngredient probeIngredient = findById(id).orElseThrow(() -> new EntityNotFoundException(id, ProbeIngredient.class));
+        mapper.updateEntity(probeIngredient, dto);
+        repository.save(probeIngredient);
     }
 
     public void deleteById(UUID id) {

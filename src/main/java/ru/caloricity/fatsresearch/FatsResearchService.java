@@ -1,7 +1,6 @@
 package ru.caloricity.fatsresearch;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -45,11 +44,9 @@ public class FatsResearchService {
     }
 
     public void update(UUID id, FatsResearchUpdateDto dto) {
-        Optional<FatsResearch> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        }
+        FatsResearch research = findById(id).orElseThrow(() -> new EntityNotFoundException(id, FatsResearch.class));
+        mapper.updateEntity(research, dto);
+        repository.save(research);
     }
 
     public void deleteById(UUID id) {

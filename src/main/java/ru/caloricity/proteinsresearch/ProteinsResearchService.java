@@ -1,7 +1,6 @@
 package ru.caloricity.proteinsresearch;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -38,11 +37,9 @@ public class ProteinsResearchService {
     }
 
     public void update(UUID id, ProteinsResearchUpdateDto dto) {
-        Optional<ProteinsResearch> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        }
+        ProteinsResearch research = findById(id).orElseThrow(() -> new EntityNotFoundException(id, ProteinsResearch.class));
+        mapper.updateEntity(research, dto);
+        repository.save(research);
     }
 
     public void deleteById(UUID id) {
