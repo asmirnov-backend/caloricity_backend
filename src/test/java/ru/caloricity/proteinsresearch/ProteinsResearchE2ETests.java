@@ -26,12 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class ProteinsResearchE2ETests {
-
 
     @Autowired
     private MockMvc mvc;
@@ -57,7 +56,6 @@ class ProteinsResearchE2ETests {
     @Test
     void getAll_ok() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-
         repository.save(new ProteinsResearchFactory().createSimple(probe));
 
         mvc.perform(get("/proteins-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
@@ -98,6 +96,10 @@ class ProteinsResearchE2ETests {
         assertTrue(createdEntity.isPresent());
         assertNotNull(createdEntity.get().getProbe());
         assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getTitrantVolumeParallelFirst(), dto.titrantVolumeParallelFirst());
+        assertEquals(createdEntity.get().getTitrantVolumeParallelSecond(), dto.titrantVolumeParallelSecond());
+        assertEquals(createdEntity.get().getControlVolume(), dto.controlVolume());
+        assertEquals(createdEntity.get().getCoefficient(), dto.coefficient());
     }
 
     @Test
@@ -132,7 +134,10 @@ class ProteinsResearchE2ETests {
 
         Optional<ProteinsResearch> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
+        assertEquals(updated.get().getTitrantVolumeParallelFirst(), dto.titrantVolumeParallelFirst());
         assertEquals(updated.get().getTitrantVolumeParallelSecond(), dto.titrantVolumeParallelSecond());
+        assertEquals(updated.get().getControlVolume(), dto.controlVolume());
+        assertEquals(updated.get().getCoefficient(), dto.coefficient());
     }
 
     @Test

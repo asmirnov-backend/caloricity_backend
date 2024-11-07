@@ -35,7 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class ProbeIngredientE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -97,7 +96,6 @@ class ProbeIngredientE2ETests {
                 .andExpect(jsonPath("$.content[0].carbohydrates").value(1));
     }
 
-
     @Test
     void create_created() throws Exception {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
@@ -126,6 +124,10 @@ class ProbeIngredientE2ETests {
 
         Optional<ProbeIngredient> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
+        assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getIngredient().getId(), ingredient.getId());
+        assertEquals(createdEntity.get().getGross(), dto.gross());
+        assertEquals(createdEntity.get().getNet(), dto.net());
     }
 
     @Test
@@ -218,5 +220,4 @@ class ProbeIngredientE2ETests {
         Optional<ProbeIngredient> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
     }
-
 }

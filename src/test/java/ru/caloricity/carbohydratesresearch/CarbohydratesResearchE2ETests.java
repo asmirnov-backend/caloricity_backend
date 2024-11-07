@@ -19,6 +19,7 @@ import ru.caloricity.probe.ProbeRepository;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -60,6 +61,7 @@ class CarbohydratesResearchE2ETests {
         mvc.perform(get("/carbohydrates-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
                 .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(60))
                 .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(61))
                 .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelFirst").value(50))
@@ -98,6 +100,10 @@ class CarbohydratesResearchE2ETests {
         assertTrue(createdEntity.isPresent());
         assertNotNull(createdEntity.get().getProbe());
         assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
+        assertEquals(createdEntity.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
@@ -132,7 +138,10 @@ class CarbohydratesResearchE2ETests {
 
         Optional<CarbohydratesResearch> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
-        assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaAfterDryingParallelSecond());
+        assertEquals(updated.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
+        assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(updated.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(updated.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
@@ -148,5 +157,4 @@ class CarbohydratesResearchE2ETests {
         assertTrue(deleted.isEmpty());
         assertTrue(probeRepository.findById(probe.getId()).isPresent());
     }
-
 }

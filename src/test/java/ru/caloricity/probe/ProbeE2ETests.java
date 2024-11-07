@@ -55,8 +55,7 @@ class ProbeE2ETests {
                 .andExpect(jsonPath("$.type").value(entity.getType().toString()))
                 .andExpect(jsonPath("$.massTheory").value(entity.getMassTheory()))
                 .andExpect(jsonPath("$.massFact").value(10))
-                .andExpect(jsonPath("$.minerals").value(0.12))
-        ;
+                .andExpect(jsonPath("$.minerals").value(0.12));
     }
 
     @Test
@@ -123,6 +122,12 @@ class ProbeE2ETests {
 
         Optional<Probe> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
+        assertEquals(createdEntity.get().getName(), dto.name());
+        assertEquals(createdEntity.get().getType(), dto.type());
+        assertEquals(createdEntity.get().getCode(), dto.code());
+        assertEquals(createdEntity.get().getMassTheory(), dto.massTheory());
+        assertEquals(createdEntity.get().getBankaEmptyMass(), dto.bankaEmptyMass());
+        assertEquals(createdEntity.get().getBankaWithProbeMass(), dto.bankaWithProbeMass());
     }
 
     @Test
@@ -134,8 +139,6 @@ class ProbeE2ETests {
                 .massTheory(-1.)
                 .bankaEmptyMass(1.)
                 .build();
-
-        System.out.println(dto);
 
         mvc.perform(post("/probes")
                         .content(objectMapper.writeValueAsString(dto))
@@ -149,11 +152,11 @@ class ProbeE2ETests {
     void update_ok() throws Exception {
         Probe entity = repository.save(new ProbeFactory().createSimple());
         ProbeUpdateDto dto = ProbeUpdateDto.builder()
-                .name("name for test132")
-                .code("f213")
-                .massTheory(1.)
-                .bankaEmptyMass(1.)
-                .bankaWithProbeMass(2.)
+                .name("updated name")
+                .code("updated code")
+                .massTheory(2.)
+                .bankaEmptyMass(2.)
+                .bankaWithProbeMass(3.)
                 .build();
 
         mvc.perform(put("/probes/{id}", entity.getId().toString())
@@ -166,6 +169,10 @@ class ProbeE2ETests {
         Optional<Probe> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
         assertEquals(updated.get().getName(), dto.name());
+        assertEquals(updated.get().getCode(), dto.code());
+        assertEquals(updated.get().getMassTheory(), dto.massTheory());
+        assertEquals(updated.get().getBankaEmptyMass(), dto.bankaEmptyMass());
+        assertEquals(updated.get().getBankaWithProbeMass(), dto.bankaWithProbeMass());
     }
 
     @Test
@@ -179,5 +186,4 @@ class ProbeE2ETests {
         Optional<Probe> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
     }
-
 }

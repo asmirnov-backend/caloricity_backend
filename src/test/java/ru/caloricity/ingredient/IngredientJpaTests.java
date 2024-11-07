@@ -1,6 +1,5 @@
 package ru.caloricity.ingredient;
 
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -62,4 +61,20 @@ public class IngredientJpaTests {
         assertEquals(names.next(), "кабачки");
     }
 
+    @Test
+    void findAllByNameLikeIgnoreCaseOrderByName_noMatch() {
+        repository.deleteAll();
+        var factory = new IngredientFactory();
+        repository.saveAll(List.of(
+                factory.createSimpleWithName("кабачки"),
+                factory.createSimpleWithName("баклажаны"),
+                factory.createSimpleWithName("Бананы"),
+                factory.createSimpleWithName("баобабы"),
+                factory.createSimpleWithName("апельсины")
+        ));
+
+        Page<IngredientInPageDto> ingredients = repository.findAllByNameLikeIgnoreCaseOrderByName(Pageable.ofSize(10), "%xyz%");
+
+        assertEquals(ingredients.getTotalElements(), 0);
+    }
 }

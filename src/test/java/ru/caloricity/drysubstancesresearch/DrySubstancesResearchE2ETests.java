@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class DrySubstancesResearchE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -57,7 +56,6 @@ class DrySubstancesResearchE2ETests {
     @Test
     void getAll_ok() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-
         repository.save(new DrySubstancesResearchFactory().createSimple(probe));
 
         mvc.perform(get("/dry-substances-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
@@ -102,6 +100,10 @@ class DrySubstancesResearchE2ETests {
         assertTrue(createdEntity.isPresent());
         assertNotNull(createdEntity.get().getProbe());
         assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
+        assertEquals(createdEntity.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
@@ -136,7 +138,10 @@ class DrySubstancesResearchE2ETests {
 
         Optional<DrySubstancesResearch> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
+        assertEquals(updated.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
         assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(updated.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(updated.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
@@ -152,5 +157,4 @@ class DrySubstancesResearchE2ETests {
         assertTrue(deleted.isEmpty());
         assertTrue(probeRepository.findById(probe.getId()).isPresent());
     }
-
 }

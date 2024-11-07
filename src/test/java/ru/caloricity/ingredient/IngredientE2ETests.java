@@ -130,6 +130,12 @@ class IngredientE2ETests {
 
         Optional<Ingredient> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
+        assertEquals(createdEntity.get().getName(), dto.name());
+        assertEquals(createdEntity.get().getEdiblePart(), dto.ediblePart());
+        assertEquals(createdEntity.get().getWater(), dto.water());
+        assertEquals(createdEntity.get().getProteins(), dto.proteins());
+        assertEquals(createdEntity.get().getFats(), dto.fats());
+        assertEquals(createdEntity.get().getCarbohydrates(), dto.carbohydrates());
     }
 
     @Test
@@ -154,13 +160,13 @@ class IngredientE2ETests {
     @Test
     void update_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
-        IngredientCreateDto dto = IngredientCreateDto.builder()
-                .name("name for test")
-                .ediblePart(1.)
-                .water(1.)
-                .proteins(1.)
-                .fats(1.)
-                .carbohydrates(1.)
+        IngredientUpdateDto dto = IngredientUpdateDto.builder()
+                .name("updated name")
+                .ediblePart(0.5)
+                .water(2.)
+                .proteins(2.)
+                .fats(2.)
+                .carbohydrates(2.)
                 .build();
 
         mvc.perform(put("/ingredients/{id}", entity.getId().toString())
@@ -173,6 +179,11 @@ class IngredientE2ETests {
         Optional<Ingredient> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
         assertEquals(updated.get().getName(), dto.name());
+        assertEquals(updated.get().getEdiblePart(), dto.ediblePart());
+        assertEquals(updated.get().getWater(), dto.water());
+        assertEquals(updated.get().getProteins(), dto.proteins());
+        assertEquals(updated.get().getFats(), dto.fats());
+        assertEquals(updated.get().getCarbohydrates(), dto.carbohydrates());
     }
 
     @Test
@@ -198,5 +209,4 @@ class IngredientE2ETests {
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> assertInstanceOf(CascadeDeleteRestrictException.class, result.getResolvedException()));
     }
-
 }
