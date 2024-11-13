@@ -67,6 +67,8 @@ class FatsResearchE2ETests {
                 .andExpect(jsonPath("$.content[0].patronMassAfterExtractionParallelFirst").value(11))
                 .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelSecond").value(90))
                 .andExpect(jsonPath("$.content[0].patronMassAfterExtractionParallelSecond").value(12))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelSecond").value(10))
                 .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(69))
                 .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(78))
                 .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(73.5));
@@ -80,6 +82,8 @@ class FatsResearchE2ETests {
                 .patronMassBeforeExtractionParallelSecond(2.)
                 .patronMassAfterExtractionParallelFirst(1.)
                 .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .probeId(probe.getId())
                 .build();
 
@@ -110,6 +114,8 @@ class FatsResearchE2ETests {
                 .patronMassBeforeExtractionParallelSecond(null)
                 .patronMassAfterExtractionParallelFirst(1.)
                 .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .probeId(UUID.randomUUID())
                 .build();
 
@@ -129,6 +135,8 @@ class FatsResearchE2ETests {
                 .patronMassBeforeExtractionParallelSecond(2.)
                 .patronMassAfterExtractionParallelFirst(1.)
                 .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .build();
 
         mvc.perform(put("/fats-researches/{id}", entity.getId().toString())

@@ -25,6 +25,7 @@ CREATE DATABASE caloricity_test WITH OWNER caloricity ENCODING 'UTF-8';
 ## TODO
 
 - Write more tests
+- Add api version in header
 - Масса сухого остатка = масса до высушивания минус масса после высушивания (Для исследований). Затем расситать среднюю из двух параллелей
 - Add error descriptions to swagger https://habr.com/ru/articles/814061/
 - Add protocols module

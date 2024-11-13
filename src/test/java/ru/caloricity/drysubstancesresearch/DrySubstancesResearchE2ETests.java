@@ -66,6 +66,8 @@ class DrySubstancesResearchE2ETests {
                 .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(62))
                 .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelFirst").value(50))
                 .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelSecond").value(52))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelSecond").value(10))
                 .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(11))
                 .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(10))
                 .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(10.5));
@@ -79,6 +81,8 @@ class DrySubstancesResearchE2ETests {
                 .byuksaParallelSecond(2.)
                 .byuksaAfterDryingParallelFirst(10.)
                 .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .probeId(probe.getId())
                 .build();
 
@@ -113,6 +117,8 @@ class DrySubstancesResearchE2ETests {
                 .byuksaParallelSecond(null)
                 .byuksaAfterDryingParallelFirst(10.)
                 .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .probeId(UUID.randomUUID())
                 .build();
 
@@ -127,7 +133,7 @@ class DrySubstancesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         DrySubstancesResearch entity = repository.save(new DrySubstancesResearchFactory().createSimple());
-        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2., 1., 1., 10.);
+        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2., 1., 1., 10.,10.,10.);
 
         mvc.perform(put("/dry-substances-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

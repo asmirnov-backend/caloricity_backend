@@ -16,6 +16,8 @@ public class FatsResearchMapper {
                 .patronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond())
                 .patronMassAfterExtractionParallelFirst(dto.patronMassAfterExtractionParallelFirst())
                 .patronMassAfterExtractionParallelSecond(dto.patronMassAfterExtractionParallelSecond())
+                .massNaveskiParallelFirst(dto.massNaveskiParallelFirst())
+                .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
                 .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
                 .build();
     }
@@ -27,6 +29,8 @@ public class FatsResearchMapper {
                 .patronMassBeforeExtractionParallelSecond(entity.getPatronMassBeforeExtractionParallelSecond())
                 .patronMassAfterExtractionParallelFirst(entity.getPatronMassAfterExtractionParallelFirst())
                 .patronMassAfterExtractionParallelSecond(entity.getPatronMassAfterExtractionParallelSecond())
+                .massNaveskiParallelFirst(entity.getMassNaveskiParallelFirst())
+                .massNaveskiParallelSecond(entity.getMassNaveskiParallelSecond())
                 .dryResidueWeightParallelFirst(entity.getDryResidueWeightParallelFirst())
                 .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
                 .dryResidueWeightAverage(entity.getDryResidueWeightAverage())

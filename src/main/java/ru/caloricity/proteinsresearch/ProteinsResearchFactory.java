@@ -14,6 +14,8 @@ public class ProteinsResearchFactory {
         research.setId(uuidIterator.next());
         research.setTitrantVolumeParallelFirst(10.);
         research.setTitrantVolumeParallelSecond(20.);
+        research.setMassNaveskiParallelFirst(10.);
+        research.setMassNaveskiParallelSecond(10.);
         research.setCoefficient(0.95);
         research.setControlVolume(5.);
         return research;

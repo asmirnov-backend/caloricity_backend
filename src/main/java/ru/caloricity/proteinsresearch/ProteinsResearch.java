@@ -31,6 +31,20 @@ public class ProteinsResearch extends BaseEntity {
     @NotNull
     private Double titrantVolumeParallelSecond;
 
+    @Comment("Масса навески первая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelFirst;
+
+    @Comment("Масса навески вторая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelSecond;
+
+//    @Comment("Масса белков, г")
+//
+//    private Double getMass() { первая, вторая параллель и среднее
+//      return 0.0014 * coefficient * (titrantVolumeParallelFirst - controlVolume) * 6.25 * масса фактическая пробы / масса навески первая параллель
+//    };
+
     @Comment("Объём контроля, г/см^3")
     @NotNull
     private Double controlVolume;

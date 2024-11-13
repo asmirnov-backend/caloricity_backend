@@ -33,6 +33,14 @@ public class DrySubstancesResearch extends BaseEntity {
     @NotNull
     private Double byuksaParallelSecond;
 
+    @Comment("Масса навески первая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelFirst;
+
+    @Comment("Масса навески вторая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelSecond;
+
     @Comment("Масса бюксы с пробой после высушивания первая параллель, г")
     @NotNull
     private Double byuksaAfterDryingParallelFirst;
@@ -47,11 +55,16 @@ public class DrySubstancesResearch extends BaseEntity {
     private Probe probe;
 
     public Double getDryResidueWeightParallelFirst() {
-        return byuksaParallelFirst - byuksaAfterDryingParallelFirst;
+        // это для первого и второго
+        return byuksaParallelFirst - byuksaAfterDryingParallelFirst; // + Масса пробы первая параллель, г
+
+        // а для третьего блюда
+        // масса пробы == масса навески
+        // (byuksaAfterDryingParallelFirst - byuksaParallelFirst) * масса фактичиская пробы / Масса пробы первая параллель;
     }
 
     public Double getDryResidueWeightParallelSecond() {
-        return byuksaParallelSecond - byuksaAfterDryingParallelSecond;
+        return byuksaParallelSecond - byuksaAfterDryingParallelSecond; // + Масса пробы второй параллель, г
     }
 
     public Double getDryResidueWeightAverage() {

@@ -16,6 +16,8 @@ public class FatsResearchFactory {
         research.setPatronMassAfterExtractionParallelFirst(11.);
         research.setPatronMassBeforeExtractionParallelSecond(90.);
         research.setPatronMassAfterExtractionParallelSecond(12.);
+        research.setMassNaveskiParallelFirst(10.);
+        research.setMassNaveskiParallelSecond(10.);
         return research;
     }
 

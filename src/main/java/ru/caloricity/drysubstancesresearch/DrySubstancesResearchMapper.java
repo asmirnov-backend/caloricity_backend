@@ -17,6 +17,8 @@ public class DrySubstancesResearchMapper {
                 .byuksaParallelSecond(dto.byuksaParallelSecond())
                 .byuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst())
                 .byuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond())
+                .massNaveskiParallelFirst(dto.massNaveskiParallelFirst())
+                .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
                 .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
                 .build();
     }
@@ -28,6 +30,8 @@ public class DrySubstancesResearchMapper {
                 .byuksaParallelSecond(entity.getByuksaParallelSecond())
                 .byuksaAfterDryingParallelFirst(entity.getByuksaAfterDryingParallelFirst())
                 .byuksaAfterDryingParallelSecond(entity.getByuksaAfterDryingParallelSecond())
+                .massNaveskiParallelFirst(entity.getMassNaveskiParallelFirst())
+                .massNaveskiParallelSecond(entity.getMassNaveskiParallelSecond())
                 .dryResidueWeightParallelFirst(entity.getDryResidueWeightParallelFirst())
                 .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
                 .dryResidueWeightAverage(entity.getDryResidueWeightAverage())

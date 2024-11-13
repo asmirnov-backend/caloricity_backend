@@ -13,6 +13,8 @@ public record FatsResearchCreateDto(
         @NotNull @Min(0) Double patronMassBeforeExtractionParallelSecond,
         @NotNull @Min(0) Double patronMassAfterExtractionParallelFirst,
         @NotNull @Min(0) Double patronMassAfterExtractionParallelSecond,
+        @NotNull @Min(0) Double massNaveskiParallelFirst,
+        @NotNull @Min(0) Double massNaveskiParallelSecond,
         @NotNull UUID probeId
 ) {
 }

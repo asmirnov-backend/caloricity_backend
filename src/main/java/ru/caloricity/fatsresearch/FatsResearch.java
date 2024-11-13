@@ -39,6 +39,14 @@ public class FatsResearch extends BaseEntity {
     @NotNull
     private Double patronMassAfterExtractionParallelSecond;
 
+    @Comment("Масса навески первая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelFirst;
+
+    @Comment("Масса навески вторая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelSecond;
+
     @OneToOne(optional = false)
     @JoinColumn(unique = true)
     private Probe probe;
@@ -54,6 +62,9 @@ public class FatsResearch extends BaseEntity {
     public Double getDryResidueWeightAverage() {
         return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0;
     }
+
+    // жиры масса
+    // return getDryResidueWeightAverage * probe.масса фактическая / масса навески
 
     @Override
     public final boolean equals(Object o) {

@@ -10,6 +10,8 @@ public record CarbohydratesResearchDto(UUID id,
                                        Double byuksaParallelSecond,
                                        Double byuksaAfterDryingParallelFirst,
                                        Double byuksaAfterDryingParallelSecond,
+                                       Double massNaveskiParallelFirst,
+                                       Double massNaveskiParallelSecond,
                                        Double dryResidueWeightParallelFirst,
                                        Double dryResidueWeightParallelSecond,
                                        Double dryResidueWeightAverage

@@ -16,6 +16,8 @@ public class DrySubstancesResearchFactory {
         research.setByuksaAfterDryingParallelSecond(52.);
         research.setByuksaParallelFirst(61.);
         research.setByuksaParallelSecond(62.);
+        research.setMassNaveskiParallelFirst(10.);
+        research.setMassNaveskiParallelSecond(10.);
         return research;
     }
 

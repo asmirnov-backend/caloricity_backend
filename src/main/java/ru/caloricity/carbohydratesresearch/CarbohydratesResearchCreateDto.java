@@ -12,6 +12,8 @@ public record CarbohydratesResearchCreateDto(
         @NotNull @Min(0) Double byuksaParallelSecond,
         @NotNull @Min(0) Double byuksaAfterDryingParallelFirst,
         @NotNull @Min(0) Double byuksaAfterDryingParallelSecond,
+        @NotNull @Min(0) Double massNaveskiParallelFirst,
+        @NotNull @Min(0) Double massNaveskiParallelSecond,
         @NotNull UUID probeId
 ) {
 }

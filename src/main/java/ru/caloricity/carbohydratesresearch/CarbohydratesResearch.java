@@ -39,6 +39,14 @@ public class CarbohydratesResearch extends BaseEntity {
     @NotNull
     private Double byuksaAfterDryingParallelSecond;
 
+    // углеводы есть только в 3-ем блюде и они рассчитываются через сухие вещества
+    // 2 парралели, среднее
+    // return сухие вещества - минеральные вещества -> для третьего блюда
+    // return сухие вещества - масса белков - масса мин веществ - масса жиров -> для первого и второго блюда
+
+    // сухие вещества теоретическая (Есть для всех исследований)
+    // считается как сумма по всем ингредиентам в пробе
+
     @OneToOne(optional = false)
     @JoinColumn(unique = true)
     private Probe probe;

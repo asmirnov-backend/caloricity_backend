@@ -80,6 +80,9 @@ public class Probe extends BaseEntity {
         return getMassFact() * type.coefficientOfMinerals;
     }
 
+    // калорийность
+    // считается как (белки + углеводы )* 4 + жиры * 9
+    // теоретическая и фактическая считается, и отклонение
 
     @Override
     public final boolean equals(Object o) {

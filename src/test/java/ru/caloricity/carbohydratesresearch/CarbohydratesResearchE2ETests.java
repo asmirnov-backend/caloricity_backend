@@ -79,6 +79,8 @@ class CarbohydratesResearchE2ETests {
                 .byuksaParallelSecond(2.)
                 .byuksaAfterDryingParallelFirst(10.)
                 .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .probeId(probe.getId())
                 .build();
 
@@ -127,7 +129,7 @@ class CarbohydratesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         CarbohydratesResearch entity = repository.save(new CarbohydratesResearchFactory().createSimple());
-        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2., 1., 1., 1.);
+        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2., 1., 1., 1., 10.,10.);
 
         mvc.perform(put("/carbohydrates-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

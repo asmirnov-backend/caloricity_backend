@@ -62,7 +62,10 @@ class ProteinsResearchE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
+                .andExpect(jsonPath("$.content[0].titrantVolumeParallelFirst").value(10))
                 .andExpect(jsonPath("$.content[0].titrantVolumeParallelSecond").value(20))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelSecond").value(10))
                 .andExpect(jsonPath("$.content[0].coefficient").value(0.95))
                 .andExpect(jsonPath("$.content[0].controlVolume").value(5));
     }
@@ -73,6 +76,8 @@ class ProteinsResearchE2ETests {
         ProteinsResearchCreateDto dto = ProteinsResearchCreateDto.builder()
                 .titrantVolumeParallelFirst(1.)
                 .titrantVolumeParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .controlVolume(10.)
                 .coefficient(10.)
                 .probeId(probe.getId())
@@ -107,6 +112,8 @@ class ProteinsResearchE2ETests {
         ProteinsResearchCreateDto dto = ProteinsResearchCreateDto.builder()
                 .titrantVolumeParallelFirst(1.)
                 .titrantVolumeParallelSecond(null)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
                 .controlVolume(10.)
                 .coefficient(10.)
                 .probeId(UUID.randomUUID())
@@ -123,7 +130,7 @@ class ProteinsResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         ProteinsResearch entity = repository.save(new ProteinsResearchFactory().createSimple());
-        ProteinsResearchUpdateDto dto = new ProteinsResearchUpdateDto(2., 1., 1., 1.);
+        ProteinsResearchUpdateDto dto = new ProteinsResearchUpdateDto(2., 1., 1., 1.,10.,10.);
 
         mvc.perform(put("/proteins-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

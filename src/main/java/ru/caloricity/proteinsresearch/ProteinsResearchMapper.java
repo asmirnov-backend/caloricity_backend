@@ -14,6 +14,8 @@ public class ProteinsResearchMapper {
         return ProteinsResearch.builder()
                 .titrantVolumeParallelFirst(dto.titrantVolumeParallelFirst())
                 .titrantVolumeParallelSecond(dto.titrantVolumeParallelSecond())
+                .massNaveskiParallelFirst(dto.massNaveskiParallelFirst())
+                .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
                 .controlVolume(dto.controlVolume())
                 .coefficient(dto.coefficient())
                 .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
