@@ -42,5 +42,7 @@ public class FatsResearchMapper {
         entity.setPatronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond());
         entity.setPatronMassAfterExtractionParallelFirst(dto.patronMassAfterExtractionParallelFirst());
         entity.setPatronMassAfterExtractionParallelSecond(dto.patronMassAfterExtractionParallelSecond());
+        entity.setMassNaveskiParallelFirst(dto.massNaveskiParallelFirst());
+        entity.setMassNaveskiParallelSecond(dto.massNaveskiParallelSecond());
     }
 }

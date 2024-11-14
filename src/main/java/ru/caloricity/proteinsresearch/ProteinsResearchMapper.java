@@ -25,6 +25,8 @@ public class ProteinsResearchMapper {
     void updateEntity(@NotNull ProteinsResearch entity, @NotNull ProteinsResearchUpdateDto dto) {
         entity.setTitrantVolumeParallelFirst(dto.titrantVolumeParallelFirst());
         entity.setTitrantVolumeParallelSecond(dto.titrantVolumeParallelSecond());
+        entity.setMassNaveskiParallelFirst(dto.massNaveskiParallelFirst());
+        entity.setMassNaveskiParallelSecond(dto.massNaveskiParallelSecond());
         entity.setControlVolume(dto.controlVolume());
         entity.setCoefficient(dto.coefficient());
     }

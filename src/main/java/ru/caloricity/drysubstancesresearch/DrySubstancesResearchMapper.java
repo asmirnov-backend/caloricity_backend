@@ -43,5 +43,7 @@ public class DrySubstancesResearchMapper {
         entity.setByuksaParallelSecond(dto.byuksaParallelSecond());
         entity.setByuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst());
         entity.setByuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond());
+        entity.setMassNaveskiParallelFirst(dto.massNaveskiParallelFirst());
+        entity.setMassNaveskiParallelSecond(dto.massNaveskiParallelSecond());
     }
 }
