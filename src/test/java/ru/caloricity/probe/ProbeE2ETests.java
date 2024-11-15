@@ -12,8 +12,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 import ru.caloricity.common.exception.EntityNotFoundException;
+import ru.caloricity.ingredient.Ingredient;
+import ru.caloricity.ingredient.IngredientFactory;
+import ru.caloricity.ingredient.IngredientRepository;
+import ru.caloricity.probeingredient.ProbeIngredient;
+import ru.caloricity.probeingredient.ProbeIngredientFactory;
+import ru.caloricity.probeingredient.ProbeIngredientRepository;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.greaterThan;
@@ -35,6 +43,10 @@ class ProbeE2ETests {
     private ObjectMapper objectMapper;
     @Autowired
     private ProbeRepository repository;
+    @Autowired
+    private ProbeIngredientRepository probeIngredientRepository;
+    @Autowired
+    private IngredientRepository ingredientRepository;
 
     @Test
     void contextLoads() {
@@ -42,7 +54,12 @@ class ProbeE2ETests {
 
     @Test
     void getById_ok() throws Exception {
+        Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe entity = repository.save(new ProbeFactory().createSimple());
+        ProbeIngredient probeIngredient = probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(entity, ingredient));
+        Set<ProbeIngredient> probeIngredients = new HashSet<>();
+        probeIngredients.add(probeIngredient);
+        entity.setProbeIngredients(probeIngredients);
 
         mvc.perform(get("/probes/{id}", entity.getId()))
                 .andDo(print())
@@ -55,7 +72,8 @@ class ProbeE2ETests {
                 .andExpect(jsonPath("$.type").value(entity.getType().toString()))
                 .andExpect(jsonPath("$.massTheory").value(entity.getMassTheory()))
                 .andExpect(jsonPath("$.massFact").value(10))
-                .andExpect(jsonPath("$.minerals").value(0.12));
+                .andExpect(jsonPath("$.minerals").value(0.12))
+                .andExpect(jsonPath("$.theoreticalCaloricity").value(18.5));
     }
 
     @Test

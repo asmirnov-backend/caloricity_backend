@@ -12,7 +12,9 @@ import ru.caloricity.fatsresearch.FatsResearch;
 import ru.caloricity.probeingredient.ProbeIngredient;
 import ru.caloricity.proteinsresearch.ProteinsResearch;
 
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Getter
@@ -24,6 +26,24 @@ import java.util.Set;
 @Table(name = "probes")
 @Builder
 @AllArgsConstructor
+@NamedEntityGraph(
+        name = "Probe.withResearchesAndIngredients",
+        attributeNodes = {
+                @NamedAttributeNode("carbohydratesResearch"),
+                @NamedAttributeNode("drySubstancesResearch"),
+                @NamedAttributeNode("fatsResearch"),
+                @NamedAttributeNode("proteinsResearch"),
+                @NamedAttributeNode(value = "probeIngredients", subgraph = "ingredientSubgraph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "ingredientSubgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("ingredient")
+                        }
+                )
+        }
+)
 public class Probe extends BaseEntity {
     @Comment("Наименование пробы")
     @NotNull
@@ -50,20 +70,20 @@ public class Probe extends BaseEntity {
     @NotNull
     private Double bankaWithProbeMass;
 
-    @OneToMany(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "probe")
     @ToString.Exclude
-    private Set<ProbeIngredient> probeIngredient;
+    private Set<ProbeIngredient> probeIngredients;
 
-    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "probe")
     private CarbohydratesResearch carbohydratesResearch;
 
-    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "probe")
     private DrySubstancesResearch drySubstancesResearch;
 
-    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "probe", fetch = FetchType.EAGER)
     private FatsResearch fatsResearch;
 
-    @OneToOne(mappedBy = "probe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "probe")
     private ProteinsResearch proteinsResearch;
 
     /**
@@ -80,6 +100,14 @@ public class Probe extends BaseEntity {
         return getMassFact() * type.coefficientOfMinerals;
     }
 
+    public Double getTheoreticalCaloricity() {
+        return Optional.ofNullable(probeIngredients)
+                .stream()
+                .flatMap(Collection::stream)
+                .map(e -> e.getIngredient().getTheoreticalCaloricity() / 100 * e.getNet())
+                .mapToDouble(Double::doubleValue)
+                .sum();
+    }
     // калорийность
     // считается как (белки + углеводы )* 4 + жиры * 9
     // теоретическая и фактическая считается, и отклонение

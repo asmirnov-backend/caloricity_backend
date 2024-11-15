@@ -29,6 +29,7 @@ public class ProbeMapper {
                 .bankaWithProbeMass(entity.getBankaWithProbeMass())
                 .massFact(entity.getMassFact())
                 .minerals(entity.getMinerals())
+                .theoreticalCaloricity(entity.getTheoreticalCaloricity())
                 .build();
     }
 

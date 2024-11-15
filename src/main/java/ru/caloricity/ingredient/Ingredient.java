@@ -51,6 +51,13 @@ public class Ingredient extends BaseEntity {
     @ToString.Exclude
     private Set<ProbeIngredient> probeIngredients;
 
+    /**
+     * @return Теоретическая калорийность 100 г ингредиента
+     */
+    public Double getTheoreticalCaloricity() {
+        return fats * 9.0 + (carbohydrates + proteins) * 4.0;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

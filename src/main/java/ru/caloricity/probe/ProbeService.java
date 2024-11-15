@@ -30,8 +30,8 @@ public class ProbeService {
         return repository.findAllDtoBy(pageable);
     }
 
-    public ProbeDto findDtoByIdOrThrow(UUID id) {
-        return repository.findById(id).map(mapper::toDto).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
+    public ProbeDto findProbeWithResearchesAndIngredientsByIdOrThrow(UUID id) {
+        return repository.findProbeWithResearchesAndIngredientsById(id).map(mapper::toDto).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
     }
 
     public Probe getExistingReferenceByIdOrThrow(UUID id) {

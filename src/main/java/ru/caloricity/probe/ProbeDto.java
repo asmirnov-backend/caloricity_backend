@@ -17,6 +17,7 @@ public record ProbeDto(UUID id,
                        Double bankaEmptyMass,
                        Double bankaWithProbeMass,
                        Double massFact,
-                       Double minerals
+                       Double minerals,
+                       Double theoreticalCaloricity
 ) {
 }

@@ -28,7 +28,7 @@ class ProbeController {
 
     @GetMapping("{id}")
     public ProbeDto findOne(@PathVariable(name = "id") UUID id) {
-        return service.findDtoByIdOrThrow(id);
+        return service.findProbeWithResearchesAndIngredientsByIdOrThrow(id);
     }
 
     @PostMapping
