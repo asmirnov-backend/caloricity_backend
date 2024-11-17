@@ -6,37 +6,1576 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
     <changeSet id="23123" author="a2s">
         <insert tableName="ingredients">
-            <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345000000"/>
-            <column name="name" value="Огурец тестовый"/>
-            <column name="edible_part" value="100"/>
-            <column name="water" value="70"/>
-            <column name="proteins" value="21.2"/>
-            <column name="fats" value="23.23"/>
-            <column name="carbohydrates" value="23.22"/>
+            <column name="id" value="f99d57f9-f7eb-464f-a22e-5f4973e135bd"/>
+            <column name="name" value="Апельсины"/>
+            <column name="edible_part" value="0.7"/>
+            <column name="water" value="87.5"/>
+            <column name="proteins" value="0.9"/>
+            <column name="fats" value="0.2"/>
+            <column name="carbohydrates" value="8.1"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
-            <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345050001"/>
-            <column name="name" value="Арбуз тестовый"/>
-            <column name="edible_part" value="10"/>
-            <column name="water" value="7"/>
-            <column name="proteins" value="1.2"/>
-            <column name="fats" value="2.2"/>
+            <column name="id" value="3d723c67-21e0-434e-a6dd-9208e6cfe748"/>
+            <column name="name" value="Батон"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="36.6"/>
+            <column name="proteins" value="8"/>
+            <column name="fats" value="0.9"/>
+            <column name="carbohydrates" value="48.9"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="5596347b-e62e-4a45-94ea-11810e40c920"/>
+            <column name="name" value="Брусника морожен."/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="86"/>
+            <column name="proteins" value="0.7"/>
+            <column name="fats" value="0.5"/>
+            <column name="carbohydrates" value="9.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="117bb4d0-59f0-4e03-a3fa-f12d0aeda933"/>
+            <column name="name" value="Булка городская пш.1с."/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="33.6"/>
+            <column name="proteins" value="7.8"/>
+            <column name="fats" value="2.5"/>
+            <column name="carbohydrates" value="50.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="a1ed575e-6fae-4847-9b0f-5375b4b29430"/>
+            <column name="name" value="Бульон из говядины"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="99.2"/>
+            <column name="proteins" value="0.6"/>
+            <column name="fats" value="0.2"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="5acdae16-453e-45a4-b8ef-4e9513d30d11"/>
+            <column name="name" value="Бульон из курицы"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="97.2"/>
+            <column name="proteins" value="2"/>
+            <column name="fats" value="0.5"/>
+            <column name="carbohydrates" value="0.3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b94df1a3-77d8-4956-ae2c-3fdb9545712b"/>
+            <column name="name" value="Бульон ио трески"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="89"/>
+            <column name="proteins" value="9.7"/>
+            <column name="fats" value="1.1"/>
+            <column name="carbohydrates" value="0.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="07e0f758-835e-4c76-820c-2a0906063ed1"/>
+            <column name="name" value="Бульон овощной"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="96.81"/>
+            <column name="proteins" value="0.65"/>
+            <column name="fats" value="0.18"/>
+            <column name="carbohydrates" value="2.36"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="62616efb-5abc-49a6-a609-eb53d56336ff"/>
+            <column name="name" value="Геркулес"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="12"/>
+            <column name="proteins" value="11"/>
+            <column name="fats" value="6.2"/>
+            <column name="carbohydrates" value="61.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="75beae86-364d-4520-afb4-d240d385e9ed"/>
+            <column name="name" value="Говядина 1 кат"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="64.5"/>
+            <column name="proteins" value="18.6"/>
+            <column name="fats" value="16"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="93fbfd61-9a6b-44a1-a3ff-942748ae010b"/>
+            <column name="name" value="Говядина бедро"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="76"/>
+            <column name="proteins" value="20.4"/>
+            <column name="fats" value="2.5"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="02ffd70f-c718-49cc-aecf-50c0481ad1f2"/>
+            <column name="name" value="Говядина грудинка"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="64.1"/>
+            <column name="proteins" value="16.3"/>
+            <column name="fats" value="18.7"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="bef1c8bc-c162-44e8-9cf9-f1a09f23fd97"/>
+            <column name="name" value="Говядина задняя часть"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="76"/>
+            <column name="proteins" value="20.4"/>
+            <column name="fats" value="2.5"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="33557af8-0879-4e1f-9c65-5ad3195bdddc"/>
+            <column name="name" value="Говядина лопатка"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="75.9"/>
+            <column name="proteins" value="19.4"/>
+            <column name="fats" value="3.6"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="5e740d9b-9cc0-4565-938f-53e19f4efc20"/>
+            <column name="name" value="Говядина тушеная в/с"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="64.3"/>
+            <column name="proteins" value="16.8"/>
+            <column name="fats" value="17"/>
+            <column name="carbohydrates" value="0.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="ab2a6513-f442-40b3-93d0-9cfa2f06ea22"/>
+            <column name="name" value="Горох лущеный"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="23"/>
+            <column name="fats" value="1.6"/>
+            <column name="carbohydrates" value="48.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="e00543f2-6cf0-4b0f-aff9-65f581e35832"/>
+            <column name="name" value="Горошек зеленый конс"/>
+            <column name="edible_part" value="0.95"/>
+            <column name="water" value="84.2"/>
+            <column name="proteins" value="3.1"/>
+            <column name="fats" value="0.2"/>
+            <column name="carbohydrates" value="6.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8319461c-090b-45b4-97de-1352e7c3701f"/>
+            <column name="name" value="Горчичный порошок"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="7.3"/>
+            <column name="proteins" value="37.1"/>
+            <column name="fats" value="11.1"/>
+            <column name="carbohydrates" value="32.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="d78e688b-e908-4978-8e45-2782b0312ad6"/>
+            <column name="name" value="Греча ядрица"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="12.6"/>
+            <column name="fats" value="3.3"/>
+            <column name="carbohydrates" value="62.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="1301ff26-c526-459c-9f1b-3294271e58d9"/>
+            <column name="name" value="Грибы белые свежие"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="89.4"/>
+            <column name="proteins" value="3.7"/>
+            <column name="fats" value="1.7"/>
+            <column name="carbohydrates" value="1.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8e463bf6-1e60-4390-8ad6-e78d21b95089"/>
+            <column name="name" value="Грибы белые сушёные"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="13"/>
+            <column name="proteins" value="30.3"/>
+            <column name="fats" value="14.3"/>
+            <column name="carbohydrates" value="9"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="cc6ba2f6-c868-42f4-a91c-debe564ee8b2"/>
+            <column name="name" value="Грибы подберезов.свеж"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="91.6"/>
+            <column name="proteins" value="2.3"/>
+            <column name="fats" value="0.9"/>
+            <column name="carbohydrates" value="1.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="f49bcf7c-b71d-4b19-9d4f-17b3d7baf0b9"/>
+            <column name="name" value="Грибы подберезов.сушён"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="13"/>
+            <column name="proteins" value="23.5"/>
+            <column name="fats" value="9.2"/>
+            <column name="carbohydrates" value="14.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b94a1480-a4fe-47a7-855a-ed343131c2c4"/>
+            <column name="name" value="Грудка куриная"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="73"/>
+            <column name="proteins" value="23.6"/>
+            <column name="fats" value="1.9"/>
+            <column name="carbohydrates" value="0.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="ff4567c0-49d9-4cda-99c1-05cfa1e4e865"/>
+            <column name="name" value="Изюм"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="19"/>
+            <column name="proteins" value="1.8"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="66"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="00919df5-b52c-49e7-aa08-9a32742e0da1"/>
+            <column name="name" value="Икра кабачковая"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="155.9"/>
+            <column name="proteins" value="1.6"/>
+            <column name="fats" value="6.3"/>
+            <column name="carbohydrates" value="7.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="c159dda7-27b9-48af-9112-947a886cebeb"/>
+            <column name="name" value="Какао-порошок"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="5"/>
+            <column name="proteins" value="24.3"/>
+            <column name="fats" value="15"/>
+            <column name="carbohydrates" value="10.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="d4c83e55-19c2-4471-817e-9a0f30b4e0f9"/>
+            <column name="name" value="Капуста белокачан"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="90"/>
+            <column name="proteins" value="1.8"/>
+            <column name="fats" value="0.1"/>
+            <column name="carbohydrates" value="4.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="51780eed-9aae-4f92-aaf4-ed7d5d263241"/>
+            <column name="name" value="Капуста квашеная"/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="89"/>
+            <column name="proteins" value="1.8"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="2.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b620be08-fad1-493c-ad7c-2b734990b70d"/>
+            <column name="name" value="Картофель"/>
+            <column name="edible_part" value="0.72"/>
+            <column name="water" value="76"/>
+            <column name="proteins" value="2"/>
+            <column name="fats" value="0.4"/>
+            <column name="carbohydrates" value="16.3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="2ba4f2cb-06b4-44b5-9ed7-7482af851509"/>
+            <column name="name" value="Колбаса  п/к Краковская"/>
+            <column name="edible_part" value="0.9"/>
+            <column name="water" value="34.6"/>
+            <column name="proteins" value="16.2"/>
+            <column name="fats" value="44.6"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="96203c23-2250-42cf-918a-9765aca388f3"/>
+            <column name="name" value="Колбаса  п/к Таллинская"/>
+            <column name="edible_part" value="0.9"/>
+            <column name="water" value="44.8"/>
+            <column name="proteins" value="17.1"/>
+            <column name="fats" value="33.8"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="27b257bd-72a5-4319-baa1-43774ff5a870"/>
+            <column name="name" value="Колбаса вар.Докторская"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="60.8"/>
+            <column name="proteins" value="12.8"/>
+            <column name="fats" value="22.2"/>
+            <column name="carbohydrates" value="4.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="0d3a5184-17ab-40fb-a9d2-2c1e2baacd98"/>
+            <column name="name" value="Колбаса вар.Любительская"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="57"/>
+            <column name="proteins" value="12.2"/>
+            <column name="fats" value="28"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="58df7bf0-f76d-435d-9317-d5fcd9fc8deb"/>
+            <column name="name" value="Колбаса вар.Русская"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="56.4"/>
+            <column name="proteins" value="11.8"/>
+            <column name="fats" value="28.9"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="38538c30-a317-4592-86c0-205b551098c9"/>
+            <column name="name" value="Колбаса п/к Украинская"/>
+            <column name="edible_part" value="0.9"/>
+            <column name="water" value="44.4"/>
+            <column name="proteins" value="16.5"/>
+            <column name="fats" value="34.4"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="3eef4eb7-89a6-45ff-a32a-81ea078bcf9b"/>
+            <column name="name" value="Кукуруза консервир."/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="81"/>
+            <column name="proteins" value="2.4"/>
+            <column name="fats" value="0.5"/>
+            <column name="carbohydrates" value="14.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="823380ad-71fc-427e-8733-9d329693276e"/>
+            <column name="name" value="Кура 1 кат"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="61.9"/>
+            <column name="proteins" value="18.2"/>
+            <column name="fats" value="18.4"/>
+            <column name="carbohydrates" value="0.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="c15aa3a7-0cee-4e5f-83c4-4f588233bab3"/>
+            <column name="name" value="Кура 2 кат"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="69.1"/>
+            <column name="proteins" value="21.2"/>
+            <column name="fats" value="8.2"/>
+            <column name="carbohydrates" value="1.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="54bec002-16d9-411e-8f1f-c7a53487e356"/>
+            <column name="name" value="Курага"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="20.2"/>
+            <column name="proteins" value="5.2"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="55"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="be3a6ede-eedf-4a21-b7d9-60dbd92f53a9"/>
+            <column name="name" value="Лавровый лист"/>
+            <column name="edible_part" value="0.1"/>
+            <column name="water" value="5.44"/>
+            <column name="proteins" value="7.61"/>
+            <column name="fats" value="8.36"/>
+            <column name="carbohydrates" value="48.67"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="9cd976a1-3743-4622-a358-a568222be73d"/>
+            <column name="name" value="Лук зеленый"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="93"/>
+            <column name="proteins" value="1.3"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="3.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b2e32468-7398-4de6-86d9-dbd0f43f0a60"/>
+            <column name="name" value="Лук репчатый"/>
+            <column name="edible_part" value="0.7"/>
+            <column name="water" value="86"/>
+            <column name="proteins" value="1.4"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="9.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="78991fd9-6516-48e1-9762-a6a8cbc48835"/>
+            <column name="name" value="Макароны в/с"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="13"/>
+            <column name="proteins" value="10.4"/>
+            <column name="fats" value="1.1"/>
+            <column name="carbohydrates" value="69.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="10ec7ce8-fb99-43a4-9c5d-f2c806b0c83c"/>
+            <column name="name" value="Макароны из муки 1с"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="13"/>
+            <column name="proteins" value="10.7"/>
+            <column name="fats" value="1.3"/>
+            <column name="carbohydrates" value="68.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="3e86b25b-65ae-4ffc-9979-44430d276866"/>
+            <column name="name" value="Манная крупа"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="10.3"/>
+            <column name="fats" value="1"/>
+            <column name="carbohydrates" value="67.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="5aea6b78-d3cc-4ec4-a4e1-b1ef5aaa8d22"/>
+            <column name="name" value="Маргарин сливочный"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="15.9"/>
+            <column name="proteins" value="0.3"/>
+            <column name="fats" value="82"/>
+            <column name="carbohydrates" value="1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="16be725e-8dad-4a26-b349-415fa2378b56"/>
+            <column name="name" value="Масло раст. нераф"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="0.2"/>
+            <column name="proteins" value="0"/>
+            <column name="fats" value="99.8"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="fb039f99-a364-4b9a-b625-56ff9072f6d2"/>
+            <column name="name" value="Масло раст. раф."/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="0.1"/>
+            <column name="proteins" value="0"/>
+            <column name="fats" value="99.9"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8cad4f02-f8b7-47b4-9674-49e5f8bd4b80"/>
+            <column name="name" value="Масло сливочное 72,5%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="25"/>
+            <column name="proteins" value="0.5"/>
+            <column name="fats" value="72.5"/>
+            <column name="carbohydrates" value="1.3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="50495eb2-5256-44fd-b796-adddf94bec1b"/>
+            <column name="name" value="Масло сливочное 82,5%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="16"/>
+            <column name="proteins" value="0.5"/>
+            <column name="fats" value="82.5"/>
+            <column name="carbohydrates" value="0.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="ad209c14-443e-4d08-adf3-861f99843604"/>
+            <column name="name" value="Минтай"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="81.9"/>
+            <column name="proteins" value="15.9"/>
+            <column name="fats" value="0.9"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="21798329-1938-4db2-81cf-ccdc8d3b7a2a"/>
+            <column name="name" value="Молоко 2,5%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="89.1"/>
+            <column name="proteins" value="2.82"/>
+            <column name="fats" value="2.5"/>
+            <column name="carbohydrates" value="4.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="12996c74-6ee0-4277-a9ef-63ccb29fe2b3"/>
+            <column name="name" value="Молоко 3,2%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="88.5"/>
+            <column name="proteins" value="2.8"/>
+            <column name="fats" value="3.2"/>
+            <column name="carbohydrates" value="4.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="d81d00c4-5e7e-4e74-8f95-ef6dc47bcbf9"/>
+            <column name="name" value="Молоко 3,5%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="88.2"/>
+            <column name="proteins" value="2.79"/>
+            <column name="fats" value="3.5"/>
+            <column name="carbohydrates" value="4.69"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="81b81aa3-6089-47a3-a3af-277f1888b61f"/>
+            <column name="name" value="Молоко обезжиренное"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="91.4"/>
+            <column name="proteins" value="3"/>
+            <column name="fats" value="0.5"/>
+            <column name="carbohydrates" value="4.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="fd0b1c21-3b24-401d-ae9d-569e00c4d221"/>
+            <column name="name" value="Молоко сгущ.с сахаром"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="26"/>
+            <column name="proteins" value="7.2"/>
+            <column name="fats" value="8.5"/>
+            <column name="carbohydrates" value="56"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="28973cbd-3872-4ec1-87ae-de5385492ae6"/>
+            <column name="name" value="Молоко сгущён.стерилиз"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="73.2"/>
+            <column name="proteins" value="7"/>
+            <column name="fats" value="8.3"/>
+            <column name="carbohydrates" value="9.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b4b01e12-64e7-4c8c-9e77-3fbee5b8474a"/>
+            <column name="name" value="Молоко стерилизованное"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="88.1"/>
+            <column name="proteins" value="2.9"/>
+            <column name="fats" value="3.5"/>
+            <column name="carbohydrates" value="4.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="5a8b07d0-3630-412e-aabe-d092c745bf74"/>
+            <column name="name" value="Молоко сухое Бурёнка"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="4"/>
+            <column name="proteins" value="15"/>
+            <column name="fats" value="25"/>
+            <column name="carbohydrates" value="47"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="3a939832-c7f3-41be-95e7-4ad2379df860"/>
+            <column name="name" value="Молоко топлёное 6%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="85.5"/>
+            <column name="proteins" value="3"/>
+            <column name="fats" value="6"/>
+            <column name="carbohydrates" value="4.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="db151778-0f5f-4adc-881d-af0a831fcb9e"/>
+            <column name="name" value="Морковь"/>
+            <column name="edible_part" value="0.9"/>
+            <column name="water" value="88"/>
+            <column name="proteins" value="1.3"/>
+            <column name="fats" value="0.1"/>
+            <column name="carbohydrates" value="7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b484bda9-cbfc-4653-9309-ae4dedb5099f"/>
+            <column name="name" value="Мука обдирная рожь"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="10.7"/>
+            <column name="fats" value="1.9"/>
+            <column name="carbohydrates" value="56.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="aff09dc3-54e3-4a1d-8d17-0ae0d18436b4"/>
+            <column name="name" value="Мука пшеничная 1 сорт"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="10.6"/>
+            <column name="fats" value="1.3"/>
+            <column name="carbohydrates" value="67.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="abd7f645-a47f-4c03-b023-46fcfcfb8bce"/>
+            <column name="name" value="Мука пшеничная в/с"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="10.3"/>
+            <column name="fats" value="1.1"/>
+            <column name="carbohydrates" value="68.9"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="57f03358-c87f-4033-b203-c147c0eb92ba"/>
+            <column name="name" value="Огурцы грунт"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="95"/>
+            <column name="proteins" value="0.8"/>
+            <column name="fats" value="0.1"/>
+            <column name="carbohydrates" value="2.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="33134296-1acc-4953-8d3a-f88be7a48588"/>
+            <column name="name" value="Огурцы маринованные"/>
+            <column name="edible_part" value="0.93"/>
+            <column name="water" value="92"/>
+            <column name="proteins" value="2.8"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="1.3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="3e3b5dcc-33e7-4f76-b17b-2fa823d26907"/>
+            <column name="name" value="Огурцы соленые"/>
+            <column name="edible_part" value="0.93"/>
+            <column name="water" value="92"/>
+            <column name="proteins" value="0.8"/>
+            <column name="fats" value="0.1"/>
+            <column name="carbohydrates" value="1.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="157ad4f4-6cec-4490-af37-5ec78bd0dcb6"/>
+            <column name="name" value="Окорочка куриные"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="66.6"/>
+            <column name="proteins" value="21.3"/>
+            <column name="fats" value="11"/>
+            <column name="carbohydrates" value="0.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="a01f92b6-f615-4ef1-95a4-26d80796f4be"/>
+            <column name="name" value="Окорочка куриные США"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="66"/>
+            <column name="proteins" value="15"/>
+            <column name="fats" value="19"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="887db1da-d485-46e0-8438-a150099984a9"/>
+            <column name="name" value="Перец сладк.болгарский"/>
+            <column name="edible_part" value="0.78"/>
+            <column name="water" value="90"/>
+            <column name="proteins" value="1.3"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="5.3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="7882f796-183a-48a8-a740-ded355733955"/>
+            <column name="name" value="Перец черный молотый"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="10.51"/>
+            <column name="proteins" value="10.95"/>
+            <column name="fats" value="3.26"/>
+            <column name="carbohydrates" value="38.31"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="72540ae2-0987-4570-b577-8260e6b769f6"/>
+            <column name="name" value="Перловая крупа"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="9.3"/>
+            <column name="fats" value="1.1"/>
+            <column name="carbohydrates" value="66.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="d4c1d787-fd03-47af-ad1a-256bf3ecc5e5"/>
+            <column name="name" value="Петрушка зелень"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="85"/>
+            <column name="proteins" value="3.7"/>
+            <column name="fats" value="0.4"/>
+            <column name="carbohydrates" value="8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="3a9aa2bd-2cc9-4392-9c36-cdf6c6251ce5"/>
+            <column name="name" value="Петрушка корень"/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="83"/>
+            <column name="proteins" value="1.5"/>
+            <column name="fats" value="0.6"/>
+            <column name="carbohydrates" value="10.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="690976d4-8a13-4722-b143-f4e93f70064e"/>
+            <column name="name" value="печень говяжья"/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="71.7"/>
+            <column name="proteins" value="17.9"/>
+            <column name="fats" value="3.7"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="08b96e3b-0bce-4419-9064-3cd227174453"/>
+            <column name="name" value="Печень свиная"/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="71.3"/>
+            <column name="proteins" value="18.8"/>
+            <column name="fats" value="3.6"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="1999fd94-ec48-4cb8-9d54-06aae678df1a"/>
+            <column name="name" value="Пикша б/г"/>
+            <column name="edible_part" value="0.7"/>
+            <column name="water" value="81.4"/>
+            <column name="proteins" value="17.2"/>
+            <column name="fats" value="0.5"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="68cc77db-2361-4acf-af17-802eb5e21a22"/>
+            <column name="name" value="Путассу"/>
+            <column name="edible_part" value="0.7"/>
+            <column name="water" value="79.2"/>
+            <column name="proteins" value="18.5"/>
+            <column name="fats" value="0.9"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8033cab1-08c7-4c0d-9c3f-06915343a924"/>
+            <column name="name" value="Пшеничеая крупа"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="11.5"/>
+            <column name="fats" value="1.3"/>
+            <column name="carbohydrates" value="63.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="1cdbfc8f-0ff9-4305-a8a4-4d85c3b9a11e"/>
+            <column name="name" value="Пшено"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="11.5"/>
+            <column name="fats" value="3.3"/>
+            <column name="carbohydrates" value="66.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="6c5703dc-5d9c-4538-b2e4-333010ced386"/>
+            <column name="name" value="Рис"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="7"/>
+            <column name="fats" value="1"/>
+            <column name="carbohydrates" value="71.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="eb4a436f-b22b-44be-9168-0562b0cfac6e"/>
+            <column name="name" value="Салат листья"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="94"/>
+            <column name="proteins" value="1.5"/>
+            <column name="fats" value="0.2"/>
+            <column name="carbohydrates" value="2.3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="2d29a976-12be-4d47-a92b-926bd9a780af"/>
+            <column name="name" value="Сардельки говяжьи"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="66.1"/>
+            <column name="proteins" value="11.4"/>
+            <column name="fats" value="18.2"/>
+            <column name="carbohydrates" value="1.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="7cf34b2e-0b14-4304-b923-f0bdd844bb6c"/>
+            <column name="name" value="Сардельки свиные"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="53.7"/>
+            <column name="proteins" value="10.1"/>
+            <column name="fats" value="31.6"/>
+            <column name="carbohydrates" value="1.9"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b7928d49-9916-4bd0-a7bb-3ad5eccc1a69"/>
+            <column name="name" value="Сардельки шпикачки"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="52.2"/>
+            <column name="proteins" value="9.2"/>
+            <column name="fats" value="36.1"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="847c276b-32a6-4eb3-a432-4b2d77a9eb06"/>
+            <column name="name" value="Сахар-песок"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="0.14"/>
+            <column name="proteins" value="0"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="99.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b25f6e95-b9d1-4596-8db4-804f60952e2a"/>
+            <column name="name" value="Свекла"/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="86"/>
+            <column name="proteins" value="1.5"/>
+            <column name="fats" value="0.1"/>
+            <column name="carbohydrates" value="9.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="6cca68be-f432-4c2e-8d5f-7892fb9c4cba"/>
+            <column name="name" value="Свинина беконная"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="54.2"/>
+            <column name="proteins" value="17"/>
+            <column name="fats" value="27.8"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8fbfde5e-603b-481e-a6e8-fcb80fa97702"/>
+            <column name="name" value="Свинина жирная"/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="38.4"/>
+            <column name="proteins" value="11.7"/>
+            <column name="fats" value="49.3"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="bad0a8e7-1e4f-485f-bd83-400f92ba802d"/>
+            <column name="name" value="Свинина мясная"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="51.5"/>
+            <column name="proteins" value="14.3"/>
+            <column name="fats" value="33.3"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="b5c0ea5b-358f-407a-9cd5-14186dcb44c2"/>
+            <column name="name" value="Сельдь малой соли"/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="53.9"/>
+            <column name="proteins" value="19.1"/>
+            <column name="fats" value="17.6"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="695c6c0c-9c1b-44ef-bffb-dfa9b7475f58"/>
+            <column name="name" value="Сердце говяжье"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="77.5"/>
+            <column name="proteins" value="16"/>
+            <column name="fats" value="3.5"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="70ca8e9f-83a1-42eb-b5d5-7adcddd35951"/>
+            <column name="name" value="Сердце свиное"/>
+            <column name="edible_part" value="0.75"/>
+            <column name="water" value="76.2"/>
+            <column name="proteins" value="16.2"/>
+            <column name="fats" value="4"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="559438da-8376-4d58-bfe0-4382f1cf53e8"/>
+            <column name="name" value="Скумбрия консервиров."/>
+            <column name="edible_part" value="0.8"/>
+            <column name="water" value="59.7"/>
+            <column name="proteins" value="16.4"/>
+            <column name="fats" value="21.4"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="82ab6ebd-34aa-4098-be42-a0b5d4ddf330"/>
+            <column name="name" value="Сметана 10%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="82.7"/>
+            <column name="proteins" value="3"/>
+            <column name="fats" value="10"/>
+            <column name="carbohydrates" value="2.9"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="f6698723-21e2-4186-aa02-69c69d05179d"/>
+            <column name="name" value="Сметана 15%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="77.7"/>
+            <column name="proteins" value="2.9"/>
+            <column name="fats" value="15"/>
+            <column name="carbohydrates" value="3.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="e2020eb3-ae80-43cd-ab10-4a6606a28446"/>
+            <column name="name" value="Сметана 20%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="72.7"/>
+            <column name="proteins" value="2.8"/>
+            <column name="fats" value="20"/>
             <column name="carbohydrates" value="3.2"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
         <insert tableName="ingredients">
-            <column name="id" value="6f7940e4-ffdf-4a23-ac5f-cfb345050002"/>
-            <column name="name" value="Дыня тестовая"/>
-            <column name="edible_part" value="103.31"/>
-            <column name="water" value="7.312"/>
-            <column name="proteins" value="132.2"/>
-            <column name="fats" value="23.2"/>
-            <column name="carbohydrates" value="37.2"/>
+            <column name="id" value="63227837-226e-48b5-bf8d-2bfbf07e0b13"/>
+            <column name="name" value="Смородина черн.морож."/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="85"/>
+            <column name="proteins" value="1"/>
+            <column name="fats" value="0.2"/>
+            <column name="carbohydrates" value="7.3"/>
             <column name="created_at" value="2024-01-01"/>
             <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="44e82c20-abca-4d71-9b96-5f2be1a4c529"/>
+            <column name="name" value="Соль"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="0.2"/>
+            <column name="proteins" value="0"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="e414d1a7-cc67-40a5-b291-d15772e71af2"/>
+            <column name="name" value="Сосиски молочные"/>
+            <column name="edible_part" value="0.95"/>
+            <column name="water" value="60.5"/>
+            <column name="proteins" value="11"/>
+            <column name="fats" value="23.9"/>
+            <column name="carbohydrates" value="1.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="5f6eccc3-caac-49e9-9a2e-75f23c325e64"/>
+            <column name="name" value="Соус томатный"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="69.3"/>
+            <column name="proteins" value="2.6"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="22.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8cf17a28-c144-46a3-b880-77513d48380c"/>
+            <column name="name" value="Сухари паниров"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="6.51"/>
+            <column name="proteins" value="13.35"/>
+            <column name="fats" value="5.3"/>
+            <column name="carbohydrates" value="67.48"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="cbb651eb-9d58-461b-9111-c2362153134c"/>
+            <column name="name" value="Сухофрукты"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="20"/>
+            <column name="proteins" value="2.3"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="59"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="fa639111-0fb0-4d2c-bb15-635cb3c104fb"/>
+            <column name="name" value="Творог 18%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="63.2"/>
+            <column name="proteins" value="14"/>
+            <column name="fats" value="18"/>
+            <column name="carbohydrates" value="2.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="9d9af5b6-f83a-4803-bd61-b5db73caad3e"/>
+            <column name="name" value="Творог 9%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="70.3"/>
+            <column name="proteins" value="16.7"/>
+            <column name="fats" value="9"/>
+            <column name="carbohydrates" value="2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="46c9fff9-799a-4dca-8990-0ef97f9f8d0e"/>
+            <column name="name" value="Творог нежирный"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="77.2"/>
+            <column name="proteins" value="18"/>
+            <column name="fats" value="0.6"/>
+            <column name="carbohydrates" value="1.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="7b8dbe42-14b8-4d11-97c6-3aa25c28efbc"/>
+            <column name="name" value="Томатная паста"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="70"/>
+            <column name="proteins" value="4.8"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="19"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="ab2249d2-d7d1-434e-b390-1a5d91a554b3"/>
+            <column name="name" value="Томатное пюре"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="80"/>
+            <column name="proteins" value="3.6"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="11.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="af93c3c0-e57d-479e-968e-531b465964a7"/>
+            <column name="name" value="Томаты"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="92"/>
+            <column name="proteins" value="1.1"/>
+            <column name="fats" value="0.2"/>
+            <column name="carbohydrates" value="3.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="6c170cae-f398-4341-babe-1f45f24fa345"/>
+            <column name="name" value="Томаты солёные"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="90"/>
+            <column name="proteins" value="1.1"/>
+            <column name="fats" value="0.1"/>
+            <column name="carbohydrates" value="1.6"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="4bceb2ff-8ba2-4e43-9efd-cab38cf76b32"/>
+            <column name="name" value="Треска б/г"/>
+            <column name="edible_part" value="0.95"/>
+            <column name="water" value="82.1"/>
+            <column name="proteins" value="16"/>
+            <column name="fats" value="0.6"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="30505b9a-3616-40b3-b8e5-32d25a3622de"/>
+            <column name="name" value="Укроп"/>
+            <column name="edible_part" value="0.95"/>
+            <column name="water" value="86.5"/>
+            <column name="proteins" value="2.5"/>
+            <column name="fats" value="0.5"/>
+            <column name="carbohydrates" value="4.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="1bf1fb20-650d-48de-b8af-22b07d7ad0ba"/>
+            <column name="name" value="Уксус столовый 9%"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="97"/>
+            <column name="proteins" value="0"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="09f568f0-a2d4-49bc-b97d-a80016a63677"/>
+            <column name="name" value="Фарш говяжий в/с"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="61.94"/>
+            <column name="proteins" value="17.7"/>
+            <column name="fats" value="20"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="fb3fa072-b924-4877-9fe5-13945f470d06"/>
+            <column name="name" value="Фарш Любительский"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="72"/>
+            <column name="proteins" value="12.3"/>
+            <column name="fats" value="32.4"/>
+            <column name="carbohydrates" value="2.9"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="790af975-6b2c-4040-bb2a-c6b96be92cf2"/>
+            <column name="name" value="Фарш Московский"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="75.9"/>
+            <column name="proteins" value="18.7"/>
+            <column name="fats" value="6.7"/>
+            <column name="carbohydrates" value="0"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="0a38444c-4635-4b35-ae0c-5795dda2aa90"/>
+            <column name="name" value="Фасоль (консервы)"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="83.5"/>
+            <column name="proteins" value="6.7"/>
+            <column name="fats" value="0.3"/>
+            <column name="carbohydrates" value="17.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="beb036fd-8338-4bcf-8dd4-3d766e1a8508"/>
+            <column name="name" value="фасоль (крупа)"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="21.1"/>
+            <column name="fats" value="1.2"/>
+            <column name="carbohydrates" value="41.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8d0bd48a-61d1-4963-a0c5-2fcf22a53e66"/>
+            <column name="name" value="Филе куриное"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="75"/>
+            <column name="proteins" value="23.6"/>
+            <column name="fats" value="1.9"/>
+            <column name="carbohydrates" value="0.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="fe3edb87-2291-45be-869f-b4514996359a"/>
+            <column name="name" value="Хлеб пшеничный в/с"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="44.1"/>
+            <column name="proteins" value="7.8"/>
+            <column name="fats" value="1.4"/>
+            <column name="carbohydrates" value="36.1"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="31558a60-7d3a-4e39-ab1a-4f32a77c364a"/>
+            <column name="name" value="Цыпленок-бройлер 1 кат"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="63.8"/>
+            <column name="proteins" value="18.7"/>
+            <column name="fats" value="16.1"/>
+            <column name="carbohydrates" value="0.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="63efe588-01bc-451c-afa4-234dda8be284"/>
+            <column name="name" value="Цыпленок-бройлер 2 кат"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="67.7"/>
+            <column name="proteins" value="19.7"/>
+            <column name="fats" value="11.2"/>
+            <column name="carbohydrates" value="0.5"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="f50fef36-6f4b-439d-8909-9a5a5409203f"/>
+            <column name="name" value="Чай черный байховый"/>
+            <column name="edible_part" value="0.72"/>
+            <column name="water" value="8.5"/>
+            <column name="proteins" value="20"/>
+            <column name="fats" value="5.1"/>
+            <column name="carbohydrates" value="6.9"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="3d4922cf-7c37-4134-bbb5-a1cd872d43c1"/>
+            <column name="name" value="Чернослив"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="25"/>
+            <column name="proteins" value="2.3"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="58.4"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="99b8b4e5-3349-4d88-9702-1891323bdad4"/>
+            <column name="name" value="Чеснок"/>
+            <column name="edible_part" value="0.67"/>
+            <column name="water" value="80"/>
+            <column name="proteins" value="6.5"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="5.2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="562ebd0f-d186-4da5-83c6-f3472e0c4a5d"/>
+            <column name="name" value="Шиповник"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="14"/>
+            <column name="proteins" value="3.4"/>
+            <column name="fats" value="1.4"/>
+            <column name="carbohydrates" value="48.3"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="6e46e84f-9569-4870-8f96-05b6eda52476"/>
+            <column name="name" value="Шпинат"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="91.2"/>
+            <column name="proteins" value="2.9"/>
+            <column name="fats" value="0.3"/>
+            <column name="carbohydrates" value="2"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="e2d8ac31-0229-4a77-a1ef-bd976e9ac7b9"/>
+            <column name="name" value="Яблоки"/>
+            <column name="edible_part" value="1"/>
+            <column name="water" value="87"/>
+            <column name="proteins" value="0.4"/>
+            <column name="fats" value="0.4"/>
+            <column name="carbohydrates" value="9.8"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="98e04c9e-5244-4023-abe5-812eb8828391"/>
+            <column name="name" value="Яблоки сушеные"/>
+            <column name="edible_part" value="0.85"/>
+            <column name="water" value="20"/>
+            <column name="proteins" value="2.2"/>
+            <column name="fats" value="0"/>
+            <column name="carbohydrates" value="48"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="f93b3d77-0f3f-4ca8-91fb-e7cc1cbdd2ea"/>
+            <column name="name" value="Яйцо 1 кат"/>
+            <column name="edible_part" value="0.88"/>
+            <column name="water" value="74"/>
+            <column name="proteins" value="12.7"/>
+            <column name="fats" value="11.5"/>
+            <column name="carbohydrates" value="0.7"/>
+            <column name="created_at" value="2024-01-01"/>
+            <column name="updated_at" value="2024-01-01"/>
+            <column name="version" value="0"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

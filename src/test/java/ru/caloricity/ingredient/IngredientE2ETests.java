@@ -11,7 +11,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import ru.caloricity.common.exception.CascadeDeleteRestrictException;
 import ru.caloricity.common.exception.EntityNotFoundException;
+import ru.caloricity.probe.Probe;
+import ru.caloricity.probe.ProbeFactory;
+import ru.caloricity.probe.ProbeRepository;
+import ru.caloricity.probeingredient.ProbeIngredientFactory;
+import ru.caloricity.probeingredient.ProbeIngredientRepository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -29,13 +35,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class IngredientE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
     private IngredientRepository repository;
+    @Autowired
+    private ProbeIngredientRepository probeIngredientRepository;
+    @Autowired
+    private ProbeRepository probeRepository;
 
     @Test
     void contextLoads() {
@@ -50,7 +59,11 @@ class IngredientE2ETests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()))
                 .andExpect(jsonPath("$.name").value(entity.getName()))
-                .andExpect(jsonPath("$.fats").value(entity.getFats()));
+                .andExpect(jsonPath("$.fats").value(entity.getFats()))
+                .andExpect(jsonPath("$.carbohydrates").value(entity.getCarbohydrates()))
+                .andExpect(jsonPath("$.proteins").value(entity.getProteins()))
+                .andExpect(jsonPath("$.ediblePart").value(entity.getEdiblePart()))
+                .andExpect(jsonPath("$.water").value(entity.getWater()));
     }
 
     @Test
@@ -92,7 +105,14 @@ class IngredientE2ETests {
 
     @Test
     void create_created() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
+        IngredientCreateDto dto = IngredientCreateDto.builder()
+                .name("name for test")
+                .ediblePart(1.)
+                .water(1.)
+                .proteins(1.)
+                .fats(1.)
+                .carbohydrates(1.)
+                .build();
 
         MvcResult result = mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
@@ -110,11 +130,24 @@ class IngredientE2ETests {
 
         Optional<Ingredient> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
+        assertEquals(createdEntity.get().getName(), dto.name());
+        assertEquals(createdEntity.get().getEdiblePart(), dto.ediblePart());
+        assertEquals(createdEntity.get().getWater(), dto.water());
+        assertEquals(createdEntity.get().getProteins(), dto.proteins());
+        assertEquals(createdEntity.get().getFats(), dto.fats());
+        assertEquals(createdEntity.get().getCarbohydrates(), dto.carbohydrates());
     }
 
     @Test
     void create_badRequest() throws Exception {
-        IngredientCreateDto dto = new IngredientCreateDto("", 1f, 1f, 1f, 1f, 1f);
+        IngredientCreateDto dto = IngredientCreateDto.builder()
+                .name("")
+                .ediblePart(1.)
+                .water(1.)
+                .proteins(1.)
+                .fats(1.)
+                .carbohydrates(1.)
+                .build();
 
         mvc.perform(post("/ingredients")
                         .content(objectMapper.writeValueAsString(dto))
@@ -127,7 +160,14 @@ class IngredientE2ETests {
     @Test
     void update_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
-        IngredientCreateDto dto = new IngredientCreateDto("name for test", 1f, 1f, 1f, 1f, 1f);
+        IngredientUpdateDto dto = IngredientUpdateDto.builder()
+                .name("updated name")
+                .ediblePart(0.5)
+                .water(2.)
+                .proteins(2.)
+                .fats(2.)
+                .carbohydrates(2.)
+                .build();
 
         mvc.perform(put("/ingredients/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -139,6 +179,11 @@ class IngredientE2ETests {
         Optional<Ingredient> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
         assertEquals(updated.get().getName(), dto.name());
+        assertEquals(updated.get().getEdiblePart(), dto.ediblePart());
+        assertEquals(updated.get().getWater(), dto.water());
+        assertEquals(updated.get().getProteins(), dto.proteins());
+        assertEquals(updated.get().getFats(), dto.fats());
+        assertEquals(updated.get().getCarbohydrates(), dto.carbohydrates());
     }
 
     @Test
@@ -153,4 +198,15 @@ class IngredientE2ETests {
         assertTrue(deletedEntity.isEmpty());
     }
 
+    @Test
+    void delete_throwCascadeDeleteRestrictException() throws Exception {
+        Ingredient entity = repository.save(new IngredientFactory().createSimple());
+        Probe probe = probeRepository.save(new ProbeFactory().createSimple());
+        probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(probe, entity));
+
+        mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertInstanceOf(CascadeDeleteRestrictException.class, result.getResolvedException()));
+    }
 }

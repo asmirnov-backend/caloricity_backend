@@ -1,20 +1,16 @@
 package ru.caloricity.ingredient;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
-
+@Builder
 public record IngredientInPageDto(UUID id,
-
                                   String name,
-
-                                  Float ediblePart,
-
-                                  Float water,
-
-                                  Float proteins,
-
-                                  Float fats,
-
-                                  Float carbohydrates) {
-
+                                  Double ediblePart,
+                                  Double water,
+                                  Double proteins,
+                                  Double fats,
+                                  Double carbohydrates
+) {
 }

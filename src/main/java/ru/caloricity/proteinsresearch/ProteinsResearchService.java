@@ -1,7 +1,6 @@
 package ru.caloricity.proteinsresearch;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +13,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProteinsResearchService {
     private final ProteinsResearchRepository repository;
     private final ProteinsResearchMapper mapper;
@@ -30,23 +30,18 @@ public class ProteinsResearchService {
         return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, ProteinsResearch.class));
     }
 
-    @Transactional
     public IdDto create(ProteinsResearchCreateDto createDto) {
         ProteinsResearch entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, ProteinsResearchUpdateDto dto) {
-        Optional<ProteinsResearch> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        }
+        ProteinsResearch research = findById(id).orElseThrow(() -> new EntityNotFoundException(id, ProteinsResearch.class));
+        mapper.updateEntity(research, dto);
+        repository.save(research);
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

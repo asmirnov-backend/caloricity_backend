@@ -1,14 +1,17 @@
 package ru.caloricity.probeingredient;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
+@Builder
 public record ProbeIngredientInPageDto(UUID id,
-                                       Float gross,
-                                       Float net,
-
+                                       Double gross,
+                                       Double net,
                                        String ingredientName,
-                                       Float water,
-                                       Float proteins,
-                                       Float fats,
-                                       Float carbohydrates) {
+                                       Double drySubstances,
+                                       Double proteins,
+                                       Double fats,
+                                       Double carbohydrates
+) {
 }

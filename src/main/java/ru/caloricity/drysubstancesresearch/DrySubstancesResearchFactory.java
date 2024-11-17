@@ -12,10 +12,12 @@ public class DrySubstancesResearchFactory {
     public DrySubstancesResearch createSimple() {
         var research = new DrySubstancesResearch();
         research.setId(uuidIterator.next());
-        research.setByuksaAfterDryingParallelFirst(50f);
-        research.setByuksaAfterDryingParallelSecond(52f);
-        research.setByuksaParallelFirst(11f);
-        research.setByuksaParallelSecond(12f);
+        research.setByuksaAfterDryingParallelFirst(50.);
+        research.setByuksaAfterDryingParallelSecond(52.);
+        research.setByuksaParallelFirst(61.);
+        research.setByuksaParallelSecond(62.);
+        research.setMassNaveskiParallelFirst(10.);
+        research.setMassNaveskiParallelSecond(10.);
         return research;
     }
 

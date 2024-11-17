@@ -2,19 +2,21 @@ package ru.caloricity.ingredient;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.caloricity.common.dto.IdDto;
+import ru.caloricity.common.exception.CascadeDeleteRestrictException;
 import ru.caloricity.common.exception.EntityNotFoundException;
+import ru.caloricity.probeingredient.ProbeIngredient;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class IngredientService {
     private final IngredientRepository repository;
     private final IngredientMapper mapper;
@@ -25,9 +27,9 @@ public class IngredientService {
 
     public Page<IngredientInPageDto> findAll(Pageable pageable, @Nullable String search) {
         if (search != null) {
-            return repository.findAllByNameLikeIgnoreCase(pageable, "%" + search + "%");
+            return repository.findAllByNameLikeIgnoreCaseOrderByName(pageable, "%" + search + "%");
         }
-        return repository.findAllDtoBy(pageable);
+        return repository.findAllDtoByOrderByName(pageable);
     }
 
     public IngredientDto findDtoByIdOrThrow(UUID id) {
@@ -42,7 +44,6 @@ public class IngredientService {
         return repository.getReferenceById(id);
     }
 
-    @Transactional
     public IdDto create(IngredientCreateDto createDto) {
         Ingredient entity = mapper.toEntity(createDto);
         entity.setId(UUID.randomUUID());
@@ -50,19 +51,17 @@ public class IngredientService {
         return new IdDto(entity.getId());
     }
 
-    @Transactional
-    public void update(UUID id, IngredientCreateDto dto) {
-        Optional<Ingredient> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        } else {
-            throw new EntityNotFoundException(id, Ingredient.class);
-        }
+    public void update(UUID id, IngredientUpdateDto dto) {
+        Ingredient ingredient = findById(id).orElseThrow(() -> new EntityNotFoundException(id, Ingredient.class));
+        mapper.updateEntity(ingredient, dto);
+        repository.save(ingredient);
     }
 
-    @Transactional
     public void deleteById(UUID id) {
+        if (repository.existsByIdAndProbeIngredientsIsNotEmpty(id)) {
+            throw new CascadeDeleteRestrictException(id, Ingredient.class, ProbeIngredient.class);
+        }
+
         repository.deleteById(id);
     }
 }

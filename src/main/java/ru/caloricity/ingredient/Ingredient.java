@@ -1,51 +1,62 @@
 package ru.caloricity.ingredient;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probeingredient.ProbeIngredient;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @Entity
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Builder
 @Comment("Каталог ингредиентов")
 @Table(name = "ingredients")
 public class Ingredient extends BaseEntity {
     @Comment("Наименование ингредиента")
-    @Column(length = 127, nullable = false)
+    @NotNull
     private String name;
 
-    @Comment("Масса съедобной части, г")
-    @Column(nullable = false)
-    private Float ediblePart;
+    @Comment("Съедобная часть, доля (От 0 до 1)")
+    @NotNull
+    private Double ediblePart;
 
     @Comment("Масса воды, г")
-    @Column(nullable = false)
-    private Float water;
+    @NotNull
+    private Double water;
 
     @Comment("Масса белков, г")
-    @Column(nullable = false)
-    private Float proteins;
+    @NotNull
+    private Double proteins;
 
     @Comment("Масса жиров, г")
-    @Column(nullable = false)
-    private Float fats;
+    @NotNull
+    private Double fats;
 
     @Comment("Масса углеводов, г")
-    @Column(nullable = false)
-    private Float carbohydrates;
+    @NotNull
+    private Double carbohydrates;
 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    private Set<Ingredient> ingredients;
+    @OneToMany(mappedBy = "ingredient")
+    @ToString.Exclude
+    private Set<ProbeIngredient> probeIngredients;
+
+    /**
+     * @return Теоретическая калорийность 100 г ингредиента
+     */
+    public Double getTheoreticalCaloricity() {
+        return fats * 9.0 + (carbohydrates + proteins) * 4.0;
+    }
 
     @Override
     public final boolean equals(Object o) {

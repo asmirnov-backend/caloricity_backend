@@ -19,6 +19,7 @@ import ru.caloricity.probe.ProbeRepository;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -55,20 +56,33 @@ class CarbohydratesResearchE2ETests {
     @Test
     void getAll_ok() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-
         repository.save(new CarbohydratesResearchFactory().createSimple(probe));
 
         mvc.perform(get("/carbohydrates-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
-                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12));
+                .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
+                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(60))
+                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(61))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelFirst").value(50))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelSecond").value(52))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(9))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(9.5));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
+        CarbohydratesResearchCreateDto dto = CarbohydratesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(2.)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -88,11 +102,21 @@ class CarbohydratesResearchE2ETests {
         assertTrue(createdEntity.isPresent());
         assertNotNull(createdEntity.get().getProbe());
         assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
+        assertEquals(createdEntity.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
     void create_badRequest() throws Exception {
-        CarbohydratesResearchCreateDto dto = new CarbohydratesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
+        CarbohydratesResearchCreateDto dto = CarbohydratesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(null)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/carbohydrates-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -105,7 +129,7 @@ class CarbohydratesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         CarbohydratesResearch entity = repository.save(new CarbohydratesResearchFactory().createSimple());
-        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2f, 1f, 1f, 1f);
+        CarbohydratesResearchUpdateDto dto = new CarbohydratesResearchUpdateDto(2., 1., 1., 1., 10.,10.);
 
         mvc.perform(put("/carbohydrates-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -116,7 +140,10 @@ class CarbohydratesResearchE2ETests {
 
         Optional<CarbohydratesResearch> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
-        assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaAfterDryingParallelSecond());
+        assertEquals(updated.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
+        assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(updated.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(updated.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
@@ -132,5 +159,4 @@ class CarbohydratesResearchE2ETests {
         assertTrue(deleted.isEmpty());
         assertTrue(probeRepository.findById(probe.getId()).isPresent());
     }
-
 }

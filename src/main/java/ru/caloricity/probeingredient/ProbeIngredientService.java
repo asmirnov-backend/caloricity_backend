@@ -1,7 +1,6 @@
 package ru.caloricity.probeingredient;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProbeIngredientService {
     private final ProbeIngredientRepository repository;
     private final ProbeIngredientMapper mapper;
@@ -37,25 +37,18 @@ public class ProbeIngredientService {
         return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, ProbeIngredient.class));
     }
 
-    @Transactional
     public IdDto create(ProbeIngredientCreateDto createDto) {
         ProbeIngredient entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, ProbeIngredientUpdateDto dto) {
-        Optional<ProbeIngredient> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        } else {
-            throw new EntityNotFoundException(id, ProbeIngredient.class);
-        }
+        ProbeIngredient probeIngredient = findById(id).orElseThrow(() -> new EntityNotFoundException(id, ProbeIngredient.class));
+        mapper.updateEntity(probeIngredient, dto);
+        repository.save(probeIngredient);
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

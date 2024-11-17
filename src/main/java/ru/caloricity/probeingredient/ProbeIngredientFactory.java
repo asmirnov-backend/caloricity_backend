@@ -13,8 +13,8 @@ public class ProbeIngredientFactory {
     public ProbeIngredient createSimple(Probe probe, Ingredient ingredient) {
         ProbeIngredient entity = new ProbeIngredient();
         entity.setId(uuidIterator.next());
-        entity.setNet(50f);
-        entity.setGross(60f);
+        entity.setNet(50.);
+        entity.setGross(60.);
         entity.setIngredient(ingredient);
         entity.setProbe(probe);
         return entity;

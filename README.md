@@ -6,6 +6,10 @@
 
 ![Modules diagram](./components-CaloricityApplication.png)
 
+# Rules
+
+- use https://www.conventionalcommits.org/en/v1.0.0/ for commits messages
+
 ## Docker compose
 
 ```bash
@@ -20,6 +24,9 @@ CREATE DATABASE caloricity_test WITH OWNER caloricity ENCODING 'UTF-8';
 
 ## TODO
 
+- Write more tests
+- Add api version in header
+- Масса сухого остатка = масса до высушивания минус масса после высушивания (Для исследований). Затем расситать среднюю из двух параллелей
 - Add error descriptions to swagger https://habr.com/ru/articles/814061/
 - Add protocols module
 - Add users module

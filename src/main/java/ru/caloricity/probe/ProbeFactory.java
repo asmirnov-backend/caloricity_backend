@@ -14,9 +14,9 @@ public class ProbeFactory {
         probe.setName("Test name");
         probe.setCode("f123213");
         probe.setType(ProbeType.FIRST);
-        probe.setBankaEmptyMass(50f);
-        probe.setBankaWithProbeMass(60f);
-        probe.setMassTheory(1f);
+        probe.setBankaEmptyMass(50.);
+        probe.setBankaWithProbeMass(60.);
+        probe.setMassTheory(1.);
         return probe;
     }
 }

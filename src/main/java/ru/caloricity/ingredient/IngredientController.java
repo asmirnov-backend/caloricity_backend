@@ -38,8 +38,8 @@ class IngredientController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientCreateDto createDto) {
-        service.update(id, createDto);
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody IngredientUpdateDto dto) {
+        service.update(id, dto);
     }
 
     @DeleteMapping("{id}")

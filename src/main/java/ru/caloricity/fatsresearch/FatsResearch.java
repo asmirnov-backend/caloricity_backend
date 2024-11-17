@@ -1,6 +1,10 @@
 package ru.caloricity.fatsresearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
@@ -17,26 +21,50 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Comment("Исследования на жиры")
 @Table(name = "fats_research")
+@Builder
 public class FatsResearch extends BaseEntity {
     @Comment("Масса патрона до экстракции первая параллель, г")
-    @Column(nullable = false)
-    private Float patronMassBeforeExtractionParallelFirst;
+    @NotNull
+    private Double patronMassBeforeExtractionParallelFirst;
 
     @Comment("Масса патрона до экстракции вторая параллель, г")
-    @Column(nullable = false)
-    private Float patronMassBeforeExtractionParallelSecond;
+    @NotNull
+    private Double patronMassBeforeExtractionParallelSecond;
 
     @Comment("Масса патрона после экстракции первая параллель, г")
-    @Column(nullable = false)
-    private Float patronMassAfterExtractionParallelFirst;
+    @NotNull
+    private Double patronMassAfterExtractionParallelFirst;
 
     @Comment("Масса патрона после экстракции вторая параллель, г")
-    @Column(nullable = false)
-    private Float patronMassAfterExtractionParallelSecond;
+    @NotNull
+    private Double patronMassAfterExtractionParallelSecond;
+
+    @Comment("Масса навески первая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelFirst;
+
+    @Comment("Масса навески вторая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelSecond;
 
     @OneToOne(optional = false)
     @JoinColumn(unique = true)
     private Probe probe;
+
+    public Double getDryResidueWeightParallelFirst() {
+        return patronMassBeforeExtractionParallelFirst - patronMassAfterExtractionParallelFirst;
+    }
+
+    public Double getDryResidueWeightParallelSecond() {
+        return patronMassBeforeExtractionParallelSecond - patronMassAfterExtractionParallelSecond;
+    }
+
+    public Double getDryResidueWeightAverage() {
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0;
+    }
+
+    // жиры масса
+    // return getDryResidueWeightAverage * probe.масса фактическая / масса навески
 
     @Override
     public final boolean equals(Object o) {
@@ -53,4 +81,5 @@ public class FatsResearch extends BaseEntity {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
 }

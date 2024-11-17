@@ -1,6 +1,8 @@
 package ru.caloricity.common;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
@@ -15,18 +17,23 @@ import java.util.UUID;
 @Setter
 public class BaseEntity {
     @Id
-    @Column(nullable = false)
-    private UUID id;
+    @NotNull
+    protected UUID id = UUID.randomUUID();
 
     @Comment("Дата и время создания")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false, nullable = false)
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
     @Comment("Дата и время редактирования")
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    protected LocalDateTime updatedAt;
+
+    @Version
+    @Setter(AccessLevel.NONE)
+    @Comment("Номер версии сущности")
+    protected long version = 0;
 }

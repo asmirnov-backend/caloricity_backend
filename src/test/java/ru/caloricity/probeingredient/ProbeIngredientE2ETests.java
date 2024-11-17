@@ -35,7 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class ProbeIngredientE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -91,19 +90,23 @@ class ProbeIngredientE2ETests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
                 .andExpect(jsonPath("$.content[0].ingredientName").value(ingredient1.getName()))
-                .andExpect(jsonPath("$.content[0].water").value(37))
-                .andExpect(jsonPath("$.content[0].proteins").value(62))
-                .andExpect(jsonPath("$.content[0].fats").value(12))
-                .andExpect(jsonPath("$.content[0].carbohydrates").value(25));
+                .andExpect(jsonPath("$.content[0].drySubstances").value(48))
+                .andExpect(jsonPath("$.content[0].proteins").value(2))
+                .andExpect(jsonPath("$.content[0].fats").value(0.5))
+                .andExpect(jsonPath("$.content[0].carbohydrates").value(1));
     }
-
 
     @Test
     void create_created() throws Exception {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(probe.getId(), ingredient.getId(), 2f, 3f);
+        ProbeIngredientCreateDto dto = ProbeIngredientCreateDto.builder()
+                .probeId(probe.getId())
+                .ingredientId(ingredient.getId())
+                .gross(2.)
+                .net(3.)
+                .build();
 
         MvcResult result = mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -121,11 +124,20 @@ class ProbeIngredientE2ETests {
 
         Optional<ProbeIngredient> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
+        assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getIngredient().getId(), ingredient.getId());
+        assertEquals(createdEntity.get().getGross(), dto.gross());
+        assertEquals(createdEntity.get().getNet(), dto.net());
     }
 
     @Test
     void create_badRequest_massSmallerThenZero() throws Exception {
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(UUID.randomUUID(), UUID.randomUUID(), -40f, 3f);
+        ProbeIngredientCreateDto dto = ProbeIngredientCreateDto.builder()
+                .probeId(UUID.randomUUID())
+                .ingredientId(UUID.randomUUID())
+                .gross(-40.)
+                .net(3.)
+                .build();
 
         mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -138,7 +150,12 @@ class ProbeIngredientE2ETests {
     @Test
     void create_badRequest_referencedProbeNotExist() throws Exception {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(UUID.randomUUID(), ingredient.getId(), 40f, 3f);
+        ProbeIngredientCreateDto dto = ProbeIngredientCreateDto.builder()
+                .probeId(UUID.randomUUID())
+                .ingredientId(ingredient.getId())
+                .gross(40.)
+                .net(3.)
+                .build();
 
         mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -152,7 +169,12 @@ class ProbeIngredientE2ETests {
     @Test
     void create_badRequest_referencedIngredientNotExist() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        ProbeIngredientCreateDto dto = new ProbeIngredientCreateDto(probe.getId(), UUID.randomUUID(), 40f, 3f);
+        ProbeIngredientCreateDto dto = ProbeIngredientCreateDto.builder()
+                .probeId(probe.getId())
+                .ingredientId(UUID.randomUUID())
+                .gross(40.)
+                .net(3.)
+                .build();
 
         mvc.perform(post("/probe-ingredient")
                         .content(objectMapper.writeValueAsString(dto))
@@ -169,7 +191,7 @@ class ProbeIngredientE2ETests {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
         ProbeIngredient entity = repository.save(new ProbeIngredientFactory().createSimple(probe, ingredient));
-        ProbeIngredientUpdateDto dto = new ProbeIngredientUpdateDto(1321f, 2412f);
+        ProbeIngredientUpdateDto dto = new ProbeIngredientUpdateDto(1321., 2412.);
 
         mvc.perform(put("/probe-ingredient/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -198,5 +220,4 @@ class ProbeIngredientE2ETests {
         Optional<ProbeIngredient> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
     }
-
 }

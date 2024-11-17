@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class FatsResearchE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -64,14 +63,29 @@ class FatsResearchE2ETests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
-                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelFirst").value(8))
-                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelSecond").value(9));
+                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelFirst").value(80))
+                .andExpect(jsonPath("$.content[0].patronMassAfterExtractionParallelFirst").value(11))
+                .andExpect(jsonPath("$.content[0].patronMassBeforeExtractionParallelSecond").value(90))
+                .andExpect(jsonPath("$.content[0].patronMassAfterExtractionParallelSecond").value(12))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelSecond").value(10))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(69))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(78))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(73.5));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, 2f, 1f, 2f, probe.getId());
+        FatsResearchCreateDto dto = FatsResearchCreateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(1.)
+                .patronMassBeforeExtractionParallelSecond(2.)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/fats-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -95,7 +109,15 @@ class FatsResearchE2ETests {
 
     @Test
     void create_badRequest() throws Exception {
-        FatsResearchCreateDto dto = new FatsResearchCreateDto(1f, null, 1f, 2f, UUID.randomUUID());
+        FatsResearchCreateDto dto = FatsResearchCreateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(1.)
+                .patronMassBeforeExtractionParallelSecond(null)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/fats-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -108,7 +130,14 @@ class FatsResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         FatsResearch entity = repository.save(new FatsResearchFactory().createSimple());
-        FatsResearchUpdateDto dto = new FatsResearchUpdateDto(2f, 2f, 1f, 2f);
+        FatsResearchUpdateDto dto = FatsResearchUpdateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(2.)
+                .patronMassBeforeExtractionParallelSecond(2.)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .build();
 
         mvc.perform(put("/fats-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))

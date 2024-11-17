@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class DrySubstancesResearchE2ETests {
 
-
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -57,21 +56,35 @@ class DrySubstancesResearchE2ETests {
     @Test
     void getAll_ok() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-
         repository.save(new DrySubstancesResearchFactory().createSimple(probe));
 
         mvc.perform(get("/dry-substances-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
-                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(11))
-                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(12));
+                .andExpect(jsonPath("$.content[0].byuksaParallelFirst").value(61))
+                .andExpect(jsonPath("$.content[0].byuksaParallelSecond").value(62))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelFirst").value(50))
+                .andExpect(jsonPath("$.content[0].byuksaAfterDryingParallelSecond").value(52))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelSecond").value(10))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelFirst").value(11))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightParallelSecond").value(10))
+                .andExpect(jsonPath("$.content[0].dryResidueWeightAverage").value(10.5));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
+        DrySubstancesResearchCreateDto dto = DrySubstancesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(2.)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -91,11 +104,23 @@ class DrySubstancesResearchE2ETests {
         assertTrue(createdEntity.isPresent());
         assertNotNull(createdEntity.get().getProbe());
         assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
+        assertEquals(createdEntity.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(createdEntity.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
     void create_badRequest() throws Exception {
-        DrySubstancesResearchCreateDto dto = new DrySubstancesResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
+        DrySubstancesResearchCreateDto dto = DrySubstancesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(null)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/dry-substances-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -108,7 +133,7 @@ class DrySubstancesResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         DrySubstancesResearch entity = repository.save(new DrySubstancesResearchFactory().createSimple());
-        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2f, 1f, 1f, 10f);
+        DrySubstancesResearchUpdateDto dto = new DrySubstancesResearchUpdateDto(2., 1., 1., 10.,10.,10.);
 
         mvc.perform(put("/dry-substances-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -119,7 +144,10 @@ class DrySubstancesResearchE2ETests {
 
         Optional<DrySubstancesResearch> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
+        assertEquals(updated.get().getByuksaParallelFirst(), dto.byuksaParallelFirst());
         assertEquals(updated.get().getByuksaParallelSecond(), dto.byuksaParallelSecond());
+        assertEquals(updated.get().getByuksaAfterDryingParallelFirst(), dto.byuksaAfterDryingParallelFirst());
+        assertEquals(updated.get().getByuksaAfterDryingParallelSecond(), dto.byuksaAfterDryingParallelSecond());
     }
 
     @Test
@@ -135,5 +163,4 @@ class DrySubstancesResearchE2ETests {
         assertTrue(deleted.isEmpty());
         assertTrue(probeRepository.findById(probe.getId()).isPresent());
     }
-
 }

@@ -1,14 +1,49 @@
 package ru.caloricity.drysubstancesresearch;
 
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import ru.caloricity.probe.ProbeMapperUtils;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.caloricity.probe.ProbeService;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ProbeMapperUtils.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface DrySubstancesResearchMapper {
-    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
-    @Mapping(source = "probeId", target = "probe", qualifiedByName = {"ProbeMapperUtils", "getExistingReferenceByIdOrThrow"})
-    DrySubstancesResearch toEntity(DrySubstancesResearchCreateDto dto);
+
+@Service
+@RequiredArgsConstructor
+public class DrySubstancesResearchMapper {
+    private final ProbeService probeService;
+
+    public DrySubstancesResearch toEntity(@NotNull DrySubstancesResearchCreateDto dto) {
+        return DrySubstancesResearch.builder()
+                .byuksaParallelFirst(dto.byuksaParallelFirst())
+                .byuksaParallelSecond(dto.byuksaParallelSecond())
+                .byuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst())
+                .byuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond())
+                .massNaveskiParallelFirst(dto.massNaveskiParallelFirst())
+                .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
+                .probe(probeService.getExistingReferenceByIdOrThrow(dto.probeId()))
+                .build();
+    }
+
+    public DrySubstancesResearchDto toDto(@NotNull DrySubstancesResearch entity) {
+        return DrySubstancesResearchDto.builder()
+                .id(entity.getId())
+                .byuksaParallelFirst(entity.getByuksaParallelFirst())
+                .byuksaParallelSecond(entity.getByuksaParallelSecond())
+                .byuksaAfterDryingParallelFirst(entity.getByuksaAfterDryingParallelFirst())
+                .byuksaAfterDryingParallelSecond(entity.getByuksaAfterDryingParallelSecond())
+                .massNaveskiParallelFirst(entity.getMassNaveskiParallelFirst())
+                .massNaveskiParallelSecond(entity.getMassNaveskiParallelSecond())
+                .dryResidueWeightParallelFirst(entity.getDryResidueWeightParallelFirst())
+                .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
+                .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
+                .build();
+    }
+
+    void updateEntity(@NotNull DrySubstancesResearch entity, @NotNull DrySubstancesResearchUpdateDto dto) {
+        entity.setByuksaParallelFirst(dto.byuksaParallelFirst());
+        entity.setByuksaParallelSecond(dto.byuksaParallelSecond());
+        entity.setByuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst());
+        entity.setByuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond());
+        entity.setMassNaveskiParallelFirst(dto.massNaveskiParallelFirst());
+        entity.setMassNaveskiParallelSecond(dto.massNaveskiParallelSecond());
+    }
 }

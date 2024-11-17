@@ -2,7 +2,6 @@ package ru.caloricity.probe;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProbeService {
     private final ProbeRepository repository;
     private final ProbeMapper mapper;
@@ -30,8 +30,8 @@ public class ProbeService {
         return repository.findAllDtoBy(pageable);
     }
 
-    public ProbeDto findDtoByIdOrThrow(UUID id) {
-        return repository.findDtoById(id).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
+    public ProbeDto findProbeWithResearchesAndIngredientsByIdOrThrow(UUID id) {
+        return repository.findProbeWithResearchesAndIngredientsById(id).map(mapper::toDto).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
     }
 
     public Probe getExistingReferenceByIdOrThrow(UUID id) {
@@ -42,25 +42,18 @@ public class ProbeService {
         return repository.getReferenceById(id);
     }
 
-    @Transactional
     public IdDto create(ProbeCreateDto createDto) {
         Probe entity = mapper.toEntity(createDto);
         repository.save(entity);
         return new IdDto(entity.getId());
     }
 
-    @Transactional
     public void update(UUID id, ProbeUpdateDto dto) {
-        Optional<Probe> currentEntity = findById(id);
-        if (currentEntity.isPresent()) {
-            BeanUtils.copyProperties(dto, currentEntity.get(), "id");
-            repository.save(currentEntity.get());
-        } else {
-            throw new EntityNotFoundException(id, Probe.class);
-        }
+        Probe probe = findById(id).orElseThrow(() -> new EntityNotFoundException(id, Probe.class));
+        mapper.updateEntity(probe, dto);
+        repository.save(probe);
     }
 
-    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

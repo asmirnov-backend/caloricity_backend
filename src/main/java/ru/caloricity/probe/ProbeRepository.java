@@ -2,6 +2,7 @@ package ru.caloricity.probe;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -14,5 +15,6 @@ public interface ProbeRepository extends JpaRepository<Probe, UUID> {
 
     Page<ProbeInPageDto> findAllByCodeLikeIgnoreCase(Pageable pageable, String like);
 
-    Optional<ProbeDto> findDtoById(UUID id);
+    @EntityGraph(value = "Probe.withResearchesAndIngredients", type = EntityGraph.EntityGraphType.FETCH)
+    Optional<Probe> findProbeWithResearchesAndIngredientsById(UUID id);
 }

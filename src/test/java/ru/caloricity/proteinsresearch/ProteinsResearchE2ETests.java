@@ -26,12 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class ProteinsResearchE2ETests {
-
 
     @Autowired
     private MockMvc mvc;
@@ -57,22 +56,32 @@ class ProteinsResearchE2ETests {
     @Test
     void getAll_ok() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-
         repository.save(new ProteinsResearchFactory().createSimple(probe));
 
         mvc.perform(get("/proteins-researches?probe-id={probeId}", probe.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(greaterThan(0)))
+                .andExpect(jsonPath("$.content[0].titrantVolumeParallelFirst").value(10))
                 .andExpect(jsonPath("$.content[0].titrantVolumeParallelSecond").value(20))
-                .andExpect(jsonPath("$.content[0].coefficient").value(0.95f))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelFirst").value(10))
+                .andExpect(jsonPath("$.content[0].massNaveskiParallelSecond").value(10))
+                .andExpect(jsonPath("$.content[0].coefficient").value(0.95))
                 .andExpect(jsonPath("$.content[0].controlVolume").value(5));
     }
 
     @Test
     void create_created() throws Exception {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1f, 2f, 10f, 10f, probe.getId());
+        ProteinsResearchCreateDto dto = ProteinsResearchCreateDto.builder()
+                .titrantVolumeParallelFirst(1.)
+                .titrantVolumeParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .controlVolume(10.)
+                .coefficient(10.)
+                .probeId(probe.getId())
+                .build();
 
         MvcResult result = mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -92,11 +101,23 @@ class ProteinsResearchE2ETests {
         assertTrue(createdEntity.isPresent());
         assertNotNull(createdEntity.get().getProbe());
         assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
+        assertEquals(createdEntity.get().getTitrantVolumeParallelFirst(), dto.titrantVolumeParallelFirst());
+        assertEquals(createdEntity.get().getTitrantVolumeParallelSecond(), dto.titrantVolumeParallelSecond());
+        assertEquals(createdEntity.get().getControlVolume(), dto.controlVolume());
+        assertEquals(createdEntity.get().getCoefficient(), dto.coefficient());
     }
 
     @Test
     void create_badRequest() throws Exception {
-        ProteinsResearchCreateDto dto = new ProteinsResearchCreateDto(1f, null, 10f, 10f, UUID.randomUUID());
+        ProteinsResearchCreateDto dto = ProteinsResearchCreateDto.builder()
+                .titrantVolumeParallelFirst(1.)
+                .titrantVolumeParallelSecond(null)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .controlVolume(10.)
+                .coefficient(10.)
+                .probeId(UUID.randomUUID())
+                .build();
 
         mvc.perform(post("/proteins-researches")
                         .content(objectMapper.writeValueAsString(dto))
@@ -109,7 +130,7 @@ class ProteinsResearchE2ETests {
     @Test
     void update_ok() throws Exception {
         ProteinsResearch entity = repository.save(new ProteinsResearchFactory().createSimple());
-        ProteinsResearchUpdateDto dto = new ProteinsResearchUpdateDto(2f, 1f, 1f, 1f);
+        ProteinsResearchUpdateDto dto = new ProteinsResearchUpdateDto(2., 1., 1., 1.,10.,10.);
 
         mvc.perform(put("/proteins-researches/{id}", entity.getId().toString())
                         .content(objectMapper.writeValueAsString(dto))
@@ -120,7 +141,10 @@ class ProteinsResearchE2ETests {
 
         Optional<ProteinsResearch> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
+        assertEquals(updated.get().getTitrantVolumeParallelFirst(), dto.titrantVolumeParallelFirst());
         assertEquals(updated.get().getTitrantVolumeParallelSecond(), dto.titrantVolumeParallelSecond());
+        assertEquals(updated.get().getControlVolume(), dto.controlVolume());
+        assertEquals(updated.get().getCoefficient(), dto.coefficient());
     }
 
     @Test

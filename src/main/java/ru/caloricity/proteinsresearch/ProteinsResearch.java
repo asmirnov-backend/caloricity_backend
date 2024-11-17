@@ -1,6 +1,10 @@
 package ru.caloricity.proteinsresearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
@@ -14,25 +18,40 @@ import java.util.Objects;
 @ToString
 @Entity
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Comment("Исследования на белок")
 @Table(name = "proteins_researches")
+@Builder
 public class ProteinsResearch extends BaseEntity {
     @Comment("Объём титранта первая параллель, г/см^3")
-    @Column(nullable = false)
-    private Float titrantVolumeParallelFirst;
+    @NotNull
+    private Double titrantVolumeParallelFirst;
 
     @Comment("Объём титранта вторая параллель, г/см^3")
-    @Column(nullable = false)
-    private Float titrantVolumeParallelSecond;
+    @NotNull
+    private Double titrantVolumeParallelSecond;
+
+    @Comment("Масса навески первая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelFirst;
+
+    @Comment("Масса навески вторая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelSecond;
+
+//    @Comment("Масса белков, г")
+//
+//    private Double getMass() { первая, вторая параллель и среднее
+//      return 0.0014 * coefficient * (titrantVolumeParallelFirst - controlVolume) * 6.25 * масса фактическая пробы / масса навески первая параллель
+//    };
 
     @Comment("Объём контроля, г/см^3")
-    @Column(nullable = false)
-    private Float controlVolume;
+    @NotNull
+    private Double controlVolume;
 
     @Comment("Коэффициент")
-    @Column(nullable = false)
-    private Float coefficient;
+    @NotNull
+    private Double coefficient;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "probe_id", unique = true)

@@ -1,10 +1,11 @@
 package ru.caloricity.carbohydratesresearch;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
@@ -19,26 +20,48 @@ import java.util.Objects;
 @NoArgsConstructor
 @Comment("Исследования на углеводы")
 @Table(name = "carbohydrates_researches")
+@AllArgsConstructor
+@Builder
 public class CarbohydratesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaParallelFirst;
+    @NotNull
+    private Double byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaParallelSecond;
+    @NotNull
+    private Double byuksaParallelSecond;
 
     @Comment("Масса бюксы с пробой после высушивания первая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaAfterDryingParallelFirst;
+    @NotNull
+    private Double byuksaAfterDryingParallelFirst;
 
     @Comment("Масса бюксы с пробой после высушивания вторая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaAfterDryingParallelSecond;
+    @NotNull
+    private Double byuksaAfterDryingParallelSecond;
+
+    // углеводы есть только в 3-ем блюде и они рассчитываются через сухие вещества
+    // 2 парралели, среднее
+    // return сухие вещества - минеральные вещества -> для третьего блюда
+    // return сухие вещества - масса белков - масса мин веществ - масса жиров -> для первого и второго блюда
+
+    // сухие вещества теоретическая (Есть для всех исследований)
+    // считается как сумма по всем ингредиентам в пробе
 
     @OneToOne(optional = false)
     @JoinColumn(unique = true)
     private Probe probe;
+
+    public Double getDryResidueWeightParallelFirst() {
+        return byuksaParallelFirst - byuksaAfterDryingParallelFirst;
+    }
+
+    public Double getDryResidueWeightParallelSecond() {
+        return byuksaParallelSecond - byuksaAfterDryingParallelSecond;
+    }
+
+    public Double getDryResidueWeightAverage() {
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0;
+    }
 
     @Override
     public final boolean equals(Object o) {

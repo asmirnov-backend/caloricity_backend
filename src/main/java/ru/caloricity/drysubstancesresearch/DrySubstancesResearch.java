@@ -1,6 +1,10 @@
 package ru.caloricity.drysubstancesresearch;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.OnDelete;
@@ -19,27 +23,53 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Comment("Исследования на сухие остатки")
 @Table(name = "dry_substances_researches")
+@Builder
 public class DrySubstancesResearch extends BaseEntity {
     @Comment("Масса бюксы первая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaParallelFirst;
+    @NotNull
+    private Double byuksaParallelFirst;
 
     @Comment("Масса бюксы вторая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaParallelSecond;
+    @NotNull
+    private Double byuksaParallelSecond;
+
+    @Comment("Масса навески первая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelFirst;
+
+    @Comment("Масса навески вторая параллель, г")
+    @NotNull
+    private Double massNaveskiParallelSecond;
 
     @Comment("Масса бюксы с пробой после высушивания первая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaAfterDryingParallelFirst;
+    @NotNull
+    private Double byuksaAfterDryingParallelFirst;
 
     @Comment("Масса бюксы с пробой после высушивания вторая параллель, г")
-    @Column(nullable = false)
-    private Float byuksaAfterDryingParallelSecond;
+    @NotNull
+    private Double byuksaAfterDryingParallelSecond;
 
     @OneToOne(optional = false)
     @JoinColumn(unique = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Probe probe;
+
+    public Double getDryResidueWeightParallelFirst() {
+        // это для первого и второго
+        return byuksaParallelFirst - byuksaAfterDryingParallelFirst; // + Масса пробы первая параллель, г
+
+        // а для третьего блюда
+        // масса пробы == масса навески
+        // (byuksaAfterDryingParallelFirst - byuksaParallelFirst) * масса фактичиская пробы / Масса пробы первая параллель;
+    }
+
+    public Double getDryResidueWeightParallelSecond() {
+        return byuksaParallelSecond - byuksaAfterDryingParallelSecond; // + Масса пробы второй параллель, г
+    }
+
+    public Double getDryResidueWeightAverage() {
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0f;
+    }
 
     @Override
     public final boolean equals(Object o) {

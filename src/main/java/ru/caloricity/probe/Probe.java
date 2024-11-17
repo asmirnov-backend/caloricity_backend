@@ -1,15 +1,21 @@
 package ru.caloricity.probe;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
+import ru.caloricity.carbohydratesresearch.CarbohydratesResearch;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.drysubstancesresearch.DrySubstancesResearch;
+import ru.caloricity.fatsresearch.FatsResearch;
+import ru.caloricity.probeingredient.ProbeIngredient;
+import ru.caloricity.proteinsresearch.ProteinsResearch;
 
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,31 +24,93 @@ import java.util.Objects;
 @NoArgsConstructor
 @Comment("Пробы блюд")
 @Table(name = "probes")
+@Builder
+@AllArgsConstructor
+@NamedEntityGraph(
+        name = "Probe.withResearchesAndIngredients",
+        attributeNodes = {
+                @NamedAttributeNode("carbohydratesResearch"),
+                @NamedAttributeNode("drySubstancesResearch"),
+                @NamedAttributeNode("fatsResearch"),
+                @NamedAttributeNode("proteinsResearch"),
+                @NamedAttributeNode(value = "probeIngredients", subgraph = "ingredientSubgraph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "ingredientSubgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("ingredient")
+                        }
+                )
+        }
+)
 public class Probe extends BaseEntity {
     @Comment("Наименование пробы")
-    @Column(length = 127, nullable = false)
+    @NotNull
     private String name;
 
     @Comment("Тип пробы")
-    @Column(length = 127, nullable = false)
+    @NotNull
     @Enumerated(EnumType.STRING)
     private ProbeType type;
 
     @Comment("Код пробы")
-    @Column(length = 127, nullable = false)
+    @NotNull
     private String code;
 
     @Comment("Масса теоретическая, г")
-    @Column(nullable = false)
-    private Float massTheory;
+    @NotNull
+    private Double massTheory;
 
     @Comment("Масса пустой банки, г")
-    @Column(nullable = false)
-    private Float bankaEmptyMass;
+    @NotNull
+    private Double bankaEmptyMass;
 
     @Comment("Масса банки с пробой, г")
-    @Column(nullable = false)
-    private Float bankaWithProbeMass;
+    @NotNull
+    private Double bankaWithProbeMass;
+
+    @OneToMany(mappedBy = "probe")
+    @ToString.Exclude
+    private Set<ProbeIngredient> probeIngredients;
+
+    @OneToOne(mappedBy = "probe")
+    private CarbohydratesResearch carbohydratesResearch;
+
+    @OneToOne(mappedBy = "probe")
+    private DrySubstancesResearch drySubstancesResearch;
+
+    @OneToOne(mappedBy = "probe", fetch = FetchType.EAGER)
+    private FatsResearch fatsResearch;
+
+    @OneToOne(mappedBy = "probe")
+    private ProteinsResearch proteinsResearch;
+
+    /**
+     * @return Масса фактическая, г
+     */
+    public Double getMassFact() {
+        return bankaWithProbeMass - bankaEmptyMass;
+    }
+
+    /**
+     * @return Минеральные вещества, г
+     */
+    public Double getMinerals() {
+        return getMassFact() * type.coefficientOfMinerals;
+    }
+
+    public Double getTheoreticalCaloricity() {
+        return Optional.ofNullable(probeIngredients)
+                .stream()
+                .flatMap(Collection::stream)
+                .map(e -> e.getIngredient().getTheoreticalCaloricity() / 100 * e.getNet())
+                .mapToDouble(Double::doubleValue)
+                .sum();
+    }
+    // калорийность
+    // считается как (белки + углеводы )* 4 + жиры * 9
+    // теоретическая и фактическая считается, и отклонение
 
     @Override
     public final boolean equals(Object o) {

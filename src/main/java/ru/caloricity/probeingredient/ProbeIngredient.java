@@ -1,10 +1,14 @@
 package ru.caloricity.probeingredient;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
 import ru.caloricity.ingredient.Ingredient;
@@ -17,20 +21,40 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProbeIngredient extends BaseEntity {
     @Comment("Масса брутто, г")
-    @Column(nullable = false)
-    private Float gross;
+    @NotNull
+    private Double gross;
 
     @Comment("Масса нетто, г")
-    @Column(nullable = false)
-    private Float net;
+    @NotNull
+    private Double net;
 
     @ManyToOne(optional = false)
     Probe probe;
 
     @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
     Ingredient ingredient;
+
+    Double drySubstances() {
+        return net - (net * ingredient.getWater()) / 100;
+    }
+
+    Double proteins() {
+        return net * ingredient.getProteins() / 100;
+    }
+
+    Double fats() {
+        return net * ingredient.getFats() / 100;
+    }
+
+    Double carbohydrates() {
+        return net * ingredient.getCarbohydrates() / 100;
+    }
 
     @Override
     public final boolean equals(Object o) {
