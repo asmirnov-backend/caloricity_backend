@@ -4,7 +4,6 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
-    <include file="/db/changelog/2024/07/05-01-changelog.xml"/>
+    <include file="db/changelog/2024/07/05-01-changelog.xml"/>
     <include file="/db/changelog/2024/07/seed-ingredients.xml"/>
-    <include file="db/changelog/2024/11/13-01-changelog.xml"/>
 </databaseChangeLog>

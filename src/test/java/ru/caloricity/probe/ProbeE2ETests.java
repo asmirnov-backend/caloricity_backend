@@ -15,6 +15,14 @@ import ru.caloricity.common.exception.EntityNotFoundException;
 import ru.caloricity.ingredient.Ingredient;
 import ru.caloricity.ingredient.IngredientFactory;
 import ru.caloricity.ingredient.IngredientRepository;
+import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearch;
+import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearchFactory;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearch;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchFactory;
+import ru.caloricity.probe.research.fatsresearch.FatsResearch;
+import ru.caloricity.probe.research.fatsresearch.FatsResearchFactory;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearch;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchFactory;
 import ru.caloricity.probeingredient.ProbeIngredient;
 import ru.caloricity.probeingredient.ProbeIngredientFactory;
 import ru.caloricity.probeingredient.ProbeIngredientRepository;
@@ -56,10 +64,21 @@ class ProbeE2ETests {
     void getById_ok() throws Exception {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe entity = repository.save(new ProbeFactory().createSimple());
+
+        FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
+        DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
+        ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
+        CarbohydratesResearch carbohydratesResearch = new CarbohydratesResearchFactory().createSimple(entity);
+
         ProbeIngredient probeIngredient = probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(entity, ingredient));
         Set<ProbeIngredient> probeIngredients = new HashSet<>();
         probeIngredients.add(probeIngredient);
         entity.setProbeIngredients(probeIngredients);
+
+        entity.setFatsResearch(fatsResearch);
+        entity.setProteinsResearch(proteinsResearch);
+        entity.setDrySubstancesResearch(drySubstancesResearch);
+        entity.setCarbohydratesResearch(carbohydratesResearch);
 
         mvc.perform(get("/probes/{id}", entity.getId()))
                 .andDo(print())
@@ -73,6 +92,10 @@ class ProbeE2ETests {
                 .andExpect(jsonPath("$.massTheory").value(entity.getMassTheory()))
                 .andExpect(jsonPath("$.massFact").value(10))
                 .andExpect(jsonPath("$.minerals").value(0.12))
+                .andExpect(jsonPath("$.fatsResearch.id").value(fatsResearch.getId().toString()))
+                .andExpect(jsonPath("$.proteinsResearch.id").value(proteinsResearch.getId().toString()))
+                .andExpect(jsonPath("$.drySubstancesResearch.id").value(drySubstancesResearch.getId().toString()))
+                .andExpect(jsonPath("$.carbohydratesResearch.id").value(carbohydratesResearch.getId().toString()))
                 .andExpect(jsonPath("$.theoreticalCaloricity").value(18.5));
     }
 

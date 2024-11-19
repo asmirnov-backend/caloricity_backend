@@ -1,10 +1,21 @@
 package ru.caloricity.probe;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearchMapper;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchMapper;
+import ru.caloricity.probe.research.fatsresearch.FatsResearchMapper;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchMapper;
 
 @Service
+@RequiredArgsConstructor
 public class ProbeMapper {
+    private final CarbohydratesResearchMapper carbohydratesResearchMapper;
+    private final DrySubstancesResearchMapper drySubstancesResearchMapper;
+    private final ProteinsResearchMapper proteinsResearchMapper;
+    private final FatsResearchMapper fatsResearchMapper;
+
     Probe toEntity(@NotNull ProbeCreateDto dto) {
         return Probe.builder()
                 .name(dto.name())
@@ -30,6 +41,10 @@ public class ProbeMapper {
                 .massFact(entity.getMassFact())
                 .minerals(entity.getMinerals())
                 .theoreticalCaloricity(entity.getTheoreticalCaloricity())
+                .carbohydratesResearch(carbohydratesResearchMapper.toDto(entity.getCarbohydratesResearch()))
+                .fatsResearch(fatsResearchMapper.toDto(entity.getFatsResearch()))
+                .proteinsResearch(proteinsResearchMapper.toDto(entity.getProteinsResearch()))
+                .drySubstancesResearch(drySubstancesResearchMapper.toDto(entity.getDrySubstancesResearch()))
                 .build();
     }
 

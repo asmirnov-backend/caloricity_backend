@@ -1,0 +1,52 @@
+package ru.caloricity.probe.research.fatsresearch;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.caloricity.probe.ProbeRepository;
+
+@Service
+@RequiredArgsConstructor
+public class FatsResearchMapper {
+    private final ProbeRepository probeRepository;
+
+    public FatsResearch toEntity(@NotNull FatsResearchCreateDto dto) {
+        return FatsResearch.builder()
+                .patronMassBeforeExtractionParallelFirst(dto.patronMassBeforeExtractionParallelFirst())
+                .patronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond())
+                .patronMassAfterExtractionParallelFirst(dto.patronMassAfterExtractionParallelFirst())
+                .patronMassAfterExtractionParallelSecond(dto.patronMassAfterExtractionParallelSecond())
+                .massNaveskiParallelFirst(dto.massNaveskiParallelFirst())
+                .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
+                .probe(probeRepository.getReferenceById(dto.probeId()))
+                .build();
+    }
+
+    public FatsResearchDto toDto(FatsResearch entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        return FatsResearchDto.builder()
+                .id(entity.getId())
+                .patronMassBeforeExtractionParallelFirst(entity.getPatronMassBeforeExtractionParallelFirst())
+                .patronMassBeforeExtractionParallelSecond(entity.getPatronMassBeforeExtractionParallelSecond())
+                .patronMassAfterExtractionParallelFirst(entity.getPatronMassAfterExtractionParallelFirst())
+                .patronMassAfterExtractionParallelSecond(entity.getPatronMassAfterExtractionParallelSecond())
+                .massNaveskiParallelFirst(entity.getMassNaveskiParallelFirst())
+                .massNaveskiParallelSecond(entity.getMassNaveskiParallelSecond())
+                .dryResidueWeightParallelFirst(entity.getDryResidueWeightParallelFirst())
+                .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
+                .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
+                .build();
+    }
+
+    void updateEntity(@NotNull FatsResearch entity, @NotNull FatsResearchUpdateDto dto) {
+        entity.setPatronMassBeforeExtractionParallelFirst(dto.patronMassBeforeExtractionParallelFirst());
+        entity.setPatronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond());
+        entity.setPatronMassAfterExtractionParallelFirst(dto.patronMassAfterExtractionParallelFirst());
+        entity.setPatronMassAfterExtractionParallelSecond(dto.patronMassAfterExtractionParallelSecond());
+        entity.setMassNaveskiParallelFirst(dto.massNaveskiParallelFirst());
+        entity.setMassNaveskiParallelSecond(dto.massNaveskiParallelSecond());
+    }
+}

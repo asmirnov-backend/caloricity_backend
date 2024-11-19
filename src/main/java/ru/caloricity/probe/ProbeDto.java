@@ -1,6 +1,10 @@
 package ru.caloricity.probe;
 
 import lombok.Builder;
+import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearchDto;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchDto;
+import ru.caloricity.probe.research.fatsresearch.FatsResearchDto;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchDto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -18,6 +22,10 @@ public record ProbeDto(UUID id,
                        Double bankaWithProbeMass,
                        Double massFact,
                        Double minerals,
-                       Double theoreticalCaloricity
-) {
+                       Double theoreticalCaloricity,
+
+                       DrySubstancesResearchDto drySubstancesResearch,
+                       FatsResearchDto fatsResearch,
+                       ProteinsResearchDto proteinsResearch,
+                       CarbohydratesResearchDto carbohydratesResearch) {
 }
