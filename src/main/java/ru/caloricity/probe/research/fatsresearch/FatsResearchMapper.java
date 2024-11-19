@@ -41,7 +41,7 @@ public class FatsResearchMapper {
                 .build();
     }
 
-    void updateEntity(@NotNull FatsResearch entity, @NotNull FatsResearchUpdateDto dto) {
+    public void updateEntity(@NotNull FatsResearch entity, @NotNull FatsResearchCreateDto dto) {
         entity.setPatronMassBeforeExtractionParallelFirst(dto.patronMassBeforeExtractionParallelFirst());
         entity.setPatronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond());
         entity.setPatronMassAfterExtractionParallelFirst(dto.patronMassAfterExtractionParallelFirst());

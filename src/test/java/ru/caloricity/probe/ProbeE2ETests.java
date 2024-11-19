@@ -15,17 +15,18 @@ import ru.caloricity.common.exception.EntityNotFoundException;
 import ru.caloricity.ingredient.Ingredient;
 import ru.caloricity.ingredient.IngredientFactory;
 import ru.caloricity.ingredient.IngredientRepository;
-import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearch;
-import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearchFactory;
 import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearch;
 import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchCreateDto;
 import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchFactory;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchRepository;
 import ru.caloricity.probe.research.fatsresearch.FatsResearch;
 import ru.caloricity.probe.research.fatsresearch.FatsResearchCreateDto;
 import ru.caloricity.probe.research.fatsresearch.FatsResearchFactory;
+import ru.caloricity.probe.research.fatsresearch.FatsResearchRepository;
 import ru.caloricity.probe.research.proteinsresearch.ProteinsResearch;
 import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchCreateDto;
 import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchFactory;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchRepository;
 import ru.caloricity.probeingredient.ProbeIngredient;
 import ru.caloricity.probeingredient.ProbeIngredientFactory;
 import ru.caloricity.probeingredient.ProbeIngredientRepository;
@@ -58,6 +59,13 @@ class ProbeE2ETests {
     private ProbeIngredientRepository probeIngredientRepository;
     @Autowired
     private IngredientRepository ingredientRepository;
+    @Autowired
+    private FatsResearchRepository  fatsResearchRepository;
+    @Autowired
+    private DrySubstancesResearchRepository drySubstancesResearchRepository;
+    @Autowired
+    private ProteinsResearchRepository proteinsResearchRepository;
+
 
     @Test
     void contextLoads() {
@@ -71,7 +79,6 @@ class ProbeE2ETests {
         FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
         DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
         ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
-        CarbohydratesResearch carbohydratesResearch = new CarbohydratesResearchFactory().createSimple(entity);
 
         ProbeIngredient probeIngredient = probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(entity, ingredient));
         Set<ProbeIngredient> probeIngredients = new HashSet<>();
@@ -81,7 +88,6 @@ class ProbeE2ETests {
         entity.setFatsResearch(fatsResearch);
         entity.setProteinsResearch(proteinsResearch);
         entity.setDrySubstancesResearch(drySubstancesResearch);
-        entity.setCarbohydratesResearch(carbohydratesResearch);
 
         mvc.perform(get("/probes/{id}", entity.getId()))
                 .andDo(print())
@@ -98,7 +104,6 @@ class ProbeE2ETests {
                 .andExpect(jsonPath("$.fatsResearch.id").value(fatsResearch.getId().toString()))
                 .andExpect(jsonPath("$.proteinsResearch.id").value(proteinsResearch.getId().toString()))
                 .andExpect(jsonPath("$.drySubstancesResearch.id").value(drySubstancesResearch.getId().toString()))
-                .andExpect(jsonPath("$.carbohydratesResearch.id").value(carbohydratesResearch.getId().toString()))
                 .andExpect(jsonPath("$.theoreticalCaloricity").value(18.5));
     }
 
@@ -140,7 +145,7 @@ class ProbeE2ETests {
     }
 
     @Test
-    void create_created() throws Exception {
+    void create_created_withAllResearches() throws Exception {
         FatsResearchCreateDto fatsResearchCreateDto = FatsResearchCreateDto.builder()
                 .patronMassBeforeExtractionParallelFirst(1.)
                 .patronMassBeforeExtractionParallelSecond(2.)
@@ -249,8 +254,9 @@ class ProbeE2ETests {
     }
 
     @Test
-    void update_ok() throws Exception {
+    void update_ok_withoutResearches() throws Exception {
         Probe entity = repository.save(new ProbeFactory().createSimple());
+
         ProbeUpdateDto dto = ProbeUpdateDto.builder()
                 .name("updated name")
                 .code("updated code")
@@ -276,8 +282,231 @@ class ProbeE2ETests {
     }
 
     @Test
+    void update_ok_addNewResearches() throws Exception {
+        Probe entity = repository.save(new ProbeFactory().createSimple());
+
+        FatsResearchCreateDto fatsResearchCreateDto = FatsResearchCreateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(1.)
+                .patronMassBeforeExtractionParallelSecond(2.)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .build();
+
+        DrySubstancesResearchCreateDto drySubstancesResearchCreateDto = DrySubstancesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(2.)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .build();
+
+        ProteinsResearchCreateDto proteinsResearchCreateDto = ProteinsResearchCreateDto.builder()
+                .titrantVolumeParallelFirst(1.)
+                .titrantVolumeParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .controlVolume(10.)
+                .coefficient(10.)
+                .build();
+
+        ProbeUpdateDto dto = ProbeUpdateDto.builder()
+                .name("updated name")
+                .code("updated code")
+                .massTheory(2.)
+                .bankaEmptyMass(2.)
+                .bankaWithProbeMass(3.)
+                .fatsResearch(fatsResearchCreateDto)
+                .drySubstancesResearch(drySubstancesResearchCreateDto)
+                .proteinsResearch(proteinsResearchCreateDto)
+                .build();
+
+        mvc.perform(put("/probes/{id}", entity.getId().toString())
+                        .content(objectMapper.writeValueAsString(dto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Optional<Probe> updated = repository.findById(entity.getId());
+        assertTrue(updated.isPresent());
+        assertEquals(updated.get().getName(), dto.name());
+        assertEquals(updated.get().getCode(), dto.code());
+        assertEquals(updated.get().getMassTheory(), dto.massTheory());
+        assertEquals(updated.get().getBankaEmptyMass(), dto.bankaEmptyMass());
+        assertEquals(updated.get().getBankaWithProbeMass(), dto.bankaWithProbeMass());
+
+        assertNotNull(updated.get().getFatsResearch());
+        assertNotNull(updated.get().getDrySubstancesResearch());
+        assertNotNull(updated.get().getProteinsResearch());
+
+        assertEquals(updated.get().getFatsResearch().getPatronMassBeforeExtractionParallelFirst(), fatsResearchCreateDto.patronMassBeforeExtractionParallelFirst());
+        assertEquals(updated.get().getFatsResearch().getPatronMassBeforeExtractionParallelSecond(), fatsResearchCreateDto.patronMassBeforeExtractionParallelSecond());
+        assertEquals(updated.get().getFatsResearch().getPatronMassAfterExtractionParallelFirst(), fatsResearchCreateDto.patronMassAfterExtractionParallelFirst());
+        assertEquals(updated.get().getFatsResearch().getPatronMassAfterExtractionParallelSecond(), fatsResearchCreateDto.patronMassAfterExtractionParallelSecond());
+        assertEquals(updated.get().getFatsResearch().getMassNaveskiParallelFirst(), fatsResearchCreateDto.massNaveskiParallelFirst());
+        assertEquals(updated.get().getFatsResearch().getMassNaveskiParallelSecond(), fatsResearchCreateDto.massNaveskiParallelSecond());
+
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaParallelFirst(), drySubstancesResearchCreateDto.byuksaParallelFirst());
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaParallelSecond(), drySubstancesResearchCreateDto.byuksaParallelSecond());
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaAfterDryingParallelFirst(), drySubstancesResearchCreateDto.byuksaAfterDryingParallelFirst());
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaAfterDryingParallelSecond(), drySubstancesResearchCreateDto.byuksaAfterDryingParallelSecond());
+        assertEquals(updated.get().getDrySubstancesResearch().getMassNaveskiParallelFirst(), drySubstancesResearchCreateDto.massNaveskiParallelFirst());
+        assertEquals(updated.get().getDrySubstancesResearch().getMassNaveskiParallelSecond(), drySubstancesResearchCreateDto.massNaveskiParallelSecond());
+
+        assertEquals(updated.get().getProteinsResearch().getTitrantVolumeParallelFirst(), proteinsResearchCreateDto.titrantVolumeParallelFirst());
+        assertEquals(updated.get().getProteinsResearch().getTitrantVolumeParallelSecond(), proteinsResearchCreateDto.titrantVolumeParallelSecond());
+        assertEquals(updated.get().getProteinsResearch().getMassNaveskiParallelFirst(), proteinsResearchCreateDto.massNaveskiParallelFirst());
+        assertEquals(updated.get().getProteinsResearch().getMassNaveskiParallelSecond(), proteinsResearchCreateDto.massNaveskiParallelSecond());
+        assertEquals(updated.get().getProteinsResearch().getControlVolume(), proteinsResearchCreateDto.controlVolume());
+        assertEquals(updated.get().getProteinsResearch().getCoefficient(), proteinsResearchCreateDto.coefficient());
+    }
+
+    @Test
+    void update_ok_updateExistingResearch() throws Exception {
+        Probe entity = repository.save(new ProbeFactory().createSimple());
+
+        FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
+        DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
+        ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
+
+        entity.setFatsResearch(fatsResearch);
+        entity.setProteinsResearch(proteinsResearch);
+        entity.setDrySubstancesResearch(drySubstancesResearch);
+
+        FatsResearchCreateDto fatsResearchCreateDto = FatsResearchCreateDto.builder()
+                .patronMassBeforeExtractionParallelFirst(1.)
+                .patronMassBeforeExtractionParallelSecond(2.)
+                .patronMassAfterExtractionParallelFirst(1.)
+                .patronMassAfterExtractionParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .build();
+
+        DrySubstancesResearchCreateDto drySubstancesResearchCreateDto = DrySubstancesResearchCreateDto.builder()
+                .byuksaParallelFirst(1.)
+                .byuksaParallelSecond(2.)
+                .byuksaAfterDryingParallelFirst(10.)
+                .byuksaAfterDryingParallelSecond(10.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .build();
+
+        ProteinsResearchCreateDto proteinsResearchCreateDto = ProteinsResearchCreateDto.builder()
+                .titrantVolumeParallelFirst(1.)
+                .titrantVolumeParallelSecond(2.)
+                .massNaveskiParallelFirst(10.0)
+                .massNaveskiParallelSecond(10.0)
+                .controlVolume(10.)
+                .coefficient(10.)
+                .build();
+
+        ProbeUpdateDto dto = ProbeUpdateDto.builder()
+                .name("updated name")
+                .code("updated code")
+                .massTheory(2.)
+                .bankaEmptyMass(2.)
+                .bankaWithProbeMass(3.)
+                .fatsResearch(fatsResearchCreateDto)
+                .drySubstancesResearch(drySubstancesResearchCreateDto)
+                .proteinsResearch(proteinsResearchCreateDto)
+                .build();
+
+        mvc.perform(put("/probes/{id}", entity.getId().toString())
+                        .content(objectMapper.writeValueAsString(dto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Optional<Probe> updated = repository.findById(entity.getId());
+        assertTrue(updated.isPresent());
+        assertEquals(updated.get().getName(), dto.name());
+        assertEquals(updated.get().getCode(), dto.code());
+        assertEquals(updated.get().getMassTheory(), dto.massTheory());
+        assertEquals(updated.get().getBankaEmptyMass(), dto.bankaEmptyMass());
+        assertEquals(updated.get().getBankaWithProbeMass(), dto.bankaWithProbeMass());
+
+        assertNotNull(updated.get().getFatsResearch());
+        assertNotNull(updated.get().getDrySubstancesResearch());
+        assertNotNull(updated.get().getProteinsResearch());
+
+        assertEquals(updated.get().getFatsResearch().getPatronMassBeforeExtractionParallelFirst(), fatsResearchCreateDto.patronMassBeforeExtractionParallelFirst());
+        assertEquals(updated.get().getFatsResearch().getPatronMassBeforeExtractionParallelSecond(), fatsResearchCreateDto.patronMassBeforeExtractionParallelSecond());
+        assertEquals(updated.get().getFatsResearch().getPatronMassAfterExtractionParallelFirst(), fatsResearchCreateDto.patronMassAfterExtractionParallelFirst());
+        assertEquals(updated.get().getFatsResearch().getPatronMassAfterExtractionParallelSecond(), fatsResearchCreateDto.patronMassAfterExtractionParallelSecond());
+        assertEquals(updated.get().getFatsResearch().getMassNaveskiParallelFirst(), fatsResearchCreateDto.massNaveskiParallelFirst());
+        assertEquals(updated.get().getFatsResearch().getMassNaveskiParallelSecond(), fatsResearchCreateDto.massNaveskiParallelSecond());
+
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaParallelFirst(), drySubstancesResearchCreateDto.byuksaParallelFirst());
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaParallelSecond(), drySubstancesResearchCreateDto.byuksaParallelSecond());
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaAfterDryingParallelFirst(), drySubstancesResearchCreateDto.byuksaAfterDryingParallelFirst());
+        assertEquals(updated.get().getDrySubstancesResearch().getByuksaAfterDryingParallelSecond(), drySubstancesResearchCreateDto.byuksaAfterDryingParallelSecond());
+        assertEquals(updated.get().getDrySubstancesResearch().getMassNaveskiParallelFirst(), drySubstancesResearchCreateDto.massNaveskiParallelFirst());
+        assertEquals(updated.get().getDrySubstancesResearch().getMassNaveskiParallelSecond(), drySubstancesResearchCreateDto.massNaveskiParallelSecond());
+
+        assertEquals(updated.get().getProteinsResearch().getTitrantVolumeParallelFirst(), proteinsResearchCreateDto.titrantVolumeParallelFirst());
+        assertEquals(updated.get().getProteinsResearch().getTitrantVolumeParallelSecond(), proteinsResearchCreateDto.titrantVolumeParallelSecond());
+        assertEquals(updated.get().getProteinsResearch().getMassNaveskiParallelFirst(), proteinsResearchCreateDto.massNaveskiParallelFirst());
+        assertEquals(updated.get().getProteinsResearch().getMassNaveskiParallelSecond(), proteinsResearchCreateDto.massNaveskiParallelSecond());
+        assertEquals(updated.get().getProteinsResearch().getControlVolume(), proteinsResearchCreateDto.controlVolume());
+        assertEquals(updated.get().getProteinsResearch().getCoefficient(), proteinsResearchCreateDto.coefficient());
+    }
+
+    @Test
+    void update_ok_removeExistingResearch() throws Exception {
+        Probe entity = repository.save(new ProbeFactory().createSimple());
+
+        FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
+        DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
+        ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
+
+        entity.setFatsResearch(fatsResearch);
+        entity.setProteinsResearch(proteinsResearch);
+        entity.setDrySubstancesResearch(drySubstancesResearch);
+
+        ProbeUpdateDto dto = ProbeUpdateDto.builder()
+                .name("updated name")
+                .code("updated code")
+                .massTheory(2.)
+                .bankaEmptyMass(2.)
+                .bankaWithProbeMass(3.)
+                .build();
+
+        mvc.perform(put("/probes/{id}", entity.getId().toString())
+                        .content(objectMapper.writeValueAsString(dto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Optional<Probe> updated = repository.findById(entity.getId());
+        assertTrue(updated.isPresent());
+        assertEquals(updated.get().getName(), dto.name());
+        assertEquals(updated.get().getCode(), dto.code());
+        assertEquals(updated.get().getMassTheory(), dto.massTheory());
+        assertEquals(updated.get().getBankaEmptyMass(), dto.bankaEmptyMass());
+        assertEquals(updated.get().getBankaWithProbeMass(), dto.bankaWithProbeMass());
+
+        assertNull(updated.get().getFatsResearch());
+        assertNull(updated.get().getDrySubstancesResearch());
+        assertNull(updated.get().getProteinsResearch());
+    }
+
+
+    @Test
     void delete_ok() throws Exception {
         Probe entity = repository.save(new ProbeFactory().createSimple());
+
+        FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
+        DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
+        ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
+
+        entity.setFatsResearch(fatsResearch);
+        entity.setProteinsResearch(proteinsResearch);
+        entity.setDrySubstancesResearch(drySubstancesResearch);
 
         mvc.perform(delete("/probes/{id}", entity.getId().toString()))
                 .andDo(print())
@@ -285,5 +514,12 @@ class ProbeE2ETests {
 
         Optional<Probe> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
+
+        Optional<FatsResearch> deletedFatsResearch = fatsResearchRepository.findById(fatsResearch.getId());
+        assertTrue(deletedFatsResearch.isEmpty());
+        Optional<DrySubstancesResearch> deletedDrySubstancesResearch = drySubstancesResearchRepository.findById(drySubstancesResearch.getId());
+        assertTrue(deletedDrySubstancesResearch.isEmpty());
+        Optional<ProteinsResearch> deletedProteinsResearch = proteinsResearchRepository.findById(proteinsResearch.getId());
+        assertTrue(deletedProteinsResearch.isEmpty());
     }
 }

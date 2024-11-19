@@ -1,7 +1,6 @@
 package ru.caloricity.probe;
 
 import lombok.Builder;
-import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearchDto;
 import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchDto;
 import ru.caloricity.probe.research.fatsresearch.FatsResearchDto;
 import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchDto;
@@ -26,6 +25,5 @@ public record ProbeDto(UUID id,
 
                        DrySubstancesResearchDto drySubstancesResearch,
                        FatsResearchDto fatsResearch,
-                       ProteinsResearchDto proteinsResearch,
-                       CarbohydratesResearchDto carbohydratesResearch) {
+                       ProteinsResearchDto proteinsResearch) {
 }

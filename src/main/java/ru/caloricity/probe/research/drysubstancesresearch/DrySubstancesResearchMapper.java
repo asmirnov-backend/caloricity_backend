@@ -42,7 +42,7 @@ public class DrySubstancesResearchMapper {
                 .build();
     }
 
-    void updateEntity(@NotNull DrySubstancesResearch entity, @NotNull DrySubstancesResearchUpdateDto dto) {
+    public void updateEntity(@NotNull DrySubstancesResearch entity, @NotNull DrySubstancesResearchCreateDto dto) {
         entity.setByuksaParallelFirst(dto.byuksaParallelFirst());
         entity.setByuksaParallelSecond(dto.byuksaParallelSecond());
         entity.setByuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst());

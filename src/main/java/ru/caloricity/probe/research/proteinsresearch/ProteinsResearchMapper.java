@@ -38,7 +38,7 @@ public class ProteinsResearchMapper {
                 .build();
     }
 
-    void updateEntity(@NotNull ProteinsResearch entity, @NotNull ProteinsResearchUpdateDto dto) {
+    public void updateEntity(@NotNull ProteinsResearch entity, @NotNull ProteinsResearchCreateDto dto) {
         entity.setTitrantVolumeParallelFirst(dto.titrantVolumeParallelFirst());
         entity.setTitrantVolumeParallelSecond(dto.titrantVolumeParallelSecond());
         entity.setMassNaveskiParallelFirst(dto.massNaveskiParallelFirst());

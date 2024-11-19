@@ -6,7 +6,6 @@ import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.probe.research.carbohydratesresearch.CarbohydratesResearch;
 import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearch;
 import ru.caloricity.probe.research.fatsresearch.FatsResearch;
 import ru.caloricity.probe.research.proteinsresearch.ProteinsResearch;
@@ -29,7 +28,6 @@ import java.util.Set;
 @NamedEntityGraph(
         name = "Probe.withResearchesAndIngredients",
         attributeNodes = {
-                @NamedAttributeNode("carbohydratesResearch"),
                 @NamedAttributeNode("drySubstancesResearch"),
                 @NamedAttributeNode("fatsResearch"),
                 @NamedAttributeNode("proteinsResearch"),
@@ -73,10 +71,6 @@ public class Probe extends BaseEntity {
     @OneToMany(mappedBy = "probe")
     @ToString.Exclude
     private Set<ProbeIngredient> probeIngredients;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(unique = true)
-    private CarbohydratesResearch carbohydratesResearch;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(unique = true)
