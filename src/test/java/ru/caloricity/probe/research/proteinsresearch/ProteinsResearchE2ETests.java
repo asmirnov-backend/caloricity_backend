@@ -80,7 +80,6 @@ class ProteinsResearchE2ETests {
                 .massNaveskiParallelSecond(10.0)
                 .controlVolume(10.)
                 .coefficient(10.)
-                .probeId(probe.getId())
                 .build();
 
         MvcResult result = mvc.perform(post("/proteins-researches")
@@ -116,7 +115,6 @@ class ProteinsResearchE2ETests {
                 .massNaveskiParallelSecond(10.0)
                 .controlVolume(10.)
                 .coefficient(10.)
-                .probeId(UUID.randomUUID())
                 .build();
 
         mvc.perform(post("/proteins-researches")

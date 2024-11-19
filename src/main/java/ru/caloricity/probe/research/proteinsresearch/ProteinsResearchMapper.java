@@ -3,14 +3,15 @@ package ru.caloricity.probe.research.proteinsresearch;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.caloricity.probe.ProbeRepository;
 
 @Service
 @RequiredArgsConstructor
 public class ProteinsResearchMapper {
-    private final ProbeRepository probeRepository;
+    public ProteinsResearch toEntity(ProteinsResearchCreateDto dto) {
+        if (dto == null) {
+            return null;
+        }
 
-    public ProteinsResearch toEntity(@NotNull ProteinsResearchCreateDto dto) {
         return ProteinsResearch.builder()
                 .titrantVolumeParallelFirst(dto.titrantVolumeParallelFirst())
                 .titrantVolumeParallelSecond(dto.titrantVolumeParallelSecond())
@@ -18,7 +19,6 @@ public class ProteinsResearchMapper {
                 .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
                 .controlVolume(dto.controlVolume())
                 .coefficient(dto.coefficient())
-                .probe(probeRepository.getReferenceById(dto.probeId()))
                 .build();
     }
 

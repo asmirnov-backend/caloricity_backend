@@ -24,6 +24,9 @@ public class ProbeMapper {
                 .massTheory(dto.massTheory())
                 .bankaEmptyMass(dto.bankaEmptyMass())
                 .bankaWithProbeMass(dto.bankaWithProbeMass())
+                .fatsResearch(fatsResearchMapper.toEntity(dto.fatsResearch()))
+                .proteinsResearch(proteinsResearchMapper.toEntity(dto.proteinsResearchCreateDto()))
+                .drySubstancesResearch(drySubstancesResearchMapper.toEntity(dto.drySubstancesResearch()))
                 .build();
     }
 

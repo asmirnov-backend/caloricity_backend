@@ -3,15 +3,16 @@ package ru.caloricity.probe.research.drysubstancesresearch;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.caloricity.probe.ProbeRepository;
 
 
 @Service
 @RequiredArgsConstructor
 public class DrySubstancesResearchMapper {
-    private final ProbeRepository probeRepository;
-
     public DrySubstancesResearch toEntity(DrySubstancesResearchCreateDto dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return DrySubstancesResearch.builder()
                 .byuksaParallelFirst(dto.byuksaParallelFirst())
                 .byuksaParallelSecond(dto.byuksaParallelSecond())
@@ -19,7 +20,6 @@ public class DrySubstancesResearchMapper {
                 .byuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond())
                 .massNaveskiParallelFirst(dto.massNaveskiParallelFirst())
                 .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
-                .probe(probeRepository.getReferenceById(dto.probeId()))
                 .build();
     }
 

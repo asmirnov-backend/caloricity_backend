@@ -16,7 +16,6 @@ public class CarbohydratesResearchMapper {
                 .byuksaParallelSecond(dto.byuksaParallelSecond())
                 .byuksaAfterDryingParallelFirst(dto.byuksaAfterDryingParallelFirst())
                 .byuksaAfterDryingParallelSecond(dto.byuksaAfterDryingParallelSecond())
-                .probe(probeRepository.getReferenceById(dto.probeId()))
                 .build();
     }
 

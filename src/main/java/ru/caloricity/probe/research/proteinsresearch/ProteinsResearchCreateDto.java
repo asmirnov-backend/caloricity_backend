@@ -4,8 +4,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
-import java.util.UUID;
-
 @Builder
 public record ProteinsResearchCreateDto(
         @NotNull @Min(0) Double titrantVolumeParallelFirst,
@@ -13,7 +11,6 @@ public record ProteinsResearchCreateDto(
         @NotNull @Min(0) Double massNaveskiParallelFirst,
         @NotNull @Min(0) Double massNaveskiParallelSecond,
         @NotNull Double controlVolume,
-        @NotNull Double coefficient,
-        @NotNull UUID probeId
+        @NotNull Double coefficient
 ) {
 }

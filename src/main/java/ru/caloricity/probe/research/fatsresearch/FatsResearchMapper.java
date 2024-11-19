@@ -3,14 +3,15 @@ package ru.caloricity.probe.research.fatsresearch;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.caloricity.probe.ProbeRepository;
 
 @Service
 @RequiredArgsConstructor
 public class FatsResearchMapper {
-    private final ProbeRepository probeRepository;
+    public FatsResearch toEntity(FatsResearchCreateDto dto) {
+        if (dto == null) {
+            return null;
+        }
 
-    public FatsResearch toEntity(@NotNull FatsResearchCreateDto dto) {
         return FatsResearch.builder()
                 .patronMassBeforeExtractionParallelFirst(dto.patronMassBeforeExtractionParallelFirst())
                 .patronMassBeforeExtractionParallelSecond(dto.patronMassBeforeExtractionParallelSecond())
@@ -18,7 +19,6 @@ public class FatsResearchMapper {
                 .patronMassAfterExtractionParallelSecond(dto.patronMassAfterExtractionParallelSecond())
                 .massNaveskiParallelFirst(dto.massNaveskiParallelFirst())
                 .massNaveskiParallelSecond(dto.massNaveskiParallelSecond())
-                .probe(probeRepository.getReferenceById(dto.probeId()))
                 .build();
     }
 

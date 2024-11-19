@@ -83,7 +83,6 @@ class DrySubstancesResearchE2ETests {
                 .byuksaAfterDryingParallelSecond(10.)
                 .massNaveskiParallelFirst(10.0)
                 .massNaveskiParallelSecond(10.0)
-                .probeId(probe.getId())
                 .build();
 
         MvcResult result = mvc.perform(post("/dry-substances-researches")
@@ -119,7 +118,6 @@ class DrySubstancesResearchE2ETests {
                 .byuksaAfterDryingParallelSecond(10.)
                 .massNaveskiParallelFirst(10.0)
                 .massNaveskiParallelSecond(10.0)
-                .probeId(UUID.randomUUID())
                 .build();
 
         mvc.perform(post("/dry-substances-researches")

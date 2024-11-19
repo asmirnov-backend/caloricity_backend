@@ -61,7 +61,6 @@ class FatsResearchE2ETests {
                 .patronMassAfterExtractionParallelSecond(2.)
                 .massNaveskiParallelFirst(10.0)
                 .massNaveskiParallelSecond(10.0)
-                .probeId(probe.getId())
                 .build();
 
         MvcResult result = mvc.perform(post("/fats-researches")
@@ -93,7 +92,6 @@ class FatsResearchE2ETests {
                 .patronMassAfterExtractionParallelSecond(2.)
                 .massNaveskiParallelFirst(10.0)
                 .massNaveskiParallelSecond(10.0)
-                .probeId(UUID.randomUUID())
                 .build();
 
         mvc.perform(post("/fats-researches")
