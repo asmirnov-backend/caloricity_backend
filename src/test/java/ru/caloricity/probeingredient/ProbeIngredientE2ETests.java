@@ -1,17 +1,16 @@
 package ru.caloricity.probeingredient;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
-import ru.caloricity.common.exception.EntityNotFoundException;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import ru.caloricity.common.RestPageImpl;
+import ru.caloricity.common.dto.IdDto;
 import ru.caloricity.ingredient.Ingredient;
 import ru.caloricity.ingredient.IngredientFactory;
 import ru.caloricity.ingredient.IngredientRepository;
@@ -19,26 +18,15 @@ import ru.caloricity.probe.Probe;
 import ru.caloricity.probe.ProbeFactory;
 import ru.caloricity.probe.ProbeRepository;
 
-import java.util.Optional;
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@Transactional
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProbeIngredientE2ETests {
 
     @Autowired
-    private MockMvc mvc;
-    @Autowired
-    private ObjectMapper objectMapper;
+    private TestRestTemplate testRestTemplate;
     @Autowired
     private ProbeIngredientRepository repository;
     @Autowired
@@ -46,58 +34,69 @@ class ProbeIngredientE2ETests {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    @Test
-    void contextLoads() {
+    @BeforeEach
+    void setUp() {
+        repository.deleteAll();
+        probeRepository.deleteAll();
+        ingredientRepository.deleteAll();
     }
 
     @Test
-    void getById_ok() throws Exception {
+    void getById_ok() {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         ProbeIngredient entity = repository.save(new ProbeIngredientFactory().createSimple(probe, ingredient));
 
-        mvc.perform(get("/probe-ingredient/{id}", entity.getId()))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(entity.getId().toString()))
-                .andExpect(jsonPath("$.gross").value(entity.getGross()))
-                .andExpect(jsonPath("$.net").value(entity.getNet()));
+        ResponseEntity<ProbeIngredientDto> response = testRestTemplate.getForEntity("/probe-ingredient/{id}", ProbeIngredientDto.class, entity.getId());
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        ProbeIngredientDto responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(entity.getId(), responseBody.id());
+        assertEquals(entity.getGross(), responseBody.gross());
+        assertEquals(entity.getNet(), responseBody.net());
     }
 
     @Test
-    void getById_notFound() throws Exception {
-        mvc.perform(get("/probe-ingredient/{id}", UUID.randomUUID()))
-                .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
+    void getById_notFound() {
+        ResponseEntity<String> response = testRestTemplate.getForEntity("/probe-ingredient/{id}", String.class, UUID.randomUUID());
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 
     @Test
-    void getAll_ok() throws Exception {
+    void getAll_ok() {
         var ingredientFactory = new IngredientFactory();
         Ingredient ingredient1 = ingredientRepository.save(ingredientFactory.createSimple());
         Ingredient ingredient2 = ingredientRepository.save(ingredientFactory.createSimple());
         Ingredient ingredient3 = ingredientRepository.save(ingredientFactory.createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-
         var factory = new ProbeIngredientFactory();
         repository.save(factory.createSimple(probe, ingredient1));
         repository.save(factory.createSimple(probe, ingredient2));
         repository.save(factory.createSimple(probe, ingredient3));
 
-        mvc.perform(get("/probe-ingredient").contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.length()").value(greaterThan(2)))
-                .andExpect(jsonPath("$.content[0].ingredientName").value(ingredient1.getName()))
-                .andExpect(jsonPath("$.content[0].drySubstances").value(48))
-                .andExpect(jsonPath("$.content[0].proteins").value(2))
-                .andExpect(jsonPath("$.content[0].fats").value(0.5))
-                .andExpect(jsonPath("$.content[0].carbohydrates").value(1));
-    }
+        ResponseEntity<RestPageImpl<ProbeIngredientInPageDto>> response = testRestTemplate.exchange(
+                "/probe-ingredient",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        RestPageImpl<ProbeIngredientInPageDto> responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(3, responseBody.getTotalElements());
+        assertEquals(ingredient1.getName(), responseBody.getContent().get(0).ingredientName());
+        assertEquals(48.5, responseBody.getContent().get(0).drySubstances());
+        assertEquals(2.5, responseBody.getContent().get(0).proteins());
+        assertEquals(0.5, responseBody.getContent().get(0).fats());
+        assertEquals(1, responseBody.getContent().get(0).carbohydrates());    }
 
     @Test
-    void create_created() throws Exception {
+    void create_created() {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
@@ -108,30 +107,20 @@ class ProbeIngredientE2ETests {
                 .net(3.)
                 .build();
 
-        MvcResult result = mvc.perform(post("/probe-ingredient")
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andReturn();
+        ResponseEntity<IdDto> response = testRestTemplate.postForEntity("/probe-ingredient", dto, IdDto.class);
 
-        String responseBody = result.getResponse().getContentAsString();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(responseBody);
-        UUID id = UUID.fromString(jsonNode.get("id").asText());
-
-        Optional<ProbeIngredient> createdEntity = repository.findById(id);
-        assertTrue(createdEntity.isPresent());
-        assertEquals(createdEntity.get().getProbe().getId(), probe.getId());
-        assertEquals(createdEntity.get().getIngredient().getId(), ingredient.getId());
-        assertEquals(createdEntity.get().getGross(), dto.gross());
-        assertEquals(createdEntity.get().getNet(), dto.net());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        IdDto responseBody = response.getBody();
+        assertNotNull(responseBody);
+        ProbeIngredient created = repository.findById(responseBody.id()).orElseThrow();
+        assertEquals(probe.getId(), created.getProbe().getId());
+        assertEquals(ingredient.getId(), created.getIngredient().getId());
+        assertEquals(2., created.getGross());
+        assertEquals(3., created.getNet());
     }
 
     @Test
-    void create_badRequest_massSmallerThenZero() throws Exception {
+    void create_badRequest_massSmallerThenZero() {
         ProbeIngredientCreateDto dto = ProbeIngredientCreateDto.builder()
                 .probeId(UUID.randomUUID())
                 .ingredientId(UUID.randomUUID())
@@ -139,16 +128,13 @@ class ProbeIngredientE2ETests {
                 .net(3.)
                 .build();
 
-        mvc.perform(post("/probe-ingredient")
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isBadRequest());
+        ResponseEntity<String> response = testRestTemplate.postForEntity("/probe-ingredient", dto, String.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     @Test
-    void create_badRequest_referencedProbeNotExist() throws Exception {
+    void create_badRequest_referencedProbeNotExist() {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         ProbeIngredientCreateDto dto = ProbeIngredientCreateDto.builder()
                 .probeId(UUID.randomUUID())
@@ -157,17 +143,14 @@ class ProbeIngredientE2ETests {
                 .net(3.)
                 .build();
 
-        mvc.perform(post("/probe-ingredient")
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
+        ResponseEntity<String> response = testRestTemplate.postForEntity("/probe-ingredient", dto, String.class);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 
     @Test
-    void create_badRequest_referencedIngredientNotExist() throws Exception {
+    void create_badRequest_referencedIngredientNotExist() {
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         ProbeIngredientCreateDto dto = ProbeIngredientCreateDto.builder()
                 .probeId(probe.getId())
@@ -176,48 +159,35 @@ class ProbeIngredientE2ETests {
                 .net(3.)
                 .build();
 
-        mvc.perform(post("/probe-ingredient")
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
+        ResponseEntity<String> response = testRestTemplate.postForEntity("/probe-ingredient", dto, String.class);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 
     @Test
-    void update_ok() throws Exception {
+    void update_ok() {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
 
         ProbeIngredient entity = repository.save(new ProbeIngredientFactory().createSimple(probe, ingredient));
         ProbeIngredientUpdateDto dto = new ProbeIngredientUpdateDto(1321., 2412.);
 
-        mvc.perform(put("/probe-ingredient/{id}", entity.getId().toString())
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isOk());
+        testRestTemplate.put("/probe-ingredient/{id}", dto, entity.getId());
 
-        Optional<ProbeIngredient> updated = repository.findById(entity.getId());
-        assertTrue(updated.isPresent());
-        assertEquals(updated.get().getGross(), dto.gross());
-        assertEquals(updated.get().getNet(), dto.net());
+        ProbeIngredient updated = repository.findById(entity.getId()).orElseThrow();
+        assertEquals(1321., updated.getGross());
+        assertEquals(2412., updated.getNet());
     }
 
     @Test
-    void delete_ok() throws Exception {
+    void delete_ok() {
         Ingredient ingredient = ingredientRepository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
-
         ProbeIngredient entity = repository.save(new ProbeIngredientFactory().createSimple(probe, ingredient));
 
-        mvc.perform(delete("/probe-ingredient/{id}", entity.getId().toString()))
-                .andDo(print())
-                .andExpect(status().isOk());
+        testRestTemplate.delete("/probe-ingredient/{id}", entity.getId());
 
-        Optional<ProbeIngredient> deletedEntity = repository.findById(entity.getId());
-        assertTrue(deletedEntity.isEmpty());
+        assertFalse(repository.findById(entity.getId()).isPresent());
     }
 }

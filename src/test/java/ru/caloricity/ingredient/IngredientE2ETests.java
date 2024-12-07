@@ -160,6 +160,7 @@ class IngredientE2ETests {
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertNotNull(response.getBody());
+        // TODO
 //        assertThat(response.getBody()).contains("name: must not be blank");
 //        assertThat(response.getBody()).contains("name: size must be between 2");
     }
