@@ -1,18 +1,13 @@
 package ru.caloricity.ingredient;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
-import ru.caloricity.common.exception.CascadeDeleteRestrictException;
-import ru.caloricity.common.exception.EntityNotFoundException;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
+import ru.caloricity.common.RestPageImpl;
 import ru.caloricity.probe.Probe;
 import ru.caloricity.probe.ProbeFactory;
 import ru.caloricity.probe.ProbeRepository;
@@ -22,23 +17,14 @@ import ru.caloricity.probeingredient.ProbeIngredientRepository;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.greaterThan;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@Transactional
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class IngredientE2ETests {
 
     @Autowired
-    private MockMvc mvc;
-    @Autowired
-    private ObjectMapper objectMapper;
+    private TestRestTemplate testRestTemplate;
     @Autowired
     private IngredientRepository repository;
     @Autowired
@@ -46,32 +32,39 @@ class IngredientE2ETests {
     @Autowired
     private ProbeRepository probeRepository;
 
-    @Test
-    void contextLoads() {
+    @BeforeEach
+    void setUp() {
+        probeIngredientRepository.deleteAll();
+        probeRepository.deleteAll();
+        repository.deleteAll();
     }
 
     @Test
     void getById_ok() throws Exception {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
 
-        mvc.perform(get("/ingredients/{id}", entity.getId()))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(entity.getId().toString()))
-                .andExpect(jsonPath("$.name").value(entity.getName()))
-                .andExpect(jsonPath("$.fats").value(entity.getFats()))
-                .andExpect(jsonPath("$.carbohydrates").value(entity.getCarbohydrates()))
-                .andExpect(jsonPath("$.proteins").value(entity.getProteins()))
-                .andExpect(jsonPath("$.ediblePart").value(entity.getEdiblePart()))
-                .andExpect(jsonPath("$.water").value(entity.getWater()));
+        ResponseEntity<IngredientDto> response = testRestTemplate.getForEntity("/ingredients/{id}", IngredientDto.class, entity.getId());
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        IngredientDto responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(entity.getId(), responseBody.id());
+        assertEquals(entity.getName(), responseBody.name());
+        assertEquals(entity.getFats(), responseBody.fats());
+        assertEquals(entity.getCarbohydrates(), responseBody.carbohydrates());
+        assertEquals(entity.getProteins(), responseBody.proteins());
+        assertEquals(entity.getEdiblePart(), responseBody.ediblePart());
+        assertEquals(entity.getWater(), responseBody.water());
     }
 
     @Test
     void getById_notFound() throws Exception {
-        mvc.perform(get("/ingredients/{id}", UUID.randomUUID()))
-                .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(result -> assertInstanceOf(EntityNotFoundException.class, result.getResolvedException()));
+        UUID id = UUID.randomUUID();
+        ResponseEntity<String> response = testRestTemplate.getForEntity("/ingredients/{id}", String.class, id);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertThat(response.getBody()).contains(id.toString());
     }
 
     @Test
@@ -81,10 +74,17 @@ class IngredientE2ETests {
         repository.save(factory.createSimple());
         repository.save(factory.createSimple());
 
-        mvc.perform(get("/ingredients").contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.length()").value(greaterThan(2)));
+        ResponseEntity<RestPageImpl<IngredientInPageDto>> response = testRestTemplate.exchange(
+                "/ingredients",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(3, response.getBody().getTotalElements());
     }
 
     @Test
@@ -96,11 +96,20 @@ class IngredientE2ETests {
         repository.save(factory.createSimple());
         repository.save(factory.createSimple());
 
-        mvc.perform(get("/ingredients?search={name}", searched.getName().toLowerCase()))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.length()").value(1))
-                .andExpect(jsonPath("$.content[0].id").value(searched.getId().toString()));
+        ResponseEntity<RestPageImpl<IngredientInPageDto>> response = testRestTemplate.exchange(
+                "/ingredients?search={name}",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                },
+                searched.getName().toLowerCase()
+        );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        RestPageImpl<IngredientInPageDto> ingredientList = response.getBody();
+        assertNotNull(ingredientList);
+        assertEquals(1, ingredientList.getTotalElements());
+        assertEquals(searched.getId(), ingredientList.getContent().getFirst().id());
     }
 
     @Test
@@ -113,21 +122,16 @@ class IngredientE2ETests {
                 .fats(1.)
                 .carbohydrates(1.)
                 .build();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<IngredientCreateDto> request = new HttpEntity<>(dto, headers);
 
-        MvcResult result = mvc.perform(post("/ingredients")
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andReturn();
+        ResponseEntity<IngredientDto> response = testRestTemplate.postForEntity("/ingredients", request, IngredientDto.class);
 
-        String responseBody = result.getResponse().getContentAsString();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(responseBody);
-        UUID id = UUID.fromString(jsonNode.get("id").asText());
-
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        IngredientDto responseBody = response.getBody();
+        assertNotNull(responseBody);
+        UUID id = responseBody.id();
         Optional<Ingredient> createdEntity = repository.findById(id);
         assertTrue(createdEntity.isPresent());
         assertEquals(createdEntity.get().getName(), dto.name());
@@ -148,13 +152,16 @@ class IngredientE2ETests {
                 .fats(1.)
                 .carbohydrates(1.)
                 .build();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<IngredientCreateDto> request = new HttpEntity<>(dto, headers);
 
-        mvc.perform(post("/ingredients")
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isBadRequest());
+        ResponseEntity<String> response = testRestTemplate.postForEntity("/ingredients", request, String.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNotNull(response.getBody());
+//        assertThat(response.getBody()).contains("name: must not be blank");
+//        assertThat(response.getBody()).contains("name: size must be between 2");
     }
 
     @Test
@@ -168,14 +175,13 @@ class IngredientE2ETests {
                 .fats(2.)
                 .carbohydrates(2.)
                 .build();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<IngredientUpdateDto> request = new HttpEntity<>(dto, headers);
 
-        mvc.perform(put("/ingredients/{id}", entity.getId().toString())
-                        .content(objectMapper.writeValueAsString(dto))
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isOk());
+        ResponseEntity<Void> response = testRestTemplate.exchange("/ingredients/{id}", HttpMethod.PUT, request, Void.class, entity.getId());
 
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         Optional<Ingredient> updated = repository.findById(entity.getId());
         assertTrue(updated.isPresent());
         assertEquals(updated.get().getName(), dto.name());
@@ -187,26 +193,25 @@ class IngredientE2ETests {
     }
 
     @Test
-    void delete_ok() throws Exception {
+    void delete_ok() {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
 
-        mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
-                .andDo(print())
-                .andExpect(status().isOk());
+        ResponseEntity<Void> response = testRestTemplate.exchange("/ingredients/{id}", HttpMethod.DELETE, null, Void.class, entity.getId());
 
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         Optional<Ingredient> deletedEntity = repository.findById(entity.getId());
         assertTrue(deletedEntity.isEmpty());
     }
 
     @Test
-    void delete_throwCascadeDeleteRestrictException() throws Exception {
+    void delete_throwCascadeDeleteRestrictException() {
         Ingredient entity = repository.save(new IngredientFactory().createSimple());
         Probe probe = probeRepository.save(new ProbeFactory().createSimple());
         probeIngredientRepository.save(new ProbeIngredientFactory().createSimple(probe, entity));
 
-        mvc.perform(delete("/ingredients/{id}", entity.getId().toString()))
-                .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(result -> assertInstanceOf(CascadeDeleteRestrictException.class, result.getResolvedException()));
+        ResponseEntity<String> response = testRestTemplate.exchange("/ingredients/{id}", HttpMethod.DELETE, null, String.class, entity.getId());
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 }
