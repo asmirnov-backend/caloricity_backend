@@ -38,8 +38,8 @@ class ProbeController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody ProbeUpdateDto createDto) {
-        service.update(id, createDto);
+    public void update(@PathVariable(name = "id") UUID id, @Valid @RequestBody ProbeUpdateDto updateDto) {
+        service.update(id, updateDto);
     }
 
     @DeleteMapping("{id}")

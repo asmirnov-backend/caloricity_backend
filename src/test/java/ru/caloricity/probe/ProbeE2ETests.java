@@ -341,13 +341,14 @@ class ProbeE2ETests {
 
     @Test
     void update_ok_updateExistingResearch() {
-        Probe entity = repository.save(new ProbeFactory().createSimple());
+        Probe entity = new ProbeFactory().createSimple();
         FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
         DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
         ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
         entity.setFatsResearch(fatsResearch);
         entity.setProteinsResearch(proteinsResearch);
         entity.setDrySubstancesResearch(drySubstancesResearch);
+        repository.save(entity);
         FatsResearchCreateDto fatsResearchCreateDto = FatsResearchCreateDto.builder()
                 .patronMassBeforeExtractionParallelFirst(1.)
                 .patronMassBeforeExtractionParallelSecond(2.)
@@ -420,13 +421,14 @@ class ProbeE2ETests {
 
     @Test
     void update_ok_removeExistingResearch() {
-        Probe entity = repository.save(new ProbeFactory().createSimple());
+        Probe entity = new ProbeFactory().createSimple();
         FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
         DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
         ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
         entity.setFatsResearch(fatsResearch);
         entity.setProteinsResearch(proteinsResearch);
         entity.setDrySubstancesResearch(drySubstancesResearch);
+        repository.save(entity);
         ProbeUpdateDto dto = ProbeUpdateDto.builder()
                 .name("updated name")
                 .code("updated code")
@@ -450,13 +452,14 @@ class ProbeE2ETests {
 
     @Test
     void delete_ok() {
-        Probe entity = repository.save(new ProbeFactory().createSimple());
+        Probe entity = new ProbeFactory().createSimple();
         FatsResearch fatsResearch = new FatsResearchFactory().createSimple(entity);
         DrySubstancesResearch drySubstancesResearch = new DrySubstancesResearchFactory().createSimple(entity);
         ProteinsResearch proteinsResearch = new ProteinsResearchFactory().createSimple(entity);
         entity.setFatsResearch(fatsResearch);
         entity.setProteinsResearch(proteinsResearch);
         entity.setDrySubstancesResearch(drySubstancesResearch);
+        repository.save(entity);
 
         testRestTemplate.delete("/probes/{id}", entity.getId());
 
