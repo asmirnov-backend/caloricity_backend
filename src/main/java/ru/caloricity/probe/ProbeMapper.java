@@ -3,8 +3,11 @@ package ru.caloricity.probe;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchCreateDto;
 import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchMapper;
+import ru.caloricity.probe.research.fatsresearch.FatsResearchCreateDto;
 import ru.caloricity.probe.research.fatsresearch.FatsResearchMapper;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchCreateDto;
 import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchMapper;
 
 @Service
@@ -55,31 +58,41 @@ public class ProbeMapper {
         entity.setBankaEmptyMass(dto.bankaEmptyMass());
         entity.setBankaWithProbeMass(dto.bankaWithProbeMass());
 
-        if (dto.fatsResearch() != null) {
+        updateFatsResearch(entity, dto.fatsResearch());
+        updateProteinsResearch(entity, dto.proteinsResearch());
+        updateDrySubstancesResearch(entity, dto.drySubstancesResearch());
+    }
+
+    private void updateFatsResearch(@NotNull Probe entity, FatsResearchCreateDto fatsResearchDto) {
+        if (fatsResearchDto != null) {
             if (entity.getFatsResearch() != null) {
-                fatsResearchMapper.updateEntity(entity.getFatsResearch(), dto.fatsResearch());
+                fatsResearchMapper.updateEntity(entity.getFatsResearch(), fatsResearchDto);
             } else {
-                entity.setFatsResearch(fatsResearchMapper.toEntity(dto.fatsResearch()));
+                entity.setFatsResearch(fatsResearchMapper.toEntity(fatsResearchDto));
             }
         } else {
             entity.setFatsResearch(null);
         }
+    }
 
-        if (dto.proteinsResearch() != null) {
+    private void updateProteinsResearch(@NotNull Probe entity, ProteinsResearchCreateDto proteinsResearchDto) {
+        if (proteinsResearchDto != null) {
             if (entity.getProteinsResearch() != null) {
-                proteinsResearchMapper.updateEntity(entity.getProteinsResearch(), dto.proteinsResearch());
+                proteinsResearchMapper.updateEntity(entity.getProteinsResearch(), proteinsResearchDto);
             } else {
-                entity.setProteinsResearch(proteinsResearchMapper.toEntity(dto.proteinsResearch()));
+                entity.setProteinsResearch(proteinsResearchMapper.toEntity(proteinsResearchDto));
             }
         } else {
             entity.setProteinsResearch(null);
         }
+    }
 
-        if (dto.drySubstancesResearch() != null) {
+    private void updateDrySubstancesResearch(@NotNull Probe entity, DrySubstancesResearchCreateDto drySubstancesResearchDto) {
+        if (drySubstancesResearchDto != null) {
             if (entity.getDrySubstancesResearch() != null) {
-                drySubstancesResearchMapper.updateEntity(entity.getDrySubstancesResearch(), dto.drySubstancesResearch());
+                drySubstancesResearchMapper.updateEntity(entity.getDrySubstancesResearch(), drySubstancesResearchDto);
             } else {
-                entity.setDrySubstancesResearch(drySubstancesResearchMapper.toEntity(dto.drySubstancesResearch()));
+                entity.setDrySubstancesResearch(drySubstancesResearchMapper.toEntity(drySubstancesResearchDto));
             }
         } else {
             entity.setDrySubstancesResearch(null);
