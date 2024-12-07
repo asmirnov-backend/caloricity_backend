@@ -115,7 +115,8 @@ class ProbeE2ETests {
                 "/probes",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<RestPageImpl<ProbeDto>>() {}
+                new ParameterizedTypeReference<>() {
+                }
         );
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -137,7 +138,8 @@ class ProbeE2ETests {
                 "/probes?search={code}",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<RestPageImpl<ProbeDto>>() {},
+                new ParameterizedTypeReference<>() {
+                },
                 searchedEntity.getCode().toLowerCase()
         );
 
