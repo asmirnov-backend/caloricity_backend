@@ -46,7 +46,6 @@ public class IngredientService {
 
     public IdDto create(IngredientCreateDto createDto) {
         Ingredient entity = mapper.toEntity(createDto);
-        entity.setId(UUID.randomUUID());
         repository.save(entity);
         return new IdDto(entity.getId());
     }
