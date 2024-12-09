@@ -8,6 +8,8 @@ import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.common.utils.Average;
+import ru.caloricity.probe.CaloricityCoefficient;
 import ru.caloricity.probe.Probe;
 
 import java.util.Objects;
@@ -49,20 +51,32 @@ public class FatsResearch extends BaseEntity {
     @OneToOne(mappedBy = "fatsResearch")
     private Probe probe;
 
-    public Double getDryResidueWeightParallelFirst() {
+    public Double getMassParallelFirst() {
         return patronMassBeforeExtractionParallelFirst - patronMassAfterExtractionParallelFirst;
     }
 
-    public Double getDryResidueWeightParallelSecond() {
+    public Double getMassParallelSecond() {
         return patronMassBeforeExtractionParallelSecond - patronMassAfterExtractionParallelSecond;
     }
 
-    public Double getDryResidueWeightAverage() {
-        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0;
+    public Double getMassForOneGramParallelFirst() {
+        return getMassParallelFirst() / massNaveskiParallelFirst;
     }
 
-    // жиры масса
-    // return getDryResidueWeightAverage * probe.масса фактическая / масса навески
+    public Double getMassForOneGramParallelSecond() {
+        return getMassParallelSecond() / massNaveskiParallelSecond;
+    }
+
+    /**
+     * @return Количество жира в одном грамме пробы
+     */
+    public Double getMassForOneGramAverage() {
+        return new Average(getMassForOneGramParallelFirst(), getMassForOneGramParallelSecond()).calc();
+    }
+
+    public Double getFactCaloricityForOneGram() {
+        return getMassForOneGramAverage() * CaloricityCoefficient.FATS;
+    }
 
     @Override
     public final boolean equals(Object o) {

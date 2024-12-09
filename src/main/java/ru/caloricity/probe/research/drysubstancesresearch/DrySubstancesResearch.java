@@ -51,19 +51,19 @@ public class DrySubstancesResearch extends BaseEntity {
 
     public Double getDryResidueWeightParallelFirst() {
         // это для первого и второго
-        return byuksaParallelFirst - byuksaAfterDryingParallelFirst; // + Масса пробы первая параллель, г
+        return byuksaParallelFirst + massNaveskiParallelFirst - byuksaAfterDryingParallelFirst;
 
         // а для третьего блюда
-        // масса пробы == масса навески
+        // масса пробы == масса навески ???
         // (byuksaAfterDryingParallelFirst - byuksaParallelFirst) * масса фактичиская пробы / Масса пробы первая параллель;
     }
 
     public Double getDryResidueWeightParallelSecond() {
-        return byuksaParallelSecond - byuksaAfterDryingParallelSecond; // + Масса пробы второй параллель, г
+        return byuksaParallelSecond + massNaveskiParallelSecond - byuksaAfterDryingParallelSecond;
     }
 
     public Double getDryResidueWeightAverage() {
-        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0f;
+        return (getDryResidueWeightParallelFirst() + getDryResidueWeightParallelSecond()) / 2.0;
     }
 
     @Override

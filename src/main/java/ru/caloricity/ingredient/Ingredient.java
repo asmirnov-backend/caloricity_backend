@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
 import ru.caloricity.common.BaseEntity;
+import ru.caloricity.probe.CaloricityCoefficient;
 import ru.caloricity.probeingredient.ProbeIngredient;
 
 import java.util.Objects;
@@ -55,7 +56,7 @@ public class Ingredient extends BaseEntity {
      * @return Теоретическая калорийность 100 г ингредиента
      */
     public Double getTheoreticalCaloricity() {
-        return fats * 9.0 + (carbohydrates + proteins) * 4.0;
+        return fats * CaloricityCoefficient.FATS + carbohydrates * CaloricityCoefficient.CARBOHYDRATES + proteins * CaloricityCoefficient.PROTEINS;
     }
 
     @Override

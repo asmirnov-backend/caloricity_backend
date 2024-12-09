@@ -12,8 +12,6 @@ public record FatsResearchDto(UUID id,
                               Double patronMassAfterExtractionParallelSecond,
                               Double massNaveskiParallelFirst,
                               Double massNaveskiParallelSecond,
-                              Double dryResidueWeightParallelFirst,
-                              Double dryResidueWeightParallelSecond,
-                              Double dryResidueWeightAverage
+                              Double getMassForOneGramAverage
 ) {
 }

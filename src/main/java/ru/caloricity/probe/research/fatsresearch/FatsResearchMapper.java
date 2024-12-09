@@ -35,9 +35,7 @@ public class FatsResearchMapper {
                 .patronMassAfterExtractionParallelSecond(entity.getPatronMassAfterExtractionParallelSecond())
                 .massNaveskiParallelFirst(entity.getMassNaveskiParallelFirst())
                 .massNaveskiParallelSecond(entity.getMassNaveskiParallelSecond())
-                .dryResidueWeightParallelFirst(entity.getDryResidueWeightParallelFirst())
-                .dryResidueWeightParallelSecond(entity.getDryResidueWeightParallelSecond())
-                .dryResidueWeightAverage(entity.getDryResidueWeightAverage())
+                .getMassForOneGramAverage(entity.getMassForOneGramAverage())
                 .build();
     }
 
