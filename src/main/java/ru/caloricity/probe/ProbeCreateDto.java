@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearchCreateDto;
+import ru.caloricity.probe.research.fatsresearch.FatsResearchCreateDto;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearchCreateDto;
 
 @Builder
 public record ProbeCreateDto(
@@ -14,6 +17,9 @@ public record ProbeCreateDto(
         @NotNull String code,
         @Nullable @Min(0) Double massTheory,
         @Nullable @Min(0) Double bankaEmptyMass,
-        @Nullable @Min(0) Double bankaWithProbeMass
+        @Nullable @Min(0) Double bankaWithProbeMass,
+        @Nullable FatsResearchCreateDto fatsResearch,
+        @Nullable DrySubstancesResearchCreateDto drySubstancesResearch,
+        @Nullable ProteinsResearchCreateDto proteinsResearchCreateDto
 ) {
 }

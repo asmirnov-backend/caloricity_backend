@@ -5,12 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.proxy.HibernateProxy;
-import ru.caloricity.carbohydratesresearch.CarbohydratesResearch;
 import ru.caloricity.common.BaseEntity;
-import ru.caloricity.drysubstancesresearch.DrySubstancesResearch;
-import ru.caloricity.fatsresearch.FatsResearch;
+import ru.caloricity.probe.research.drysubstancesresearch.DrySubstancesResearch;
+import ru.caloricity.probe.research.fatsresearch.FatsResearch;
+import ru.caloricity.probe.research.proteinsresearch.ProteinsResearch;
 import ru.caloricity.probeingredient.ProbeIngredient;
-import ru.caloricity.proteinsresearch.ProteinsResearch;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -29,7 +28,6 @@ import java.util.Set;
 @NamedEntityGraph(
         name = "Probe.withResearchesAndIngredients",
         attributeNodes = {
-                @NamedAttributeNode("carbohydratesResearch"),
                 @NamedAttributeNode("drySubstancesResearch"),
                 @NamedAttributeNode("fatsResearch"),
                 @NamedAttributeNode("proteinsResearch"),
@@ -74,16 +72,16 @@ public class Probe extends BaseEntity {
     @ToString.Exclude
     private Set<ProbeIngredient> probeIngredients;
 
-    @OneToOne(mappedBy = "probe")
-    private CarbohydratesResearch carbohydratesResearch;
-
-    @OneToOne(mappedBy = "probe")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(unique = true)
     private DrySubstancesResearch drySubstancesResearch;
 
-    @OneToOne(mappedBy = "probe", fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(unique = true)
     private FatsResearch fatsResearch;
 
-    @OneToOne(mappedBy = "probe")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(unique = true)
     private ProteinsResearch proteinsResearch;
 
     /**
